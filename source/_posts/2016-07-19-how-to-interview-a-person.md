@@ -77,7 +77,10 @@ categories: 思考 经验分享
 
 ## 最后
 
-最后给 PHPer 几点建议：
+最后我想说的是，面试一个人，仅仅只考面试的时候交流不到一个小时是不太准确的，所以我为什么提倡你写博客写开源代码，对技术人员来说，看看你写过的代码，远比你扯那些没用的要
+简单直接也准确好多。所以也就有了这句话「Talk is cheap. Show me the code.」。
+
+给 PHPer 几点建议：
 
 - 一定要知道[PHP PSR 标准规范](https://psr.phphub.org/)
 - [PHP 之道](http://laravel-china.github.io/php-the-right-way/) 也应该至少看过一遍，还有这本书，最好也看一遍
@@ -89,6 +92,7 @@ categories: 思考 经验分享
 
 - [面试杂谈：怎样才算“精通xx”？](http://zhangshenjia.com/literature/master_on_skill/)
 - [结果与目标](http://zhangshenjia.com/literature/result_or_target/)
+- [成为一流的人才](http://blog.forecho.com/cheng-wei-yi-liu-de-ren-cai.html)
 
 
 
