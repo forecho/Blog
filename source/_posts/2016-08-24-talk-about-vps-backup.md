@@ -16,6 +16,8 @@ categories: 经验分享
 
 于是乎找到下面三种解决方案：
 
+<!--more-->
+
 ## 多备份
 
 [多备份](http://www.dbfen.com/index.php/users/newuser_by/B277CCFD) 是一个在线备份服务，操作非常
