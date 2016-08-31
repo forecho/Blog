@@ -9,7 +9,7 @@ categories: 经验分享 阅读
 ## 引言
 
 今年年初的时候我写了篇[《使用 Kindle 阅读》](http://blog.forecho.com/use-the-kindle-reading.html) 文章，从2012年底开始到现在差不多快4年的 Kindle 使用经历，
-那么我来分享一下吧。
+那么我来分享一下我是如何使用 Kindle 的。
 
 ![](http://ww1.sinaimg.cn/large/4cc5f9b3gw1f7d9t8yndyj20mq04r0tk.jpg)
 
@@ -48,7 +48,7 @@ categories: 经验分享 阅读
 
 后来就发现这个网站，而且最常用的也是这个网站，能撑到现在也不容易，其中用户特权也改过2、3次，一直是普通用户。也共享过4本书。
 
-现在只要是找书，第一反应是来这个网站找，如果没找到，再想办法。
+现在只要是找书，第一反应是来这个网站找，如果没找到，再找其他路子。
 
 **[mLook](https://www.mlook.mobi/)**
 
