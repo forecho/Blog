@@ -48,16 +48,16 @@ categories: 思考 阅读
 
 ## Kindle5 VS Kindle Paperwhite 3
 
-前几天看到京东国际上有做活动，只要666就能把 Kindle Paperwhite 3 带回家，但是是海外版，不能退不保修，考虑一下，最后还是心动了。
+前几天看到京东国际上有做活动，只要666就能把 Kindle Paperwhite 3（以下简称 KPW3） 带回家，但是是海外版，不能退不保修，考虑一下，最后还是心动了。
 下面放两张对比图片：
 
 左边是 KPW3，右边是 Kindle5：
 
-![](http://i4.tietuku.com/9eedcc5d900678dd.png)
+![](http://ww1.sinaimg.cn/mw690/4cc5f9b3gw1f7d9pj59ayj21kw23u7wh.jpg)
 
 KPW3 后背 LOGO 变成 amazon 了：
 
-![](http://i4.tietuku.com/c1f9765d63abda74.png)
+![](http://ww1.sinaimg.cn/mw690/4cc5f9b3gw1f7d9pcjarcj21kw23unox.jpg)
 
 海淘最痛苦的是，买了东西要经过漫长的等待！我差不多等了20天，算是一种折磨。用了一段 KPW3 之后我来谈谈两个的区别：
 
