@@ -8,7 +8,7 @@ categories: 生日 吐槽
 
 ## 引言
 
-其实这篇文章应该要写在[《博客5岁生日快乐》](http://blog.forecho.com/blog-5-year-old-happy-birthday.html)前半个多月的，但是9月真是一个让人非常忙碌的月份。
+其实这篇文章应该要写在[《博客5岁生日快乐》](http://blog.forecho.com/blog-5-year-old-happy-birthday.html)前半个多月的，但是9月真是一个让人非常忙碌的月份，所以一直拖到今天。
 
 最近这一个月里我主要干了两件事和一件小事。
 
