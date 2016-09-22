@@ -9,11 +9,12 @@ footer: true
 
 # 个人信息
 
- - 蔡正海/男/1990
+ - forecho/男/1990
  - 大专/武汉交通职业学院电子信息工程系
  - 工作年限：4年
  - 技术博客：<http://blog.forecho.com>
  - Github: <http://github.com/forecho>
+ - Email: caizhenghai[@]gmail.com
  - 职位：开发工程师
 
 # 开源项目和作品
