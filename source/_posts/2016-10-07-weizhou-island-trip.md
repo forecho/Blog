@@ -109,7 +109,7 @@ categories: 旅游 不跟团
 ![海边看日落图](https://ws2.sinaimg.cn/large/4cc5f9b3jw1f8o43a873uj20r20r278f.jpg)
 海边看日落图
 
-![我的坐骑](https://ws4.sinaimg.cn/large/4cc5f9b3jw1f8o48lgskkj20ka0r246x.jpg)
+![我的坐骑](https://ws3.sinaimg.cn/large/4cc5f9b3jw1f8o4j3sk4fj20qo0qotj3.jpg)
 我的坐骑
 
 ![中石化原油码头](https://ws4.sinaimg.cn/large/4cc5f9b3jw1f8o46z5rk9j20zk0qo42i.jpg)
@@ -118,7 +118,7 @@ categories: 旅游 不跟团
 ![海边看日出](https://ws1.sinaimg.cn/large/4cc5f9b3gw1f8o3ys2i7yj20r20r20yn.jpg)
 海边看日出图
 
-![香蕉](https://ws2.sinaimg.cn/large/4cc5f9b3jw1f8o424ho49j20ka0r2tgk.jpg)
+![岛上的香蕉](https://ws4.sinaimg.cn/large/4cc5f9b3jw1f8o4lnifq2j20r20r2qe0.jpg)
 岛上的香蕉
 
 ![北海的老街](https://ws3.sinaimg.cn/large/4cc5f9b3jw1f8o4a5jxutj20r20r2n59.jpg)
@@ -169,4 +169,4 @@ categories: 旅游 不跟团
 
 也留下几个遗憾，下次可能还会去，但是不会在旺季的时候去。
 
-PS：不满足用照片的形式来记录旅行，我们特意在淘宝上租了一个 GoPro4(银狗)来玩，有防水壳儿，可以在水下拍摄，感觉很不错，已经准备买 GoPro5 了，素材已经有很多了，准备剪辑一个视频出来，敬请期待。
+PS：不满足用照片的形式来记录旅行，我们特意在淘宝上租了一个 GoPro4(银狗)来玩，有防水壳儿，可以在水下拍摄，感觉很不错，已经准备买 GoPro5 了，素材已经有很多了，准备剪辑一个视频出来，敬请期待。单反的话背过去很重，用的次数也不多，但是如果要拍日出和日落还必须得用单反拍。由于我一直拿着 GoPro 在拍视频，手机拍的照片也不多。
