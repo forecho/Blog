@@ -34,9 +34,11 @@ nvm install stable
 $ npm install -g hexo-cli
 ```
 
-但是实际上我安装的时候，`nvm install stable` 命令卡半天也没反应，进度很慢。而且第一次我明明安装成功了，但是输入 npm 的时候任然提示：`The program 'npm' is currently not installed. To run 'npm' please ask your administrator to install the package 'npm'`
+但是实际上我安装的时候，`nvm install stable` 命令卡半天也没反应，进度很慢。而且第一次我明明安装成功了，但是输入 npm 的时候任然提示：
 
-输入 hexo 的时候也是遇到:`hexo: command not found`
+`The program 'npm' is currently not installed. To run 'npm' please ask your administrator to install the package 'npm'`
+
+输入 hexo 的时候也是遇到：`hexo: command not found`
 
 我一脸懵逼，只能重新再安装一遍。每次看到一推输出 `npm WARN ...` 我也很慌，它是安装成功了吗？
 
@@ -120,12 +122,16 @@ env:
 ```
 
 以上文件你需要修改4处：
+
 - `git config user.name`
 - `git config user.email" `
 - `GH_REPO`
 - `secure: "xxxxx=" `
 
 **此处我被一个教程给坑了，注意是 `GH_Token` 不是 `GH_TOKEN`!**
+
+5、最后你要去 [Travis CI](https://travis-ci.org/)，手动开启此项目的监控，以后你写文章就是手动新建一个文件，然后 `git push` 就可以实现自动部署了。
+
 
 ## 添加域名解析
 
