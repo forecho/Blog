@@ -109,14 +109,15 @@ big { font-size: 1.2em; }
 
 article blockquote {
   $bq-margin: 1.2em;
-  font-style: italic;
+  /* font-style: italic; */
   position: relative;
-  font-size: 1.2em;
+  font-size: 1.1em;
   line-height: 1.5em;
   padding-left: 1em;
+  background-color: #f7f7f7;
   border-left: 4px solid rgba($text-color-light, .5);
   cite {
-    font-style: italic;
+    /* font-style: italic; */
     a { color: $text-color-light !important; word-wrap: break-word; }
     &:before { content: '\2014'; padding:{right: .3em; left: .3em;} color: $text-color-light; }
   }
