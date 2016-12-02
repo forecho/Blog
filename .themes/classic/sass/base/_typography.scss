@@ -111,8 +111,7 @@ article blockquote {
   $bq-margin: 1.2em;
   font-style: italic;
   position: relative;
-  font-size: 1.2em;
-  line-height: 1.5em;
+  font-size: 1em;
   padding-left: 1em;
   border-left: 4px solid rgba($text-color-light, .5);
   cite {
@@ -121,7 +120,7 @@ article blockquote {
     &:before { content: '\2014'; padding:{right: .3em; left: .3em;} color: $text-color-light; }
   }
   @media only screen and (min-width: 992px) {
-    padding-left: 1.5em;
+    padding-left: 1.2em;
     border-left-width: 4px;
   }
 }
