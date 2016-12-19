@@ -89,7 +89,7 @@ PS：以上代码可以在[这里](http://ideone.com/T9d3Qb)查看并且运行�
 
 ## 使用其他 helpers
 
-据我了解，Yii2 的 helpers 在其他 PHP 中，也是可以使用的，但是本人没有亲测，不作保证。
+据我了解，Yii2 的 helpers 在其他 PHP 框架中也是可以使用的，但是本人没有亲测，不作保证。
 
 类似这种 helpers 是可以在网上找到的，比方说我就找到了[phpfunct/funct](https://github.com/phpfunct/funct)
 
