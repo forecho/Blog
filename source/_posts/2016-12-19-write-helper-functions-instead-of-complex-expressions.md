@@ -35,7 +35,7 @@ categories: Yii2 编程思想
 
 如果使用辅助函数来实践的话，代码将会是这样的：
 
-```
+```php
 /**
  * 分转元
  * @param int $price 分
