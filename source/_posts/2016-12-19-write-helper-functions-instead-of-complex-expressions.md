@@ -23,7 +23,7 @@ categories: Yii2 编程思想
 这样写虽然能实现效果，但是如果需求有变化，需要使用强制保留两位小数，那么你需要这样改：
 
 ```php
-<?= echo number_format(round(($price / 100), 2), 2, '.', ''); ?>
+<?= number_format(round(($price / 100), 2), 2, '.', ''); ?>
 ```
 
 看上去虽然不多的代码，但是
@@ -36,11 +36,6 @@ categories: Yii2 编程思想
 如果使用辅助函数来实践的话，代码将会是这样的：
 
 ```php
-/**
- * 分转元
- * @param int $price 分
- * @return float 元
- */
 function fenToYuan($price)
 {
     $price = round(($price / 100), 2);
