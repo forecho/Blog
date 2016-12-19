@@ -36,12 +36,16 @@ categories: Yii2 编程思想
 如果使用辅助函数来实践的话，代码将会是这样的：
 
 ```php
+/**		
+* 分转元		
+* @param int $price 分		
+* @return float 元		
+*/
 function fenToYuan($price)
 {
     $price = round(($price / 100), 2);
     return number_format($price, 2, '.', '');
 }
-
 // 视图层使用方式
 echo fenToYuan($price);
 ```
@@ -61,18 +65,14 @@ Yii2 中有一个 [helpers](https://github.com/yiisoft/yii2/tree/master/framewor
 ```php
 // 最基本的用法，获取数组中的某个键对应的值。好处是不必判断 username 是否存在
 $username = \yii\helpers\ArrayHelper::getValue($_POST, 'username');
-
 // 也可以获取对象中的某个值
 $username = \yii\helpers\ArrayHelper::getValue($user, 'username');
-
 // 也可以使用匿名函数
 $fullName = \yii\helpers\ArrayHelper::getValue($user, function ($user, $defaultValue) {
     return $user->firstName . ' ' . $user->lastName;
 });
-
 // 使用「.」获取关联对象的属性
 $street = \yii\helpers\ArrayHelper::getValue($users, 'address.street');
-
 // 获取数组键值的数组键值
 $versions = ['date' => '2016年12月19日', '1.0' => ['date' => '2016年12月18日']];
 $value = \yii\helpers\ArrayHelper::getValue($versions, ['1.0', 'date']); // $value 输出为 2016年12月18日
