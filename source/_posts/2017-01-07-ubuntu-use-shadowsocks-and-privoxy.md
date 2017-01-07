@@ -38,7 +38,6 @@ sudo vim /etc/shadowsocks.conf
 ```
 # 启动 SS
 sudo nohup sslocal -c /etc/shadowsocks.conf >/dev/null 2>%1 &
-
 # 查看进程
 sudo ps aux |grep sslocal |grep -v "grep" 
 ```
@@ -65,6 +64,7 @@ sudo vim /etc/privoxy/config
 ```
 
 找到 `listen-address` 确保有这行代码 `listen-address 127.0.0.1:8118`
+
 找到 `forward-socks5t` 确保有这行代码(没有自己加) `forward-socks5  /  127.0.0.1:1080 .`
 
 启动
