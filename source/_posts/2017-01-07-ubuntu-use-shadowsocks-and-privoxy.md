@@ -5,6 +5,13 @@ date: 2017-01-07 12:35:22 +0800
 comments: true
 categories: 经验分享 科学上网
 ---
+## 引言
+
+先说说这东西有什么用吧，我是 Windows7 使用 Vagrant 安装了个 Ubuntu 虚拟机，然后需要在虚拟机里面配置 SS 代理使用 PHP 的 Composer 下载，不然非常慢。
+那么本教程应该同样适用于 Ubuntu 服务器（做为 SS 客户端的方式）配置使用 SS，其他版本的 Linux 要想使用需要稍微改动下，但是思路是一样的。
+
+如果你的 Mac 电脑，终端需要配置 SS 代理，推荐你使用 proxychains-ng 方式，具体查看[macOS 终端走代理（科学上网）](https://gold.xitu.io/entry/5821840cd203090055134cc0)
+
 ## ShadowSocks 客户端
 
 注意是 ShadowSocks 客户端，服务端我就不介绍了。先安装 Python pip 再安装 shadowsocks，然后再配置：
@@ -39,7 +46,7 @@ sudo vim /etc/shadowsocks.conf
 # 启动 SS
 sudo nohup sslocal -c /etc/shadowsocks.conf >/dev/null 2>%1 &
 # 查看进程
-sudo ps aux |grep sslocal |grep -v "grep" 
+sudo ps aux |grep sslocal |grep -v "grep"
 ```
 
 ```
