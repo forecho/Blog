@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Linux(Ubuntu) 使用 ShadowSocks + Privoxy 代理"
+title: "Ubuntu 使用 ShadowSocks + Privoxy 代理"
 date: 2017-01-07 12:35:22 +0800
 comments: true
 categories: 经验分享 科学上网
 ---
-## shadowsocks 客户端
+## ShadowSocks 客户端
 
 注意是 ShadowSocks 客户端，服务端我就不介绍了。先安装 Python pip 再安装 shadowsocks，然后再配置：
 
@@ -103,3 +103,4 @@ curl www.google.com
 
 - [Linux中使用ShadowSocks+Privoxy代理](https://docs.20150509.cn/2016/12/12/Linux%E4%B8%AD%E4%BD%BF%E7%94%A8ShadowSocks-Privoxy%E4%BB%A3%E7%90%86/)
 - [linux下的ss+privoxy代理配置](http://www.voidcn.com/blog/xwydq/article/p-5796260.html)
+- [Linux 命令行下使用 Shadowsocks 代理](https://mritd.me/2016/07/22/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E4%BD%BF%E7%94%A8-Shadowsocks-%E4%BB%A3%E7%90%86/)
