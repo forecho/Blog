@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "知识管理工作流"
+title: "我的知识管理工作流"
 date: 2016-12-12 12:09:22 +0800
 comments: true
 categories: 思考 经验分享
@@ -18,7 +18,7 @@ categories: 思考 经验分享
 
 **书**
 
-![萝卜书摘](http://ww1.sinaimg.cn/mw690/4cc5f9b3gw1fbmo9jpinfj20ku112gv2.jpg)
+![萝卜书摘](http://i.imgur.com/8JjAROLl.png)
 
 最近大多数情况下都在用 kindle 看电子书，家里也有很多纸质书。
 
@@ -79,7 +79,7 @@ Kindle 版的电子书，标记和索引很方便，而且出门携带也非常�
 
 **播客**
 
-![](http://ww3.sinaimg.cn/mw690/4cc5f9b3gw1fbmopf426jj20ku112jxy.jpg)
+![Imgur](http://i.imgur.com/1LFTPzBl.png)
 
 有时候早上挤地铁的时候，人多到 Kindle 都拿不出来的情况，这个时候我一般会听播客。还有一种情况就是眼睛太累了，需要闭眼休息的时候。
 
@@ -113,7 +113,7 @@ Kindle 版的电子书，标记和索引很方便，而且出门携带也非常�
 
 **制定清单**
 
-![](http://ww4.sinaimg.cn/mw690/4cc5f9b3gw1fbmonpwifij20ku11240j.jpg)
+![Imgur](http://i.imgur.com/O3PL1XWl.png)
 
 永远有一个 Todo List，让自己永远有事情代办，可以给事情标记优先级。利用天每天的碎片时间，也可以记录下每一次的灵感。
 
@@ -130,7 +130,7 @@ Kindle 版的电子书，标记和索引很方便，而且出门携带也非常�
 
 **习惯养成**
 
-![](http://ww3.sinaimg.cn/mw690/4cc5f9b3gw1fbmotrrol0j20ku112wgv.jpg)
+![](http://i.imgur.com/tCYavgHl.png)
 
 > 不积跬步，无以至千里；不积小流，无以成江海。
 
@@ -148,7 +148,7 @@ Kindle 版的电子书，标记和索引很方便，而且出门携带也非常�
 
 ## 补充
 
-![](http://ww4.sinaimg.cn/mw690/4cc5f9b3gw1fbmozxwwekj20ku112dm1.jpg)
+![](http://i.imgur.com/5iR2gvNl.png)
 
 最近在听一档播客节目的时候了解了一个叫[万维刚](http://www.geekonomics10000.com/)的人，以前倒是看到过他写的[《万万没想到：用理工科思维理解世界》](https://book.douban.com/subject/25986341/) 这本书，但是还没来得及看内容。
 在[静雅思听](http://www.justing.com.cn/#/authors/22862)上听了一些他的书，觉得非常有意思，收获很大。根据「得到」中看到的[《两种技能增长曲线》](https://m.igetget.com/try/article/cid/855) 分析，我认为以上的知识管理会是一个「指数增长」的技能。
