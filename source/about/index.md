@@ -52,6 +52,11 @@ footer: true
 - 重来
 - 暗时间
 
+## 更多关于我
+
+- [twitter](https://twitter.com/caizhenghai)
+- [instagram](https://www.instagram.com/forecho/)
+
 ## 关于关闭博客评论
 
 2016-09-22 优化了一下博客的访问速度，同时为了访问速度暂时去掉了 disqus 文章评论功能。不过好像去掉这个功能也没什么负面影响，因为最近1年都没人评论我的博客了，说出来都是泪 ಥ_ಥ 。如果真的有人想发布评论的话，可以通过本页面的邮件联系我。
