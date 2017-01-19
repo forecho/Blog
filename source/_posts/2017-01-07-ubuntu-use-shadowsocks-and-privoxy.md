@@ -72,7 +72,7 @@ sudo vim /etc/privoxy/config
 
 找到 `listen-address` 确保有这行代码 `listen-address 127.0.0.1:8118`
 
-找到 `forward-socks5t` 确保有这行代码(没有自己加) `forward-socks5  /  127.0.0.1:1080 .`
+找到 `forward-socks5` 确保有这行代码(没有自己加) `forward-socks5  /  127.0.0.1:1080 .`
 
 启动
 
@@ -103,7 +103,7 @@ source ~/.bashrc
 ## 测试
 
 ```
-curl www.google.com
+curl ip.gs
 ```
 
 ## 参考链接
