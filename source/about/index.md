@@ -51,11 +51,15 @@ footer: true
 - 高效能程序员的修炼
 - 重来
 - 暗时间
+- 智识分子
 
 ## 更多关于我
 
 - [twitter](https://twitter.com/caizhenghai)
 - [instagram](https://www.instagram.com/forecho/)
+- 微信公众号
+
+![](http://i.imgur.com/J2ZeYYUm.jpg)
 
 ## 关于关闭博客评论
 
