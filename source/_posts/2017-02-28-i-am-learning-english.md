@@ -5,10 +5,6 @@ date: 2017-02-28 22:53:58 +0800
 comments: true
 categories: 学英语
 ---
-* list element with functor item
-{:toc}
-
-# 我在学英语
 
 ## 先说说我的英语水平
 
@@ -17,6 +13,8 @@ categories: 学英语
 ## 我为什么要学英语
 
 最近这半年因为一系列事情又让我燃烧起「要好好学英语」的激情。这一系列事情是这样的：
+
+<!--more-->
 
 - 首先是看了许岑写了一本教你制作 PPT 的书，然后去了解许岑这个人，发现他还在淘宝上卖教你学英语的视频，然后看了一些，他的主打思想就是不死背单词，而是通过看电影学英语，他推荐非常适合学英语的电影是《西雅图未眠夜》，而且我看出来他非常喜欢汤姆·汉克斯这个人。
 - 然后在《智识分子》中有一篇文章是《一点实用主义的学英语心得》，这篇文章最后两段给我印象非常深刻，讲的是他上初中的时候，公交车上一位老者主动跟他说起学外语的事情，老者鼓励他应该学三门外语，说学习第二门外语的时间只需要第一门的一半，而第三门又只需要更少的时间。他还说，掌握一门外语，就如同打开了一扇通往一个新的世界的大门，你可以读很多很多新的书。让我第一次有意识到学外语居然不是为了考试和工作，而是为了读书。
@@ -48,7 +46,6 @@ categories: 学英语
 **看 YouTube 学英语**
 
 科学上网是每个程序员必备的技能，YouTube 上有大量的学习视频（当然包括学英语的视频），时不时的我会去看看，这里我就推荐三个频道一个就是[阿滴英文](https://youtube.com/channel/UCeo3JwE3HezUWFdVcehQk9Q?feature=hovercard)和[Learn English with EnglishClass101.com](https://youtube.com/user/ENGLISHCLASS101?feature=hovercard)还有[CaseyNeistat](https://youtube.com/user/caseyneistat?feature=hovercard)。
-
 
 
 **看英文书学英语**
