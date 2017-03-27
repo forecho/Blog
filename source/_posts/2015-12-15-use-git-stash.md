@@ -23,10 +23,10 @@ $ git stash
 $ git status
 ```
 
-切换分支：
+创建分支 && 切换分支：
 
 ```sh
-$ git branch dev
+$ git branch dev && git checkout dev
 ```
 
 还原代码：
