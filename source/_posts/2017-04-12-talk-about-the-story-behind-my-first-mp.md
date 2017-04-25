@@ -3,7 +3,7 @@ layout: post
 title: "谈谈我第一个公众号背后的故事"
 date: 2017-04-12 21:33:58 +0800
 comments: true
-categories: 故事
+categories: 故事 深度阅读
 ---
 ## 由来
 

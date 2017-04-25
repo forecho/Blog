@@ -3,7 +3,7 @@ layout: post
 title: "读《你要如何衡量你的人生》"
 date: 2017-04-11 21:33:58 +0800
 comments: true
-categories: 读书笔记 阅读
+categories: 读书笔记 深度阅读
 ---
 
 ![content_01.jpg](https://ooo.0o0.ooo/2017/04/24/58fdb86559135.jpg)

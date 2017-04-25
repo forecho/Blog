@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "说说罗振宇采访罗永浩的《长谈》"
-date: 2017-04-23 21:53:58 +0800
+date: 2017-04-24 21:53:58 +0800
 comments: true
 categories: 总结
 ---
