@@ -86,6 +86,12 @@ categories: 阅读
 
 推荐理由：初级程序员看了，可以少走一些弯路，有一定经验的人看了，可以看看自己犯过怎样的错误。
 
+### [《软技能》](https://www.amazon.cn/dp/B01IB086H4/?ie=UTF8&tag=forecho0c-23)
+
+[![《软技能》](https://images-cn.ssl-images-amazon.com/images/I/51LInr2bO5L._SX420_BO1,204,203,200_.jpg)](https://www.amazon.cn/dp/B01IB086H4/?ie=UTF8&tag=forecho0c-23)
+
+之前有听过代码时间采访作者的一期播客[节目](https://codetimecn.com/episodes/publish)，感觉内容很不错，值得一看。已经买了电子版。
+
 ## 总结
 
 技术书看得太多，有时候可以换换脑子，看看这类非技术书，可以缓解一下脑子，也有可能会帮助你提高效率，也可能会帮助你成长。
