@@ -108,6 +108,6 @@ curl ip.gs
 
 ## 参考链接
 
-- [Linux中使用ShadowSocks+Privoxy代理](https://docs.20150509.cn/2016/12/12/Linux%E4%B8%AD%E4%BD%BF%E7%94%A8ShadowSocks-Privoxy%E4%BB%A3%E7%90%86/)
+- [Linux中使用ShadowSocks+Privoxy代理](https://docs.lvrui.io/2016/12/12/Linux%E4%B8%AD%E4%BD%BF%E7%94%A8ShadowSocks-Privoxy%E4%BB%A3%E7%90%86/)
 - [linux下的ss+privoxy代理配置](http://www.voidcn.com/blog/xwydq/article/p-5796260.html)
 - [Linux 命令行下使用 Shadowsocks 代理](https://mritd.me/2016/07/22/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E4%BD%BF%E7%94%A8-Shadowsocks-%E4%BB%A3%E7%90%86/)
