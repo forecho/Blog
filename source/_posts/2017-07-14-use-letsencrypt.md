@@ -45,7 +45,6 @@ blog.forecho.com www.forecho.com
 server {
   listen 80;
   ....
-
   location /.well-known/acme-challenge {
     allow all;
     alias /var/www/dehydrated/;
@@ -87,11 +86,11 @@ server {
   listen       443 ssl;
   ## listen 443 ssl http2;
   listen       [::]:443 ssl;
-
-  ssl on;
+  ## ssl
+  ssl on;
   ssl_certificate /etc/dehydrated/certs/blog.forecho.com/fullchain.pem;
   ssl_certificate_key /etc/dehydrated/certs/blog.forecho.com/privkey.pem;
-
+  ## ssl pem
   ssl_dhparam /etc/ssl/certs/dhparam.pem;
   ssl_session_cache shared:SSL:10m;
   ssl_session_timeout 10m;
