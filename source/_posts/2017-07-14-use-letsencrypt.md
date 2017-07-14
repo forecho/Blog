@@ -123,20 +123,21 @@ sudo service nginx reload
 把脚本改为可执行
 
 ```
-chmod 777 /etc/dehydrated/auto-renew.sh
+$ chmod 777 /etc/dehydrated/auto-renew.sh
 ```
 
 把默认的 nano 改成 vim，如果你喜欢 nano 的话跳过这一步。
 
 ```
-vim ~/.selected_editor
+$ vim ~/.selected_editor
+# 输入
 SELECTED_EDITOR="/usr/bin/vim.tiny"
 ```
 
 ### 3.1 添加日志目录
 
 ```
-mkdir -p /etc/dehydrated/log
+$ mkdir -p /etc/dehydrated/log
 ```
 
 ### 3.2 添加定时任务
@@ -150,7 +151,7 @@ $ crontab -e
 重启 cron 的服务
 
 ```
-sudo service cron restart
+$ sudo service cron restart
 ```
 
 搞定！
