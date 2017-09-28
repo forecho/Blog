@@ -9,9 +9,9 @@ footer: true
 
 ## 个人信息
 
- - forecho/男/1990
+ - forecho
  - 大专/武汉交通职业学院电子信息工程系
- - 工作年限：4年
+ - 工作年限：6年+
  - 技术博客：<http://blog.forecho.com>
  - Github: <http://github.com/forecho>
  - Email: caizhenghai[@]gmail.com
