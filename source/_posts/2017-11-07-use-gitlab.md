@@ -225,7 +225,13 @@ deploy_test:
 简单解释一下：
 
 - 由于之前注册 GitLab CI 的时候选的是 shell，所以运行的时候用的是本台机器的环境，意味着上面的代码你要提前安装好 nodejs 环境。
-- GitLab CI 运行的时候使用的是 `gitlab-runner` 用户操作，你如果想实现 `cp` 等一些命令，可能需要把 `gitlab-runner` 添加到有权限的组中。
+- GitLab CI 运行的时候使用的是 `gitlab-runner` 用户操作，你如果想实现 `cp` 等一些命令，可能需要把 `gitlab-runner` 添加到有权限的组中。先切换到 root 用户，再切换到  `gitlab-runner` 用户：
+
+```
+$ sudo su - 
+$ su gitlab-runner
+```
+
 - 上面的配置实现的是 `dev` 分支推送代码之后会执行 `deploy_dev` 里面的操作。 `test` 分支推送代码之后会执行 `deploy_test` 里面的操作。
 
 ## 总结
