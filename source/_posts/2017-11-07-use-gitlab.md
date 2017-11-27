@@ -117,7 +117,6 @@ gitlab_rails['smtp_domain'] = "no-reply.forecho.com"
 gitlab_rails['smtp_authentication'] = "login"
 gitlab_rails['smtp_enable_starttls_auto'] = true
 gitlab_rails['smtp_tls'] = false
-
 # ...
 gitlab_rails['gitlab_email_from'] = "gitlab@no-reply.forecho.com"
 ```
