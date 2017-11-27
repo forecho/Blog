@@ -219,7 +219,7 @@ deploy_test:
     - rsync -avuz -e 'ssh -i /home/www/deploy_rsa' /home/www/company_test root@192.168.1.48:/home/www
     - echo "修改远程目录"
     - ssh -i /home/www/deploy_rsa root@192.168.1.48 "rm -rf /home/www/company && mv /home/www/company_test /home/www/company"
-
+    - curl --request POST --url 'https://oapi.dingtalk.com/robot/send?access_token=xxxxx' --header 'content-type:application/json' --data '{"msgtype":"text","text":{"content":"测试环境已经更新"},"at":{"atMobiles":["xxxx","xxx"],"isAtAll":false}}'
 ```
 
 简单解释一下：
@@ -233,6 +233,7 @@ $ su gitlab-runner
 ```
 
 - 上面的配置实现的是 `dev` 分支推送代码之后会执行 `deploy_dev` 里面的操作。 `test` 分支推送代码之后会执行 `deploy_test` 里面的操作。
+- 最后一行脚本是结合钉钉的[群机器人](https://open-doc.dingtalk.com/docs/doc.htm?treeId=257&articleId=105735&docType=1)做一个回调通知，告诉大家测试环境代码已经更新，非常方便。
 
 ## 总结
 
