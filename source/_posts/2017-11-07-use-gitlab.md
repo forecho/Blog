@@ -5,6 +5,8 @@ date: 2017-11-07 16:01:58 +0800
 comments: true
 categories: 技术分享 GitLab
 ---
+* list element with functor item
+{:toc}
 
 ## 安装 GitLab
 
@@ -135,6 +137,64 @@ $ sudo gitlab-rails console
 // 发送测试邮件
 $ Notify.test_email('收件人邮箱', '邮件标题', '邮件正文').deliver_now
 ```
+
+## 备份
+
+执行备份命令：
+
+```sh
+$ sudo gitlab-rake gitlab:backup:create
+```
+
+查看备份：
+
+```sh
+$ sudo ls /var/opt/gitlab/backups
+```
+
+可以通过修改 `/etc/gitlab/gitlab.rb` 的  `gitlab_rails['backup_path']` 来修改默认存放备份文件的目录。
+
+
+定时任务实现每天凌晨2点进行一次自动备份:
+
+```sh
+$ sudo su -
+$ crontab -e
+```
+
+添加代码 `0 2 * * * /opt/gitlab/bin/gitlab-rake gitlab:backup:create`
+
+
+## 恢复备份
+
+
+```sh
+# 停止相关数据连接服务
+$ sudo gitlab-ctl stop unicorn
+$ sudo gitlab-ctl stop sidekiq
+# 从1393513186编号备份中恢复
+$ sudo gitlab-rake gitlab:backup:restore BACKUP=1393513186
+# 启动Gitlab
+$ sudo gitlab-ctl start
+```
+
+备份相关参考文档[《使用Gitlab一键安装包后的日常备份恢复与迁移》](https://segmentfault.com/a/1190000002439923)。
+
+## 汉化
+
+汉化参考文档[《Omnibus 安装汉化》](https://gitlab.com/xhang/gitlab/wikis/home#omnibus-%E5%AE%89%E8%A3%85%E6%B1%89%E5%8C%96)，自己实践的命令如下：
+
+```sh
+$ cd ~
+$ git clone https://gitlab.com/xhang/gitlab.git
+$ gitlab_version=$(sudo cat /opt/gitlab/embedded/service/gitlab-rails/VERSION)
+$ cd gitlab && git diff v${gitlab_version} v${gitlab_version}-zh > ../${gitlab_version}-zh.diff
+$ sudo gitlab-ctl stop
+$ sudo patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 < ../${gitlab_version}-zh.diff
+$ sudo gitlab-ctl start
+$ sudo gitlab-ctl reconfigure
+```
+
 
 ## GitLab 配置 CI
 
