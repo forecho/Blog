@@ -97,7 +97,7 @@ AttributeError: /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1: undefined symbol: EV
 
 看日志找到 `crypto/openssl.py` 所在的文件位置，然后打开文件，此处我的位置为：
 
-```shell
+```
 sudo cp /usr/local/lib/python2.7/dist-packages/shadowsocks/crypto/openssl.py /usr/local/lib/python2.7/dist-packages/shadowsocks/crypto/openssl.py.bak
 sudo vim /usr/local/lib/python2.7/dist-packages/shadowsocks/crypto/openssl.py
 ```
