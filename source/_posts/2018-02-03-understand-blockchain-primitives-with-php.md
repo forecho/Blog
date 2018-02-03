@@ -199,6 +199,6 @@ echo "区块链验证通过吗？" . ($blockChain->isChainValid() ? '通过' : '
 ## 参考连接
 
 - [使用 Go 语言打造区块链（一）](http://lixiaolai.com/2017/09/28/building-blockchain-in-go-part-1/)
-- [用 golang 实现区块链系列一 | 基本原型](https://annatarhe.github.io/2017/12/29/building-blockchain-in-go-part-1-basic-prototype.html)
+- [用 golang 实现区块链系列一 - 基本原型](https://annatarhe.github.io/2017/12/29/building-blockchain-in-go-part-1-basic-prototype.html)
 - [Building Blockchain in Go. Part 1: Basic Prototype](https://jeiwan.cc/posts/building-blockchain-in-go-part-1/)
 - [[YouTube]Creating a blockchain with Javascript (Blockchain, part 1)](https://www.youtube.com/watch?v=zVqczFZr124&t=10s&index=2&list=PLQ5fjAsCtfQ77yDXk8BVW6sRQO9qzq-Os)
