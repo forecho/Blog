@@ -3,7 +3,7 @@ layout: post
 title: "2013年给自己的一个胶带"
 date: 2014-02-06 22:52
 comments: true
-categories: 总结
+categories: 年终总结
 ---
 
 2013年发生了很多事。
