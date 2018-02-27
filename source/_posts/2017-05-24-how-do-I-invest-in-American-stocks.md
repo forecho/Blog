@@ -3,7 +3,7 @@ layout: post
 title: "我是怎么投资美股的"
 date: 2017-05-24 23:33:58 +0800
 comments: true
-categories: 经验分享 理财
+categories: 经验分享 美股
 ---
 ## 学会理财
 
