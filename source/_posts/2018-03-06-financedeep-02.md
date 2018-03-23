@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "【深度理财02】炒美股一年学到的经验教训"
-date: 2018-03-06 10 13:09:58 +0800
+date: 2018-03-06 13:09:58 +0800
 comments: true
 categories: 美股 深度理财
 ---
