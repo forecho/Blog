@@ -56,7 +56,7 @@ categories: 分享经验
 - 资金用途选「出国费用」和「隐私旅游度假」。
 - 手机 App 汇款记得一定要选择『境外工行收款』，不然使用他行收款会有100多块钱的人民币手续费！
 - 汇1万港币，亚洲的卡，只会收到9940港币，最低扣除60港币手续费。
-- 当天汇款一般第二个工作日香港帐号才会收到钱，如果你是星期五汇款，意味着你需要等到星期一了。
+- 当天汇款一般第二个工作日香港帐号才会收到钱，如果你是星期五汇款，意味着你需要等到星期一了。
 
 最后确认成交的时候，要用上你之前已经激活过的电子密码器了。工银亚洲最迟一个工作日收到钱，我是上午打钱，下午还没收到。
 
@@ -74,3 +74,4 @@ categories: 分享经验
 - [工银亚洲（香港）见证开户攻略2017年版](http://www.typemylife.com/icbc-asia-open-account/)
 - [【在大陆开设香港银行账户攻略】工商银行&建设银行篇](https://mp.weixin.qq.com/s?__biz=MzI5MzE1ODMzNQ==&mid=2652743094&idx=2&sn=3a04fe5fcef8f4d2bdc7d1f19c7f2049&scene=21)
 - [【在大陆开设香港银行账户攻略】中国银行&招商银行篇](https://mp.weixin.qq.com/s?__biz=MzI5MzE1ODMzNQ==&mid=2652743094&idx=3&sn=f8b7b17a3086444a230d86d058d6e064&scene=21)
+- [工银亚洲开户见证业务常见费用 PDF](http://v.icbc.com.cn/userfiles/Resources/ICBC/haiwai/Huashang/download/2017/Crossborder_fee.pdf)
