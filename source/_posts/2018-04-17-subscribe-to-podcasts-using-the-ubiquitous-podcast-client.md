@@ -16,9 +16,9 @@ categories: 分享 播客
 
 <!--more-->
 
-但是有些播主并不注重 Apple 的 Podcast，干脆就没去上架。一直喜欢使用 [Overcast](https://3li3.com/app/view?id=8052) 听播客的我，自然是不能忍。想到得第一件事情当然是先搜索，在网上找找看有没有人做类似的工具，我肯定不是一个人有这个需求。果然被我找到了 https://miao.li/2016/podcast_beta_miao_li/ ，不过用了大半年，无法使用了。也没找到其他解决办法，最后只能自己再造轮子了。
+但是有些播主并不注重 Apple 的 Podcast，干脆就没去上架。一直喜欢使用 [Overcast](https://3li3.com/app/view?id=8052) 听播客的我，自然是不能忍。想到得第一件事情当然是先搜索，在网上找找看有没有人做类似的工具，我肯定不是一个人有这个需求。果然被我找到了 <https://miao.li/2016/podcast_beta_miao_li/> ，不过用了大半年，无法使用了。也没找到其他解决办法，最后只能自己再造轮子了。
 
-GitHub 地址：https://github.com/forecho/Quicksilver ，选了一个非常中二的名字，其实就是漫威里面快银的名字。
+GitHub 地址：<https://github.com/forecho/Quicksilver> ，选了一个非常中二的名字，其实就是漫威里面快银的名字。
 
 ## 实现思路
 
@@ -32,7 +32,7 @@ GitHub 地址：https://github.com/forecho/Quicksilver ，选了一个非常中�
 
 选择开源出于以下几点考虑：
 
-- 想吸点粉丝
+- 想吸点粉丝。
 - 这种实现方式不太稳定，只要官网数据结构有改动，我这边就可能用不了了。所以选择开源，就算我以后不维护了（这可能性比较小），其他人有这个需求也可以提供代码，帮助维护。
 - 我只有听喜马拉雅FM的需求，其他人有其他改进的需求可以贡献代码。
 
@@ -44,7 +44,7 @@ GitHub 地址：https://github.com/forecho/Quicksilver ，选了一个非常中�
 
 最后再贴几个链接：
 
-- 前两天看到一个类似的功能的网站，有兴趣可以看一下：http://getpodcast.xyz/
-- 如果你可以访问 YouTube，而且想把 YouTube 频道当播客听，不要错过这个： http://podsync.net/
-- 如果你还不知道听什么节目，快看看我这篇文章：https://blog.forecho.com/im-listening-to-podcasts.html
-- 目前已经支持的节目列表：https://git.io/vpU3y
+- 前两天看到一个类似的功能的网站，有兴趣可以看一下：<http://getpodcast.xyz/>
+- 如果你可以访问 YouTube，而且想把 YouTube 频道当播客听，不要错过这个： <http://podsync.net/>
+- 如果你还不知道听什么节目，快看看我这篇文章：<https://blog.forecho.com/im-listening-to-podcasts.html>
+- 目前已经支持的节目列表：<https://git.io/vpU3y>
