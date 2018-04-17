@@ -10,11 +10,11 @@ categories: 分享 播客
 
 由于换了一家创业公司（等过一阵子有时间会细说这个事情），最近一个月会比较忙，都没时间写博客了，但是又不想停更，所以就有了这篇文章。
 
-<!--more-->
-
 ## 诞生记
 
 我听播客已经有几年了，每次做饭、跑步、打扫家务或者上下班比较累的时候听播客真是一举两得的事情。近两年由于喜马拉雅FM、蜻蜓FM等一系列的国内播客平台的火爆，提高了国内播客节目的产出。
+
+<!--more-->
 
 但是有些播主并不注重 Apple 的 Podcast，干脆就没去上架。一直喜欢使用 [Overcast](https://3li3.com/app/view?id=8052) 听播客的我，自然是不能忍。想到得第一件事情当然是先搜索，在网上找找看有没有人做类似的工具，我肯定不是一个人有这个需求。果然被我找到了 https://miao.li/2016/podcast_beta_miao_li/ ，不过用了大半年，无法使用了。也没找到其他解决办法，最后只能自己再造轮子了。
 
@@ -47,4 +47,4 @@ GitHub 地址：https://github.com/forecho/Quicksilver ，选了一个非常中�
 - 前两天看到一个类似的功能的网站，有兴趣可以看一下：http://getpodcast.xyz/
 - 如果你可以访问 YouTube，而且想把 YouTube 频道当播客听，不要错过这个： http://podsync.net/
 - 如果你还不知道听什么节目，快看看我这篇文章：https://blog.forecho.com/im-listening-to-podcasts.html
-- 目前已经支持的节目列表：https://github.com/forecho/Quicksilver/wiki/%E7%9B%AE%E5%89%8D%E5%B7%B2%E7%BB%8F%E6%94%AF%E6%8C%81%E7%9A%84%E8%8A%82%E7%9B%AE%E5%88%97%E8%A1%A8
+- 目前已经支持的节目列表：https://git.io/vpU3y
