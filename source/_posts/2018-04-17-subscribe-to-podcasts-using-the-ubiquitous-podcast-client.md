@@ -42,8 +42,9 @@ GitHub 地址：https://github.com/forecho/Quicksilver ，选了一个非常中�
 
 最后再说两句，如果你是程序员建议你学一下 Python，不需要学得有多精通，会用就行，Python 写小工具真是神奇。我写 Python 的过程基本上就是看[廖雪峰的官方网站](https://www.liaoxuefeng.com/)，教程写的简单实用。然后自己再多实践。
 
-最后再推荐两个网站：
+最后再贴几个链接：
 
 - 前两天看到一个类似的功能的网站，有兴趣可以看一下：http://getpodcast.xyz/
 - 如果你可以访问 YouTube，而且想把 YouTube 频道当播客听，不要错过这个： http://podsync.net/
 - 如果你还不知道听什么节目，快看看我这篇文章：https://blog.forecho.com/im-listening-to-podcasts.html
+- 目前已经支持的节目列表：https://github.com/forecho/Quicksilver/wiki/%E7%9B%AE%E5%89%8D%E5%B7%B2%E7%BB%8F%E6%94%AF%E6%8C%81%E7%9A%84%E8%8A%82%E7%9B%AE%E5%88%97%E8%A1%A8
