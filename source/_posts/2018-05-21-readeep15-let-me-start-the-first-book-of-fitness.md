@@ -3,7 +3,7 @@ layout: post
 title: "【深度阅读15】让我开始健身的第一本书"
 date: 2018-05-21 07:43:58 +0800
 comments: true
-categories: 创业
+categories: 深度阅读
 ---
 
 [![《囚徒健身》](https://images-cn.ssl-images-amazon.com/images/I/51BJUW%2BCniL.jpg)](https://www.amazon.cn/dp/B00ESZ081E/?ie=UTF8&tag=forecho0c-23)
