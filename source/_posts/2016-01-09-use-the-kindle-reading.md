@@ -38,7 +38,7 @@ categories: 思考 阅读
 回来之后立马搜索了一下，决定买一个 Kindle，但是那个时候 Kindle 还没有国产的，去淘宝搜索一个，最新版是 Kindle5，价格600，没犹豫立马就买了。
 
 自从那之后 Kindle 上下班一直陪伴着我，用 Kindle 看的书虽然不是非常多，但是我仍然认为 Kindle 是我买的最
-值得的一个电子设备，而且还不伤眼睛。现在的我们很少会有耐心在电脑上看完一篇比较长的文章，但是我可以配合 [readability](https://www.readability.com) 的 Send to Kindle 真是利器，
+值得的一个电子设备，而且还不伤眼睛。现在的我们很少会有耐心在电脑上看完一篇比较长的文章，但是我可以配合 [Instapaper](https://www.instapaper.com) 的 Send to Kindle 真是利器，
 让我阅读了很多长篇文章，受益良多。
 
 有很多人不太理解为什么有了 iPhone 和 iPad 之后为什么还需要 Kindle？我认为有两点：
