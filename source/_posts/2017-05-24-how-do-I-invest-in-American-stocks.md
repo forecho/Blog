@@ -90,4 +90,10 @@ PS：最后吐槽一下，当天下午3点之后入金，需要等待下一个�
 富途证券暂时不支持大陆银行卡了，那么现在你要购买美股，可以有两个选择：
 
 - 去办一张香港银行卡，想办的话推荐看这篇文章[《工银亚洲卡开户攻略》](http://blog.forecho.com/icbc-asia-open-account.html)，也可以去办民生银行的，能去香港的话可以办招行香港卡。
-- 使用其他证劵，推荐[老虎证劵](https://itiger.com/accounts?invite=FORECHO)或者雪盈证劵。
+- 使用其他证劵，推荐[老虎证劵](https://itiger.com/accounts?invite=FORECHO)或者[雪盈证劵](https://www.snowballsecurities.com/ib-account-open/web?r=50001001166)。
+
+相关文章推荐：
+
+- [再谈美股开户:富途 vs 雪盈](https://blog.forecho.com/talk-about-US-stocks-account-again.html)
+- [【深度理财02】炒美股一年学到的经验教训](https://blog.forecho.com/financedeep-02.html)
+
