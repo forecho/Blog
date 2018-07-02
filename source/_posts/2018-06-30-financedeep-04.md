@@ -72,3 +72,10 @@ categories: 美股 深度理财
 - 精力有限，关注的股票最好不要超过五个。
 
 以上总结纯属自己的思考，其中是否正确，请自行判断。请保持自己的独立思考，本文章中的观点不构成任何投资建议。
+
+## 相关文章
+
+- [我是怎么投资美股的](https://blog.forecho.com/how-do-I-invest-in-American-stocks.html)
+- [再谈美股开户:富途 vs 雪盈](https://blog.forecho.com/talk-about-US-stocks-account-again.html)
+- [【深度理财02】炒美股一年学到的经验教训](https://blog.forecho.com/financedeep-02.html)
+- [《工银亚洲卡开户攻略》](https://blog.forecho.com/icbc-asia-open-account.html)
