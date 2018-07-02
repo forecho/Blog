@@ -8,7 +8,7 @@ categories: 经验分享 阅读
 
 ## 引言
 
-今年年初的时候我写了篇[《使用 Kindle 阅读》](http://blog.forecho.com/use-the-kindle-reading.html) 文章，从2012年底开始到现在差不多快4年的 Kindle 使用经历，
+今年年初的时候我写了篇[《使用 Kindle 阅读》](https://blog.forecho.com/use-the-kindle-reading.html) 文章，从2012年底开始到现在差不多快4年的 Kindle 使用经历，
 那么我来分享一下我是如何使用 Kindle 的。
 
 ![](http://ww1.sinaimg.cn/large/4cc5f9b3gw1f7d9t8yndyj20mq04r0tk.jpg)

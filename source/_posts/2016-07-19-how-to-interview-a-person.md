@@ -92,7 +92,7 @@ categories: 思考 经验分享
 
 - [面试杂谈：怎样才算“精通xx”？](http://zhangshenjia.com/literature/master_on_skill/)
 - [结果与目标](http://zhangshenjia.com/literature/result_or_target/)
-- [成为一流的人才](http://blog.forecho.com/cheng-wei-yi-liu-de-ren-cai.html)
+- [成为一流的人才](https://blog.forecho.com/cheng-wei-yi-liu-de-ren-cai.html)
 
 
 

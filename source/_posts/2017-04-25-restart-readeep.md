@@ -7,7 +7,7 @@ categories: 深度阅读
 ---
 ## 引言
 
-[上一篇文章](http://blog.forecho.com/talk-about-the-story-behind-my-first-mp.html)我有说过我会重启《深度阅读》。
+[上一篇文章](https://blog.forecho.com/talk-about-the-story-behind-my-first-mp.html)我有说过我会重启《深度阅读》。
 
 受到《长谈》节目的影响，我也思考了一下，未来如果我变得有钱之后，除了吃喝玩乐，我要做以下几件事情：
 
@@ -19,7 +19,7 @@ categories: 深度阅读
 
 <!--more-->
 
-自从看了 YouTube，发现了[囧星人](https://www.youtube.com/user/shintaroReview)，就爱上他的『囧说书』专栏了。也是受她的推荐和影响我看了《你要如何衡量你的人生》这本书并且写了一篇[读书笔记](http://blog.forecho.com/how-will-you-measure-your-life.html)。
+自从看了 YouTube，发现了[囧星人](https://www.youtube.com/user/shintaroReview)，就爱上他的『囧说书』专栏了。也是受她的推荐和影响我看了《你要如何衡量你的人生》这本书并且写了一篇[读书笔记](https://blog.forecho.com/how-will-you-measure-your-life.html)。
 
 ## 说明
 
