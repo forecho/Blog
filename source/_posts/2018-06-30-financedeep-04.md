@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "【深度理财03】新手炒股可能容易犯这些错误"
+title: "【深度理财04】新手炒股可能容易犯这些错误"
 date: 2018-06-30 13:09:58 +0800
 comments: true
 categories: 美股 深度理财
