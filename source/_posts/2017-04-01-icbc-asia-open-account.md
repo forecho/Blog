@@ -68,6 +68,14 @@ categories: 分享经验
 
 最后吐槽一下，其实半年前我本来想办招行香港一卡通的，但是那个时候一直纠结每个月的管理费还有就是需求不够强烈，所以就一直拖着没办，年后因为有需求想办理了，结果去发现从2月开始招行把原来5万人民币的开户门槛，提高为500万人民币。Are you kidding me? 一下子对招行没啥好印象了。
 
+## 用途
+
+开通香港银行卡最大的好处是可以购买美股和港股，那么我是如何购买美股和港股的呢？可以查看下面我写的文章：
+
+- [我是怎么投资美股的](https://blog.forecho.com/how-do-I-invest-in-American-stocks.html)
+- [再谈美股开户:富途 vs 雪盈](https://blog.forecho.com/talk-about-US-stocks-account-again.html)
+- [【深度理财02】炒美股一年学到的经验教训](https://blog.forecho.com/financedeep-02.html)
+
 ## 参考链接
 
 - [工银亚洲内地客户见证开户服务介绍](https://www.icbcasia.com/ICBC/%E6%B5%B7%E5%A4%96%E5%88%86%E8%A1%8C/%E5%B7%A5%E9%93%B6%E4%BA%9A%E6%B4%B2/CN/%E4%B8%AA%E4%BA%BA%E9%87%91%E8%9E%8D/%E4%BA%BA%E6%B0%91%E5%B8%81%E5%8F%8A%E8%B7%A8%E5%A2%83%E7%90%86%E8%B4%A2/%E5%86%85%E5%9C%B0%E5%AE%A2%E6%88%B7%E6%9C%8D%E5%8A%A1%E4%B8%93%E5%8C%BA/scm_aow.htm)
