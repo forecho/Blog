@@ -83,3 +83,11 @@ categories: 美股 深度理财
 - 从新手村毕业之后，可以使用融资融券功能，适当的加杠杠。
 
 以上总结的经验教训不一定是对的，欢迎留言或者发邮件与我交流讨论。
+
+
+## 相关文章
+
+- [我是怎么投资美股的](https://blog.forecho.com/how-do-I-invest-in-American-stocks.html)
+- [再谈美股开户:富途 vs 雪盈](https://blog.forecho.com/talk-about-US-stocks-account-again.html)
+- [【深度理财02】炒美股一年学到的经验教训](https://blog.forecho.com/financedeep-02.html)
+- [《工银亚洲卡开户攻略》](https://blog.forecho.com/icbc-asia-open-account.html)

@@ -119,3 +119,4 @@ categories: 经验分享
 ## 参考资料
 
 - [入深户领1.5-3万元补贴实操流程](https://www.jianshu.com/p/650efc2197b9)
+- [2017深圳入户新政后个人申办在职人才引进流程](https://www.jianshu.com/p/980673667d4d)
