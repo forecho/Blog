@@ -29,9 +29,9 @@ categories: phpstorm
 如果没有使用 `Ctrl + Alt + L` 的习惯的话，你可以使用录制宏的方式，制定『当我们按 `Ctrl + S` 保存的时候自动执行代码格式化』的规则：
 
 
-- 点击 `Edit -> Macros -> Start Macro Recording` 开始录制宏，然后按快捷键 `Ctrl + Alt + L`、`Ctrl + Alt + O` 、 `Ctrl + S`。
+- 点击 `Edit -> Macros -> Start Macro Recording` 开始录制宏，然后依次按快捷键 `Ctrl + Alt + L`、`Ctrl + Alt + O` 、`Ctrl + S`。
 - 然后点击 `Edit -> Macros -> Stop Macro Recording` 结束录制。会自动弹出一个窗口，自己设置个名称， 比方说 `Super Save`。
-- 然后点击 `File -> Keymap` 修改快捷键，把之前保存快捷键修改为 `Alt +S` 或者其他快捷键或者取消。 搜索 `Super Save` 添加快捷键为 `Ctrl + S` 就可以了。
+- 然后点击 `File -> Keymap` 修改快捷键，把之前保存快捷键修改为 `Alt + S` 或者其他快捷键或者取消。然后搜索 `Super Save` 添加快捷键为 `Ctrl + S` 就可以了。
 
 ![568971eb-904f-457b-be4f-0581e9b62315.png](https://i.loli.net/2018/10/12/5bc05565a0157.png)
 
