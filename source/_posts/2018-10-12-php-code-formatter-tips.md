@@ -33,8 +33,7 @@ categories: phpstorm
 - 然后点击 `Edit -> Macros -> Stop Macro Recording` 结束录制。会自动弹出一个窗口，自己设置个名称， 比方说 `Super Save`。
 - 然后点击 `File -> Keymap` 修改快捷键，把之前保存快捷键修改为 `Alt + S` 或者其他快捷键或者取消。然后搜索 `Super Save` 添加快捷键为 `Ctrl + S` 就可以了。
 
-![568971eb-904f-457b-be4f-0581e9b62315.png](https://i.loli.net/2018/10/12/5bc05565a0157.png)
-
+![](https://ww1.sinaimg.cn/large/4cc5f9b3gy1fw5isgafujj20g30hvtgz.jpg)
 
 ## [GrumPHP](https://github.com/phpro/grumphp)
 
