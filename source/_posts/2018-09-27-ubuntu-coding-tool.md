@@ -181,6 +181,19 @@ sudo apt install nixnote2
 - [VS Code](https://code.visualstudio.com/)
 - [PhpStorm](https://www.jetbrains.com/phpstorm/)
 
+
+### 下载软件 - [uGet+aria2](https://www.cnblogs.com/EasonJim/p/7119294.html)
+
+安装 
+
+```sh
+sudo add-apt-repository ppa:plushuang-tw/uget-stable
+sudo add-apt-repository ppa:t-tujikawa/ppa
+sudo apt-get update
+sudo apt-get install uget
+sudo apt-get install aria2
+```
+
 ## 最后
 
 Ubuntu 作为软件开发系统，除了软件比较少之外，其实还挺不错的。Windows 和 Mac 系统常用得软件在 Ubuntu 都能找到代替品，可以将就着用，唯一让我不太满意的就是剪贴板软件了，Diodon 不太稳定，找机会再换一个。
