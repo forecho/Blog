@@ -194,6 +194,17 @@ sudo apt-get install uget
 sudo apt-get install aria2
 ```
 
+
+### 截图软件 - [Flameshot](https://github.com/lupoDharkael/flameshot)
+
+安装
+
+点击 [releases](https://github.com/lupoDharkael/flameshot/releases) 页面下载最新版本的代码，然后双击安装即可。
+
+使用
+
+只需要配置快捷键就可以了，在 `设置-键盘` 中，将 `flameshot gui` 命令绑定到 `Ctrl+Alt+A` 即可（根据个人习惯）。功能很强大，使用习惯跟 QQ 截图一样。
+
 ## 最后
 
 Ubuntu 作为软件开发系统，除了软件比较少之外，其实还挺不错的。Windows 和 Mac 系统常用得软件在 Ubuntu 都能找到代替品，可以将就着用，唯一让我不太满意的就是剪贴板软件了，Diodon 不太稳定，找机会再换一个。
