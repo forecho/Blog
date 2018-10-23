@@ -205,6 +205,22 @@ sudo apt-get install aria2
 
 只需要配置快捷键就可以了，在 `设置-键盘` 中，将 `flameshot gui` 命令绑定到 `Ctrl+Alt+A` 即可（根据个人习惯）。功能很强大，使用习惯跟 QQ 截图一样。
 
+### 代码比对软件 - [Meld](http://meldmerge.org/)
+
+安装 
+
+```sh
+sudo apt-get install meld
+```
+
+使用
+
+直接去应用程序里面搜索 `meld` 或者在命令行输入：
+
+```sh
+meld&
+```
+
 ## 最后
 
 Ubuntu 作为软件开发系统，除了软件比较少之外，其实还挺不错的。Windows 和 Mac 系统常用得软件在 Ubuntu 都能找到代替品，可以将就着用，唯一让我不太满意的就是剪贴板软件了，Diodon 不太稳定，找机会再换一个。
