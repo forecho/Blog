@@ -221,6 +221,18 @@ sudo apt-get install meld
 meld&
 ```
 
+### 音乐 - [网易云音乐](https://music.163.com/#/download)
+
+我的系统是 Ubuntu 18.04，官网下载最新1.1版本安装打不开，网上找的各种解决办法麻烦而且不太好使。但是可以下载 [1.0 版本](http://mirrors.ustc.edu.cn/debiancn/pool/main/n/netease-cloud-music/netease-cloud-music_1.0.0%2Brepack.debiancn-1_i386.deb)安装，安装命令：
+
+```
+sudo dpkg -i netease-cloud-music_1.0.0+repack.debiancn-1_i386.deb
+sudo apt-get -f install
+sudo dpkg -i netease-cloud-music_1.0.0+repack.debiancn-1_i386.deb
+```
+
+第二条和第三条命令主要是解决依赖问题。
+
 ## 最后
 
 Ubuntu 作为软件开发系统，除了软件比较少之外，其实还挺不错的。Windows 和 Mac 系统常用得软件在 Ubuntu 都能找到代替品，可以将就着用，唯一让我不太满意的就是剪贴板软件了，Diodon 不太稳定，找机会再换一个。
