@@ -95,7 +95,7 @@ COPY ./sources.list /etc/apt/sources.list
 xdebug.remote_connect_back=1
 xdebug.remote_port=9000
 xdebug.idekey=PHPSTORM
-
+;
 xdebug.remote_autostart=1
 xdebug.remote_enable=1
 xdebug.cli_color=1
@@ -103,7 +103,7 @@ xdebug.profiler_enable=1
 xdebug.profiler_output_dir = "/var/www/xdebug/xdebug_profiler"
 xdebug.max_nesting_level=250
 xdebug.remote_log="/var/www/xdebug/xdebug_docker.log"
-
+;
 ;内存分析
 ; xdebug.auto_trace = 1
 ; xdebug.trace_output_dir = "/var/www/xdebug/xdebug_trace"
@@ -111,10 +111,10 @@ xdebug.remote_log="/var/www/xdebug/xdebug_docker.log"
 ; xdebug.show_mem_delta = 1
 ; xdebug.collect_params = 4
 ; xdebug.collect_return = 1
-
+;
 xdebug.remote_handler=dbgp
 xdebug.remote_mode=req
-
+;
 xdebug.var_display_max_children=-1
 xdebug.var_display_max_data=-1
 xdebug.var_display_max_depth=-1
