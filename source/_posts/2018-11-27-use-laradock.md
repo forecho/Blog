@@ -12,6 +12,8 @@ PHP开发，想用 Docker 但又没太多时间去学，那你可以试试 [Lava
 
 你可以很方便的搭建各种环境，比方说 redis、MongoDB、MySQL、Nginx 等等。
 
+<!--more-->
+
 ## 快速使用
 
 - 下载代码
@@ -27,9 +29,7 @@ cd laradock
 cp env-example .env
 ```
 
-<!--more-->
-
-修改 `.env` 的 `APP_CODE_PATH_HOST` 的值，相对路径就可以。
+- 修改 `.env` 的 `APP_CODE_PATH_HOST` 的值，相对路径就可以。
 
 比方说我的文件结构是这样的：
 
@@ -45,7 +45,52 @@ cp env-example .env
 
 连接的 MySQL 的时候 `DB_HOST=mysql` 而不是 `127.0.0.1`。
 
-然后就可以在 laradock 目录下执行命令开始使用了，示例：
+- 然后修改添加 nginx 配置，比方说 `nginx/sites/blog.conf`：
+
+```
+server {
+
+    listen 80;
+    listen [::]:80;
+
+    server_name blog.dev.work;
+    root /var/www/blog/public;
+    index index.php index.html index.htm;
+
+    location / {
+         try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    location ~ \.php$ {
+        try_files $uri /index.php =404;
+        fastcgi_pass php-upstream;
+        fastcgi_index index.php;
+        fastcgi_buffers 16 16k;
+        fastcgi_buffer_size 32k;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        #fixes timeouts
+        fastcgi_read_timeout 600;
+        include fastcgi_params;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/letsencrypt/;
+        log_not_found off;
+    }
+}
+```
+
+- 修改 `/etc/hosts` 文件，添加：
+
+```
+127.0.0.1 blog.dev.work
+```
+
+- 然后就可以在 laradock 目录下执行命令开始使用了，示例：
 
 ```
 docker-compose up -d nginx workspace redis mysql phpmyadmin mongo
