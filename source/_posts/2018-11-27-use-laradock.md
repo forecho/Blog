@@ -59,7 +59,6 @@ docker-compose up -d nginx workspace redis mysql phpmyadmin mongo
 ```
 ### Environment ########################################################################################################
 # If you're in China, or you need to change sources, will be set CHANGE_SOURCE to true in .env.
-
 CHANGE_SOURCE=true
 ```
 
