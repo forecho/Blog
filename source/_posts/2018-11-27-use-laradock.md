@@ -98,15 +98,6 @@ docker-compose up -d nginx workspace redis mysql phpmyadmin mongo
 
 ## 换中国源
 
-
-- 修改 `.env` 和 `env-example` 文件添加如下配置代码，控制开启或者关闭：
-
-```
-### Environment ########################################################################################################
-# If you're in China, or you need to change sources, will be set CHANGE_SOURCE to true in .env.
-CHANGE_SOURCE=true
-```
-
 - 新建 `php-fpm/sources.list` 文件，添加代码（基本上就是只换域名地址，其他不换）：
 
 ```
@@ -164,10 +155,19 @@ xdebug.var_display_max_data=-1
 xdebug.var_display_max_depth=-1
 ```
 
-- 执行 `$ docker-compose build --no-cache php-fpm workspace` 命令。
-- 关闭 docker 并且重启 `$ docker-compose down && docker-compose up -d nginx workspace redis mysql`
+- 重新 build 并且 重启命令：
 
-扩展配置地址在 php-fpm 容器 `$ docker exec -it laradock_php-fpm_1 bash` 里面的 `$ cat /usr/local/etc/php/conf.d/xdebug.ini`
+```
+docker-compose build --no-cache php-fpm && docker-compose restart php-fpm
+docker-compose down && docker-compose up -d nginx workspace redis mysql
+```
+
+- 查看配置文件：
+
+```
+docker exec -it laradock_php-fpm_1 bash
+cat /usr/local/etc/php/conf.d/xdebug.ini
+```
 
 
 ## 安装 xhprof 扩展
@@ -232,10 +232,12 @@ RUN if [ ${INSTALL_XHPROF} = true ]; then \
 
 COPY ./xhprof.ini /usr/local/etc/php/conf.d
 ```
-重新 build 并且 重启 php-fpm 命令：
+
+- 重新 build 并且 重启 php-fpm 命令：
 
 ```
-$ docker-compose build --no-cache php-fpm && docker-compose restart php-fpm
+docker-compose build --no-cache php-fpm && docker-compose restart php-fpm
+docker-compose down && docker-compose up -d nginx workspace redis mysql
 ```
 
 - 检查是否安装成功：
