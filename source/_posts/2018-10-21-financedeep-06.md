@@ -3,6 +3,7 @@ layout: post
 title: "【深度理财06】当我们在买股票的时候"
 date: 2018-10-21 07:49:58 +0800
 comments: true
+published：false
 categories: 美股 深度理财
 ---
 * list element with functor item
