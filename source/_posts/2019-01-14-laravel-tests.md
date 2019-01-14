@@ -55,7 +55,7 @@ public function testDecodeUnionId()
 
 多组数据可以使用 `@dataProvider` 的方式传入数据来测试。比方说我测试一个金额，只支持正数、两位小数。
 
-```php
+```
 namespace App\Rules\Rules;
 
 use App\Rules\AmountRule;
@@ -122,7 +122,7 @@ class AmountRuleTest extends TestCase
 
 ### Console 测试
 
-```php
+```
 namespace App\Console\Commands;
 
 use App\Models\ClientApp;
@@ -163,7 +163,7 @@ class CreateClient extends Command
 ```
 
 
-```php
+```
 public function testCreateClient()
 {
     $application = new Application();
@@ -187,7 +187,7 @@ public function testCreateClient()
 
 ### 断言类
 
-```php
+```
 /**
 * @test
 */
@@ -205,7 +205,7 @@ public function getAccountByUnionId()
 
 默认没有测试异常的方法，所以我们自己实现一个。
 
-```php
+```
 /**
 * Asserts that the given callback throws the given exception.
 *
@@ -225,7 +225,7 @@ protected function assertException(string $expectClass, callable $callback)
 }
 ```
 
-```php
+```
 public function testSomeException()
 {
     $service = new PointsAccountService();
@@ -238,7 +238,7 @@ public function testSomeException()
 ### 队列测试
 
 
-```php
+```
 use Illuminate\Support\Facades\Queue;
 
 public function testJob()
@@ -257,8 +257,7 @@ public function testJob()
 
 ### API 接口测试
 
-
-```php
+```
 use Illuminate\Http\Request;
 
 public function testUserCreate()
@@ -282,7 +281,7 @@ public function testUserCreate()
 - 添加接口返回的数据，比方说添加 `tests/fixtures/simple_data/vendor/v1/member/info.json` 文件，里面就贴上接口正常返回的数据。
 - 添加控制器方法 `app/Http/Controllers/TestController.php` 文件，里面的方法做文件映射：
 
-```php
+```
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Response;
@@ -304,7 +303,7 @@ class TestController extends Controller
 
 - 添加路由配置文件 `routes/api.php`
 
-```php
+```
 // tests v1 版本 account-base-service 和 notification
 Route::group(['prefix' => 'tests/v1',], function () {
     Route::get('member/info', 'TestController@index');
