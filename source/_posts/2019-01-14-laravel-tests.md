@@ -326,7 +326,7 @@ Laravel 默认如果有 `.env.testing` 环境配置文件的话，跑单元测�
 
 跑单元测试我们一般用下面这个命令跑：
 
-```shell
+```sh
 vendor/bin/phpunit
 ```
 
