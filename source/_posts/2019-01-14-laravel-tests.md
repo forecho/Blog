@@ -35,7 +35,7 @@ public function testComputePermission()
 
 ### 断言返回数据数组包含某个键值
 
-```
+```php
 /**
 * @throws \App\Exceptions\ThirdPartyServiceErrorException
 */
@@ -259,7 +259,6 @@ public function testJob()
 
 ```php
 use Illuminate\Http\Request;
-
 public function testUserCreate()
 {
     $data = [
