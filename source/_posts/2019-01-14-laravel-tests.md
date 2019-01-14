@@ -259,7 +259,6 @@ public function testJob()
 
 ```php
 use Illuminate\Http\Request;
-
 public function testUserCreate()
 {
     $data = [
