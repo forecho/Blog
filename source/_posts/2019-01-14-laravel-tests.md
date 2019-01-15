@@ -259,7 +259,6 @@ public function testJob()
 
 ```php
 use Illuminate\Http\Request;
-
 public function testUserCreate()
 {
     $data = [
@@ -270,6 +269,7 @@ public function testUserCreate()
         ->assertJson([
             'code' => 0,
         ]);
+    // something other assert
 }
 ```
 
