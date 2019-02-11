@@ -6,7 +6,7 @@ comments: true
 categories: 旅游 不跟团
 ---
 
-![](https://ws1.sinaimg.cn/mw690/4cc5f9b3gy1g01o9a86u4j214o0uinpd.jpg)
+![](https://ws1.sinaimg.cn/large/4cc5f9b3gy1g01o9a86u4j214o0uinpd.jpg)
 
 ## 引言
  
@@ -103,6 +103,8 @@ categories: 旅游 不跟团
 - 第三天上午在酒店门口等大巴上车回宜昌东，然后赶车回武昌。
 
 ### 滑雪
+
+![](http://ww1.sinaimg.cn/large/4cc5f9b3gy1g02kn63taej210c0r94qp.jpg)
 
 神农架滑雪场的雪是自然雪加人工降雪，但是不用担心雪的问题。有4个滑道，最高处是高级玩家滑雪道，我那天好像就看到一个人在上面玩过。下面从左到右依次是零级滑道、初级滑道和高级滑道。
 
