@@ -5,6 +5,8 @@ date: 2018-11-27 21:03:58 +0800
 comments: true
 categories: docker 经验分享
 ---
+* list element with functor item
+{:toc}
 
 ## 引言
 
@@ -19,8 +21,9 @@ PHP开发，想用 Docker 但又没太多时间去学，那你可以试试 [Lava
 - 下载代码
 
 ```
-git clone https://github.com/laradock/laradock.git
+git clone https://github.com/laradock/laradock.git --depth=1
 ```
+> depth 用于指定克隆深度，为1即表示只克隆最近一次 commit，可以加快 clone 速度。
 
 - 修改配置
 

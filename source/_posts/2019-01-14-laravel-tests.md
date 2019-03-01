@@ -6,6 +6,9 @@ comments: true
 categories: laravel
 ---
 
+* list element with functor item
+{:toc}
+
 ## 引言
 
 新公司入职第一件事就是让我给一个用 Laravel 框架开发的项目写单元测试，我会说『当了这么多年的程序员没写过单元测试吗？』，于是我一边学习一边写，这篇文章是我写了一个月单元测试的经验分享。
