@@ -29,7 +29,7 @@ categories: restful 工具控
 
 ![](https://ws1.sinaimg.cn/large/4cc5f9b3gy1g0nh1jn2qaj20uq0y0go5.jpg)
 
-一个典型的 RUSTful 请求如上图所示。
+一个典型的 RESTful 请求如上图所示。
 
 ### 获取请求的代码
 
