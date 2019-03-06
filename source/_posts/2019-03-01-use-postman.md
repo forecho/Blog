@@ -5,9 +5,10 @@ date: 2019-03-01 21:58:22 +0800
 comments: true
 categories: restful 工具控
 ---
-
 * list element with functor item
 {:toc}
+
+{% raw %}
 
 ## 引言
 
@@ -25,7 +26,7 @@ categories: restful 工具控
 
 ![](https://ws1.sinaimg.cn/large/4cc5f9b3gy1g0ngs2gf5bj213w0k440q.jpg)
 
-先设置环境名称，再设置环境的 `Key` 和 `Value` ，如上图设置，如果你想调用 `http` 的值只要使用 {{http}} 就可以调用。 
+先设置环境名称，再设置环境的 `Key` 和 `Value` ，如上图设置，如果你想调用 `http` 的值只要使用 `{{http}}` 就可以调用。 
 
 ![](https://ws1.sinaimg.cn/large/4cc5f9b3gy1g0nh1jn2qaj20uq0y0go5.jpg)
 
@@ -133,3 +134,5 @@ postman.setGlobalVariable('jwt_token', removeIllegalCharacters(token));
 如果你做也做接口开发，需要经常测试接口的话，推荐你使用 Postman，如果你经常使用 Postman 的话，可以多花的时间研究一下这个工具的使用方式，一定会为你之后节约很多时间。
 
 正所谓『磨刀不误砍柴工』。
+
+{% endraw %}
