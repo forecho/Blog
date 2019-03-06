@@ -61,7 +61,8 @@ Postman 有一个 Pre-request Scripts 功能，可以在发生请求之前执行
 - 先去环境变量添加 `client_key` 和 `client_secret`
 - 然后再 Pre-request Scripts 框输入下面代码：
 
-```
+```javascript
+
 var removeIllegalCharacters = function(input) {
     return input
         .replace(/=/g, '')
@@ -91,6 +92,7 @@ var signature = CryptoJS.enc.Base64.stringify(signatureHash);
 var token = 'Bearer ' + unsignedToken + '.' + signature;
 
 postman.setGlobalVariable('jwt_token', removeIllegalCharacters(token));
+
 ```
 
 ![](https://ws1.sinaimg.cn/large/4cc5f9b3gy1g0sagkvk0cj215c0emwft.jpg)
