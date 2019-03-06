@@ -25,7 +25,7 @@ categories: restful 工具控
 
 ![](https://ws1.sinaimg.cn/large/4cc5f9b3gy1g0ngs2gf5bj213w0k440q.jpg)
 
-先设置环境名称，再设置环境的 `Key` 和 `Value` ，如上图设置，如果你想调用 `http` 的值只要使用 ```{{http}}``` 就可以调用。 
+先设置环境名称，再设置环境的 `Key` 和 `Value` ，如上图设置，如果你想调用 `http` 的值只要使用 {{http}} 就可以调用。 
 
 ![](https://ws1.sinaimg.cn/large/4cc5f9b3gy1g0nh1jn2qaj20uq0y0go5.jpg)
 
@@ -97,7 +97,7 @@ postman.setGlobalVariable('jwt_token', removeIllegalCharacters(token));
 
 ![](https://ws1.sinaimg.cn/large/4cc5f9b3gy1g0sagkvk0cj215c0emwft.jpg)
 
-- 最后在 Header 里面配置 Authorization 就可以直接用 ```{{jwt_token}}``` 了
+- 最后在 Header 里面配置 Authorization 就可以直接用 `{{jwt_token}}` 了
 
 
 ![](https://ws1.sinaimg.cn/large/4cc5f9b3gy1g0swhn9edqj217u0n0die.jpg)
@@ -115,9 +115,9 @@ postman.setGlobalVariable('jwt_token', removeIllegalCharacters(token));
 我们除了可以自定义脚本之外，Postman 还内置了一些常用的变量:
 
 
-- ```{{$guid}}```：v4 样式的 guid
-- ```{{$timestamp}}```：当前时间戳
-- ```{{$randomInt}}```：0到1000之间的随机整数
+- `{{$guid}}`：v4 样式的 guid
+- `{{$timestamp}}`：当前时间戳
+- `{{$randomInt}}`：0到1000之间的随机整数
 
 ![](https://ws1.sinaimg.cn/large/4cc5f9b3gy1g0sxqch7cjj20uu0m8mze.jpg)
 
