@@ -146,11 +146,13 @@ Octopress 使用双花括号的时候就会自动把他认为是变量，会『�
 但是这样的话对去 [Github 对应文章](https://github.com/forecho/blog/blob/master/source/_posts/2019-03-01-use-postman.md) 阅读的体验造成很大的破话。解决办法就是把整个文章都包含进去即可：
 
 ```
+
 {%raw%}
 
 文章内容
 
 {%endraw%}
+
 ```
 
 {% endraw %}
