@@ -145,8 +145,7 @@ blog.3li3.com
 
 ## 更换主题
 
-这个也遇到一个坑，首先我看到这篇文章 [Hexo Top 10 Popular Themes](https://en.abnerchou.me/Blog/5c00ca67/)，然后找到了 [NexT](http://theme-next.iissnan.com/) 主题，
-下载主题的时候一定要使用「下载稳定版本」的方式，不然你会遇到 git 子模块的坑。
+这个也遇到一个坑，首先我看到这篇文章 [Hexo Top 10 Popular Themes](https://en.abnerchou.me/Blog/5c00ca67/)，然后找到了 [NexT](http://theme-next.iissnan.com/) 主题，下载主题的时候一定要使用「下载稳定版本」的方式，不然你会遇到 git 子模块的坑。
 
 然后使用上面的配置会导致 Travis CI 不能自动部署 Hexo，除非你让配置支持子模块，哎，懒得折腾了，所以我用最简单的方式把主题重新安装整了一遍。
 
