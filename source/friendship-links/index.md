@@ -40,6 +40,7 @@ footer: true
 - [天雨的博客](https://blog.irain.in/)
 - [LengYues'Blog](https://www.apkdv.com/)
 - [城中村群租房](https://www.darmau.com/)
+- [朋也的博客](https://tomoya92.github.io/)
 
 ## 待考察
 
