@@ -13,6 +13,7 @@ footer: true
 
 ## 联盟成员
 
+- [forecho](https://blog.forecho.com/)
 - [Jason](https://atjason.com/)
 
 期待你的加入……
