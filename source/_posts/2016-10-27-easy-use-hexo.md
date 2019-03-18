@@ -6,6 +6,9 @@ comments: true
 categories: 经验分享
 ---
 
+* list element with functor item
+{:toc}
+
 ## 引言
 
 今天心血来潮，想搭建一个 [3li3](http://3li3.com/) 的博客，准备以博客的形式记录产品的成长。类似的博客有：[SelfStore 博客](http://blog.selfstore.io/)。
@@ -61,30 +64,12 @@ $ npm install -g hexo-cli
 
 下面我来简单分享一下我的步骤：
 
-1、安装 travis 命令行
 
-```
-$ gem install travis
-```
+1、去 Github 提供的 [Personal Access Token](https://github.com/settings/tokens) 创建一个 Token，然后复制 Token 值，记录下来，后面会用到。
 
-2、去 Github 提供的 [Personal Access Token](https://github.com/settings/tokens) 创建一个 Token，然后复制 Token 值。
-3、使用密码生成加密的 Token
+![](https://ws1.sinaimg.cn/large/4cc5f9b3gy1g17eo4jq5dj211q0h6mzu.jpg)
 
-```
-$ travis encrypt -r owner/repo GH_Token=Your_Personal_Access_Token
-```
-
-owner/repo: 你的 Github 仓库名字(<用户名>/<仓库名>)，比如我的博客仓库 3li3/blog
-GH_Token: 你上一步新建的 Personal Access Token。
-
-以上命令返回：
-
-```
-secure: "xxxxx="
-```
-此处的 secure 值，下面步骤会用到。
-
-4、新建 `.travis.yml` 文件，代码如下：
+2、在项目根目录下新建 `.travis.yml` 文件，代码如下：
 
 ```
 language: node_js
@@ -109,7 +94,7 @@ after_script:
   - git config user.email "caizhenghai@gmail.com"
   - git add .
   - git commit -m "Auto deploy from Travis-CI."
-  - git push --force --quiet "https://$GH_Token@github.com/$GH_REPO.git" master:gh-pages
+  - git push --force --quiet "https://${GH_TOKEN}@github.com/${GH_REPO}.git" master:gh-pages
 
 branches:
   only:
@@ -118,7 +103,6 @@ branches:
 env:
   global:
     - GH_REPO: 3li3/blog
-    - secure: "xxxxx="
 ```
 
 以上文件你需要修改4处：
@@ -126,11 +110,25 @@ env:
 - `git config user.name`
 - `git config user.email" `
 - `GH_REPO`
-- `secure: "xxxxx=" `
 
-**此处我被一个教程给坑了，注意是 `GH_Token` 不是 `GH_TOKEN`!**
+3、然后就去 GitHub 新建仓库、push 代码，操作 git 命令参考如下：
 
-5、最后你要去 [Travis CI](https://travis-ci.org/)，手动开启此项目的监控，以后你写文章就是手动新建一个文件，然后 `git push` 就可以实现自动部署了。
+
+```
+git init
+git add .
+git commit -m "first commit"
+git remote add origin https://github.com/WJTeam/blog.git
+git push -u origin master
+```
+
+4、然后你要去 [Travis CI](https://travis-ci.org/account/repositories)，手动开启此项目的监控（没有看到的话，点左边的  Sync account 按钮）。
+
+开启之后点击设置添加环境变量值，在 `Environment Variables` 处添加 `GH_TOKEN` 值为上面第一步生成的 token 值。
+
+![](https://ws1.sinaimg.cn/large/4cc5f9b3gy1g17difuvfej22100gijtu.jpg)
+
+至此配置完成，以后你写文章就是要去 `source/_posts/` 目录下，参照已有文件规则手动新建一个文件，就可以开始写博客了，写完再次 `git push` 就可以实现自动部署了。
 
 
 ## 添加域名解析
