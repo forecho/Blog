@@ -17,6 +17,7 @@ footer: true
 - [Jason](https://atjason.com/)
 - [把酒诗代码，趁乱写年华。](http://www.102no.com)
 - [sergiojune](https://sergiojune.com/)
+- [Wang Shudao](https://vulgur.github.io)
 
 期待你的加入……
 
