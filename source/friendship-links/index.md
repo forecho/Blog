@@ -41,6 +41,7 @@ footer: true
 - [LengYues'Blog](https://www.apkdv.com/)
 - [城中村群租房](https://www.darmau.com/)
 - [朋也的博客](https://tomoya92.github.io/)
+- [kok的笔记本](https://wocai.de/)
 
 ## 待考察
 
