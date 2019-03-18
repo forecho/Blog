@@ -22,6 +22,7 @@ footer: true
 - [把酒诗代码，趁乱写年华。](http://www.102no.com)
 - [sergiojune](https://sergiojune.com/)
 - [Wang Shudao](https://vulgur.github.io)
+- [数字游民部落](https://jarodise.com/)
 
 ## 链接
 
@@ -35,6 +36,14 @@ footer: true
 - [Kevin Blog](https://zhowkev.in/)
 - [Randy Lu](https://lutaonan.com/)
 - [Huiris's Blog](https://huiris.com/)
+- [熊二哈的猫窝](https://www.wispx.cn/)
+- [天雨的博客](https://blog.irain.in/)
+- [LengYues'Blog](https://www.apkdv.com/)
+- [城中村群租房](https://www.darmau.com/)
+
+## 待考察
+
+- [yukong's blog](http://www.yukonga.cn/)
 
 
 期待你的加入……
