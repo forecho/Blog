@@ -15,6 +15,7 @@ footer: true
 
 - [forecho](https://blog.forecho.com/)
 - [Jason](https://atjason.com/)
+- [把酒诗代码，趁乱写年华。](http://www.102no.com)
 
 期待你的加入……
 
