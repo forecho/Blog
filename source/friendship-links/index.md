@@ -23,6 +23,8 @@ footer: true
 - [sergiojune](https://sergiojune.com/)
 - [Wang Shudao](https://vulgur.github.io)
 - [数字游民部落](https://jarodise.com/)
+- [Darer](https://darerd.github.io/)
+- [大师兄](https://dsx2016.com/)
 
 ## 链接
 
@@ -42,6 +44,12 @@ footer: true
 - [城中村群租房](https://www.darmau.com/)
 - [朋也的博客](https://tomoya92.github.io/)
 - [kok的笔记本](https://wocai.de/)
+- [Flyaway'Blog](http://zhouyichu.com/)
+- [默](https://jasper-1024.github.io/)
+- [初始化](https://init.blog/)
+- [kn007](https://kn007.net/)
+- [maemoの風船が！](https://www.maemo.cc/)
+
 
 ## 待考察
 
