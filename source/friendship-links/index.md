@@ -26,6 +26,7 @@ footer: true
 - [Darer](https://darerd.github.io/)
 - [大师兄](https://dsx2016.com/)
 - [To be a happy sir](https://www.happysir.com/)
+- [你好我是森林](https://chensenlin.cn//)
 
 ## 链接
 
@@ -52,6 +53,7 @@ footer: true
 - [maemoの風船が！](https://www.maemo.cc/)
 - [意外](https://yukunweb.com/)
 - [逐鹿 IT](http://amonxu.com/)
+- [嘎里三分熟](http://www.jetchen.cn/)
 
 
 ## 待考察
