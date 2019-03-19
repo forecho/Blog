@@ -25,6 +25,7 @@ footer: true
 - [数字游民部落](https://jarodise.com/)
 - [Darer](https://darerd.github.io/)
 - [大师兄](https://dsx2016.com/)
+- [To be a happy sir](https://www.happysir.com/)
 
 ## 链接
 
