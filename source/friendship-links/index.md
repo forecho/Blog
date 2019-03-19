@@ -49,11 +49,15 @@ footer: true
 - [初始化](https://init.blog/)
 - [kn007](https://kn007.net/)
 - [maemoの風船が！](https://www.maemo.cc/)
+- [意外](https://yukunweb.com/)
+- [逐鹿 IT](http://amonxu.com/)
 
 
 ## 待考察
 
 - [yukong's blog](http://www.yukonga.cn/)
+- [IOIOX](https://www.ioiox.com/)
+- [Dictator's BLOG](https://www.yangchong.top/)
 
 
 期待你的加入……
