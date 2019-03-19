@@ -118,7 +118,7 @@ env:
 git init
 git add .
 git commit -m "first commit"
-git remote add origin https://github.com/WJTeam/blog.git
+git remote add origin https://github.com/3li3/blog.git
 git push -u origin master
 ```
 
@@ -133,7 +133,7 @@ git push -u origin master
 
 ## 添加域名解析
 
-这个很简单，首先你要在项目 source 目录下创建一个 `CNAME` 文件，写入你要解析的域名就可以了，比方说：
+这个很简单，首先你要在项目 **`source` 目录**下创建一个 `CNAME` 文件，写入你要解析的域名就可以了，比方说：
 
 ```
 blog.3li3.com
@@ -153,4 +153,4 @@ blog.3li3.com
 
 ## 总结
 
-为了以后方便，一定要**使用 Travis CI 工具自动部署 Hexo**。
+为了以后方便，一定要**使用 Travis CI 工具自动部署 Hexo**。 最后大家可以去参考 [3li3/blog](https://github.com/3li3/blog) 项目的源码。
