@@ -54,6 +54,7 @@ footer: true
 - [意外](https://yukunweb.com/)
 - [逐鹿 IT](http://amonxu.com/)
 - [嘎里三分熟](http://www.jetchen.cn/)
+- [Yisaer](https://yisaer.github.io/)
 
 
 ## 待考察
