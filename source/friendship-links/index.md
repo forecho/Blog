@@ -26,7 +26,8 @@ footer: true
 - [Darer](https://darerd.github.io/)
 - [大师兄](https://dsx2016.com/)
 - [To be a happy sir](https://www.happysir.com/)
-- [你好我是森林](https://chensenlin.cn//)
+- [你好我是森林](https://chensenlin.cn/)
+- [Chorder](https://chorder.net/)
 
 ## 链接
 
@@ -56,6 +57,8 @@ footer: true
 - [嘎里三分熟](http://www.jetchen.cn/)
 - [Yisaer](https://yisaer.github.io/)
 - [渚碧](https://jubeny.com/)
+- [深入浅出区块链](https://learnblockchain.cn/)
+- [晚晴幽草轩](https://www.jeffjade.com/)
 
 
 ## 待考察
