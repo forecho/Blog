@@ -66,6 +66,7 @@ footer: true
 - [yukong's blog](http://www.yukonga.cn/)
 - [IOIOX](https://www.ioiox.com/)
 - [Dictator's BLOG](https://www.yangchong.top/)
+- [Jokerの狗窝](http://hello.xjqxz.top/)
 
 
 期待你的加入……
