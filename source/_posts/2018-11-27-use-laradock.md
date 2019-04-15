@@ -161,7 +161,7 @@ xdebug.var_display_max_depth=-1
 - 重新 build 并且 重启命令：
 
 ```
-docker-compose up build -d php-fpm
+docker-compose up --build -d php-fpm
 docker-compose down && docker-compose up -d nginx workspace redis mysql
 ```
 
@@ -239,7 +239,7 @@ COPY ./xhprof.ini /usr/local/etc/php/conf.d
 - 重新 build 并且 重启 php-fpm 命令：
 
 ```
-docker-compose up build -d php-fpm
+docker-compose up --build -d php-fpm
 docker-compose down && docker-compose up -d nginx workspace redis mysql
 ```
 
