@@ -211,7 +211,7 @@ tideways.sample_rate=100
 # Xhprof:
 ###########################################################################
 
-ARG INSTALL_XHPROF=true
+ARG INSTALL_XHPROF=false
 
 RUN if [ ${INSTALL_XHPROF} = true ]; then \
     # Install the php xhprof extension 
