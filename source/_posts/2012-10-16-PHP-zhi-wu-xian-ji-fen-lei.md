@@ -6,7 +6,7 @@ comments: true
 categories: 
 ---
 
-用到今天发现一个严重的错误，在id超过两位数的时候，排序是有问题的。如下图错误的排序： ![](http://ww1.sinaimg.cn/large/4cc5f9b3gw1ecej0gvfo9j207b06ejrl.jpg) 你会发现如果按照as出来的bpath排序的话，cid为55的排序错误，正确的情况是cid为55的应该在101前面，出错的原因是bpath是一个字符串，它会安装字符串来排序，以 “-”  为分节符第一位是0一位数，55的第二位为55两位数，101的第三位数为101三位数。位数不同导致排序不正确的BUG，解决办法就是让cid的位数固定下来，不够的前面填充0，这里我们就用到了MySQL的[ZEROFILL](http://www.2cto.com/database/201206/135566.html)。
+用到今天发现一个严重的错误，在id超过两位数的时候，排序是有问题的。如下图错误的排序： ![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160845.png) 你会发现如果按照as出来的bpath排序的话，cid为55的排序错误，正确的情况是cid为55的应该在101前面，出错的原因是bpath是一个字符串，它会安装字符串来排序，以 “-”  为分节符第一位是0一位数，55的第二位为55两位数，101的第三位数为101三位数。位数不同导致排序不正确的BUG，解决办法就是让cid的位数固定下来，不够的前面填充0，这里我们就用到了MySQL的[ZEROFILL](http://www.2cto.com/database/201206/135566.html)。
 
 > # Zerofill
 > 
@@ -17,7 +17,7 @@ categories:
     
     ALTER TABLE `category` CHANGE COLUMN `id` `id` INT(9) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT
 
-现在你再执行查询，结果如下： ![](http://ww3.sinaimg.cn/large/4cc5f9b3gw1ecejm9a62ij20ck07m3zd.jpg) 现在的补救方法要么就是把子类删除掉，要么就是手动添加path的0保证位数相同。（不要太在意上图的cid，其实就是等同于本文的id。只是换了个名字而已。） ============以上信息update 于2014年1月10日============ 目前写无限极分类的大致分为三种情况： 
+现在你再执行查询，结果如下： ![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160901.png) 现在的补救方法要么就是把子类删除掉，要么就是手动添加path的0保证位数相同。（不要太在意上图的cid，其实就是等同于本文的id。只是换了个名字而已。） ============以上信息update 于2014年1月10日============ 目前写无限极分类的大致分为三种情况： 
 
   1. 递归（效率太慢）
   2. ajax（不会的话，就写不出来）

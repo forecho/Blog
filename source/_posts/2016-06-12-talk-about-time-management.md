@@ -26,7 +26,7 @@ categories: 总结 管理
 
 aTimeLogger2 算是比较时间好用的时间记录软件，但是有一点比较麻烦，就是你必须手动点击开始然后记得手动再去点结束。
 
-![](http://ww2.sinaimg.cn/large/4cc5f9b3gw1f4stre4c4dj20hs0vkjvc.jpg)
+![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424161129.png)
 
 坚持记录了差不多有半个月之后我发现我健身和阅读的时间相对来说是少之又少。
 随便打个游戏或者看个时间都要1个小时了，但是健身呢？每次都不到半个小时，阅读时间也很少。

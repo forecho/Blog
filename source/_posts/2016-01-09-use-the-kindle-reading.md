@@ -53,11 +53,11 @@ categories: 思考 阅读
 
 左边是 KPW3，右边是 Kindle5：
 
-![](http://ww1.sinaimg.cn/mw690/4cc5f9b3gw1f7d9pj59ayj21kw23u7wh.jpg)
+![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424161104.png)
 
 KPW3 后背 LOGO 变成 amazon 了：
 
-![](http://ww1.sinaimg.cn/mw690/4cc5f9b3gw1f7d9pcjarcj21kw23unox.jpg)
+![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424161115.png)
 
 海淘最痛苦的是，买了东西要经过漫长的等待！我差不多等了20天，算是一种折磨。用了一段 KPW3 之后我来谈谈两个的区别：
 

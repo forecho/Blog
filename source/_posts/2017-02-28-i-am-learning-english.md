@@ -66,7 +66,7 @@ categories: 学英语
 
 **2月份**
 
-![Imgur](http://i.imgur.com/Nxixmkjl.png) 
+![Imgur](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162801.png) 
 
 根据打卡记录分析，2月份背了11天单词，19号之后因为开始晨跑导致之后的几天时间没安排好，忘记背单词了，28号之后开始恢复背单词情况。由于每次只背10个单词所以目前只掌握了110单词左右，进度有点慢，3月份要加油。
 

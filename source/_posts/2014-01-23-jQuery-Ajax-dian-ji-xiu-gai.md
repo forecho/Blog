@@ -6,7 +6,7 @@ comments: true
 categories: jquery ajax
 ---
 
-先来一张效果图： ![](http://ww3.sinaimg.cn/large/4cc5f9b3gw1ectjmoyoxrj208a063aa1.jpg) view HTML页面代码如下：
+先来一张效果图： ![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160945.png) view HTML页面代码如下：
 
 
     <td align="center" onclick="changeLike(<?php echo $id ?>,'<?php echo $like_count; ?>',this)">

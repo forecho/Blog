@@ -17,7 +17,7 @@ categories: 分享 YouTube
 
 ## [超級歪 Super Y](https://www.youtube.com/c/superycinema)
 
-[![超級歪 Super Y](https://i.imgur.com/SNRs4gOl.png)](https://www.youtube.com/c/superycinema)
+[![超級歪 Super Y](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424163513.png)](https://www.youtube.com/c/superycinema)
 
 推荐指数：⭐⭐⭐⭐⭐  
 分类：书、电影
@@ -28,7 +28,7 @@ categories: 分享 YouTube
 
 ## [冏星人](https://www.youtube.com/user/shintaroReview)
 
-[![冏星人](https://i.imgur.com/SJ8oo4il.png)](https://www.youtube.com/user/shintaroReview)
+[![冏星人](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424163552.png)](https://www.youtube.com/user/shintaroReview)
 
 推荐指数：⭐⭐⭐⭐⭐  
 分类：书
@@ -37,7 +37,7 @@ categories: 分享 YouTube
 
 ## [觸電網](https://www.youtube.com/user/truemovie1)
 
-[![觸電網](https://i.imgur.com/OmteU22l.png)](https://www.youtube.com/user/truemovie1)
+[![觸電網](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424163604.png)](https://www.youtube.com/user/truemovie1)
 
 推荐指数：⭐⭐⭐⭐  
 分类：电影
@@ -47,7 +47,7 @@ categories: 分享 YouTube
 
 ## [電影法蘭克](https://www.youtube.com/user/Frankyin1)
 
-[![電影法蘭克](https://i.imgur.com/Bpel1JBl.png)](https://www.youtube.com/user/Frankyin1)
+[![電影法蘭克](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424163614.png)](https://www.youtube.com/user/Frankyin1)
 
 推荐指数：⭐⭐⭐⭐  
 分类：电影、漫画

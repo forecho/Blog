@@ -59,7 +59,7 @@ footer: true
 - [instagram](https://www.instagram.com/forecho/)
 - 微信公众号
 
-![](http://i.imgur.com/J2ZeYYUm.jpg)
+![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424163739.png)
 
 ## 关于关闭博客评论
 

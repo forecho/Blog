@@ -25,7 +25,7 @@ categories: 经验分享
 
 ## 徒步中
 
-![Imgur](http://i.imgur.com/lU8eKO3l.png)
+![Imgur](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162816.png)
 
 路线是根据公司的创业地址来设定的，前2个小时可以说是毫无压力，虽然走了2W 多的步数，但是状态还是可以的，大家边走路边扯淡，时间过的很快的。
 
@@ -37,7 +37,7 @@ categories: 经验分享
 
 到达爱地大厦之后非常开心，那顿鸭脖可以说是我们有史以来吃过最美味的。吃完美味。片刻休息之后剩下的一下段路程不再话下。
 
-![Imgur](http://i.imgur.com/VbaXQPJ.png)
+![Imgur](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162826.png)
 
 最后能坚持到达终点的人都会有公司颁发的纪念品。
 
@@ -55,7 +55,7 @@ categories: 经验分享
 
 这次老板把他7岁的儿子也带来徒步了，最后他儿子都成功完成了挑战（很累，但是不想放弃），我们又有什么理由不能完成呢？
 
-![Imgur](http://i.imgur.com/qbXRINkl.png)
+![Imgur](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162837.png)
 
 像我平常走2W 步就有点累的人来说，走30公里（有46000多步）可以说是一个不小的挑战了，但是当你走到终点的那一刻你会发现这其实也没什么。
 

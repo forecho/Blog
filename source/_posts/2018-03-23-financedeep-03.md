@@ -68,7 +68,7 @@ categories: 深度理财
 
 基金实质就是一种委托关系，委托别人帮我们去投资。推荐大家使用定投的方式购买指数基金，推荐使用京东金融平台的小目标定投功能购买基金。
 
-![](https://ws1.sinaimg.cn/mw690/4cc5f9b3ly1fpmv533kotj20rs0rswem.jpg)
+![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424161939.png)
 
 ## 参考链接
 

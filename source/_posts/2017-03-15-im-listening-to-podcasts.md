@@ -22,7 +22,7 @@ categories: 分享 总结
 
 **[Teahour](http://teahour.fm/)**
 
-![Imgur](http://i.imgur.com/NkYwn4Um.png)
+![Imgur](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162858.png)
 
 推荐指数：⭐⭐⭐⭐⭐
 
@@ -32,7 +32,7 @@ categories: 分享 总结
 
 **[Checked](http://checked.fm/)**
 
-![Imgur](http://i.imgur.com/igPHBMum.png)
+![Imgur](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162910.png)
 
 推荐指数：⭐⭐⭐
 
@@ -42,7 +42,7 @@ categories: 分享 总结
 
 **[代码时间](https://codetimecn.com/)**
 
-![Imgur](http://i.imgur.com/FLfWCiGm.png)
+![Imgur](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162920.png)
 
 推荐指数：⭐⭐⭐⭐
 
@@ -51,7 +51,7 @@ categories: 分享 总结
 
 **[迟早更新](http://www.weareones.com/2)**
 
-![Imgur](http://i.imgur.com/GRPk4ITm.png)
+![Imgur](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162928.png)
 
 推荐指数：⭐⭐⭐⭐
 
@@ -63,7 +63,7 @@ categories: 分享 总结
 
 **[冬吴同学会](http://www.ximalaya.com/83432108/album/8475135/)**
 
-![冬吴同学会](https://i.imgur.com/pDsR7ixl.png)
+![冬吴同学会](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162942.png)
 
 推荐指数：⭐⭐⭐⭐⭐
 
@@ -74,7 +74,7 @@ categories: 分享 总结
 
 **吴晓波频道**
 
-![吴晓波频道](http://i.imgur.com/039Lx0d.png)
+![吴晓波频道](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162951.png)
 
 推荐指数：⭐⭐⭐⭐
 
@@ -83,7 +83,7 @@ categories: 分享 总结
 
 **[一席](http://www.yixi.tv/)**
 
-![一席](http://i.imgur.com/Ezjbyy5m.png)
+![一席](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424163005.png)
 
 推荐指数：⭐⭐⭐⭐
 
@@ -92,7 +92,7 @@ categories: 分享 总结
 
 **[极客电台](https://geek.wasai.org/)**
 
-![极客电台](http://i.imgur.com/AnqWMTVm.png)
+![极客电台](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424163014.png)
 
 推荐指数：⭐⭐⭐
 

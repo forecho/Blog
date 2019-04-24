@@ -31,7 +31,7 @@ categories: 想法
 - 邮箱地址：`Y2FpemhlbmdoYWlAZ21haWwuY29t` （BASE64 解码才可以看到）
 - 扫描下面二维码加我微信
 
-![](https://ws1.sinaimg.cn/large/4cc5f9b3ly1g14o39ec00j208c08c3yk.jpg)
+![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162125.png)
 
 
 ## 最后
