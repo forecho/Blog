@@ -136,8 +136,8 @@ cc_license_allow_commercial_uses: false
 cc_license_icon: 'normal'
 
 donate: true
-donate_wechat_image_link: 'http://ww1.sinaimg.cn/large/4cc5f9b3gw1f2a2pb37psj2064061wf3.jpg'
-donate_alipay_image_link: 'http://ww3.sinaimg.cn/large/4cc5f9b3gw1f2a2pswyv5j206506474w.jpg'
+donate_wechat_image_link: 'https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153510.png'
+donate_alipay_image_link: 'https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153431.png'
 
 douban: true
 douban_username: 'ipzone'

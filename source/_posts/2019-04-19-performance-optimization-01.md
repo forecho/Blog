@@ -37,7 +37,7 @@ categories: 经验分享 性能优化
 - Buckets 下面的 `X-Axis` 的 Aggregation 一半选择 `Date Histogram`，剩下的默认就好。
 - 参数设置好之后，你可以点一个▶️图标就会有统计结果了。
 
-![](https://ws1.sinaimg.cn/large/4cc5f9b3gy1g27t5mvimqj21a70q80vl.jpg)
+![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153001.png)
 
 然后我们就可以得到自己想要的数据了，直接记录结果就可以了。同样的可以根据情况记录项目中 Curl 请求其他接口的耗时情况。
 
@@ -49,7 +49,7 @@ categories: 经验分享 性能优化
 
 我使用的是公司内部基于 [laynefyc/xhgui-branch](https://github.com/laynefyc/xhgui-branch) 改造的库。这个项目只要分两个模块，一个是收集数据到 MongoDB ，一个是 web 页面读取 MongoDB 的数据。
 
-![](https://ws1.sinaimg.cn/large/4cc5f9b3gy1g27ykgzmrfj21ym0swguz.jpg)
+![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153141.png)
 
 这个工具只能看具体的某个请求耗时，不能方便的做统计，所以我觉得可以和上面的 EFK 方式结合使用，效果更好。
 
