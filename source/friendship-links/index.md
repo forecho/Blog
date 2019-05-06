@@ -29,6 +29,7 @@ footer: true
 - [你好我是森林](https://chensenlin.cn/)
 - [Chorder](https://chorder.net/)
 - [完美的胖达](https://wmdpd.com/)
+- [刘悦的技术博客](https://v3u.cn/)
 
 ## 链接
 
