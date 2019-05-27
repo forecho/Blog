@@ -35,7 +35,7 @@ categories: Docker
 
 修改系统日志配置信息：
 
-```
+```sh
 sudo vim /etc/rsyslog.d/50-default.conf
 ```
 
@@ -47,7 +47,7 @@ cron.*  /var/log/cron.log
 
 重启 rsyslog
 
-```shell
+```sh
 #sudo /etc/init.d/rsyslog restart
 sudo service rsyslog restart
 sudo service cron restart
