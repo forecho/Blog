@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "PHP 代码规范 Tips"
+title: "PHP 代码规范之工具篇"
 date: 2018-10-12 20:50:59 +0800
 comments: true
 categories: phpstorm
@@ -31,7 +31,7 @@ Phpstorm 依次点击菜单栏 `File -> Settings -> Editor -> Code Style -> PHP`
 如果没有使用 `Ctrl + Alt + L` 的习惯的话，你可以使用录制宏的方式，制定『当我们按 `Ctrl + S` 保存的时候自动执行代码格式化』的规则：
 
 
-- 点击 `Edit -> Macros -> Start Macro Recording` 开始录制宏，然后依次按快捷键 `Ctrl + Alt + L`、`Ctrl + Alt + O` 、`Ctrl + S`。
+- 点击 `Edit -> Macros -> Start Macro Recording` 开始录制宏，然后依次按快捷键 `Ctrl + Alt + L`、`Ctrl + Alt + O` 、`Ctrl + S` (Mac 对应的是 option + command + L、option + control + O 、command + S)。
 - 然后点击 `Edit -> Macros -> Stop Macro Recording` 结束录制。会自动弹出一个窗口，自己设置个名称， 比方说 `Super Save`。
 - 然后点击 `File -> Settings -> Keymap` 修改快捷键，把之前保存快捷键修改为 `Alt + S` 或者其他快捷键或者取消。然后搜索 `Super Save` 添加快捷键为 `Ctrl + S` 就可以了。
 
