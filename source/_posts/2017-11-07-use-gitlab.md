@@ -12,7 +12,7 @@ categories: 技术分享 GitLab
 
 ```
 $ sudo apt-get install curl openssh-server ca-certificates postfix
-$ curl -sS http://packages.gitlab.com.cn/install/gitlab-ce/script.deb.sh | sudo bash
+$ curl -sS http://packages.gitlab.cc/install/gitlab-ce/script.deb.sh | sudo bash
 $ sudo apt-get install gitlab-ce
 ```
 
