@@ -16,6 +16,10 @@ $ curl -sS http://packages.gitlab.cc/install/gitlab-ce/script.deb.sh | sudo bash
 $ sudo apt-get install gitlab-ce
 ```
 
+如果需要安装指定版本，最后一步之前去 <https://packages.gitlab.com/gitlab/gitlab-ce> 看一下，找到指定版本，有安装指南。
+
+PS：查看 Linux 当前系统版本用 `cat /etc/lsb-release` 命令。
+
 修改 GitLab 配置文件
 
 ```
