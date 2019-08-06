@@ -175,6 +175,14 @@ cat /usr/local/etc/php/conf.d/xdebug.ini
 
 ## 安装 xhprof 扩展
 
+### 2019年08月06日 更新：
+
+此扩展我已经发了 PR : [feat: Add PHP_FPM_INSTALL_XHPROF as an option to install xhprof extension ](https://github.com/laradock/laradock/pull/2077) 和 [fix: fix install xhprof error](https://github.com/laradock/laradock/pull/2141) 更新到了官方库，使用最新版 Laradock 直接改 `.env` 配置文件就可以了。
+
+------------
+
+### 旧版
+
 - 修改 `.env` 和 `env-example` 文件，在 PHP_FPM 处添加配置代码，控制开启或者关闭：
 
 ```
@@ -252,6 +260,17 @@ docker exec -it laradock_php-fpm_1 php -m | grep tideways
 或者
 ```
 docker exec -it laradock_php-fpm_1 php --ri tideways
+```
+
+## 修改配置情况
+
+如果单纯的只是改 `.ini` 配置文件，改完之后只需要重新 `build` 对应的服务然后重启所有服务就可以了，不需要 `build --no-cache`，这个太耗时间了。
+
+例如：只是修改了 `php-fpm/xhprof.ini` 文件的参数信息，然后只需要如下操作：
+
+```
+docker-compose up --build -d php-fpm
+docker-compose down && docker-compose up -d nginx workspace redis mysql
 ```
 
 ## 补充几个常用命令
