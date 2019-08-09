@@ -76,7 +76,6 @@ public function uploadAmazon(string $productType, Product $product, int $product
     $amazonProduct = new AmazonMarketPlaceProduct();
     if ($product->productSku) {
         $amazonProduct->setSku($product->parent_sku)
-            ->setCountryCode($shop->country_code)
             ->setFeedProductType($productType)
             ->setBrand($product->brand)
             ->setTitle($product->title)
@@ -96,7 +95,6 @@ public function uploadAmazon(string $productType, Product $product, int $product
             $_amazonProduct = clone $amazonProduct;
             $_amazonProduct->setSku($productSku->product_sku)
                 ->setFeedProductType($productType)
-                ->setCountryCode($shop->country_code)
                 ->setBrand($product->brand)
                 ->setTitle($product->title)
                 ->setManufacturer($product->manufacturer)
@@ -131,7 +129,6 @@ public function uploadAmazon(string $productType, Product $product, int $product
 
         $amazonProduct->setSku($parentSku)
             ->setFeedProductType($productType)
-            ->setCountryCode($shop->country_code)
             ->setBrand($product->brand)
             ->setTitle($product->{$titleAttribute})
             ->setManufacturer($product->manufacturer)
@@ -232,6 +229,10 @@ if ($isJp) {
 ### UPC/EAN
 
 这个可以通过购买生成器生成 UPC 和 EAN，也可以购买合法 UPC/EAN。生成器生成的容易导致上传产品失败，换一个重新上传产品即可。有时候发现你上传的产品出现别人的图片，不要慌，这个就是因为 UPC/EAN 跟别人重复导致的，换一个重新上传产品即可。
+
+### 关于产品描述
+
+产品描述除了不能大于 2000 字符串之外，还不能使用除了 `<br>`（换行） 和 `<b></b>`（加粗） 之外的 HTML 标签。
 
 ## 总结
 
