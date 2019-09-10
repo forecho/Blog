@@ -46,19 +46,16 @@ print(map (^2) [0 .. 25])
 
 ```php
 $input = [1, 2, 3, 4, 5, 6];
-
 // 匿名函数赋值给变量
 $filterEven = function($item) {
     return ($item % 2) == 0;
 };
 $output = array_filter($input, $filterEven);
 print_r($output);
-
 // 不使用变量，直接使用闭包的版本
 $output = array_filter($input, function($item) {
     return ($item % 2) == 0;
 });
-
 print_r($output);
 ```
 
@@ -74,10 +71,8 @@ function criteriaGreaterThan($min)
         return $item > $min;
     };
 }
-
 $input = [1, 2, 3, 4, 5, 6];
 $output = array_filter($input, criteriaGreaterThan(3));
-
 print_r($output); // items > 3
 ```
 
@@ -91,16 +86,13 @@ PHP 自带的高阶函数还有 `array_map`、`array_reduce`……
 function foo($x, $y, $z) {
 	echo $x + $y + $z;
 }
-
 echo foo(1, 2, 3); // 6
-
 // 柯里化之后
 function fnFoo($x, $y) {
 	return function($z) use($x, $y) {
 		foo($x, $y, $z);
 	};
 }
-
 $bar = fnFoo(1,2);
 echo $bar(3); // 6
 ```
@@ -126,7 +118,6 @@ echo $bar(3); // 6
 const a = 1
 const foo = (b) => a + b
 foo(2) // => 3
-
 // 纯函数
 const a = 1
 const bar = (x, b) => x + b
