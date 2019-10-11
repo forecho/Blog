@@ -91,6 +91,10 @@ categories: vim
 - `viw`：选中当前字符
 - `viW`：选中当前字串（字串含义见后面内容）
 
+更多可以参考下图，来源 [VIM学习笔记 文本对象（Text Objects）](http://yyq123.blogspot.com/2016/12/vim-text-objects.html)
+
+![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20191011095932.png)
+
 ### 命令行模式
 
 进入命令行模式之后我们可以执行一些命令对文本进行操作。
