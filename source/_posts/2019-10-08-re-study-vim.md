@@ -91,7 +91,7 @@ categories: vim
 - `viw`：选中当前字符
 - `viW`：选中当前字串（字串含义见后面内容）
 
-更多可以参考下图，来源 [VIM学习笔记 文本对象（Text Objects）](http://yyq123.blogspot.com/2016/12/vim-text-objects.html)
+更多可以参考下图，来源[《VIM学习笔记 文本对象（Text Objects）》](http://yyq123.blogspot.com/2016/12/vim-text-objects.html)
 
 ![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20191011095932.png)
 
@@ -256,3 +256,4 @@ Vim 要了解 Vim 的哲学，学 Vim 带来的收益我认为是[指数增长](
 
 - [Vim 多模式介绍](http://einverne.github.io/post/2015/05/vim-mode.html)
 - [Vim 从入门到精通](https://github.com/wsdjeg/vim-galore-zh_cn/blob/master/README.md)
+- [VIM学习笔记](http://yyq123.github.io/learn-vim/learn-vi-00-List.html)
