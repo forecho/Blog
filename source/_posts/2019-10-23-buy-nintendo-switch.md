@@ -8,6 +8,8 @@ categories: 购物 Switch
 * list element with functor item
 {:toc}
 
+![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20191023170804.png)
+
 ## 引言
 
 经常看我博客的朋友可能知道我在去年春节之前租了一个 Switch 回家玩了，为此我还特意写了一篇文章 [《租 Switch 玩》](https://blog.forecho.com/rent-a-switch-to-play.html)。
