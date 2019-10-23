@@ -3,7 +3,7 @@ layout: post
 title: "租 Switch 玩"
 date: 2019-04-18 21:58:22 +0800
 comments: true
-categories: 体验 经验分享
+categories: 体验 Switch
 ---
 * list element with functor item
 {:toc}
