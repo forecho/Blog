@@ -8,6 +8,8 @@ categories: 体验 Switch
 * list element with functor item
 {:toc}
 
+![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20191023170804.png)
+
 ## 引言
 
 这里的 Switch 是指任天堂的 [Nintendo Switch](https://www.nintendo.com/switch/) 游戏主机，老早就在心里种草了，没买的原因有两个：
