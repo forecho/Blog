@@ -30,6 +30,7 @@ footer: true
 - [Chorder](https://chorder.net/)
 - [完美的胖达](https://wmdpd.com/)
 - [刘悦的技术博客](https://v3u.cn/)
+- [见字如面](https://hiwannz.com/)
 
 ## 链接
 
@@ -61,7 +62,6 @@ footer: true
 - [渚碧](https://jubeny.com/)
 - [深入浅出区块链](https://learnblockchain.cn/)
 - [晚晴幽草轩](https://www.jeffjade.com/)
-- [见字如面](https://hiwannz.com/)
 
 
 ## 待考察
