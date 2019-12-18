@@ -55,8 +55,7 @@ categories: 健身 Switch
 
 《健身环大冒险》可以创建多名用户的，你可以和家人玩小游戏，刷排行榜，也是非常有意思的。
 
-
-![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/DCIM.jpg)
+![](https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/PBxK0p.jpg)
 
 虽然这个游戏冒险模式不能多人一起玩，但是多人可以互相攀比着玩，进一步提高了玩游戏的积极性。
 
