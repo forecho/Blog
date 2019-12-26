@@ -284,7 +284,7 @@ end)
 
 使用这个功能之前先要安装 `blueutil`
 
-```shell
+```sh
 brew install blueutil
 ```
 
