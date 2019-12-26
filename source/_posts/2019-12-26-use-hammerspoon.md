@@ -56,6 +56,7 @@ categories: mac
 `init.lua`
 
 ```lua
+
 require "modules.reload"
 require "config"
 require "modules.window"
@@ -71,6 +72,7 @@ hs.hotkey.bind({'cmd', 'shift'}, 'h', function()
 	speaker:speak("Hammerspoon is online")
 	hs.notify.new({title="Hammerspoon launch", informativeText="Boss, at your service"}):send()
 end)
+
 ```
 
 ### 配置文件
@@ -78,6 +80,7 @@ end)
 `config.lua`
 
 ```lua
+
 windowHotkey = {'control','command'}
 launcherHotkey = {'option'}
 inputHotkey = {'option'}
@@ -112,6 +115,7 @@ appInputMethod = {
     {'/Applications/wechatwebdevtools.app', 'English'},
     {'/Applications/Sketch.app', 'English'},
 }
+
 ```
 
 ### 实现自动输入法切换功能
