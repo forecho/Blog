@@ -123,6 +123,7 @@ appInputMethod = {
 `defaultInput.lua`
 
 ```lua
+
 local function Chinese()
     hs.keycodes.currentSourceID("com.sogou.inputmethod.sogou.pinyin")
 end
@@ -169,6 +170,7 @@ end
 
 appWatcher = hs.application.watcher.new(applicationWatcher)
 appWatcher:start()
+
 ```
 
 ### 切换输入法
@@ -176,6 +178,7 @@ appWatcher:start()
 `input.lua` 实现切换输入法功能，这个已经弃用了，最后还是使用系统自带的快捷键了，代码放出来给大家参考：
 
 ```lua
+
 local function Chinese()
     hs.keycodes.currentSourceID("com.sogou.inputmethod.sogou.pinyin")
 end
@@ -204,6 +207,7 @@ local function cycleInputMethod()
 end
 
 hs.hotkey.bind(inputHotkey, '.', cycleInputMethod)
+
 ```
 
 ### App 启动
@@ -211,11 +215,13 @@ hs.hotkey.bind(inputHotkey, '.', cycleInputMethod)
 `launcher.lua`，可以实现特定的快捷键启动指定的软件，使用最频繁的功能了，妥妥的提升效率。实现代码如下：
 
 ```lua
+
 hs.fnutils.each(applist, function(entry)
     hs.hotkey.bind(launcherHotkey, entry.shortcut, entry.appname, function()
         hs.application.launchOrFocus(entry.appname)
     end)
 end)
+
 ```
 
 修改 `config.lua` 文件，定制化自己的需求。
@@ -225,6 +231,7 @@ end)
 不用手动点击刷新，自动重载 Hammerspoon 配置
 
 ```lua
+
 local function reloadConfig(paths)
     doReload = false
     for _,file in pairs(paths) do
@@ -243,6 +250,7 @@ end
 
 configFileWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig)
 configFileWatcher:start()
+
 ```
 
 
@@ -251,6 +259,7 @@ configFileWatcher:start()
 `window.lua`，我只有最大化和两个显示器换屏的需求，所以只实现的这个功能，还可以实现二分之一屏幕的需求，参考本文末尾给的参考链接。
 
 ```lua
+
 hs.hotkey.bind(windowHotkey, 'return', function()
     hs.grid.maximizeWindow()
 end)
@@ -280,6 +289,7 @@ hs.hotkey.bind(windowHotkey, 'right', function()
         w:moveToScreen(s)
     end
 end)
+
 ```
 
 ### 休眠自动关闭蓝牙
@@ -293,6 +303,7 @@ brew install blueutil
 ```
 
 ```lua
+
 function bluetoothSwitch(state)
     -- state: 0(off), 1(on)
     cmd = "/usr/local/bin/blueutil --power "..(state)
@@ -314,7 +325,8 @@ function caffeinateCallback(eventType)
 end
 
 caffeinateWatcher = hs.caffeinate.watcher.new(caffeinateCallback)
-caffeinateWatcher:start() 
+caffeinateWatcher:start()
+
 ```
 
 ## 最后
