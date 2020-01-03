@@ -96,8 +96,8 @@ func main() {
 			panic(err)
 		}
 
-		re = regexp.MustCompile(`(\d{4}-\d{2}-\d{2})-(.*)`)
-		newFilename := re.ReplaceAllString(filename, "$2")
+        re = regexp.MustCompile(`(\d{4}-\d{2}-\d{2})-(.*)`)
+        newFilename := strings.ToLower(re.ReplaceAllString(filename, "$2"))
 
 		re = regexp.MustCompile(`---\n([\s\S]*)---\n([\s\S]*)`)
 		matches := re.FindSubmatch(data)
