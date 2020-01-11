@@ -1,0 +1,971 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="一、如果表单是 POST 或者 GET 提交的话，可以直接这样写 jQuery： $("form").submit(function() { var submitme = true; $(':radio').each(function() { // loop through each radio &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/posts/19/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/biao-dan-duo-radio-jQuery-bu-wei-kong-yan-zheng.html">表单多radio jQuery 不为空验证</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年01月24日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>一、如果表单是 POST 或者 GET 提交的话，可以直接这样写 jQuery：</p>
+
+<pre><code>$("form").submit(function() {
+    var submitme = true;
+    $(':radio').each(function() { // loop through each radio button
+        nam = $(this).attr('name'); // get the name of its set
+        if (submitme &amp;&amp; !$(':radio[name="'+nam+'"]:checked').length) {
+        // see if any button in the set is checked
+            alert(nam+' group not checked');
+            submitme = false;
+        }
+    });
+    return submitme; // cancel the form submit
+});
+</code></pre>
+
+<p>二、如果表单用的 Ajax 提交的话，我们还需要修改一下：</p>
+
+<ol>
+  <li>
+    <p>把提交按钮 type 由 submit 改成 button 类型，然后加一个 id=”submit ”。</p>
+  </li>
+  <li>
+    <p>jQuery 代码如下：</p>
+
+    <p>$(“#button”).click(function(){
+     var submitme = true;
+     $(‘:radio’).each(function() {
+         nam = $(this).attr(‘name’);
+         if (submitme &amp;&amp; !$(‘:radio[name=”‘+nam+’”]:checked’).length) {
+             alert(nam+’ group not checked’);
+             submitme = false;
+         }
+     });</p>
+
+    <pre><code> if (submitme) {
+     // 防止重复提交
+     $(this).attr({
+         disabled: 'disabled',
+         value: '正在提交...'
+     });
+     $.post("/admin/saveUserData",$("#user-form").serialize(),function(data){
+         #do something
+         ....
+     });
+ };  })
+</code></pre>
+  </li>
+</ol>
+
+<p>参考文章：<a href="http://stackoverflow.com/questions/10706925/jquery-ensuring-all-radio-groups-are-checked">http://stackoverflow.com/questions/10706925/jquery-ensuring-all-radio-groups-are-checked</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Yii-fei-zhu-jian-guan-lian.html">Yii 非主键关联</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年01月24日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="k">function</span> <span class="nf">relations</span><span class="p">()</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">    <span class="nx">    return</span> <span class="k">array</span><span class="p">(</span>
+</span><span class="line">    <span class="nx">        </span><span class="s1">&#39;last_experience&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+</span><span class="line">    <span class="nx">            self</span><span class="o">::</span><span class="na">HAS_ONE</span><span class="p">,</span>
+</span><span class="line">    <span class="nx">            </span><span class="s1">&#39;Experience&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="nx">            </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="nx">            </span><span class="s1">&#39;on&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user_id=last_experience.user_id&#39;</span>
+</span><span class="line">    <span class="nx">        </span><span class="p">),</span>
+</span><span class="line">    <span class="nx">    </span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/jQuery-Ajax-dian-ji-xiu-gai.html">jQuery Ajax 点击修改</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年01月23日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>先来一张效果图： <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160945.png" alt="" /> view HTML页面代码如下：</p>
+
+<pre><code>&lt;td align="center" onclick="changeLike(&lt;?php echo $id ?&gt;,'&lt;?php echo $like_count; ?&gt;',this)"&gt;
+    &lt;?php echo $value['like']; ?&gt;
+&lt;/td&gt;
+</code></pre>
+
+<p>JavaScript代码如下：</p>
+
+<pre><code>function changeLike (id, like, obj) {
+    $(obj).html('&lt;input type="num" name="" size="5" value="'+like+'"&gt;');
+    $(obj).find('input').focus();
+    // 键盘Enter键提交
+    $(obj).find('input').keydown(function(event) {
+        if(event.which==13){
+            $(obj).find('input').blur();
+        }
+    });
+    // 更新数据
+    $(obj).find('input').blur(function(event) {
+        $(obj).html(this.value);
+        $.get('/admin/ajaxLike/'+id+'/'+this.value, function(data) {
+            like = data;
+        });
+    });
+}
+</code></pre>
+
+<p>至于控制器代码就很简单了，用获取到的参数，更新记录，返回新纪录。下面是我用CakePHP写的action，请结合自身情况写代码：</p>
+
+<pre><code>public function ajaxLike($id, $like)
+{
+    $this-&gt;layout = 'ajax';
+    $this-&gt;Article-&gt;id = $id;
+    $this-&gt;Article-&gt;saveField('like', $like);
+    exit($like);
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/CakePHP-ajax-fen-ye.html">CakePHP Ajax分页</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年01月23日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Controller文件头部调用CakePHP自带分页并且配置分页条数代码：</p>
+
+<pre><code>public $components = array('RequestHandler', 'Paginator');
+public $paginate = array('limit' =&gt; 2 );  //2是为了方便测试
+</code></pre>
+
+<p>调用的action方法如下：</p>
+
+<pre><code>public function list()
+{
+    $this-&gt;Paginator-&gt;settings = $this-&gt;paginate;
+    $data = $this-&gt;Paginator-&gt;paginate('Notice');
+    $this-&gt;set('data', $data);
+}
+</code></pre>
+
+<p>list.ctp文件，代码如下：</p>
+
+<pre><code>&lt;?php echo $this-&gt;Js-&gt;writeBuffer(array('inline'=&gt;false));?&gt;
+&lt;div id="search_result"&gt;
+    &lt;?php foreach ($data as $key =&gt; $value): ?&gt;
+        &lt;?php echo $value['Notice']['title'] ?&gt;
+    &lt;?php endforeach ?&gt;
+    &lt;?php $this-&gt;Paginator-&gt;options(array(
+                'update' =&gt; '#search_result',
+                'evalScripts' =&gt; true,
+    ));?&gt;
+    &lt;?php echo $this-&gt;Paginator-&gt;prev('上一页' . __('', true), array(), null, array('class'=&gt;'disabled'));?&gt;
+    &lt;?php echo $this-&gt;Paginator-&gt;numbers(array('class' =&gt; 'numbers', 'first' =&gt; false, 'last' =&gt; false));?&gt;
+    &lt;?php echo $this-&gt;Paginator-&gt;next(__('下一页', true) . ' &gt;&gt;', array(), null, array('class' =&gt; 'disabled'));?&gt;
+    &lt;?php echo $this-&gt;Js-&gt;writeBuffer(array('inline'=&gt;true));?&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>参考文章： <a href="http://endoyuta.com/2013/05/06/cakephp-2-3-ajax%E3%81%AApagination/">http://endoyuta.com/2013/05/06/cakephp-2-3-ajax%E3%81%AApagination/</a> <a href="http://caky.de/en/core-libraries/helpers/js.html#ajax-pagination">http://caky.de/en/core-libraries/helpers/js.html#ajax-pagination</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Yii-kuo-zhan-zi-dai-de-shi-jian-xuan-ze-qi-cha-jian-CJuiDatePicker.html">Yii扩展自带的时间选择器插件CJuiDatePicker</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年01月13日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>事情大概是这样的：我数据库时间字段用的是 int 类型，存储的是时间戳。并且我写文章的时候，时间是需要可以修改的。</p>
+
+<p>来一张最终效果图： <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160820.png" alt="" /></p>
+
+<p>首先我用了 Yii 自带的 Zii CJuiDatePicker 扩展，非常的强大的把 jQuery UI 的 <a href="http://jqueryui.com/datepicker/">Datepicker</a> 继承进去了，使用非常的简单，手册上有。但是这个有个缺陷，没有小时分钟，只能配置日期。这个有点坑爹了。然后没办法，去找了一个 yii 的扩展。我选了 <a href="http://www.yiiframework.com/extension/ejuidatetimepicker/">ejuidatetimepicker</a>，使用也很简单，基本就按照给的 Demo复制过去就可以了。</p>
+
+<p>现在来说说这个功能的难点，首先我数据库是 int 时间戳格式的，但是我用的这个插件是日期格式的，那么现在我又不想改数据库时间的字段类型，我要如何解决？ Google 了一下，找到了一篇文章，我按照这个来结果成功了。</p>
+
+<p>首先根据插件的 Demo 我们在视图form的时间是这样写的：</p>
+
+<pre><code>&lt;?php echo $form-&gt;labelEx($model,'create_time'); ?&gt;
+    &lt;?php $this-&gt;widget('application.extensions.timepicker.EJuiDateTimePicker',array(
+        'model'=&gt;$model,
+        'attribute'=&gt;'create_time',
+        'language'=&gt;'zh-CN',
+        'options'=&gt;array(
+            'hourGrid' =&gt; 4,
+            'hourMin' =&gt; 9,
+            'hourMax' =&gt; 17,
+            'timeFormat' =&gt; 'hh:mm',
+            'changeMonth' =&gt; true,
+            'changeYear' =&gt; false,
+            ),
+        'htmlOptions'=&gt;array(
+            'readonly'=&gt;true,
+            'style'=&gt;'width:180px;'
+        ),
+    )); ?&gt;
+&lt;?php echo $form-&gt;error($model,'create_time'); ?&gt;
+</code></pre>
+
+<p>控制器部分我们基本上不用修改。接下来我们去修改 Model 文件，添加两个 yii 的 function：</p>
+
+<pre><code>protected function beforeSave()
+{
+    $this-&gt;admin_id = Yii::app()-&gt;user-&gt;id;
+    // $this-&gt;create_time = date('Y-m-d', CDateTimeParser::parse($this-&gt;create_time, 'yyyy-MM-dd hh:mm'));
+    $this-&gt;create_time = strtotime($this-&gt;create_time);
+    return parent::beforeSave();
+}
+
+protected function afterFind()
+{
+    $this-&gt;create_time = Yii::app()-&gt;dateFormatter-&gt;format('yyyy-MM-dd hh:mm', $this-&gt;create_time);
+    return parent::afterFind();
+}
+</code></pre>
+
+<p><code>beforeSave</code> 就是数据保存之前我们要处理的事件。<code>afterFind</code> 就是数据显示之前我们要处理的事件。 非常巧妙的用法。</p>
+
+<p>最后别忘记了把 Model 的 rules 的时间验证规则改一下，代码如下：</p>
+
+<pre><code>array('create_time', 'date', 'format'=&gt;'yyyy-MM-dd hh:mm', 'message'=&gt;'{attribute} have wrong format'),
+</code></pre>
+
+<p>**值得注意的是 rules 验证会在 beforeSave 之前执行。beforeSave 和 afterFind 都是 protected 属性。</p>
+
+<p>** 参考文章：**
+- <a href="http://www.yiiframework.com/extension/ejuidatetimepicker/">http://www.yiiframework.com/extension/ejuidatetimepicker/</a>
+- <a href="http://www.yiiframework.com/doc/api/1.1/CJuiDatePicker">http://www.yiiframework.com/doc/api/1.1/CJuiDatePicker</a>
+- <a href="http://www.volkomenjuist.nl/blog/2013/02/24/yii-cjuidatepicker-dateformat/">http://www.volkomenjuist.nl/blog/2013/02/24/yii-cjuidatepicker-dateformat/ </a>  </p>
+
+<p>最后感叹下自带 zii 的方便强大，再分享一个资源： <a href="http://www.bsourcecode.com/yii-framework/yii-extensions/">http://www.bsourcecode.com/yii-framework/yii-extensions/</a></p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#206" title="2014-08-22 12:05:00">Jack Van</a>:</strong> 怎么只能从9点到16点</p>
+
+<p><strong><a href="#208" title="2014-10-19 15:41:00">ForEcho</a>:</strong> 代码上面有参数。自己可以设置，hourMin 和 hourMax</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/CakePHP-de-xiao-ji-qiao-yong-fa.html">CakePHP的小技巧用法</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年01月03日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>1、问：如果控制器有一个方法，不要视图怎么办？</strong></p>
+
+<p>答：使用：$this-&gt;autoRender = false</p>
+
+<p><strong>2、对于一直在开发的网站，在频繁更新的情况下，如何保证css文件、js文件和image文件不调用浏览器缓存文件问题？</strong></p>
+
+<p>答：一个是在调用的文件名最后加变量后缀，如时间。示例代码如下：</p>
+
+<pre><code>&lt;link rel="stylesheet" type="text/css" href="http://forecho.com/css/index.css?2014-01-03-1" media="all" /&gt;
+</code></pre>
+
+<p>二如果是CakePHP的话还可以修改core.php配置文件，代码如下：</p>
+
+<pre><code>/**
+ * Apply timestamps with the last modified time to static assets (js, css, images).
+ * Will append a querystring parameter containing the time the file was modified. This is
+ * useful for invalidating browser caches.
+ *
+ * Set to `true` to apply timestamps when debug &gt; 0. Set to 'force' to always enable
+ * timestamping regardless of debug value.
+ */
+    Configure::write('Asset.timestamp', true);
+</code></pre>
+
+<p>这样的好处是你接下来可以直接用CakePHP自带的写法调用图片和文件了，如：</p>
+
+<pre><code>&lt;?php
+	echo $this-&gt;Html-&gt;css('main');
+	echo $this-&gt;Html-&gt;image();
+?&gt;
+</code></pre>
+
+<p><strong>3、点赞的时候需要+1，如何更新数据库？</strong></p>
+
+<p>代码如下：</p>
+
+<pre><code>$this-&gt;Widget-&gt;updateAll(
+    array('Widget.numberfield' =&gt; 'Widget.numberfield + 1'),
+    array('Widget.id' =&gt; 1)
+);
+</code></pre>
+
+<p><strong>4、如何通过主键最简单的方式获取到一条数据？</strong></p>
+
+<p>代码如下：</p>
+
+<pre><code>// 只获取name字段信息
+$this-&gt;User-&gt;read("name", $id);
+// 获取所有信息
+$this-&gt;User-&gt;read(null, $id);
+</code></pre>
+
+<p><strong>5、CakePHP控制器如何返回上一页？</strong></p>
+
+<pre><code>$this-&gt;redirect($this-&gt;referer());
+</code></pre>
+
+<p><strong>6、CakePHP A控制器调用B控制器</strong></p>
+
+<pre><code>$this-&gt;requestAction(
+    array('controller'=&gt;'Wx','action'=&gt;'aa'),
+    array('data'=&gt;
+        array('xing'=&gt;'A1','ming'=&gt;'A2')
+    )
+);
+</code></pre>
+
+<p>这样可以在A控制器调用B控制器方法，而且在后面传参过去，用$this-&gt;request-&gt;data获取参数值。</p>
+
+<p><strong>7、输出单个页面执行的SQL语句</strong></p>
+
+<pre><code>$log = $this-&gt;Model-&gt;getDataSource()-&gt;getLog(false, false);
+debug($log);
+</code></pre>
+
+<p>Model要改一下名字才能用。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/CakePHP-belongsTo-bu-shi-zhu-jian-guan-lian.html">CakePHP belongsTo不是主键关联</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年01月02日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>belongsTo是<code>属于</code>的关系。</p>
+
+<pre><code>var $belongsTo = array(
+
+    'Inventory' =&gt; array(
+        'className'    =&gt; 'Inventory',
+        'foreignKey' =&gt; false,
+        'conditions' =&gt; array(' `RentalLineitem`.`i_num` = `Inventory`.`i_num`'),
+        'dependent'    =&gt; false //是否级联删除
+    )
+
+);
+</code></pre>
+
+<p>参考文章：<a href="http://stackoverflow.com/questions/6267804/cakephp-mapping-belongsto-association-to-a-non-primary-key">http://stackoverflow.com/questions/6267804/cakephp-mapping-belongsto-association-to-a-non-primary-key</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/qing-yuan-dan-du-wan-tao-bao-ji-shu-zhe-shi-nian.html">庆「元旦」读完《淘宝技术这十年》</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年01月01日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>元旦放假一天，天气不错无处可玩，想着去广场晒着太阳应该是件很不错的事情。于是吃完午饭抱着同事借来的《淘宝技术这十年》去广场找了个位置看书，在家对着电脑不管多安静，我是看不进去书的。</em> <em>其实以前在博客园的<a href="http://kb.cnblogs.com/page/132724/">这里</a>已经看得差不多一半了，其实书的内容不怎么多的，除了讲技术的部分不明觉厉之外，其他的章节还是很有意思的。下面就摘抄一些有意义的笔记。内容主要为后面一章节，本书的前一半内容看的比较早了，当时忘记记录笔记了。</em></p>
+
+<blockquote>
+  <p>子柳:你对刚入行的技术人员有什么建议?<br />
+正明:找到自己感兴趣的,花时间投进去,通过实践后的知 识积累比只看书本有用得多。我看过一本操作系统方面的英文书,其中引用了一段中国人的格言:“I hear and I forget. I see and I remember. I do and I understand”,这句话给我留下非常深刻的 印象。是荀子说的“不闻不若闻之,闻之不若见之,见之不若知 之,知之不若行之。”</p>
+</blockquote>
+
+<blockquote>
+  <p>子柳:从你的经历来看,你对现在的技术人员的成长有什么建议?<br />
+正祥:很多人会说年轻人比较浮躁,其实我的身边有很多非常优秀的年轻人,他们聪明、刻苦、有闯劲、愿意接受新事物。 年轻的同事想赚钱,想提升自己的职称,这些都是十分正常的。 在这点上,我特别喜欢马总的理念——做公司要赚钱,但阿里从 不把赚钱作为第一目标,我们服务好了客户,客户赚了钱,我 们一定会得到自己应得的一份。在个人成长问题上也是类似的 道理,这就是,一个人如果把做事、做成事作为主要目标,该他 得到的东西,一定会顺理成章的、水到渠成地得到,但是,如果 把上升作为主要目标,做同样的事,结果就会完全不一样。一句 话,你的心态会最终决定你的成就。</p>
+</blockquote>
+
+<blockquote>
+  <p>子柳:你来淘宝技术大学授课的时候,给学员说过“但行好 事,不问前程”,现在很多同学都因为晋升的问题很纠结,可否 解释一下自己是怎么看待晋升的?<br />
+毕玄:大家都说了,晋升是一个“水到渠成”的事情。大家 都会在意晋升,这个是正常的,除非你不在意级别,生活上也没 有压力,不过这样的人是很少的,呵呵。如果真的没有升上去, 这个也没有什么办法能够挽救了。我觉得重要的是在这个过程中 你回顾了你一年做了什么事情,对公司有什么贡献,技术上有哪些成长。 对于技术人员最常见的一种情况是晋升名单公布的时候,你 去看谁升上去了,然后对比一下自己,觉得他水平不如自己,为 什么是他得到了晋升,而不是你。我觉得最重要的是看那个人对 公司做了多少贡献,你可以说你的技术确实很强,但事实是你对 公司没有做出任何贡献。</p>
+</blockquote>
+
+<blockquote>
+  <p>子柳:你是技术晋升的评委,在评审的过程中,你比较看重什么样的特质?<br />
+毕玄:如果你是向技术方向发展的人员,我们要看技术方面的专业性;然后看你的技术对公司的业务发展有多少贡献。还有 一点,我比较看重的是,也许你不在其位,但能够跳出自己的范 围,想到公司未来到底会面临什么问题,用什么方法来解决。当 然,仅想是不够的,如果你能够落实就最好了,我们不管你落实 的技术含量有多高,关键是你解决了什么样的问题。如果你能够 做到这些,你这个人对公司就非常重要。</p>
+</blockquote>
+
+<blockquote>
+  <p>子柳:你经常出去招聘学生,你欣赏什么样的学生?<br />
+毕玄:其实在校招聘的时候,我比较欣赏的学生往往是那些很“不务正业”类型的。我经常会问他们,你有没有利用业余时间出于自己的技术兴趣做的一些小东西。这样的学生我们通常 会比较感兴趣,我认为这样的学生是真正喜欢技术。聪明程度一般就可以的,他能够进入这些不错的学校,智商是不会有什么问 题的。</p>
+</blockquote>
+
+<blockquote>
+  <p>子柳:你对新人的要求是什么样的?<br />
+放翁:第一个是做事要自己思考后再去问别人,而不是一遇到问题就找人求助。第二个是不断地打破自己的一些想法,你不要担心自己今天已经做了50%的工作,要是推倒重来,前面的事情都白干了。我现在带的两个新人成长很快,但是都有类似的经历,就是一个东西被我反复推翻重做,在这个过程中就是不断地成长,要思考我为什么让你推倒重做,若想不清楚,下次重做的概率会更大,这样慢慢地就会学会了思考。</p>
+</blockquote>
+
+<blockquote>
+  <p>子柳:你对工程师有什么忠告?<br />
+放翁:任何一个公司,不管用什么手段,都做不到绝对公 平,最终只会有小部分人得到机会。这个时候去抱怨、愤怒都没 有用的,只有自己不断地努力争取机会才行。</p>
+</blockquote>
+
+<blockquote>
+  <p>子柳:给技术刚起步的人员一些技术成长的建议吧。<br />
+云铮:兴趣是最好的老师,坚持是达到梦想的唯一途径,当然,在个人发展的不同阶段寻找到合适的导师很重要,看准方向 会事半功倍。在刚刚参加工作还没有形成自己的判断时,方向有 两个来源,一个是个人的兴趣,一个是找一个你非常佩服且能掌 握未来方向的人,当然,如果这两者正好重合,那么剩下的就是 脚踏实地坚持。</p>
+</blockquote>
+
+<blockquote>
+  <p>子柳:说说你个人的成长经验,给起步阶段的同事一些建议吧。<br />
+小马:现在回过头来看,其实成长最快的一段时间是刚进淘 宝的那几年,那个时候很单纯,就想着把工作做好,做完一个做 下一个,不管这个业务是不是重要,需求方是不是好打交道。有个“一万个小时理论”,我觉得很正确,说的就是一个人必须经 过不断地练习,不断地遇到问题才能成长起来。当然,做的时候 要不断总结,写博客是一个很好的途径。</p>
+</blockquote>
+
+<blockquote>
+  <p>子柳:现在有很多人出去创业,作为一个曾经创过业的技术 人员,你有什么看法?<br />
+小马:很多人创业是因为公司变得越来越大,有很多流程和 规章制度的限制,这样自己发挥的空间越来越小。但是真的到 社会中创业时会发现限制同样很多,你同样要面临税务局、工商 局、商标、公司注册、股东关系、员工管理、同行竞争等问题, 这跟你在公司中工作并没有本质的不同。所以说创业其实是一种 心态,你用旺盛的精力、饱满的斗志和坚定的信念去克服一个又 一个的困难,这就是创业。到外面去创业和在一个大公司里创 业,我个人觉得并没有本质的区别。 当然,如果你不认可公司整体的方向,或者你不认可这个行 业,你有一个理想去打造一个新的天地,公司也应该有这种胸怀 鼓励你去创业。</p>
+</blockquote>
+
+<p>总结一下去年真正看完的书只有可怜的《Getting Real – 37signals》、《不许联想》、《打造 Facebook》、《把时间当作朋友》4本。太少了，争取今年能至少读完10本书。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/CakePHP-saveAll-yong-fa.html">CakePHP saveAll用法</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年12月26日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>视图表单代码如下：</p>
+
+<pre><code>&lt;tr id="research-items"&gt;
+	&lt;td&gt;
+		&lt;select name="type[]"&gt;
+			&lt;option value="text"&gt;单行文字&lt;/option&gt;
+			&lt;option value="textarea"&gt;多行文字&lt;/option&gt;
+			&lt;option value="radio"&gt;单项选择&lt;/option&gt;
+			&lt;option value="checkbox"&gt;多项选择&lt;/option&gt;
+		&lt;/select&gt;
+	&lt;/td&gt;
+	&lt;td&gt;&lt;input type="text" name="question[]" value="" placeholder="这里是问题"&gt;&lt;/td&gt;
+	&lt;td&gt;&lt;input type="text" name="items[]" value="" placeholder="答案1|答案2"&gt;&lt;/td&gt;
+	&lt;td&gt;
+		&lt;input type="checkbox" name="is_answer[]" value="1" &lt;?php echo (isset($data) &amp;&amp; $data['ResearchSetting']['is_answer']==1) ? "checked" : '' ; ?&gt;&gt;是否必填
+	&lt;/td&gt;
+	&lt;td&gt;&lt;a class="btn_delete" title="删除" href="javascript:;"&gt;删除&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+</code></pre>
+
+<p>控制器的写法如下：</p>
+
+<pre><code>for ($i=0; $i &lt; count($_POST['type']) ; $i++) {
+     $post[$i]['ResearchOption']['type']                = $_POST['type'][$i];
+     $post[$i]['ResearchOption']['question']            = $_POST['question'][$i];
+     $post[$i]['ResearchOption']['items']               = $_POST['items'][$i];
+     $post[$i]['ResearchOption']['is_answer']           = ($_POST['is_answer'][$i])?$_POST['is_answer'][$i]:0;
+     $post[$i]['ResearchOption']['research_setting_id'] = $this-&gt;ResearchSetting-&gt;id;
+}
+$this-&gt;ResearchOption-&gt;saveAll($post);
+</code></pre>
+
+<p>参考链接：<a href="http://book.cakephp.org/2.0/en/models/saving-your-data.html">http://book.cakephp.org/2.0/en/models/saving-your-data.html</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/CakePHP-hanMany-yong-fa.html">CakePHP hanMany用法</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年12月18日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>hanMany就是一对多的关系，比方说我们现在一篇文章有多条评论，那么这个就是一对多的关系。 我们在文章的模型里面写hasMany就可以关联评论了。使用方法如下：</p>
+
+<pre><code>var $hasMany = array('ProductsSku' =&gt;
+		array('className'     =&gt; 'ProductsSku',//关联对象类名
+				'conditions'    =&gt; '',//关联对象限定条件
+				'order'         =&gt; '',//关联对象排序子句
+				'limit'         =&gt; '',//检索的关联对象数量
+				'foreignKey'    =&gt; 'prod_id',//外键字段名
+				'dependent'     =&gt; true,//是否级联删除
+				'exclusive'     =&gt; false,//：如果设为true，所有的关联对象将在一句sql中删除，model的beforeDelete回调函数不会被执行。但是如果没有复杂的逻辑在级联删除中，这样的设定会带来性能上的优势。（译注：Cake的确方便，但是使用时一定要记住控制sql语句发送数量）
+				'finderQuery'   =&gt; ''//定义一句完整的sql语句来检索关联对象，能够对关联规则进行最大程度上的控制。当关联关系特别复杂的时候，比如one table - many model one model - many table的情况下，Cake无法准确的替你完成映射动作，需要你自己来完成这个艰巨的任务。
+		)
+);
+</code></pre>
+
+<p>在CakePHP命名规范里面规定每一张表都有ID为主键的字段，作为外键foreignKey的字段命名：其默认值为当前模型的单数模型名缀以 ‘_id’。如果你遵守这个使用起来将非常简单。 下面我们来说个实例。 文章的表名为Articles，文章评论表名为Comments。那么文章的模型文件为Article.php，文章评论的模型文件为Comment.php。（单复数命名规则） 那么在Article.php文件中这样写就可以实现简单的关联评论表了。</p>
+
+<pre><code>class Article extends AppModel
+{
+    public $name = 'Article';
+
+    public $hasMany = array(
+        'Comment' =&gt; array(
+            'className'  =&gt; 'Comment',
+        )
+    );
+}
+</code></pre>
+
+<p>参考资料： <a href="http://www.cnblogs.com/matchless/archive/2013/02/01/2889134.html">http://www.cnblogs.com/matchless/archive/2013/02/01/2889134.html</a> <a href="http://www.21haolou.com/articles/show/88">http://www.21haolou.com/articles/show/88</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/20">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/18">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

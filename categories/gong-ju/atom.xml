@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 工具 | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/gong-ju/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[关于三立三]]></title>
+    <link href="https://blog.forecho.com/about-3li3.com.html"/>
+    <updated>2016-05-22T04:29:22+00:00</updated>
+    <id>https://blog.forecho.com/about-3li3.com</id>
+    <content type="html"><![CDATA[<h2 id="section">引言</h2>
+
+<p>项目上线之后有了一点点自由的零碎时间，再利用周末时间。于是就写了一个「监控你想要 App 降价或者限免的项目」，名字叫做<a href="http://3li3.com/">三立三</a>。</p>
+
+<h2 id="section-1">关于三立三</h2>
+
+<p>我是一个 App 狂热爱好者，经常会去少数派，AppSo 等网站上去看一下最新最好玩的 App，经常会看到他们有推荐一些
+精品的 App 限免，但是一般 App 限免是有时效性的，意思是说他们写的文章的时候是限免的，但是我去读文章的时候兴高采烈的去
+App Store 上准备下载的时候，那个 App 不一定还在限免。如果这个 App 对我来说不急着用的话，我肯定是希望在它最便宜或者最低价格的时候拿下。</p>
+
+<p>所以我写了一个帮我监控 App 价格的项目，这个就是三立三诞生的主要原因。</p>
+
+<!--more-->
+
+<p>当然还有一些其他原因：</p>
+
+<ul>
+  <li>App Store 首页推荐的一些 App 还是挺有趣的，但是 App Store 的访问速度有时候真的不能忍受。</li>
+  <li>AppShopper 的功能其实能满足我大多数需求，但是它没有价格走势，不支持中文搜索。</li>
+  <li>…</li>
+</ul>
+
+<h2 id="section-2">如何使用？</h2>
+
+<ul>
+  <li>注册账号</li>
+  <li>搜索想要监控「限免」或者「限免」的 App，点击想要。</li>
+  <li>去「用户设置」中设置，填写 Email 通知地址。</li>
+</ul>
+
+<p>然后你就坐等 Email 通知的。如果你是高级玩家的话，推荐使用 Slack 通知。</p>
+
+<p>网站目前还处于测试阶段，需要邀请码才能注册，如果你对本站感兴趣，欢迎写邮件索要邀请码，Gmail 邮箱 caizhenghai</p>
+
+<h2 id="app">我不知道我想要哪些 App？</h2>
+
+<p>可以去<a href="http://3li3.com/site/users">活跃用户</a>菜单栏看看别人正在想用什么 App。</p>
+
+<blockquote>
+  <p>三立三名字的由来：
+刚开始花了很长时间写名字，一开始想在项目中带 App 字段，后来不想让这个项目局限于 App，所以决定域名不带 App。<br />
+有一天无意中发现发现个网站<a href="http://minongbang.com/">米农帮</a>，通过搜索发现了 <a href="http://3li3.com/">3li3.com</a> 这个4位而且又好记的域名。<br />
+于是名字就这么诞生了。</p>
+</blockquote>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于 PhpStorm 的小技巧]]></title>
+    <link href="https://blog.forecho.com/tips-about-phpstorm.html"/>
+    <updated>2016-01-29T08:36:58+00:00</updated>
+    <id>https://blog.forecho.com/tips-about-phpstorm</id>
+    <content type="html"><![CDATA[<h2 id="section">前言</h2>
+
+<p>如果一个工具是你每天工作都必须要用的，请认真阅读官方文档，花几个小时好好研究使用技巧，这将为你以后工作带来很高的效率。</p>
+
+<p>这篇文章内容其实很早就在我印象笔记里面了，今天整理出来，分享给大家。</p>
+
+<h2 id="section-1">快捷键</h2>
+
+<p><strong>常用快捷键</strong></p>
+
+<ul>
+  <li>全局搜索文件  按两下shift</li>
+  <li>显示项目类列表 alt + 1</li>
+  <li>显示方法列表  alt + 7</li>
+  <li>全局搜索类 ：ctrl+n</li>
+  <li>更新注释：alt+enter</li>
+</ul>
+
+<!--more-->
+
+<p><strong>Mac 快捷键</strong></p>
+
+<ol>
+  <li>显示或者隐藏左边栏：command+1</li>
+  <li>查找文件名：command+shift+o</li>
+  <li>查看文件结构：command+F12</li>
+  <li>查看函数、方法：command+alt+o</li>
+  <li>关闭所有文件的时候 command+↑ 、command+n 快速新建文件</li>
+  <li>command+e 查看历史打开文件</li>
+  <li>Live  Templates：先选中一个模板，再按两下 shift ，再输入 「Live」找到「Save as Live  Templates」就可以新建一个模板</li>
+  <li>alt+command+L 格式化代码</li>
+  <li>代码块转换成独立方法：control+t</li>
+  <li>函数操作 command+n / control+enter</li>
+  <li>方法参数操作：alt+enter</li>
+  <li>调用其他类的时候自动use：设置-》搜索「Import」勾选「Enable auto-import in namespace scope」</li>
+  <li>多个光标：按住 alt 健点击鼠标</li>
+  <li>多选：control+g</li>
+  <li>分屏：「Window」-》「Editor Tabs」-》Split XX</li>
+  <li>设置命名空间：设置-》Directories-》Sources-》p</li>
+</ol>
+
+<p><strong>Windows 快捷键</strong></p>
+
+<ol>
+  <li>项目名右键选择”Local History -&gt; Show History”可查看本地修改记录</li>
+  <li>Ctrl + E 可查看最近打开文件或项目</li>
+  <li>打开File -&gt; Setting -&gt; Editor，选择Appearance下面的Show Method Separators。它会将你的代码按方法，用灰色线框进行智能分割。你还可以使用：alt+↑或↓，在方法之间进行跳转</li>
+  <li>Ctrl + Shift + V，可选择要粘贴的最近内容</li>
+  <li>Ctrl + D，复制粘贴选中的文本</li>
+  <li>Ctrl + Y，删除当前行或选中行</li>
+  <li>Ctrl + Alt + 左右方向键，定位到上一次编辑的位置</li>
+  <li>Alt + 上下方向键，跳转到上/下函数</li>
+  <li>Alt + 左右方向键，导航标签切换</li>
+  <li>Ctrl + N，根据类名称查找</li>
+  <li>Ctrl + Shift + N，根据文件名查找</li>
+  <li>Ctrl + Shift + Alt + N，根据函数名查找</li>
+  <li>Ctrl + Shift + F，Find in Path</li>
+  <li>Ctrl + Shift + I，查看变量初始化的值</li>
+  <li>Ctrl + F12，快速查看当前文件的所有方法</li>
+  <li>Ctrl + /，单行注释</li>
+  <li>Ctrl + Shift + /，多行注释</li>
+  <li>修改默认打开的文件模版：”file” —&gt; “setting” —&gt; “file and code template”</li>
+  <li>/** + Enter 或者  /** + 空格键，自动生成注释</li>
+  <li>Ctrl + Alt + L，格式化代码</li>
+  <li>选中文件或者文件，Alt+Insert 新建文件</li>
+</ol>
+
+<p><strong>更换为 sublime 快捷键</strong></p>
+
+<p>因为以前用习惯了 sublime，改不过来快捷键方式了，所以但是了这个项目 <a href="https://github.com/forecho/PHPStorm-Config">PHPStorm-Config</a></p>
+
+<h2 id="section-2">其他</h2>
+
+<p><strong>视频教程</strong></p>
+
+<p><a href="https://laracasts.com/series/how-to-be-awesome-in-phpstorm">https://laracasts.com/series/how-to-be-awesome-in-phpstorm</a></p>
+
+<p><strong>换主题</strong></p>
+
+<p><a href="http://daylerees.github.io/">http://daylerees.github.io/</a>
+<a href="https://github.com/daylerees/colour-schemes">https://github.com/daylerees/colour-schemes</a></p>
+
+<p>添加主题：
+<code>
+cd ~/Library/Preferences/WebIde80/colors
+wget https://raw.githubusercontent.com/daylerees/colour-schemes/master/jetbrains/yule.icls
+</code></p>
+
+<p><strong>安装插件</strong></p>
+
+<ul>
+  <li>command+shift+a 输入 plugins</li>
+  <li>点击 Browse Repositories</li>
+  <li>输入 color 选择 color ide 安装 重启IDE</li>
+</ul>
+
+<p><strong>更换新建文件模板</strong></p>
+
+<p>Setting -&gt; File and Code Templates</p>
+
+<p><code>
+/**
+* author     : forecho &lt;caizhenghai@gmail.com&gt;
+* createTime : ${DATE} ${TIME}
+* description:
+*/
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Forecho 的利器]]></title>
+    <link href="https://blog.forecho.com/my-setup.html"/>
+    <updated>2015-12-15T14:46:34+00:00</updated>
+    <id>https://blog.forecho.com/my-setup</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">介绍一下你自己和所做的工作。</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">你都在使用哪些硬件？</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">软件呢？</a>    <ul>
+      <li><a href="#windows" id="markdown-toc-windows">Windows</a></li>
+      <li><a href="#mac" id="markdown-toc-mac">Mac</a></li>
+      <li><a href="#iphone--ipad-app" id="markdown-toc-iphone--ipad-app">iPhone &amp;&amp; iPad App</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-3" id="markdown-toc-section-3">你最理想的工作环境是什么？</a></li>
+  <li><a href="#section-4" id="markdown-toc-section-4">你平时获得工作灵感的方式有哪些？</a></li>
+  <li><a href="#section-5" id="markdown-toc-section-5">推荐一件生活中的利器给大家。</a></li>
+</ul>
+
+<h2 id="section">介绍一下你自己和所做的工作。</h2>
+
+<p>Hi，大家好，我是 forecho，目前在做程序后端开发，主要是 PHP，业余时间也折腾下 iOS 和 Python AND Ruby。工作已经有4年多了，目前在深圳。</p>
+
+<h2 id="section-1">你都在使用哪些硬件？</h2>
+
+<ul>
+  <li>一台2012年款的 MacBook Pro 15寸的中配，8G 内存，2年前被我换成 256G SSD 之后，除了没有 Retina 屏和有点重之外，其他的都还好。</li>
+  <li>iPhone5 用了3、4年，自己换了 home 键和电池，打算再坚挺1年，直到 iPhone7.</li>
+  <li>戴尔（DELL）UltraSharp U2412M，配合 MacBook 做双显示器用。自从买了一个电视盒子，也用来看电视了。</li>
+  <li>Kindle5 对于爱看书的我，2012 年年底就买了，一直用到现在，看过不少书，真心觉得是最值的一个电子设备，每天上班比背着。前几天买了海淘了个 KPW 3 还没到货。</li>
+  <li>iPad mini 2，之前有一个 iPad Air 1 的后来嫌太重了，换了 mini 了。本来打算用来用 PDF 的，现在沦落到看各种视频，给女朋友打游戏的地步了。</li>
+  <li>极路由，当然其他智能路由器也是可以的，配合 Shadowsocks 可以实现路由器翻墙，设备只要连接这个 WiFi 就在墙外，在家可以自由的刷 Twitter，看 YouTube。</li>
+  <li>天猫魔盒，当初买这个就是图他便宜，感觉越用反应越慢。</li>
+  <li>酷冷至尊的一款 87 键茶轴机械键盘。本来打算买个 FILCO 圣手二代，但是感觉太贵，没下手，换了这个中等价位的，感觉还可以。</li>
+</ul>
+
+<!--more-->
+
+<h2 id="section-2">软件呢？</h2>
+
+<h3 id="windows">Windows</h3>
+
+<p>因为公司给配置的是 Windows 的系统，所以也攒下了很多利器。</p>
+
+<ul>
+  <li>Chrome：这个不用解释了吧，一个新电脑我第一件事就是用 IE 去下载 Chrome 浏览器</li>
+  <li>VirtualBox + Vagrant：有些软件 Linux 下没有，导致我没办法完全抛弃 Windows 而使用 Linux 主力开发（不讨论 Mac），自从遇到了 VirtualBox + Vagrant，真是相见恨晚</li>
+  <li>babun ：非常强大的终端，傻瓜式的使用，集成 oh-my-zsh、git 等省时省力。</li>
+  <li>Xshell：ssh 工具，配合上面两个一起用。</li>
+  <li>Clover：如果你喜欢 Chrome 浏览器，那么你一定会爱死这个软件了，以 Chrome 的形式来使用我们的资源管理器，多标签、书签、新标签打开、重新打开关闭之后的标签，统统没问题，快捷键都和 Chrome 一样。</li>
+  <li>Listary：增强文件夹资源管理工具。免费有中文。高级版收费，保存文件的时候可以直接根据文件名搜索文件路径，你值得拥有。</li>
+  <li>Launchy：Mac OS 上的神器 开速启动软件 - Alfred 用了之后你就离不开了。同样 Windows 也有很多快读启动，我用的是 Launchy，简单实用而且免费有中文，不能更爱了。</li>
+  <li>Ditto：复制粘贴是我们最常用的操作了，有了这个剪贴板，之前复制的信息都可以在 Ditto 里面找到了，这就是效率。</li>
+  <li>Sublime Text：神器，以前用这个写代码，虽然现在用 IDE 写代码，但是简单的查看代码还是用这个。</li>
+  <li>PhpStorm：写 PHP 利器</li>
+  <li>印象笔记：主要用来干两件事情，一是 Chrome 剪藏插件用来收集平常搜索到的资料，曾经试过为知和有道，但是这个功能都没有印象笔记给力。二是自己工作的时候写一些笔记，工作的时候有点东西还是需要记录下来的，有时候匆匆忙忙记录下来，后头有时间再整理，然后又可能会发布到博客中。</li>
+  <li>Shadowsocks：这个不解释，自己买的搬瓦工搭建的梯子，从此爽的不要不要的，一个月18块钱左右，很划算，看 YouTube 720P 速度还能接受。</li>
+</ul>
+
+<p>更多 Windows 下的利器可以参照我之前写的 <a href="https://blog.forecho.com/blog/windows-coding-tool.html">Windows 开发利器</a></p>
+
+<h3 id="mac">Mac</h3>
+
+<p>在家的时候偶尔也写写代码，所以也整理一份吧。</p>
+
+<ul>
+  <li>VirtualBox + Vagrant</li>
+  <li>iTerm2：终端</li>
+  <li>Alfred：不只是快速启动</li>
+  <li>Dash：各种文档</li>
+  <li>Evernote</li>
+  <li>MPlyerX：播放器</li>
+  <li>Chrome</li>
+  <li>Sublime Text</li>
+  <li>Shadowsocks</li>
+  <li>PhpStorm</li>
+  <li>Homebrew：安装各种环境</li>
+  <li>Caffenie：让屏幕常亮的软件</li>
+  <li>xee：看图</li>
+</ul>
+
+<h3 id="iphone--ipad-app">iPhone &amp;&amp; iPad App</h3>
+
+<ul>
+  <li>Reeder：30块钱买的，喜欢 RSS 阅读的推荐，非常值</li>
+  <li>Flipboard：阅读。</li>
+  <li><a href="https://www.fiftythree.com/">Paper</a>：曾经花钱内购过，但后来都免费了</li>
+  <li>Overcast：听博客用，曾经花30块钱内购过，现在也全部免费了。，现在偶尔也用 Castor</li>
+  <li>Tweetbot：刷 twitter 用。</li>
+  <li>Panda：刷各种网站的排行榜用，但是主要是针对国外网站。</li>
+  <li>Slack：微信的公众号各种限制，Slack 各种服务，接口也很强大，玩法很多。</li>
+  <li>Inbox：Google 出品的 Gmail 客户端，非常好用，体验做的很好，缺点是只支持 Gmail，而 Gmail 正好是我的主力邮箱。</li>
+  <li>豆瓣：喜欢看电影和书，一直用豆瓣来标记书和电影，同时也看一下评价。</li>
+  <li>豌豆荚一览：省下下载很多应用</li>
+  <li>Pocket：稍后阅读工具，配合 Chrome 扩展程序一起用。</li>
+  <li>即刻：定制消息。</li>
+  <li>奇妙清单：记录各种清单，想法。</li>
+  <li>Trello：项目管理。</li>
+  <li>iHour：记录时间，1万小时天才理论。</li>
+  <li>快喵加速器：最简单的翻墙App。</li>
+  <li>种子习惯：专门记录一些习惯，签到打卡用。</li>
+</ul>
+
+<h2 id="section-3">你最理想的工作环境是什么？</h2>
+
+<ul>
+  <li>在家办公</li>
+  <li>可站立办公的桌椅</li>
+  <li>有两台显示器</li>
+  <li>有一台快速的电脑（SSD + 大内存）</li>
+  <li>机械键盘</li>
+  <li>有一把舒适的椅子</li>
+  <li>能快速上网的网速</li>
+  <li>有安静的工作环境</li>
+  <li>成为独立开发者</li>
+</ul>
+
+<p>以上基本上是《高效能程序员的修炼》中程序员的《权利法案》。</p>
+
+<h2 id="section-4">你平时获得工作灵感的方式有哪些？</h2>
+
+<ul>
+  <li>使用 Chrome 的 Panda 扩展程序，浏览 GitHub 、dribbble、Product Hunt 排行榜</li>
+  <li>Twitter</li>
+  <li>V2EX</li>
+  <li>Ruby-China</li>
+</ul>
+
+<h2 id="section-5">推荐一件生活中的利器给大家。</h2>
+
+<p>推荐《囚徒健身》这本书，对于比较懒，但是又想健身的朋友这本书真的很不错，有渐进的计划表，可以配合上面提到的「种子习惯」App 一起用。</p>
+
+<p>这本书最关键的是每天只需要投入10分钟左右就可以了，对于每天下班吃完晚餐之后都已经比较晚的人来说再适合不过了。</p>
+
+<p>我已经开始健身一个多月了，已经有些效果了。</p>
+
+<blockquote>
+  <p>本文参与了「利器社群计划」，发现更多创造者和他们的工具：<a href="http://liqi.io/community/">http://liqi.io/community/</a></p>
+</blockquote>
+]]></content>
+  </entry>
+  
+</feed>

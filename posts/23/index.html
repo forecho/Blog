@@ -1,0 +1,973 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="表结构一样，现在需要把这些表全部都的数据都查出来，使用一个Model文件。 首先要声明三个私有变量： private $tableName = 'fr_goods';//默认表名
+private static $_models=array();
+private $_md; 添加 构造函数: &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/posts/23/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Yii-duo-biao-shi-yong-yi-ge-Model-wen-jian.html">Yii 多表使用一个Model文件</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年08月03日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>表结构一样，现在需要把这些表全部都的数据都查出来，使用一个Model文件。 首先要声明三个私有变量：</p>
+
+<pre><code>private $tableName = 'fr_goods';//默认表名
+private static $_models=array();
+private $_md;
+</code></pre>
+
+<p>添加 构造函数:创建和初始化对象成员属性，代码如下：</p>
+
+<pre><code>public function __construct($scenario='search', $tableName = null)
+{
+    if($tableName !== null)
+        $this-&gt;tableName = $tableName;
+    parent::__construct($scenario);
+}
+</code></pre>
+
+<p>把默认的function tableName() 改为如下：</p>
+
+<pre><code>public function tableName()
+{
+     return $this-&gt;tableName;
+
+}
+</code></pre>
+
+<p>这个时候你调用的时候，输出tableName的时候，虽然成功了，但是数据还是没有变。 下面我们要改变数据元才行。   把默认生成的 function model()，改成如下代码：</p>
+
+<pre><code>public static function model($tableName = false, $className=__CLASS__)
+{
+    if($tableName === null) $className=null; // 这个字符串将节省内部CActiveRecord的功能
+    if(!$tableName)
+        return parent::model($className);
+
+    if(isset(self::$_models[$tableName.$className]))
+        return self::$_models[$tableName.$className];
+    else
+    {
+        $model=self::$_models[$tableName.$className]=new $className(null);
+        $model-&gt;tableName = $tableName;
+
+        $model-&gt;_md=new CActiveRecordMetaData($model);
+        $model-&gt;attachBehaviors($model-&gt;behaviors());
+
+        return $model;
+    }
+}
+</code></pre>
+
+<p>最关键的是添加下面这行代码：</p>
+
+<pre><code>public function getMetaData()
+{
+    if($this-&gt;_md!==null)
+        return $this-&gt;_md;
+    else
+        return $this-&gt;_md=static::model($this-&gt;tableName())-&gt;_md;
+}
+</code></pre>
+
+<p>现在配置完成。下面我们写一个调用的小例子。 下面是Model的function search()代码：</p>
+
+<pre><code>public function search()
+{
+    // Warning: Please modify the following code to remove attributes that
+    // should not be searched.
+
+    $criteria=new CDbCriteria;
+
+    $criteria-&gt;compare('id',$this-&gt;id,true);
+    $criteria-&gt;compare('goods_sn',$this-&gt;goods_sn,true);
+    $criteria-&gt;compare('language_ids',$this-&gt;language_ids,true);
+    $criteria-&gt;compare('site_ids',$this-&gt;site_ids,true);
+
+    return new CActiveDataProvider($this, array(
+        'criteria'=&gt;$criteria,
+    ));
+}
+</code></pre>
+
+<p>Controller文件代码如下：</p>
+
+<pre><code>public function actionAdmin()
+{
+    $model=new KindsGoods('search', 'es_goods');//es_goods表名
+    $model-&gt;unsetAttributes();  // clear any default values
+    if(isset($_GET['KindsGoods']))
+        $model-&gt;attributes=$_GET['KindsGoods'];
+
+    $this-&gt;render('admin',array(
+        'model'=&gt;$model,
+    ));
+}
+</code></pre>
+
+<p>这个时候输出的结果如果是es_goods表的数据，那就说明你成功了。   参考文章：<a href="http://stackoverflow.com/questions/16399561/yii-one-model-for-multiple-tables">http://stackoverflow.com/questions/16399561/yii-one-model-for-multiple-tables</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/PHP-Yii-huo-qu-shu-ju-ku-suo-you-biao-ming.html">PHP Yii 获取数据库所有表名</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年08月02日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>再次感叹Google和English的强大，所以以后找问题一定要在Google加英语的关键词。 MySQL获取所有的表名很简单，就一行代码如下：</p>
+
+<pre><code>SHOW TABLES
+</code></pre>
+
+<p>Yii获取所有的表名，代码如下：</p>
+
+<pre><code>foreach(Yii::app()-&gt;db-&gt;schema-&gt;getTables() as $name=&gt;$table)
+{
+	echo $table-&gt;name;
+}
+</code></pre>
+
+<p>  参考文章： <a href="http://blog.sjzycxx.cn/post/328/">http://blog.sjzycxx.cn/post/328/</a> <a href="http://www.farifam.com/site/content/365-Show+All+Table+Database+In+Yii+Framework.html">http://www.farifam.com/site/content/365-Show+All+Table+Database+In+Yii+Framework.html</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Yii-zhong-CDetailView-zhong-de-HTML-zhuan-yi-wen-ti.html">Yii中CDetailView中的HTML转义问题</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年07月30日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><?php $this->widget(&#8216;zii.widgets.CDetailView&#8217;, array(
+        &#8216;data&#8217;=>$model,
+        &#8216;attributes&#8217;=>array(
+            &#8216;about&#8217;,
+            array(
+                &#8216;name&#8217;=>t(&#8216;about&#8217;, &#8216;model&#8217;),
+                &#8216;type&#8217;=>&#8217;ntext&#8217;,
+                &#8216;value&#8217;=>$model->about,
+            ),
+        ),
+    )); ?>
+
+<p>我这里只是显示textarea里面的&lt;/br&gt;标签。 所以type选的是ntext。   参考资料： <a href="http://www.yiichina.com/api/CDetailView#attributes-detail">http://www.yiichina.com/api/CDetailView#attributes-detail</a> <a href="http://www.yiichina.com/api/CFormatter">http://www.yiichina.com/api/CFormatter</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Yii-Ajax-biao-dan-yan-zheng.html">Yii Ajax 表单验证</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年07月30日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>先在Views页面的表单开启这个功能：</p>
+
+<pre><code>&lt;?php $form=$this-&gt;beginWidget('CActiveForm', array(
+    'id'=&gt;'signup-form',
+    'enableAjaxValidation' =&gt; true,//开启Ajax验证
+    'enableClientValidation'=&gt;true,
+    'clientOptions'=&gt;array(
+        'validateOnSubmit'=&gt;true,
+    ),
+)); ?&gt;
+
+...
+
+&lt;?php $this-&gt;endWidget(); ?&gt;
+</code></pre>
+
+<p>然后再对应的Controller的action中加入代码：</p>
+
+<pre><code>//注册
+public function actionSignup()
+{   
+    $model = new LoginForm('signup');
+    // 开启Ajax验证
+    if(isset($_POST['ajax']) &amp;&amp; $_POST['ajax']==='signup-form')
+    {
+        echo CActiveForm::validate($model);
+        Yii::app()-&gt;end();
+    }
+    if (isset($_POST['LoginForm'])) {
+        $model-&gt;attributes=$_POST['LoginForm'];
+        if($model-&gt;validate()){
+            if($model-&gt;signup()){ 
+               $this-&gt;redirect(array('login'));
+            }
+        }
+    }
+
+    $this-&gt;render('signup', array('model'=&gt;$model));
+}
+</code></pre>
+
+<p><strong>需要注意的是：表单的ID 名字 要跟控制器中的一样。（此处我的是<code>signup-form</code>）</strong> ==============补充 2014年01月12日============= 如果想让 ajax 的字段唯一，只需要在 Model 文件的 Rules 方法里面加上下面这行就可以了：</p>
+
+<pre><code>array('name', 'unique'),
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Yii-Select-xia-la-cai-dan.html">Yii Select下拉菜单</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年07月30日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yii给下拉菜单一个添加一条数据： 一、不需要默认值</p>
+
+<pre><code>&lt;?php echo $form-&gt;dropdownlist(
+                    $model,
+                    'parent_id',
+                    CHtml::listData(Cat::model()-&gt;findAll(), 'id', 'name'),
+                    array('prompt'=&gt;'根目录')
+); ?&gt;
+</code></pre>
+
+<p>‘prompt’可以换成’empty’ 结果是：</p>
+
+<pre><code>&lt;select name="Cat[parent_id]" id="cat_parent_id"&gt;
+    &lt;option value=""&gt;根目录&lt;/option&gt;
+    &lt;option value="1"&gt;手机&lt;/option&gt;
+    &lt;option value="2"&gt;婚纱&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+<p>  二、如果自己的添加的一个Option需要给定Value的话，只能用‘empty’来实现，示例如下：</p>
+
+<pre><code>&lt;?php echo $form-&gt;dropdownlist(
+                    $model,
+                    'parent_id',
+                    CHtml::listData(Cat::model()-&gt;findAll(), 'id', 'name'),
+                    array('empty'=&gt;array('10'=&gt;'根目录'))
+); ?&gt;
+</code></pre>
+
+<p>结果是：</p>
+
+<pre><code>&lt;select name="Cat[parent_id]" id="cat_parent_id"&gt;
+    &lt;option value="10"&gt;根目录&lt;/option&gt;
+    &lt;option value="1"&gt;手机&lt;/option&gt;
+    &lt;option value="2"&gt;婚纱&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+<p>  参考资料： <a href="http://www.yiichina.com/api/CHtml#activeDropDownList-detail">http://www.yiichina.com/api/CHtml#activeDropDownList-detail</a> <a href="http://stackoverflow.com/questions/16057637/yii-dropdown-list-empty-value-as-default">http://stackoverflow.com/questions/16057637/yii-dropdown-list-empty-value-as-default</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/PHP-MySQL-Yii-geng-xin-shu-ju-ku-shi-zi-duan-zhi-zi-zeng.html">PHP MySQL Yii更新数据库时 字段值自增</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年07月30日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>PHP MySQL的实现方法是：</p>
+
+<pre><code>update tablename set fieldname = fieldname*2 where ...
+</code></pre>
+
+<p>Yii基本上有三种实现方法： 一、用save()方法。</p>
+
+<pre><code>//登录一次加5点
+$user=User::model()-&gt;findByPk(Yii::app()-&gt;user-&gt;id);
+$user-&gt;reputation=$user-&gt;reputation+'5';
+$user-&gt;save(); // 将更改保存到数据库
+</code></pre>
+
+<p>二、用saveCounters方法。（要实现自减，只需把数值改成负数即可）</p>
+
+<pre><code>$postRecord=User::model()-&gt;findByPk(Yii::app()-&gt;user-&gt;id);
+$postRecord-&gt;saveCounters(array('reputation'=&gt;5));
+</code></pre>
+
+<p>三、用updateCounters？这个还没有成功，报错貌似是编码问题，待解。   参考资料：<a href="http://www.yiiframework.com/wiki/282/using-counters-with-activerecord/">http://www.yiiframework.com/wiki/282/using-counters-with-activerecord/</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Yii-biao-tian-jia-zi-duan-hou-shu-ju-geng-xin-bu-cheng-gong.html">Yii 表添加字段后数据更新不成功</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年07月28日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>情况是这样的，我开始已经用Gii生成了Model文件了，后来又手动添加一个字段，这个字段是info，TEXT类型，不是必填项。 刚开始我是直接在已经生成的Model文件里的rules最后一行代码添加info的，添加之后的代码如下：</p>
+
+<pre><code>public function rules()
+{
+	// NOTE: you should only define rules for those attributes that
+	// will receive user inputs.
+	return array(
+		array('email', 'required'),
+		array('email', 'length', 'max'=&gt;255),
+		array('name', 'length', 'max'=&gt;25),
+		array('password', 'length', 'max'=&gt;100),
+		// The following rule is used by search().
+		// Please remove those attributes that should not be searched.
+		array('id, email, name, password, info', 'safe', 'on'=&gt;'search'),
+	);
+}
+</code></pre>
+
+<p>后来调试了半天，数据就是添加不进去数据库，在Controller的actionUpade时打印数据$_POST[‘User’]，能获取到更新后的数据，但是就是添加不了数据库。 最后Google和调试了几次，发现可能是我的info字段没有设置验证规则，虽然不是必填项。后来就试着添加了下面这行代码：</p>
+
+<pre><code>array('info','type','type'=&gt;'string'),
+</code></pre>
+
+<p>感觉上面这行代码挺别扭的，但是最后结果是成功更新数据到数据库了，事实证明就是这个字段的验证有问题。 后来我又发现了这个rules的safe貌似只是针对search场景的，而我需要的更新数据。 于是代码改成下面这样的了：</p>
+
+<pre><code>public function rules()
+{
+	// NOTE: you should only define rules for those attributes that
+	// will receive user inputs.
+	return array(
+		array('email', 'required'),
+		array('email', 'length', 'max'=&gt;255),
+		array('name', 'length', 'max'=&gt;25),
+		array('password', 'length', 'max'=&gt;100),
+		array('info', 'safe'),
+		// The following rule is used by search().
+		// Please remove those attributes that should not be searched.
+		array('id, email, name, password', 'safe', 'on'=&gt;'search'),
+	);
+}
+</code></pre>
+
+<p>测试一下，果然成功了。 最后为了进一步确认一下，我去Gii又生成一个这个表的Model，只是预览一下代码，不生成。对比rules，果然就是改这里。早知道直接用这个方法了。 <strong>最后总结一下</strong>，yii的表每个字段在rules都要有个验证规则，如果没有验证规则，那就必须要写一个safe。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Ubuntu-an-zhuang-PHP-Mongo-kuo-zhan.html">Ubuntu安装PHP Mongo扩展</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年07月26日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>如果你没有安装PHP的PECL，就先在终端执行下面命令：</p>
+
+<pre><code>sudo apt-get install php5-dev php5-cli php-pear
+</code></pre>
+
+<p>然后安装命令：</p>
+
+<pre><code>sudo pecl install mongo
+</code></pre>
+
+<p>找到你的php.ini配置文件，打开（下面是我系统的php.ini文件路径，你需要找到你的配置文件）：</p>
+
+<pre><code>vim /etc/php5/fpm/php.ini
+</code></pre>
+
+<p>手动添加下面这行代码：</p>
+
+<pre><code>extension=mongo.so
+</code></pre>
+
+<p>重启一下PHP：</p>
+
+<pre><code>sudo service php5-fpm restart
+</code></pre>
+
+<p>然后查看你的info.php文件（查看PHP配置文件），如果你能搜索到“mongo”，那就说明你安装成功了。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/jie-jue-Nginx-wu-fa-shi-bie-PHP-wen-ti.html">解决Nginx无法识别PHP问题</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年07月23日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这两天很蛋疼的在Linux下面配置LNMP环境。参考了比较多的资料，但是发现一个问题，就是安装好环境之后，Nginx无法识别PHP文件，HTML文件是没有问题的。</p>
+
+<p>还要解决配置多个虚拟目录的问题。</p>
+
+<p>后来就各种Google找资料，按照<a href="http://www.markdream.com/server/nginx-config-null-host.shtml">这篇文章</a>的方法配置，还算比较成功。</p>
+
+<p>这个可以成功的配置虚拟目录，但是还是无法识别PHP。</p>
+
+<p>后来找到<a href="http://ilovers.sinaapp.com/drupal/node/10">这篇文章</a>，其中提到：Nginx 本身并没有PHP 解释器，所以，需要借助于 PHP 提供的 fastcgi，所以，需要运行 PHP 的 php-cgi 进程；</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">php-cgi -b 127.0.0.1:9000 # cmd 中运行 php-cgi，监听本地地址，9000端口；</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>我是比较头晕不知道自己是否安装了这个，但是发现自己Nginx配置目录下还是有fastcgi文件的。 <strong>我的9000端口法无监听？</strong>试了一下这个方法，无效。 其实这个地方监听是什么，你需要去看<code>/etc/php5/fpm/pool.d/www.conf</code>配置文件写的是什么，这个写成一致即可。 后来把：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">location ~ \.php($|/) {
+</span><span class="line">    set  $script     $uri;
+</span><span class="line">    set  $path_info  "";
+</span><span class="line">    if ($uri ~ "^(.+\.php)(/.+)") {
+</span><span class="line">      set  $script     $1;
+</span><span class="line">      set  $path_info  $2;
+</span><span class="line">    }
+</span><span class="line">    fastcgi_pass   127.0.0.1:9000;
+</span><span class="line">    include        fastcgi_params;
+</span><span class="line">    fastcgi_param  PATH_INFO                $path_info;
+</span><span class="line">    fastcgi_param  SCRIPT_FILENAME          /usr/local/vhost/demo$script;
+</span><span class="line">    fastcgi_param  SCRIPT_NAME              $script;
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>改成为：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">location ~ \.php$ {
+</span><span class="line">    root   /usr/local/vhost/demo;
+</span><span class="line">    fastcgi_pass unix:/var/run/php5-fpm.sock;
+</span><span class="line">    fastcgi_index  index.php;
+</span><span class="line">    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+</span><span class="line">    include        fastcgi_params;
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>然后重启Nginx服务，访问你设置的server_name ，成功</p>
+
+<p>补充一些参考文章：</p>
+
+<ul>
+  <li><a href="http://www.laruence.com/2009/07/28/1030.html">Linux上配置Nginx+PHP5(FastCGI)</a></li>
+  <li><a href="http://blog.sina.com.cn/s/blog_6a0b2afd01014acf.html">ubuntu 12.10 默认安装php5-fpm无监听9000端口，nginx无法链接php5-fpm修正</a></li>
+  <li><a href="http://ordinary-linux-user.blogspot.com/2013/04/installing-nginx-and-php-on-linux-mint.html">Installing Nginx and PHP on Linux Mint 13</a></li>
+  <li><a href="https://www.digitalocean.com/community/articles/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-12-04">How to Install Linux, nginx, MySQL, PHP (LEMP) stack on Ubuntu 12.04</a></li>
+</ul>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/yong-jQuery-shi-xian-dang-qian-ye-mian-gei-cai-dan-dao-hang-yi-ge-te-ding-yang-shi.html">用jQuery实现当前页面给菜单导航一个特定样式</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年07月22日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>以前一直困惑我的一个问题就是：怎么实现给当前页面导航菜单一个样式？</p>
+
+<p>最最开始的时候用的是最笨的方法，就是每个导航页面都写得不一样。比方说index.html页面的时候，会在index导航的a标签一个.active样式，然后第二个Posts.html页面的时候会在Posts导航的a标签一个.active样式。这个虽然效果实现了，但是有个很大的缺点 - 导航不能调用一个，每个页面的导航写法不一样。</p>
+
+<p>后来发现可以用PHP的GET变量来实现这个效果。这个效果比上一个好，可以调用同一个导航文件，但是现在想想，这个方法会让导航这个文件代码变得臃肿，每个a标签都要写个if语句判断语句。然后根据GET获得的变量来判断是否显示.active这个样式。</p>
+
+<p>今天无意中看了下一个<a href="http://usman.it/themes/charisma/">开源的后台模板</a>。下载下来发现他这个是纯HTML也实现了这个功能，然后查看源代码，在<a href="http://usman.it/themes/charisma/js/charisma.js">charisma.js</a>文件发现了下面这个关键的代码：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="c1">//highlight current / active link</span>
+</span><span class="line"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;ul.main-menu li a&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">	<span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">))[</span><span class="mi">0</span><span class="p">].</span><span class="nx">href</span><span class="o">==</span><span class="nb">String</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">))</span>
+</span><span class="line">		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">);</span>
+</span><span class="line"><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>然后根据这个，自己写了个Demo，果然实现了。这下省了不少代码，也解决了一个我一直以来比较困惑的问题，看来还是得多看看别人的代码，学习。</p>
+
+<p><a href="http://pan.baidu.com/share/link?shareid=1247541698&amp;uk=2684558169">Demo下载</a>。</p>
+
+<hr />
+
+<p>其实这样也有效果：</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;ul.nav li a&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">href</span> <span class="o">==</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">parent</span><span class="p">().</span><span class="nx">addClass</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>## Comments</p>
+
+<p><strong><a href="#154" title="2013-07-22 21:58:00">风逐蓝天</a>:</strong> Good. 学习了.</p>
+
+<p><strong><a href="#155" title="2013-07-25 16:08:00">风逐蓝天</a>:</strong> $($(this))[0].href 这个是什么意思？ 为什么不能是 $(this)[0].href ？</p>
+
+<p><strong><a href="#156" title="2013-07-25 16:22:00">ForEcho</a>:</strong> 这个问题我也想过，但是没搞清楚，毕竟不是专业的前端。但是我试过$(this)[0].href，结果就是行不通。你可以试着alert($(this)[0].href) 查看结果。</p>
+
+<p><strong><a href="#191" title="2013-11-12 17:55:00">gao</a>:</strong> 优化后:</p>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.nav li a&quot;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">    <span class="nx">$this</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span><span class="line">    <span class="k">if</span><span class="p">(</span><span class="nx">$this</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">href</span><span class="o">==</span><span class="nb">String</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">)){</span>
+</span><span class="line">        <span class="nx">$this</span><span class="p">.</span><span class="nx">parent</span><span class="p">().</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;current&quot;</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p><strong><a href="#192" title="2013-11-12 18:29:00">ForEcho</a>:</strong> Thx 这样写更美观了</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/24">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/22">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

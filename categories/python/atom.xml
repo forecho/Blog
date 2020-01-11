@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Python | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/python/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[安装 Python Pip]]></title>
+    <link href="https://blog.forecho.com/install-pip.html"/>
+    <updated>2014-11-18T12:05:23+00:00</updated>
+    <id>https://blog.forecho.com/install-pip</id>
+    <content type="html"><![CDATA[<h2 id="windows-">Windows 安装</h2>
+
+<ol>
+  <li>先下载 <a href="https://raw.github.com/pypa/pip/master/contrib/get-pip.py">get-pip.py</a></li>
+  <li>再运行<code>python get-pip.py</code>执行安装程序</li>
+  <li>添加环境变量到计算机，例如：<code>C:\Python27\Scripts</code></li>
+</ol>
+
+<h2 id="ubuntu">Ubuntu安装</h2>
+<ol>
+  <li>在终端运行<code>sudo apt-get install python-pip</code></li>
+</ol>
+
+<h2 id="asciii">解决asciii码错误</h2>
+<!--more-->
+<p>这个问题是由环境默认编码导致的。</p>
+
+<p><strong>Windows的解决办法是：</strong>
+在 <code>C:Python27\Lib\site-packages</code> 建一个文件 sitecustomize.py，输入以下内容，Python 会自动运行这个文件。</p>
+
+<p><code>python
+import sys
+sys.setdefaultencoding('gb2312')
+</code>
+<strong>Ubuntu的解决办法是</strong>
+在终端输入以下命令：</p>
+
+<p><code>sh
+echo $LANG
+export LANG=zh_CN.GBK
+echo $LANG
+</code></p>
+
+<h2 id="section">参考链接</h2>
+
+<ol>
+  <li><a href="http://stackoverflow.com/questions/4750806/how-to-install-pip-on-windows">How to install pip on Windows?</a></li>
+  <li><a href="http://www.v2ex.com/t/90659">请教一个pip install 出现报asciii码错误的问题。</a></li>
+</ol>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Css | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/css/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[解决iPhone/iPad 按钮样式问题]]></title>
+    <link href="https://blog.forecho.com/jie-jue-iPhone-iPad-an-niu-yang-shi-wen-ti.html"/>
+    <updated>2014-03-06T10:07:00+00:00</updated>
+    <id>https://blog.forecho.com/jie-jue-iPhone-iPad-an-niu-yang-shi-wen-ti</id>
+    <content type="html"><![CDATA[<p>你要的左边的按钮的样式，在Android上面显示是 OK 的，但是不知道为什么，iPad 和 iPhone 上面显示却是右边的按钮样式，很难看。 <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162256.png" alt="" /> 解决办法就是添加下面的代码：</p>
+
+<p><code>css
+-webkit-appearance: none;
+</code></p>
+
+<p>或者是：</p>
+
+<p><code>css
+input[type="button"], input[type="submit"], input[type="reset"] {
+    -webkit-appearance: none;
+}
+</code></p>
+
+<p>参考链接：</p>
+
+<p><a href="http://stackoverflow.com/questions/5438567/css-submit-button-weird-rendering-on-ipad-iphone">CSS submit button weird rendering on iPad/iPhone</a></p>
+
+<p><a href="http://stackoverflow.com/questions/11378380/css-input-button-on-iphone">CSS input button on iPhone</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[谈谈登陆页面Div上下左右居中的事]]></title>
+    <link href="https://blog.forecho.com/tan-tan-deng-lu-ye-mian-Div-shang-xia-zuo-you-ju-zhong-de-shi.html"/>
+    <updated>2012-03-02T15:25:00+00:00</updated>
+    <id>https://blog.forecho.com/tan-tan-deng-lu-ye-mian-Div-shang-xia-zuo-you-ju-zhong-de-shi</id>
+    <content type="html"><![CDATA[<p>最主要的CSS样式</p>
+
+<p><code>css
+.login{
+    width:631px;
+    height:314px;
+    margin-top:-157px;
+    margin-left:-316px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    background:url(images/mod.gif);
+}
+</code></p>
+
+<p>使用 <strong>绝对定位 </strong> 然后margin-top选取div height的一半值 margin-left 选取div width的一半值  </p>
+
+<p>其他方法参考<a href="http://demo.tutorialzine.com/2010/03/centering-div-vertically-and-horizontally/demo.html">这里~</a></p>
+]]></content>
+  </entry>
+  
+</feed>

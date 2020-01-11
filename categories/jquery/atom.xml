@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Jquery | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/jquery/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[表单多radio jQuery 不为空验证]]></title>
+    <link href="https://blog.forecho.com/biao-dan-duo-radio-jQuery-bu-wei-kong-yan-zheng.html"/>
+    <updated>2014-01-24T14:02:00+00:00</updated>
+    <id>https://blog.forecho.com/biao-dan-duo-radio-jQuery-bu-wei-kong-yan-zheng</id>
+    <content type="html"><![CDATA[<p>一、如果表单是 POST 或者 GET 提交的话，可以直接这样写 jQuery：</p>
+
+<pre><code>$("form").submit(function() {
+    var submitme = true;
+    $(':radio').each(function() { // loop through each radio button
+        nam = $(this).attr('name'); // get the name of its set
+        if (submitme &amp;&amp; !$(':radio[name="'+nam+'"]:checked').length) {
+        // see if any button in the set is checked
+            alert(nam+' group not checked');
+            submitme = false;
+        }
+    });
+    return submitme; // cancel the form submit
+});
+</code></pre>
+
+<p>二、如果表单用的 Ajax 提交的话，我们还需要修改一下：</p>
+
+<ol>
+  <li>
+    <p>把提交按钮 type 由 submit 改成 button 类型，然后加一个 id=”submit ”。</p>
+  </li>
+  <li>
+    <p>jQuery 代码如下：</p>
+
+    <p>$(“#button”).click(function(){
+     var submitme = true;
+     $(‘:radio’).each(function() {
+         nam = $(this).attr(‘name’);
+         if (submitme &amp;&amp; !$(‘:radio[name=”‘+nam+’”]:checked’).length) {
+             alert(nam+’ group not checked’);
+             submitme = false;
+         }
+     });</p>
+
+    <pre><code> if (submitme) {
+     // 防止重复提交
+     $(this).attr({
+         disabled: 'disabled',
+         value: '正在提交...'
+     });
+     $.post("/admin/saveUserData",$("#user-form").serialize(),function(data){
+         #do something
+         ....
+     });
+ };  })
+</code></pre>
+  </li>
+</ol>
+
+<p>参考文章：<a href="http://stackoverflow.com/questions/10706925/jquery-ensuring-all-radio-groups-are-checked">http://stackoverflow.com/questions/10706925/jquery-ensuring-all-radio-groups-are-checked</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery Ajax 点击修改]]></title>
+    <link href="https://blog.forecho.com/jQuery-Ajax-dian-ji-xiu-gai.html"/>
+    <updated>2014-01-23T16:20:00+00:00</updated>
+    <id>https://blog.forecho.com/jQuery-Ajax-dian-ji-xiu-gai</id>
+    <content type="html"><![CDATA[<p>先来一张效果图： <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160945.png" alt="" /> view HTML页面代码如下：</p>
+
+<pre><code>&lt;td align="center" onclick="changeLike(&lt;?php echo $id ?&gt;,'&lt;?php echo $like_count; ?&gt;',this)"&gt;
+    &lt;?php echo $value['like']; ?&gt;
+&lt;/td&gt;
+</code></pre>
+
+<p>JavaScript代码如下：</p>
+
+<pre><code>function changeLike (id, like, obj) {
+    $(obj).html('&lt;input type="num" name="" size="5" value="'+like+'"&gt;');
+    $(obj).find('input').focus();
+    // 键盘Enter键提交
+    $(obj).find('input').keydown(function(event) {
+        if(event.which==13){
+            $(obj).find('input').blur();
+        }
+    });
+    // 更新数据
+    $(obj).find('input').blur(function(event) {
+        $(obj).html(this.value);
+        $.get('/admin/ajaxLike/'+id+'/'+this.value, function(data) {
+            like = data;
+        });
+    });
+}
+</code></pre>
+
+<p>至于控制器代码就很简单了，用获取到的参数，更新记录，返回新纪录。下面是我用CakePHP写的action，请结合自身情况写代码：</p>
+
+<pre><code>public function ajaxLike($id, $like)
+{
+    $this-&gt;layout = 'ajax';
+    $this-&gt;Article-&gt;id = $id;
+    $this-&gt;Article-&gt;saveField('like', $like);
+    exit($like);
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用jQuery实现当前页面给菜单导航一个特定样式]]></title>
+    <link href="https://blog.forecho.com/yong-jQuery-shi-xian-dang-qian-ye-mian-gei-cai-dan-dao-hang-yi-ge-te-ding-yang-shi.html"/>
+    <updated>2013-07-22T17:50:00+00:00</updated>
+    <id>https://blog.forecho.com/yong-jQuery-shi-xian-dang-qian-ye-mian-gei-cai-dan-dao-hang-yi-ge-te-ding-yang-shi</id>
+    <content type="html"><![CDATA[<p>以前一直困惑我的一个问题就是：怎么实现给当前页面导航菜单一个样式？</p>
+
+<p>最最开始的时候用的是最笨的方法，就是每个导航页面都写得不一样。比方说index.html页面的时候，会在index导航的a标签一个.active样式，然后第二个Posts.html页面的时候会在Posts导航的a标签一个.active样式。这个虽然效果实现了，但是有个很大的缺点 - 导航不能调用一个，每个页面的导航写法不一样。</p>
+
+<p>后来发现可以用PHP的GET变量来实现这个效果。这个效果比上一个好，可以调用同一个导航文件，但是现在想想，这个方法会让导航这个文件代码变得臃肿，每个a标签都要写个if语句判断语句。然后根据GET获得的变量来判断是否显示.active这个样式。</p>
+
+<p>今天无意中看了下一个<a href="http://usman.it/themes/charisma/">开源的后台模板</a>。下载下来发现他这个是纯HTML也实现了这个功能，然后查看源代码，在<a href="http://usman.it/themes/charisma/js/charisma.js">charisma.js</a>文件发现了下面这个关键的代码：</p>
+
+<p><code>javascript
+//highlight current / active link
+$('ul.main-menu li a').each(function(){
+	if($($(this))[0].href==String(window.location))
+		$(this).parent().addClass('active');
+});
+</code></p>
+
+<p>然后根据这个，自己写了个Demo，果然实现了。这下省了不少代码，也解决了一个我一直以来比较困惑的问题，看来还是得多看看别人的代码，学习。</p>
+
+<p><a href="http://pan.baidu.com/share/link?shareid=1247541698&amp;uk=2684558169">Demo下载</a>。</p>
+
+<hr />
+
+<p>其实这样也有效果：
+<code>javascript
+$('ul.nav li a').each(function(){
+    if ($(this)[0].href == window.location.href) {
+        $(this).parent().addClass('active');
+    }
+});
+</code>
+## Comments</p>
+
+<p><strong><a href="#154" title="2013-07-22 21:58:00">风逐蓝天</a>:</strong> Good. 学习了.</p>
+
+<p><strong><a href="#155" title="2013-07-25 16:08:00">风逐蓝天</a>:</strong> $($(this))[0].href 这个是什么意思？ 为什么不能是 $(this)[0].href ？</p>
+
+<p><strong><a href="#156" title="2013-07-25 16:22:00">ForEcho</a>:</strong> 这个问题我也想过，但是没搞清楚，毕竟不是专业的前端。但是我试过$(this)[0].href，结果就是行不通。你可以试着alert($(this)[0].href) 查看结果。</p>
+
+<p><strong><a href="#191" title="2013-11-12 17:55:00">gao</a>:</strong> 优化后:
+<code>javascript
+$(".nav li a").each(function(){
+    $this = $(this);
+    if($this[0].href==String(window.location)){
+        $this.parent().addClass("current");
+    }
+});
+</code>
+<strong><a href="#192" title="2013-11-12 18:29:00">ForEcho</a>:</strong> Thx 这样写更美观了</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用表单验证插件 Validform]]></title>
+    <link href="https://blog.forecho.com/shi-yong-biao-dan-yan-zheng-cha-jian-Validform.html"/>
+    <updated>2012-10-16T13:52:00+00:00</updated>
+    <id>https://blog.forecho.com/shi-yong-biao-dan-yan-zheng-cha-jian-Validform</id>
+    <content type="html"><![CDATA[<p><a href="http://validform.rjboy.cn/">官方网址</a> 先下载完整的示例文档。 调用如下两个文件（注意文件路径）：</p>
+
+<p><code>javascript
+&lt;script type="text/javascript" src="resources/scripts/jquery-1.6.2.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="resources/scripts/Validform_v5.1_min.js"&gt;&lt;/script&gt;
+</code></p>
+
+<p>然后添加javascript代码（此处我使用的是示例2）：</p>
+
+<p>&#8220;`javascript
+<script type="text/javascript">
+$(function(){
+    //$(".registerform").Validform();  //就这一行代码！;</script></p>
+
+<pre><code>$(".registerform").Validform({
+    tiptype:2
+}); }) &lt;/script&gt; ```
+</code></pre>
+
+<p>然后是表单的视图页面主要代码：</p>
+
+<p>&#8220;`html</p>
+<p>
+    <label>导航名称</label>
+    <input class="text-input small-input" type="text" id="small-input" name="name" datatype="s2-10" errormsg="昵称至少2个字符,最多10个字符！" />
+    <span class="Validform_checktip"></span>
+    <br />
+</p>
+<p>&#8220;`</p>
+
+<p><strong>form表单的class是”registerform”</strong>。即：</p>
+
+<p><code>html
+class="registerform"
+</code></p>
+
+<p>PS: 此处我表单的input与提示文字Validform_checktip 属于同一级标签，而官方给我们的是都有一个父级的td标签，所以我需要改官方的Validform_v5.1_min.js文件，找到下图代码 <img src="http://m1.img.libdd.com/farm4/2012/0914/10/6490CA006AB38112DE4FE6C76AD2177A5CAFE5189977_800_86.jpg" alt="" /> 修改如下：</p>
+
+<p><code>javascript
+if(type==2 &amp;&amp; o.obj){
+o.obj.next(".Validform_checktip").html(msg);
+    Validform.util.cssctl(o.obj.next(".Validform_checktip"),o.type);
+}
+</code></p>
+
+<p><strong>即：删掉两处的parent和find。</strong> 更多的说明文档，请参考<a href="http://validform.rjboy.cn/?cat=1">这里</a>。   样式的话，只需调用如下三个即可。</p>
+
+<p><code>css
+/* 表单 */
+.Validform_wrong {
+    color: red;
+    padding-left: 20px;
+    white-space: nowrap;
+    background: url(../images/error.png) no-repeat left center;
+}
+.Validform_right {
+    color: #71B83D;
+    padding-left: 20px;
+    background: url(../images/right.png) no-repeat left center;
+}
+.Validform_checktip {
+    margin-left: 8px;
+    line-height: 20px;
+    height: 20px;
+    overflow: hidden;
+    color: #999;
+    font-size: 12px;
+}
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery 二级联动]]></title>
+    <link href="https://blog.forecho.com/jQuery-er-ji-lian-dong.html"/>
+    <updated>2011-10-14T13:44:00+00:00</updated>
+    <id>https://blog.forecho.com/jQuery-er-ji-lian-dong</id>
+    <content type="html"><![CDATA[<p>公司JS做的一个效果，二级联动 获取第二个value的值。 下面是js代码。</p>
+
+<p><code>javascript
+&lt;script type="text/javascript" src="js/jquery-1.6.2.min.js"&gt;// &lt;![CDATA[
+&lt;script type="text/javascript"&gt;
+var currentShowCity=0;
+$(document).ready(function(){
+   $("#province").change(function(){
+       $("#content").text("");
+	   $("#province option").each(function(i,o){
+		   if($(this).attr("selected")){
+			   $(".city").hide();
+			   $(".city").eq(i).show();
+			   currentShowCity=i;
+			   $(".city:eq("+i+")").change(function(){
+			     $(".city:eq("+i+") option").each(function(i,o){
+				    if($(this).attr("selected")){
+					  $("#content").text($(this).text());
+                       $("#value").val($(this).val());
+					}
+				 })
+			   })
+		   }
+	   });
+   });
+   $("#province").change();
+});
+function getSelectValue(){
+	alert("1级="+$("#province").val());
+	$(".city").each(function(i,o){
+		 if(i == currentShowCity){
+			alert("2级="+$(".city").eq(i).val());
+		 }
+    });
+}
+// ]]&gt;&lt;/script&gt;
+</code></p>
+
+<p>下面是html代码。</p>
+
+<p><code>html
+&lt;select id="province"&gt;
+	&lt;option selected="selected"&gt;----请选择省份----&lt;/option&gt;
+	&lt;option&gt;北京&lt;/option&gt;
+	&lt;option&gt;上海&lt;/option&gt;
+	&lt;option&gt;江苏&lt;/option&gt;
+&lt;/select&gt;
+&lt;select class="city" style="display: inline-block;"&gt;
+	&lt;option&gt;----请选择----&lt;/option&gt;
+&lt;/select&gt;
+&lt;select class="city" style="display: none;"&gt;
+	&lt;option&gt;----请选择----&lt;/option&gt;
+	&lt;option value="20"&gt;预定流程&lt;/option&gt;
+	&lt;option value="21"&gt;预定演示&lt;/option&gt;
+	&lt;option value="22"&gt;服务时间&lt;/option&gt;
+	&lt;option value="23"&gt;注意事项&lt;/option&gt;
+&lt;/select&gt;
+&lt;select class="city" style="display: none;"&gt;
+	&lt;option&gt;----请选择----&lt;/option&gt;
+	&lt;option value="24"&gt;会员章程&lt;/option&gt;
+	&lt;option value="25"&gt;入会资格&lt;/option&gt;
+	&lt;option value="26"&gt;会员优惠&lt;/option&gt;
+	&lt;option value="27"&gt;会员申请&lt;/option&gt;
+&lt;/select&gt;
+&lt;select class="city" style="display: none;"&gt;
+	&lt;option&gt;----请选择----&lt;/option&gt;
+	&lt;option value="28"&gt;儿童座椅&lt;/option&gt;
+	&lt;option value="29"&gt;GPS&lt;/option&gt;
+	&lt;option value="30"&gt;送车上门&lt;/option&gt;
+	&lt;option value="31"&gt;异店还车&lt;/option&gt;
+&lt;/select&gt;
+&lt;input id="value" type="text" name="" value="" /&gt; &lt;input onclick="getSelectValue();" type="button" value="点我" /&gt;
+</code></p>
+
+<p>效果演示代码请猛击 <a href="http://www.nowhisky.com/demo/2liandong.html">这里~~~~</a></p>
+]]></content>
+  </entry>
+  
+</feed>

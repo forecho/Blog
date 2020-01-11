@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Yii | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/yii/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[为了 Yii 的长远发展]]></title>
+    <link href="https://blog.forecho.com/for-yii.html"/>
+    <updated>2019-04-17T13:58:22+00:00</updated>
+    <id>https://blog.forecho.com/for-yii</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#yii" id="markdown-toc-yii">初次接触 Yii</a></li>
+  <li><a href="#getyii" id="markdown-toc-getyii">GetYii</a></li>
+  <li><a href="#yii-" id="markdown-toc-yii-">Yii 小专栏</a></li>
+  <li><a href="#yii--1" id="markdown-toc-yii--1">Yii 槽点</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">最后</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">参考链接</a></li>
+</ul>
+
+<h2 id="section">引言</h2>
+
+<p>3月29号，Yii 官网更新了一篇文章 <a href="https://www.yiiframework.com/news/204/preparing-yii-for-the-long-run">Preparing Yii for the long run</a> ，简单来讲就是核心团队成员想通过捐赠的资金方式，使他们能够在主要工作都放在全职开发 Yii 上，只需要很少或根本没有其他工作。</p>
+
+<p>这篇文章主要是想呼吁正在使用 Yii 开发的你，如果觉得 Yii 框架在你工作中对你很有帮助，而且又有条件的话，那么不妨通过行动来支持一下 Yii 吧，不用太多，每个月1$就够了。捐赠地址 <a href="https://opencollective.com/yiisoft">https://opencollective.com/yiisoft</a>。</p>
+
+<p>好了，到此为止，本篇文章的核心内容算是写完了，下面我主要想聊聊自己与 Yii 的几个小故事，想听的可以往下看。</p>
+
+<!--more-->
+
+<h2 id="yii">初次接触 Yii</h2>
+
+<p>那个时候我刚大学毕业，新入职的公司就我一个 PHP 开发，工作的内容就是维护一个由外包公司开发的篇电商系统。</p>
+
+<p>那是我第一次接触 Yii，虽然它并不是我接触的第一个 PHP 框架，但看了很多天框架还是一脸懵逼。虽说 Yii 入门门槛比较高，但是好在当初加入的几个 Yii 群对我帮助很大，能感受到他们非常的有耐心和热情。特别是其中几个群友我们现在还保持着很好的关系，其中有 Simon 、callmez 、 亦清 、大裤衩子、Lonely……</p>
+
+<h2 id="getyii">GetYii</h2>
+
+<p>虽然我很喜欢使用 Yii 开发，但是也不能保证没次换工作公司也使用 Yii 开发。虽然是这样，只要一有机会我就会推荐公司使用 Yii。 Yii2 刚出来那会儿正好处于年底，工作不忙，于是我趁着那段时间用 Yii2 开发了一个社区 - <a href="https://github.com/iiyii/getyii">GetYii</a>，并且开源出去了。写论坛是为了快速学习 Yii2，开源是为了赚点名气，现在回头看看已经过去4年了，受限于当初技术能力和对 Yii 框架的熟悉有限，GetYii 现在看来有很多槽点，但是也有一些值得借鉴的地方。</p>
+
+<p>在『运营』 <a href="https://getyii.com/">GetYii</a> 社区的这段时间里，我算是明白了两件事情：</p>
+
+<ul>
+  <li>我不擅长运营，还是写代码简单的多。</li>
+  <li>社区的运营关键是人</li>
+</ul>
+
+<p>这个开源项目为我带来的收益：</p>
+
+<ul>
+  <li>认识了几个技术朋友</li>
+  <li>有3个公司找过我，或找我接外包，或招我入职。其中还有一个王总，我们都是 Yii 粉，聊得来，所以去年的时候我还跟他一起创业。</li>
+</ul>
+
+<h2 id="yii-">Yii 小专栏</h2>
+
+<p>这两年知识付费很火，也是我也跑去尝试了一把，开了一个小专栏 <a href="https://xiaozhuanlan.com/yiier">Yiier</a> ，本打算好好写点 Yii 教程的，写了几篇之后换了一份工作，跑去创业l ，天天加班，累成狗，于是就断更了，再后来好不容易不创业了，但是新公司用的 Laravel，到现在都快半年没怎么用 Yii 了，但是还是很怀念 Yii。</p>
+
+<p>小专栏一共收入没有几百块钱（提现的话，平台还要收取10%），但是我没履行之前的承诺，所以这个钱我一直没敢提现拿去花，曾想过退款给大家，但是网站好像不支持，但是今天正好看到 Yii 官方呼吁大家捐赠，我打算把这个钱减去提现的手续费全部拿去捐赠给 Yii 官方去，以 Yii fans 的名义，私自做这个决定，虽然也不是很妥，但是我没想到更好的方案了。</p>
+
+<p>至于小专栏后续打算，我目前想到的是打算陆陆续续把文章整理到自己的独立博客，免费开放给大家，后续如果还有机会使用 Yii2 的话我会再更新文章。</p>
+
+<h2 id="yii--1">Yii 槽点</h2>
+
+<p>Yii 作为一个非常好用的框架，得益于创始于 <a href="https://github.com/qiangxue">Qiang Xue</a> 的非常厉害的技术功底，他在开发 Yii2 的1年半里能做到每天没间断过的贡献代码，让我非常佩服（有兴趣的可以点这个<a href="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162151.png">链接</a>观看更直观）。自从他入职 capitalone 之后就把 Yii2 的维护工作交给社区的几个人了。</p>
+
+<p>Yii2 学会之后虽然开发网站非常快捷，但是由于视图耦合度非常高，如果你不想要默认的效果或者想开发比较复杂的效果，都是一件麻烦的事情。而且随着对 Web 开发交互的要求越来越高，前端技术的迅速崛起，越来越多的项目使用前后端分离架构来开发项目，Yii2 在这方面可以说已经落后了。</p>
+
+<p>由于 Yii 开源项目没有找到可持续的商业模式，核心维护者并不能把所有的精力放在开发 Yii2 上，所以说开发进度慢。对 Yii 现状的不满，于是有人就开始在官方论坛讨论关于 Yii 的未来，也有贡献者对 Yii 失望而转向 Laravel 的。</p>
+
+<p>要想一个开源软件得到可持续的发展，一定要找到可靠的商业模式。虽然我不怎么喜欢 Laravel，但是不可否认他能做到最活跃的 PHP 框架也是有原因。创始人全职开发，商业模式可靠，羡慕。好在现在 Yii 的核心开发者已经有意识到这些问题，以团队的名义开了一个捐赠的页面是行动的第一步。</p>
+
+<p>最后让我们一起期待 Yii3 早点发布吧。</p>
+
+<h2 id="section-1">最后</h2>
+
+<p>本篇文章主要是为了帮 Yii 拉赞助的，顺便回忆一下自己与 Yii 的故事。最后吐槽了一下 Yii 目前的状态以及对 Yii3 的期待。</p>
+
+<h2 id="section-2">参考链接</h2>
+
+<ul>
+  <li><a href="http://skynin.xyz/razrabotchikam/is-yii-dying/">IS YII DYING?</a></li>
+  <li><a href="https://forum.yiiframework.com/t/the-future-of-yii/124616">The future of Yii</a></li>
+  <li><a href="https://github.com/yii2tech/illuminate">yii2tech/illuminate</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Yii 非主键关联]]></title>
+    <link href="https://blog.forecho.com/Yii-fei-zhu-jian-guan-lian.html"/>
+    <updated>2014-01-24T13:53:00+00:00</updated>
+    <id>https://blog.forecho.com/Yii-fei-zhu-jian-guan-lian</id>
+    <content type="html"><![CDATA[<p><code>php
+function relations()
+    {
+        return array(
+            'last_experience' =&gt; array(
+                self::HAS_ONE,
+                'Experience',
+                '',
+                'on' =&gt; 'user_id=last_experience.user_id'
+            ),
+        );
+    }
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Yii扩展自带的时间选择器插件CJuiDatePicker]]></title>
+    <link href="https://blog.forecho.com/Yii-kuo-zhan-zi-dai-de-shi-jian-xuan-ze-qi-cha-jian-CJuiDatePicker.html"/>
+    <updated>2014-01-13T16:48:00+00:00</updated>
+    <id>https://blog.forecho.com/Yii-kuo-zhan-zi-dai-de-shi-jian-xuan-ze-qi-cha-jian-CJuiDatePicker</id>
+    <content type="html"><![CDATA[<p>事情大概是这样的：我数据库时间字段用的是 int 类型，存储的是时间戳。并且我写文章的时候，时间是需要可以修改的。</p>
+
+<p>来一张最终效果图： <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160820.png" alt="" /></p>
+
+<p>首先我用了 Yii 自带的 Zii CJuiDatePicker 扩展，非常的强大的把 jQuery UI 的 <a href="http://jqueryui.com/datepicker/">Datepicker</a> 继承进去了，使用非常的简单，手册上有。但是这个有个缺陷，没有小时分钟，只能配置日期。这个有点坑爹了。然后没办法，去找了一个 yii 的扩展。我选了 <a href="http://www.yiiframework.com/extension/ejuidatetimepicker/">ejuidatetimepicker</a>，使用也很简单，基本就按照给的 Demo复制过去就可以了。</p>
+
+<p>现在来说说这个功能的难点，首先我数据库是 int 时间戳格式的，但是我用的这个插件是日期格式的，那么现在我又不想改数据库时间的字段类型，我要如何解决？ Google 了一下，找到了一篇文章，我按照这个来结果成功了。</p>
+
+<p>首先根据插件的 Demo 我们在视图form的时间是这样写的：</p>
+
+<pre><code>&lt;?php echo $form-&gt;labelEx($model,'create_time'); ?&gt;
+    &lt;?php $this-&gt;widget('application.extensions.timepicker.EJuiDateTimePicker',array(
+        'model'=&gt;$model,
+        'attribute'=&gt;'create_time',
+        'language'=&gt;'zh-CN',
+        'options'=&gt;array(
+            'hourGrid' =&gt; 4,
+            'hourMin' =&gt; 9,
+            'hourMax' =&gt; 17,
+            'timeFormat' =&gt; 'hh:mm',
+            'changeMonth' =&gt; true,
+            'changeYear' =&gt; false,
+            ),
+        'htmlOptions'=&gt;array(
+            'readonly'=&gt;true,
+            'style'=&gt;'width:180px;'
+        ),
+    )); ?&gt;
+&lt;?php echo $form-&gt;error($model,'create_time'); ?&gt;
+</code></pre>
+
+<p>控制器部分我们基本上不用修改。接下来我们去修改 Model 文件，添加两个 yii 的 function：</p>
+
+<pre><code>protected function beforeSave()
+{
+    $this-&gt;admin_id = Yii::app()-&gt;user-&gt;id;
+    // $this-&gt;create_time = date('Y-m-d', CDateTimeParser::parse($this-&gt;create_time, 'yyyy-MM-dd hh:mm'));
+    $this-&gt;create_time = strtotime($this-&gt;create_time);
+    return parent::beforeSave();
+}
+
+protected function afterFind()
+{
+    $this-&gt;create_time = Yii::app()-&gt;dateFormatter-&gt;format('yyyy-MM-dd hh:mm', $this-&gt;create_time);
+    return parent::afterFind();
+}
+</code></pre>
+
+<p><code>beforeSave</code> 就是数据保存之前我们要处理的事件。<code>afterFind</code> 就是数据显示之前我们要处理的事件。 非常巧妙的用法。</p>
+
+<p>最后别忘记了把 Model 的 rules 的时间验证规则改一下，代码如下：</p>
+
+<pre><code>array('create_time', 'date', 'format'=&gt;'yyyy-MM-dd hh:mm', 'message'=&gt;'{attribute} have wrong format'),
+</code></pre>
+
+<p>**值得注意的是 rules 验证会在 beforeSave 之前执行。beforeSave 和 afterFind 都是 protected 属性。</p>
+
+<p>** 参考文章：**
+- <a href="http://www.yiiframework.com/extension/ejuidatetimepicker/">http://www.yiiframework.com/extension/ejuidatetimepicker/</a>
+- <a href="http://www.yiiframework.com/doc/api/1.1/CJuiDatePicker">http://www.yiiframework.com/doc/api/1.1/CJuiDatePicker</a>
+- <a href="http://www.volkomenjuist.nl/blog/2013/02/24/yii-cjuidatepicker-dateformat/">http://www.volkomenjuist.nl/blog/2013/02/24/yii-cjuidatepicker-dateformat/ </a>  </p>
+
+<p>最后感叹下自带 zii 的方便强大，再分享一个资源： <a href="http://www.bsourcecode.com/yii-framework/yii-extensions/">http://www.bsourcecode.com/yii-framework/yii-extensions/</a></p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#206" title="2014-08-22 12:05:00">Jack Van</a>:</strong> 怎么只能从9点到16点</p>
+
+<p><strong><a href="#208" title="2014-10-19 15:41:00">ForEcho</a>:</strong> 代码上面有参数。自己可以设置，hourMin 和 hourMax</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Yii 调用KindEditor在线编辑器]]></title>
+    <link href="https://blog.forecho.com/yii-diao-yong-KindEditor-zai-xian-bian-ji-qi.html"/>
+    <updated>2012-09-28T15:33:00+00:00</updated>
+    <id>https://blog.forecho.com/yii-diao-yong-KindEditor-zai-xian-bian-ji-qi</id>
+    <content type="html"><![CDATA[<ol>
+  <li>先下载<a href="http://pan.baidu.com/share/link?shareid=8839&amp;uk=2684558169">这个</a>文件，然后解压，把editor 这个文件夹放在你项目的根目录里。</li>
+  <li>然后找_form.php这个文件，找到你的”content”（这里我的是名称是“news_content”），修改成如下代码：（被注释掉的是原来的代码，上面一行是新加上的。）</li>
+</ol>
+
+<p>&#8220;`php</p>
+<div class="row">
+    <?php echo $form->labelEx($model,&#8217;news_content&#8217;); ?>
+    <?php echo $form->textArea($model,&#8217;news_content&#8217;,array(&#8216;style&#8217;=>&#8217;width:90%; height:500px&#8217;)); ?>
+    <?php // echo $form->textField($model,&#8217;news_content&#8217;,array(&#8216;size&#8217;=>60,&#8217;maxlength&#8217;=>8000)); ?>
+    <?php echo $form->error($model,&#8217;news_content&#8217;); ?>
+</div>
+<p>&#8220;`</p>
+
+<p>然后在_form.php这个文件开头，添加如下代码，调用编辑器样式。</p>
+
+<p><code>php
+&lt;?php
+    Yii::app()-&gt;clientScript-&gt;registerCssFile('./editor/themes/default/default.css');
+?&gt;
+</code></p>
+
+<p>最后在_form.php这个文件结尾处，添加如下代码，调用编辑器的js文件以及调用js</p>
+
+<p><code>javascript
+&lt;script charset="utf-8" src="./editor/kindeditor.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+    KindEditor.ready(function(K) {
+        editor = K.create('#News_news_content', {
+            allowFileManager: true,
+            resizeType: 1,
+            newlineTag: 'p',
+            //syncType: '',
+            // uploadJson: '&lt;?php echo $this-&gt;createUrl('news/upload') ?&gt;'
+        });
+    });
+&lt;/script&gt;
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[yii学习笔记（五）-修改新建Create页面]]></title>
+    <link href="https://blog.forecho.com/yii-xue-xi-bi-ji-wu-xiu-gai-xin-jian-Create-ye-mian.html"/>
+    <updated>2012-07-12T15:47:00+00:00</updated>
+    <id>https://blog.forecho.com/yii-xue-xi-bi-ji-wu-xiu-gai-xin-jian-Create-ye-mian</id>
+    <content type="html"><![CDATA[<p>我们可以用gii生成views里面的页面，很方便的，但是，并不是所有的东西都是我们所需要的，所以我们要学会修改代码，为我们所用。 <strong>改为下拉选项框</strong> 添加某个字段的时候，把手动输入的input表单改成下拉选项框。 首页，我们要在字段对应的表的m下写入一个方法。比方说我现在一个type_id字段对应的是news_type表。 那么我们在m文件夹中找到NewsType.php文件，在末尾加上这段代码：</p>
+
+<pre><code>// 获取type
+public function getNewsTypeList()
+{
+    $newsTypeList = NewsType::model()-&gt;findAll();
+    return CHtml::listData($newsTypeList,'id','news_type_name');
+
+    //下面是用来验证的代码
+    // $returnData = CHtml::listData($newsTypeList,'id','news_type_name');
+    // print_r($returnData);
+    // exit;
+}
+</code></pre>
+
+<p>然后我们找到Create所在的页面，这里是Admin/views/news/_form.php文件。 找到这段代码：</p>
+
+<pre><code>&lt;?php echo $form-&gt;textField($model,'type_id',array('size'=&gt;10,'maxlength'=&gt;10)); ?&gt;
+</code></pre>
+
+<p>修改为：</p>
+
+<pre><code>&lt;?php echo $form-&gt;dropDownList($model,'type_id',NewsType::model()-&gt;getNewsTypeList()); ?&gt;
+</code></pre>
+
+<p>刷新一下就会得到我们想要的下拉选项效果。 <strong>系统默认添加的信息</strong> 那么有些情况下，我们会遇到一个字段是由系统自动帮我们添加的，比方说，添加新闻的人，时间。 我们先把_form.php文件里字段相应的代码删掉。 然后去找这个表的m文件，这里是News.php文件 在末尾加上这段代码：</p>
+
+<pre><code>//自动添加新闻时间、状态
+protected function beforeSave()
+{
+    if (parent::beforeSave()) {
+        if ($this-&gt;isNewRecord) {
+
+        //如果是新的新闻
+
+            $this-&gt;create_time = date('Y-m-d H:i:s');
+            $this-&gt;create_user_id = Yii::app()-&gt;user-&gt;id;
+        }else {
+            $this-&gt;update_time = date('Y-m-d H:i:s');
+            $this-&gt;update_user_id = Yii::app()-&gt;user-&gt;id;
+        }
+            return true;
+        }else {
+            return false;
+    }
+
+}
+</code></pre>
+
+<p><strong>读取数据的时候转换</strong> 其实这个时候数据记录type_id字段的任然是数字，那么读取的时候我们还需要转换一下。 在读取页面的m对应的文件中修改代码，这里对应的是News.php文件 我们找到下面这段代码：</p>
+
+<pre><code>public function relations()
+{
+    // NOTE: you may need to adjust the relation name and the related
+    // class name for the relations automatically generated below.
+    return array();
+}
+</code></pre>
+
+<p>添加修改为：</p>
+
+<pre><code>public function relations()
+{
+    // NOTE: you may need to adjust the relation name and the related
+    // class name for the relations automatically generated below.
+    //表链接
+    return array(
+        'typeName'=&gt;array(self::BELONGS_TO,'NewsType','type_id'),
+        'statusName'=&gt;array(self::BELONGS_TO,'StatusType','status_id'),
+    );
+}
+</code></pre>
+
+<p>然后去找到要显示的页面，这里是Admin/views/news/_view.php 找到这段代码：</p>
+
+<pre><code>&lt;?php echo CHtml::encode($data-&gt;type_id); ?&gt;
+</code></pre>
+
+<p>修改为：</p>
+
+<pre><code>&lt;?php echo CHtml::encode($data-&gt;typeName-&gt;news_type_name); ?&gt;
+</code></pre>
+
+<p>statusName也是这样修改。</p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#111" title="2012-07-13 16:04:30">桂林老医</a>:</strong> :shock: 看不懂</p>
+]]></content>
+  </entry>
+  
+</feed>

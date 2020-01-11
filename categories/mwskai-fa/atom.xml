@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mws开发 | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/mwskai-fa/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[MWS 开发 - 产品上传篇]]></title>
+    <link href="https://blog.forecho.com/mws-product.html"/>
+    <updated>2019-08-08T14:58:22+00:00</updated>
+    <id>https://blog.forecho.com/mws-product</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">上传产品</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">思路</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">实现</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-4" id="markdown-toc-section-4">注意事项</a>    <ul>
+      <li><a href="#section-5" id="markdown-toc-section-5">编码问题</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">产品图片</a></li>
+      <li><a href="#upcean" id="markdown-toc-upcean">UPC/EAN</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">关于产品描述</a></li>
+      <li><a href="#sku-" id="markdown-toc-sku-">SKU 异常</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-8" id="markdown-toc-section-8">总结</a></li>
+  <li><a href="#section-9" id="markdown-toc-section-9">相关文章</a></li>
+</ul>
+
+<h2 id="section">引言</h2>
+
+<p>上次我们讲了 <a href="https://blog.forecho.com/mws-order.html">MWS 与订单相关的开发</a>，这次我们就来讲如何通过 MWS 接口上传产品。</p>
+
+<!--more-->
+
+<h2 id="section-1">上传产品</h2>
+
+<p>上传产品有几种方式，此处我们采用的是提交类型为 <a href="https://docs.developer.amazonservices.com/en_US/feeds/Feeds_FeedType.html"><code>_POST_FLAT_FILE_LISTINGS_DATA_</code></a> 的 Feed 方式来上传产品。因为这种方式兼容性比较强。</p>
+
+<h3 id="section-2">思路</h3>
+
+<p>思路就是先生成一个包含产品信息的 csv 文件，再去请求 MWS 接口。</p>
+
+<h3 id="section-3">实现</h3>
+
+<p><a href="https://blog.forecho.com/mws-order.html">《订单篇》</a>我有提到一个 MWS PHP 的库，但是再开发产品上传功能的时候，被这个库坑惨了，由于作者不维护了，即使提了 PR 也没人合并，所以我 Fork 了一份，自己直接改了代码，修复了 bug，欢迎你们使用我的这个库 <a href="https://github.com/forecho/amazon-mws">forecho/amazon-mws</a>。</p>
+
+<p><strong>安装库</strong></p>
+
+<p>使用方式，先修改你项目的 <code>composer.json</code> 文件，添加如下代码</p>
+
+<p><code>
+"require": {
+    // ...
+    "mcs/amazon-mws": "*",
+    // ...
+},
+"repositories": [
+    {
+        "name": "mcs/amazon-mws",
+        "type": "git",
+        "url": "git@github.com:forecho/amazon-mws.git"
+    }
+]
+</code></p>
+
+<p>然后再执行如下命令：</p>
+
+<p><code>
+composer require mcs/amazon-mws
+</code></p>
+
+<blockquote>
+  <p>如果在执行命令行的时候提示需要输入 <code>Token</code> 的话，解决办法就是去 GitHub 的 <a href="https://github.com/settings/tokens">Personal access tokens</a> 页面，点击 「Generate new token」 新建一个 Token，选择 <code>public_repo</code> ，然后就会得到一个 Token，然后去终端输入这个值就可以继续了。</p>
+</blockquote>
+
+<p>原来的库上传产品非常简单，更是没有提供 <code>_POST_FLAT_FILE_LISTINGS_DATA_</code> 的方式上传产品，我在这个 issue#30 - <a href="https://github.com/meertensm/amazon-mws/issues/30">Add Product Error</a> 的基础上加了此功能。</p>
+
+<p><strong>上传产品的伪代码</strong></p>
+
+<p>下面是我上传产品的伪代码，可以拿来参考：</p>
+
+<p>&#8220;`php
+&lt;?php
+public function uploadAmazon(string $productType, Product $product, int $productNode, $otherAttributes = []) 
+{
+    $client = new MCS\MWSClient([
+        ‘Marketplace_Id’ =&gt; ‘’,
+        ‘Seller_Id’ =&gt; ‘’,
+        ‘Access_Key_ID’ =&gt; ‘’,
+        ‘Secret_Access_Key’ =&gt; ‘’,
+        ‘MWSAuthToken’ =&gt; ‘’ // Optional. Only use this key if you are a third party user/developer
+    ]);
+    $amazonProducts = [];
+    $postItems = [];
+    $amazonProduct = new AmazonMarketPlaceProduct();
+    if ($product-&gt;productSku) {
+        $amazonProduct-&gt;setSku($product-&gt;parent_sku)
+            -&gt;setFeedProductType($productType)
+            -&gt;setBrand($product-&gt;brand)
+            -&gt;setTitle($product-&gt;title)
+            -&gt;setManufacturer($product-&gt;manufacturer)
+            -&gt;setRecommendedBrowseNodes($productNode)
+            -&gt;setParentChild(‘Parent’)
+            -&gt;setOtherAttributes(\app\core\helpers\ArrayHelper::clearValue($otherAttributes))
+            -&gt;setVariationTheme($product-&gt;variation_theme);
+        array_push($amazonProducts, $amazonProduct);
+        array_push($postItems, $amazonProduct-&gt;toArray(false));</p>
+
+<pre><code>    foreach ($product-&gt;productSku as $productSku) {
+        $retailPrice = $productSku-&gt;retail_price ?: 0;
+        $salePrice = $productSku-&gt;sale_price ?: 0;
+        $saleDate = $salePrice ? explode('~', $productSku-&gt;sale_date) : [];
+
+        $_amazonProduct = clone $amazonProduct;
+        $_amazonProduct-&gt;setSku($productSku-&gt;product_sku)
+            -&gt;setFeedProductType($productType)
+            -&gt;setBrand($product-&gt;brand)
+            -&gt;setTitle($product-&gt;title)
+            -&gt;setManufacturer($product-&gt;manufacturer)
+            -&gt;setPrice($retailPrice &gt; 0 ? CurrencyConverter::CNYConverter($currency, $retailPrice) : '')
+            -&gt;setSalePrice($salePrice &gt; 0 ? CurrencyConverter::CNYConverter($currency, $salePrice) : '')
+            -&gt;setProductId($amazonProductId)
+            -&gt;setSizeName($productSku-&gt;size ?: '')
+            -&gt;setColorName($productSku-&gt;color ?: '')
+            -&gt;setProductIdType('EAN')
+            -&gt;setCurrency($currency)
+            -&gt;setConditionType('New')
+            -&gt;setWeight($product-&gt;weight)
+            -&gt;setQuantity($product-&gt;quantity)
+            -&gt;setParentChild('Child')
+            -&gt;setParentSku($parentSku)
+            -&gt;setSaleFromDate(count($saleDate) == 2 ? $saleDate[0] : '')
+            -&gt;setSaleEndDate(count($saleDate) == 2 ? $saleDate[1] : '')
+            -&gt;setVariationTheme($product-&gt;variation_theme)
+            -&gt;setKeywords($product-&gt;search_keyword)
+            -&gt;setRecommendedBrowseNodes($productNode)
+            -&gt;setBulletPoint($features)
+            -&gt;setDescription($product-&gt;description)
+            -&gt;setOtherAttributes($otherAttributes)
+            -&gt;setImage($productSku-&gt;images);
+        array_push($amazonProducts, $_amazonProduct);
+        array_push($postItems, $_amazonProduct-&gt;toArray(false));
+    }
+} else {
+    $retailPrice = $product-&gt;price ?: 0;
+    $salePrice = $product-&gt;sale_price ?: 0;
+    $saleDate = $salePrice ? explode('~', $product-&gt;sale_date) : [];
+
+    $amazonProduct-&gt;setSku($parentSku)
+        -&gt;setFeedProductType($productType)
+        -&gt;setBrand($product-&gt;brand)
+        -&gt;setTitle($product-&gt;{$titleAttribute})
+        -&gt;setManufacturer($product-&gt;manufacturer)
+        -&gt;setPrice($retailPrice &gt; 0 ? CurrencyConverter::CNYConverter($currency, $retailPrice) : '')
+        -&gt;setSalePrice($salePrice &gt; 0 ? CurrencyConverter::CNYConverter($currency, $salePrice) : '')
+        -&gt;setProductId($amazonProductId)
+        -&gt;setProductIdType('EAN')
+        -&gt;setCurrency($currency)
+        -&gt;setConditionType('New')
+        -&gt;setWeight($product-&gt;weight)
+        -&gt;setQuantity($product-&gt;quantity)
+        -&gt;setSaleFromDate(count($saleDate) == 2 ? $saleDate[0] : '')
+        -&gt;setSaleEndDate(count($saleDate) == 2 ? $saleDate[1] : '')
+        -&gt;setKeywords($product-&gt;search_keyword)
+        -&gt;setRecommendedBrowseNodes($productNode)
+        -&gt;setBulletPoint($features)
+        -&gt;setDescription($product-&gt;description)
+        -&gt;setOtherAttributes($otherAttributes)
+        -&gt;setImage($product-&gt;images);
+    array_push($amazonProducts, $amazonProduct);
+    array_push($postItems, $amazonProduct-&gt;toArray(false));
+}
+
+// You can also submit an array of MWSProduct objects
+$feed = $client-&gt;postProduct(
+    $amazonProducts,
+    'fptcustomcustom',
+    '2019.0501',
+    'SE9NRV9MSUdIVElOR19BTkRfTEFNUFM='
+);
+Yii::info($postItems, $product-&gt;id . '上传产品数据');
+return $feed; } ```
+</code></pre>
+
+<p>上传产品是一个异步接口，提交成功会返回如下数据:</p>
+
+<p><code>php
+[
+  'FeedSubmissionId' =&gt; 'xxxxxxx', // 一串数字
+  'FeedType' =&gt; '_POST_FLAT_FILE_LISTINGS_DATA_',
+  'SubmittedDate' =&gt; '2019-08-08T10:15:29+00:00',
+  'FeedProcessingStatus' =&gt; '_SUBMITTED_',
+]
+</code></p>
+
+<p>要想获取结果，需要过两分钟之后再去请求另外一个接口，你可以用下面方法实现：</p>
+
+<p><code>php
+$client-&gt;GetFeedSubmissionResult($FeedSubmissionId);
+</code></p>
+
+<p>如果成功返回的信息是了类似这样的：</p>
+
+<p>&#8220;`
+Feed Processing Summary:
+	Number of records processed		2
+	Number of records successful		2</p>
+
+<p>&#8220;`</p>
+
+<p>如果失败就类似这样的：</p>
+
+<p>&#8220;`
+Feed Processing Summary:
+	Number of records processed		4
+	Number of records successful		3</p>
+
+<p>original-record-number	sku	error-code	error-type	error-message
+14	3uC000670-Random combination-Large<em>2+Sma	90118	Error	The item_sku field contains an invalid value: 3uC000670-Random combination-Large</em>2+Small*2. The value exceeds the maximum number of bytes allowed: 40.</p>
+
+<p>&#8220;`</p>
+
+<h2 id="section-4">注意事项</h2>
+
+<h3 id="section-5">编码问题</h3>
+
+<p>我最开始上传产品的时候，产品上传成功了，但是去亚马逊后台看，产品是乱码的，解决这个问题花了我几天时间。导致这个问题出现的原因就是编码问题。</p>
+
+<p><a href="https://github.com/meertensm/amazon-mws/blob/master/src/MWSClient.php#L1221">meertensm/amazon-mws</a> 提交接口的时候使用的是 <code>iso-8859-1</code> 编码，这意味着上传 CSV 文件的时候，要先把内容转成对应的格式。问题是<strong>并非所有的亚马逊站点都是用这个编码，日本就是用 <code>UTF-8</code> 编码的</strong>，所以之前上传产品到日本站点总算乱码。听说中国站点也是 <code>UTF-8</code> 编码，不过这已经不重要了，因为亚马逊这部分业务已经退出中国了。<strong>此问题我已经在 <a href="https://github.com/forecho/amazon-mws">forecho/amazon-mws</a> 解决</strong>，你可以不用关心此细节。</p>
+
+<p>另外一个需要注意的编码问题就是，在使用 <code>GetFeedSubmissionResult()</code> 方法获取刊登结果时候，日本站返回的数据是 <code>Shift-JIS</code> 的，这个需要你手动转一下：</p>
+
+<p><code>php
+if ($isJp) {
+    $string = mb_convert_encoding($string, 'UTF-8', 'Shift-JIS')
+}
+</code></p>
+
+<h3 id="section-6">产品图片</h3>
+
+<p>上传产品的时候图片我们是给的图片地址链接，如果图片放在国内，很容易出现亚马逊下载产品图片超时导致的刊登失败。所以我们要想办法把我们的图片存到海外，比方说使用阿里的 OSS。</p>
+
+<p>如果因为用了阿里 OSS 的海外 Bucket，导致我们在使用的时候上传图片很慢，可以了解一下这个<a href="https://yq.aliyun.com/articles/688039">《OSS全球传输加速开启公测，助力企业业务全地域覆盖》</a>。</p>
+
+<h3 id="upcean">UPC/EAN</h3>
+
+<p>这个可以通过购买生成器生成 UPC 和 EAN，也可以购买合法 UPC/EAN。生成器生成的容易导致上传产品失败，换一个重新上传产品即可。有时候发现你上传的产品出现别人的图片，不要慌，这个就是因为 UPC/EAN 跟别人重复导致的，换一个重新上传产品即可。</p>
+
+<h3 id="section-7">关于产品描述</h3>
+
+<p>产品描述除了不能大于 2000 字符串之外，还不能使用除了 <code>&lt;br&gt;</code>（换行） 和 <code>&lt;b&gt;&lt;/b&gt;</code>（加粗） 之外的 HTML 标签。</p>
+
+<h3 id="sku-">SKU 异常</h3>
+
+<p>出现上传产品失败，错误信息 SKU 异常的，如 8008 错误，这种情况一般也是因为 UPC/EAN 有问题导致的，我们可以把异常的 SKU 的 UPC/EAN 在 <a href="http://gepir.gs1.org/index.php/search-by-gtin">美国统一代码委员会网站
+</a> 查询，如果查询到有结果，说明你就不能使用此 UPC/EAN，换一个 UPC/EAN 重新上传即可。</p>
+
+<h2 id="section-8">总结</h2>
+
+<p>上传产品也是比较核心的功能，开发此功能比我开发同步订单花了更多时间，踩了不少坑，现在分享出来，让大家少走一点弯路。</p>
+
+<h2 id="section-9">相关文章</h2>
+
+<ul>
+  <li><a href="https://blog.forecho.com/mws-order.html">《MWS 开发 - 订单篇》</a></li>
+  <li><a href="https://blog.forecho.com/mws-product.html">《MWS 开发 - 产品上传篇》</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MWS 开发 - 订单篇]]></title>
+    <link href="https://blog.forecho.com/mws-order.html"/>
+    <updated>2019-07-08T14:58:22+00:00</updated>
+    <id>https://blog.forecho.com/mws-order</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#sdk" id="markdown-toc-sdk">SDK</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">订单相关的功能</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">同步订单</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">发货</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-4" id="markdown-toc-section-4">总结</a></li>
+  <li><a href="#section-5" id="markdown-toc-section-5">相关文章</a></li>
+</ul>
+
+<h2 id="section">引言</h2>
+
+<p>最近这几个月都在帮一个朋友在开发亚马逊 ERP 系统，使用了 <a href="http://docs.developer.amazonservices.com/en_US/dev_guide/index.html">MWS 接口</a>，自己一路摸索，花了不少时间和精力，现在想把这些经验记录分享出来，让大家少走一些弯路。</p>
+
+<p>这将是一系列文章，本篇主要讲与订单相关的接口。</p>
+
+<!--more-->
+
+<h2 id="sdk">SDK</h2>
+
+<p>MWS 的接口文档在<a href="http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_Overview.html">这里</a>（中文文档不是最新的）查看，但是官方给的 PHP SDK 非常的老了，而且每个功能模块还是分散的，于是我就去 Github 找到了 Star 最多的一个，即 <a href="https://github.com/meertensm/amazon-mws">meertensm/amazon-mws</a>，好用是好用，但是我使用之前没发现作者好像没维护了，有一些坑在里面。</p>
+
+<p>好在这些坑我都帮你踩过了，你接着往下看就可以了。</p>
+
+<h2 id="section-1">订单相关的功能</h2>
+
+<h3 id="section-2">同步订单</h3>
+
+<p><strong>订单列表</strong></p>
+
+<p>文档地址：<a href="http://docs.developer.amazonservices.com/zh_CN/orders/2013-09-01/Orders_ListOrders.html">ListOrders</a></p>
+
+<p><code>php
+$client = new MCS\MWSClient([
+    'Marketplace_Id' =&gt; '',
+    'Seller_Id' =&gt; '',
+    'Access_Key_ID' =&gt; '',
+    'Secret_Access_Key' =&gt; '',
+    'MWSAuthToken' =&gt; '' // Optional. Only use this key if you are a third party user/developer
+]);
+$fromDate = new DateTime('2016-01-01');
+$states = ['Unshipped','PartiallyShipped','Shipped','PendingAvailability','Pending','InvoiceUnconfirmed','Canceled','Unfulfillable'];
+$client-&gt;ListOrders($fromDate, false, $states);
+</code></p>
+
+<p>SDK 的 <a href="https://github.com/meertensm/amazon-mws/blob/master/src/MWSClient.php#L383">ListOrders()</a> 默认的 <code>states</code> 只有两个状态。</p>
+
+<p><strong>订单商品</strong></p>
+
+<p>要想获取订单里的商品信息要调用 <a href="https://github.com/meertensm/amazon-mws/blob/master/src/MWSClient.php#L493">ListOrderItems()</a></p>
+
+<p><strong>订单商品的属性和图片</strong></p>
+
+<p>要想获取订单商品里的属性和图片信息得调用 <a href="https://github.com/meertensm/amazon-mws/blob/master/src/MWSClient.php#L553">GetMatchingProductForId()</a>，商品属性目前应该只有 <code>Size</code> 和 <code>Color</code>。</p>
+
+<p>注意：如果接口返回 <code>Request is throttled</code>，那你就要考虑接口频率问题了，详情就得查看文档<a href="http://docs.developer.amazonservices.com/zh_CN/dev_guide/DG_Throttling.html">《限制：针对提交请求频率的限制》</a>了。</p>
+
+<h3 id="section-3">发货</h3>
+
+<p><strong>思路</strong></p>
+
+<p>发货是一个异步接口，流程就是先创建一个类型为 <code>_POST_ORDER_FULFILLMENT_DATA_</code> 的 <code>SubmitFeed</code>，获取到一个 <code>FeedSubmissionId</code>，然后稍候通过另外一个接口传 <code>FeedSubmissionId</code> 查询发货结果。</p>
+
+<p><strong>实践</strong></p>
+
+<p>坑的是前面提到的 <a href="https://github.com/meertensm/amazon-mws">meertensm/amazon-mws</a> 库作者没有实现发货方法，提了 PR 作者也没时间管了，所以我自己实现了。</p>
+
+<ul>
+  <li>先创建一个 <code>core/replace/MWSClient.php</code> 文件:</li>
+</ul>
+
+<p>&#8220;`php
+&lt;?php
+/**
+ * author     : forecho <a href="mailto:caizhenghai@gmail.com">caizhenghai@gmail.com</a>
+ * createTime : 2019/6/11 9:53 PM
+ * description:
+ */</p>
+
+<p>namespace app\core\helpers;</p>
+
+<p>use Exception;</p>
+
+<p>class MWSClient extends \MCS\MWSClient
+{
+    /**
+     * Sets the shipping status of an order
+     * @param array $data required data
+     * @return array feed submission result
+     * @throws Exception
+     */
+    public function setDeliveryState(array $data)
+    {
+        if (!isset($data[“shippingDate”])) {
+            $data[“shippingDate”] = date(“c”);
+        }</p>
+
+<pre><code>    if (!isset($data["carrierCode"]) &amp;&amp; !isset($data["carrierName"])) {
+        throw new Exception('Missing required carrier data');
+    }
+
+    $feed = [
+        'MessageType' =&gt; 'OrderFulfillment',
+        'Message' =&gt; [
+            'MessageID' =&gt; rand(),
+            "OrderFulfillment" =&gt; [
+                "AmazonOrderID" =&gt; $data["orderId"],
+                "FulfillmentDate" =&gt; $data["shippingDate"]
+            ]
+        ]
+    ];
+    $fulfillmentData = [];
+
+
+    if (isset($data["carrierCode"])) {
+        $fulfillmentData["CarrierCode"] = $data["carrierCode"];
+    } elseif (isset($data["carrierName"])) {
+        $fulfillmentData["CarrierName"] = $data["carrierName"];
+    }
+
+    if (isset($data["shippingMethod"])) {
+        $fulfillmentData["ShippingMethod"] = $data["shippingMethod"];
+    }
+
+
+    if (isset($data["trackingCode"])) {
+        $fulfillmentData["ShipperTrackingNumber"] = $data["trackingCode"];
+    }
+
+    if (sizeof($fulfillmentData) &gt; 0) {
+        $feed["Message"]["OrderFulfillment"]["FulfillmentData"] = $fulfillmentData;
+    }
+    $feed = $this-&gt;SubmitFeed('_POST_ORDER_FULFILLMENT_DATA_', $feed);
+
+    return $feed;
+} } ```
+</code></pre>
+
+<ul>
+  <li>然后修改第一步调用 <code>MWSClient</code> 类的时候使用我们自己的类：</li>
+</ul>
+
+<p><code>php
+$client = new app\core\helpers\MWSClient([
+    'Marketplace_Id' =&gt; '',
+    'Seller_Id' =&gt; '',
+    'Access_Key_ID' =&gt; '',
+    'Secret_Access_Key' =&gt; '',
+    'MWSAuthToken' =&gt; '' // Optional. Only use this key if you are a third party user/developer
+]);
+</code></p>
+
+<ul>
+  <li>这样之后我们就可以这样发货了：</li>
+</ul>
+
+<p>&#8220;`php
+$client-&gt;setDeliveryState([
+    “orderId” =&gt; 3456342,
+    “carrierCode” =&gt; “UPS”,
+    “trackingCode” =&gt; “34JD943T6”,
+    “shippingMethod” =&gt; “1 Day”,
+]);</p>
+
+<p>$client-&gt;setDeliveryState([
+    “orderId” =&gt; 3456342,
+    “carrierName” =&gt; “Mini transporters A.C.”,
+    “trackingCode” =&gt; “34JD943T6”,
+]);</p>
+
+<p>$client-&gt;setDeliveryState([
+    “orderId” =&gt; 3456342,
+    “carrierName” =&gt; “Mini transporters A.C.”,
+    “trackingCode” =&gt; “34JD943T6”,
+    “shippingDate” =&gt; “2018-06-21T12:32:24+02:00”
+]);
+&#8220;`</p>
+
+<p>以上实践代码我是根据 <a href="https://github.com/meertensm/amazon-mws/issues/55">Update order - set delivery state #55</a> 这个 Issues 采坑而来的。</p>
+
+<ul>
+  <li>查询发货结果</li>
+</ul>
+
+<p>无论成功或者失败都可以通过 <a href="https://github.com/meertensm/amazon-mws/blob/master/src/MWSClient.php#L956">GetFeedSubmissionResult()</a> 方法获取结果。</p>
+
+<p>PS: 可以分享一下我发货采坑的过程：</p>
+
+<p>MWS 对应的接口都会有对应的参数 XMLSchema，是专门用来校验接口传过去的参数，我们可以找一个在线 XML 校验的网站，校验我们要传过去的值是否正确。异步接口调试非常的麻烦，而且亚马逊返回的错误信息又不足够详细。</p>
+
+<ul>
+  <li><a href="https://images-na.ssl-images-amazon.com/images/G/01/rainier/help/xsd/release_1_9/OrderFulfillment.xsd">OrderFulfillment 的 XMLSchema</a></li>
+  <li><a href="https://www.liquid-technologies.com/online-xsd-validator">在线 XML 校验</a></li>
+</ul>
+
+<h2 id="section-4">总结</h2>
+
+<p>发现国内使用 MWS 的文档和资料比较少，自己辛辛苦苦踩的坑，当然要分享出来，希望对你有用。</p>
+
+<h2 id="section-5">相关文章</h2>
+
+<ul>
+  <li><a href="https://blog.forecho.com/mws-order.html">《MWS 开发 - 订单篇》</a></li>
+  <li><a href="https://blog.forecho.com/mws-product.html">《MWS 开发 - 产品上传篇》</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+</feed>

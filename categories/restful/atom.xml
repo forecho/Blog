@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Restful | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/restful/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[使用 Postman]]></title>
+    <link href="https://blog.forecho.com/use-postman.html"/>
+    <updated>2019-03-01T13:58:22+00:00</updated>
+    <id>https://blog.forecho.com/use-postman</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">基本使用</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">创建环境变量</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">获取请求的代码</a></li>
+      <li><a href="#url--request--response" id="markdown-toc-url--request--response">查看 URL 请求的 <code>Request</code> 和 <code>Response</code></a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">其他</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-5" id="markdown-toc-section-5">高级玩法</a>    <ul>
+      <li><a href="#pre-request-scripts" id="markdown-toc-pre-request-scripts">Pre-request Scripts</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">内置函数</a></li>
+      <li><a href="#tests" id="markdown-toc-tests">Tests</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-7" id="markdown-toc-section-7">最后</a></li>
+</ul>
+
+<p></p>
+
+<h2 id="section">引言</h2>
+
+<p><a href="http://blog.forecho.com/use-jwt.html">上篇文章</a>我们讲到 API 可能会使用到的 JWT 认证。既然讲到 API 开发就不得不讲到 API 调试以及测试神器 - <a href="https://www.getpostman.com/">Postman</a>。</p>
+
+<h2 id="section-1">基本使用</h2>
+
+<h3 id="section-2">创建环境变量</h3>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160357.png" alt="创建环境变量" /></p>
+
+<p>根据上面截图的地方，可以找到创建环境变量的设置。设置按钮旁边的『眼睛』按钮可以查看当前使用的环境变量的值。</p>
+
+<!--more-->
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160522.png" alt="" /></p>
+
+<p>先设置环境名称，再设置环境的 <code>Key</code> 和 <code>Value</code> ，如上图设置，如果你想调用 <code>http</code> 的值只要使用 <code>{{http}}</code> 就可以调用。</p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160542.png" alt="" /></p>
+
+<p>一个典型的 RESTful 请求如上图所示。</p>
+
+<h3 id="section-3">获取请求的代码</h3>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160601.png" alt="" /></p>
+
+<p>POST 还可以非常方便的获取各种语言的请求代码，方便你在开发中使用。</p>
+
+<h3 id="url--request--response">查看 URL 请求的 <code>Request</code> 和 <code>Response</code></h3>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160614.png" alt="" /></p>
+
+<p>在软件的左下角，找到终端的图标，就可以打开 Postman Console 。</p>
+
+<h3 id="section-4">其他</h3>
+
+<ul>
+  <li>登录账号之后可以同步收藏夹。</li>
+  <li>免费用户的功能基本够用。</li>
+</ul>
+
+<h2 id="section-5">高级玩法</h2>
+
+<h3 id="pre-request-scripts">Pre-request Scripts</h3>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160627.png" alt="" /></p>
+
+<p>Postman 有一个 Pre-request Scripts 功能，可以在发生请求之前执行一段自定义脚本。这个功能在请求需要 Token 验证的 API，非常有用。比方说我们现在请求的接口需要 JWT 验证，传统的方式就是我们在其他地方算好 Token，粘贴过来就可以了。但是这种方式有很大的弊端，因为一般的 Token 都有实效时间的，所以 Token 实效了，下次你又得重复操作一遍。</p>
+
+<p>但是有了 Pre-request Scripts 功能，我们就可以自动计算 Token，不用考虑实效问题，示例：</p>
+
+<ul>
+  <li>先去环境变量添加 <code>client_key</code> 和 <code>client_secret</code></li>
+  <li>然后再 Pre-request Scripts 框输入下面代码：</li>
+</ul>
+
+<p>&#8220;`javascript</p>
+
+<p>var removeIllegalCharacters = function(input) {
+    return input
+        .replace(/=/g, ‘’)
+        .replace(/+/g, ‘-‘)
+        .replace(/\//g, ‘_’);
+};</p>
+
+<p>var base64object = function(input) {
+    var inputWords = CryptoJS.enc.Utf8.parse(JSON.stringify(input));
+    var base64 = CryptoJS.enc.Base64.stringify(inputWords);
+    var output = removeIllegalCharacters(base64);
+    return output;
+};</p>
+
+<p>var clientKey = postman.getEnvironmentVariable(‘client_key’);
+var clientSecret = postman.getEnvironmentVariable(‘client_secret’);</p>
+
+<p>var exp = Math.floor(Date.now() / 1000) + 15000;
+var now = Math.floor(Date.now() / 1000);
+var header = { ‘alg’: ‘HS256’, ‘typ’: ‘JWT’ };
+var payload = { ‘exp’: exp, ‘iat’: now, ‘client_id’: clientKey};</p>
+
+<p>var unsignedToken = base64object(header) + “.” + base64object(payload);</p>
+
+<p>var signatureHash = CryptoJS.HmacSHA256(unsignedToken, clientSecret);
+var signature = CryptoJS.enc.Base64.stringify(signatureHash);
+var token = ‘Bearer ‘ + unsignedToken + ‘.’ + signature;</p>
+
+<p>postman.setGlobalVariable(‘jwt_token’, removeIllegalCharacters(token));</p>
+
+<p>&#8220;`</p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160640.png" alt="" /></p>
+
+<ul>
+  <li>最后在 Header 里面配置 Authorization 就可以直接用 <code>{{jwt_token}}</code> 了</li>
+</ul>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160651.png" alt="" /></p>
+
+<p>上述方式是给单独的 API 的配置 Pre-request Scripts ，Postman 还可以给集合配置 Pre-request Scripts，这样的话整个集合就可以都使用这个 <code>{{jwt_token}}</code> 了。但是值得<strong>注意</strong>的有：</p>
+
+<ul>
+  <li>集合里面配置是 Variables，单独配置的话只能设置环境变量。</li>
+  <li>如果集合配置了 Pre-request Script ，单独又配置了环境变量，Pre-request Script 脚本会<strong>优先读取</strong>环境变量的值，这个要非常注意。</li>
+  <li>集合的 Pre-request Scripts 获取变量方式有点不一样，比方说上面的生成 JWT Token 脚本，要使用 <code>pm.variables.get('client_key')</code> 代替 <code>postman.getEnvironmentVariable('client_key')</code>。</li>
+</ul>
+
+<p>更多使用方法，请查看<a href="https://learning.getpostman.com/docs/postman/scripts/pre_request_scripts/">官方文档 Pre-request scripts</a>。</p>
+
+<h3 id="section-6">内置函数</h3>
+
+<p>我们除了可以自定义脚本之外，Postman 还内置了一些常用的变量:</p>
+
+<ul>
+  <li><code>{{$guid}}</code>：v4 样式的 guid</li>
+  <li><code>{{$timestamp}}</code>：当前时间戳</li>
+  <li><code>{{$randomInt}}</code>：0到1000之间的随机整数</li>
+</ul>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160716.png" alt="" /></p>
+
+<p>更多使用方法，请查看<a href="https://learning.getpostman.com/docs/postman/environments_and_globals/variables/">官方文档 Variables</a>。</p>
+
+<h3 id="tests">Tests</h3>
+
+<p>目前还没用到，下次补上……</p>
+
+<h2 id="section-7">最后</h2>
+
+<p>如果你做也做接口开发，需要经常测试接口的话，推荐你使用 Postman，如果你经常使用 Postman 的话，可以多花的时间研究一下这个工具的使用方式，一定会为你之后节约很多时间。</p>
+
+<p>正所谓『磨刀不误砍柴工』。</p>
+
+<p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用 JWT]]></title>
+    <link href="https://blog.forecho.com/use-jwt.html"/>
+    <updated>2019-02-25T13:58:22+00:00</updated>
+    <id>https://blog.forecho.com/use-jwt</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#jwt" id="markdown-toc-jwt">什么是 JWT</a>    <ul>
+      <li><a href="#hearder" id="markdown-toc-hearder">Hearder</a></li>
+      <li><a href="#payload" id="markdown-toc-payload">Payload</a></li>
+      <li><a href="#signature" id="markdown-toc-signature">Signature</a></li>
+    </ul>
+  </li>
+  <li><a href="#jwt-" id="markdown-toc-jwt-">JWT 特性</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">防止被篡改 &amp;&amp; 信息不加密</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">减少数据库的压力</a></li>
+    </ul>
+  </li>
+  <li><a href="#jwt-1" id="markdown-toc-jwt-1">更加安全的 JWT</a></li>
+  <li><a href="#uuid--token" id="markdown-toc-uuid--token">UUID 当 Token</a></li>
+  <li><a href="#section-3" id="markdown-toc-section-3">实战</a></li>
+  <li><a href="#section-4" id="markdown-toc-section-4">总结</a></li>
+  <li><a href="#section-5" id="markdown-toc-section-5">参考链接</a></li>
+</ul>
+
+<h2 id="section">引言</h2>
+
+<p>API 开发一定会涉及到认证问题，本篇文章就是结合我自己工作经验来分享一下我用过的 JWT 认证以及它和普通认证的区别，希望本篇文章对你在开发 API 认证时有用。</p>
+
+<h2 id="jwt">什么是 JWT</h2>
+
+<p><a href="https://jwt.io/">JWT</a> 全名是 JSON Web Tokens，是一个基于 JSON 的开放标准用于创建声明一些声明的访问令牌。JWT 由以下三部分组成：</p>
+
+<!--more-->
+
+<ul>
+  <li><code>header</code></li>
+  <li><code>payload</code></li>
+  <li><code>signature</code></li>
+</ul>
+
+<p>这三部分通过指定的算法，会生成一个类似 <code>xxx.yyy.zzz</code> 结构的字符串。</p>
+
+<h3 id="hearder">Hearder</h3>
+
+<p>通常是由算法名称和 Token 类型组成的一个 JSON，用得最多的就是这个:</p>
+
+<p><code>json
+{
+   "alg": "HS256",
+   "typ": "JWT"
+}
+</code></p>
+
+<h3 id="payload">Payload</h3>
+
+<p>这部分算是 JWT 最主要的部分，这部分内容就是你需要传的数据，也是一个 JSON，内容由自定义部分和规范定义部分组成。比方说：</p>
+
+<p><code>json
+{
+    "iss": "JWT-Rails-Server", // 签发者
+    "aud": "www.baidu.com", // 接收者
+    "iat": 1472263256, // JWT 签发的时间
+    "exp": 1472522525, // 过期时间
+    "sub": "jwt@baidu.com", // JWT对应的用户 
+    "user_id": 1211 // 自定义
+}
+</code></p>
+
+<p>规范定义也是可选的，一般用的最多的是 <code>iat</code> 和 <code>exp</code>。</p>
+
+<h3 id="signature">Signature</h3>
+
+<p>第三部分就是签名，它是由 <code>Hearder</code> 和 <code>Payload</code> 使用 <code>.</code> 连接成的字符串，再使用我们自己提供的一个密钥进行指定算法（比方说 HS256）加密后的字符串。</p>
+
+<h2 id="jwt-">JWT 特性</h2>
+
+<h3 id="section-1">防止被篡改 &amp;&amp; 信息不加密</h3>
+
+<p><strong>JWT 主要是用来防止信息被篡改</strong>。它传递的信息不能被篡改，并不是加密的。我们可以使用 <a href="http://calebb.net/">JWT-Decode</a> 工具来做个示范：</p>
+
+<p><code>
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImp0aSI6ImI4OWJmMmNiLTI0MmMtNDI1Yi05MmNmLTQyZGQyMDMyNjBiMSIsImlhdCI6MTU1MTA4Nzg3MCwiZXhwIjoxNTUxMDkxNDcwfQ.tI9NtLAuoUxLRf64H7zwAdjZKY83iZcAE_9qpcdWBXc
+</code></p>
+
+<p>以上 JWT 会被解析为：</p>
+
+<p><code>
+{
+ typ: "JWT",
+ alg: "HS256"
+}.
+{
+ sub: "1234567890",
+ name: "John Doe",
+ admin: true,
+ jti: "b89bf2cb-242c-425b-92cf-42dd203260b1",
+ iat: 1551087870,
+ exp: 1551091470
+}.
+[signature]
+</code></p>
+
+<p>所以 JWT 传递的信息其实是可以被解密的，<strong>请不要在 JWT 里面传递一些敏感的数据。</strong></p>
+
+<h3 id="section-2">减少数据库的压力</h3>
+
+<p>API 是根据请求过来的 JWT，进行实时解密，并且校验的。所以 JWT 可以不存入数据库当中，除非你想要实现『让某个 JWT 失效』的需求。</p>
+
+<h2 id="jwt-1">更加安全的 JWT</h2>
+
+<p>对称加密算法（主要基于 HMAC，如 HS256）分发 JWT 的过程是使用同一个密钥（secret）生成和验证 JWT。这种方式严格依赖秘钥，一旦秘钥被泄漏，就可以生成『假的』 JWT。</p>
+
+<p>在多个团队开发过程中，JWT 的认证服务和资源服务很可能是不同的团队开发和维护，密钥在这个过程中传递，很有可能泄漏。这个时候我们应该要使用非对称加密算法（主要是基于 <a href="https://zh.wikipedia.org/wiki/RSA%E5%8A%A0%E5%AF%86%E6%BC%94%E7%AE%97%E6%B3%95">RSA</a>，如 RS256）生成 JWT，即认证服务器使用私钥生成 JWT，资源服务器使用公钥去校验 JWT，认证服务去管理私钥，公钥开放给各个资源服务，这样密钥泄漏的可能性就大大降低了。</p>
+
+<p>这种方式使用上类似，只是把 Header 里面的 <code>alg</code> 换成 <code>RS256</code>，生成的时候使用秘钥，解密的时候使用公钥。需要注意的是：</p>
+
+<ul>
+  <li>使用非对称加密算法生成 JWT 在解密的时候，不应该直接使用传过来 JWT 解密出 Header 里面的 <code>alg</code> 值，不然如果对方传过来的是 <code>HS256</code>，那他就可以随意篡改了。</li>
+</ul>
+
+<h2 id="uuid--token">UUID 当 Token</h2>
+
+<p>除了 JWT 当 Token，我们还可以使用服务器生成的 UUID 当 token，当用户请求登录接口的时候，生成 UUID，并且把这个 UUID 和这个用户 ID 绑定存在数据库或者 redis 里面。当然我们还可以设置这个 Token 的过期时间。</p>
+
+<p>当用户请求需要认证的 API 时候，必须要带上 Token，API 服务收到请求的时候先从存储服务里面读取 Token 以及验证 Token 是否有效。</p>
+
+<p>相比 JWT，这种方式必须要存储 Token。</p>
+
+<h2 id="section-3">实战</h2>
+
+<p>了解 JWT 之后，想用 JWT 非常简单，<a href="https://jwt.io/">官网</a>已经提供了常用开发语言的 JWT 相关类库，直接用就可以了。比方说 PHP 就用 <a href="https://github.com/firebase/php-jwt">firebase/php-jwt</a> 。</p>
+
+<p><strong>值得注意</strong></p>
+
+<p>当使用非对称加密也就是 RS256 算法加密的时候，从证书中获取公钥或者私钥的时候要用 <a href="http://php.net/manual/zh/function.openssl-pkey-get-public.php"><code>openssl_pkey_get_public()</code></a> 和 <a href="http://php.net/manual/zh/function.openssl-pkey-get-private.php"><code>openssl_pkey_get_private()</code></a> 方法。</p>
+
+<h2 id="section-4">总结</h2>
+
+<p>本篇文章主要介绍了 JWT 这种无状态 Token 的特性：</p>
+
+<ul>
+  <li>防止被篡改 &amp;&amp; 信息不加密</li>
+  <li>可以不访问数据库进行验证，高效</li>
+</ul>
+
+<p>提高 JWT 安全的方式有：</p>
+
+<ul>
+  <li>通过设置有效时间，即 <code>exp</code> 参数</li>
+  <li>如果有必要，可以使用非对称加密方式实现生成 JWT</li>
+  <li>不要信任客户端传过来 JWT 里的 <code>alg</code></li>
+</ul>
+
+<p>最后还说了 JWT 对称加密（<code>HS256</code>）和非对称加密（<code>RS256</code>）的使用方式。</p>
+
+<h2 id="section-5">参考链接</h2>
+
+<ul>
+  <li><a href="https://www.freebuf.com/column/170359.html">JWT的认识与攻击</a></li>
+  <li><a href="http://blog.qiji.tech/archives/1723">JWT 简介（译）</a></li>
+  <li><a href="http://blog.leapoahead.com/2015/09/06/understanding-jwt/">JSON Web Token - 在Web应用间安全地传递信息</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Yii2 搭建最基础的 RESTful]]></title>
+    <link href="https://blog.forecho.com/yii2-base-restful.html"/>
+    <updated>2015-07-27T12:25:53+00:00</updated>
+    <id>https://blog.forecho.com/yii2-base-restful</id>
+    <content type="html"><![CDATA[<p>为了让项目更加清晰，我们可以单独新建一个 Api，用来专门开发 Api。至于怎么新建，参考这篇文章：<a href="https://blog.forecho.com/blog/yii2-create-api.html">Yii2 高级版新建一个 Api 应用</a></p>
+
+<hr />
+<p><strong>系列文章</strong></p>
+
+<p>最近半年一直在开发 restful 的 API 系统，所以打算写这系列文章来分享自己的经验，希望对大家有用。</p>
+
+<ul>
+  <li><a href="https://blog.forecho.com/blog/yii2-base-restful.html">Yii2 搭建最基础的 RESTful</a></li>
+  <li><a href="">Yii2 RESTful 添加认证</a></li>
+  <li><a href="">Yii2 RESTful 添加鉴权</a></li>
+  <li><a href="">Yii2 RESTful 添加访问速率限制</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Yii2 如何实现 RESTful？]]></title>
+    <link href="https://blog.forecho.com/yii2-use-restful.html"/>
+    <updated>2015-03-22T12:25:53+00:00</updated>
+    <id>https://blog.forecho.com/yii2-use-restful</id>
+    <content type="html"><![CDATA[<h2 id="rest">什么是REST</h2>
+
+<p>简单的说，REST 指的是一组架构约束条件和原则。满足这些约束条件和原则的应用程序或设计就是 RESTful。</p>
+
+<h2 id="restful">为什么要Restful？</h2>
+
+<p>主要遵循两个准则：</p>
+
+<ul>
+  <li>不要为了RESTful而RESTful</li>
+  <li>在能表达清楚的情况下，简单就是美</li>
+</ul>
+
+<h2 id="yii2--restful">Yii2 使用 RESTful？</h2>
+
+<p>其实 Yii2 框架本身就对 RESTful 是友好支持的，具体可以看<a href="http://www.yiiframework.com/doc-2.0/guide-rest-quick-start.html">官方文档</a>，或者去看源码，都是可以的。</p>
+
+<p><strong>下面分享我写的<a href="https://github.com/iiYii/yii2-rest-demo">Yii2 RESTful DEMO</a>。</strong></p>
+
+<p>具体实现可以看我的代码，有不懂的可以留言。下面我重点说一下值得注意的地方：</p>
+
+<!--more-->
+
+<h3 id="yii2-restful-">Yii2 RESTful 如何实现自定义方法？</h3>
+
+<p>新建一个 user 控制器，输入以下代码：</p>
+
+<p>&#8220;`
+namespace app\controllers;</p>
+
+<p>use yii\rest\ActiveController;</p>
+
+<p>class UserController extends ActiveController
+{
+    public $modelClass = ‘app\models\User’;
+}
+&#8220;`</p>
+
+<p>然后你在浏览器里面输入 用 GET 请求 <code>localhost/basic/web/users</code> 这个地址是可以跑的，因为继承的 <code>ActiveController</code> 这个类是有对 user RESTful 表的 基本操作的，包括 GET，POST，PUT，PATCH，DELETE。所以我们要注销系统自带的实现方法，代码如下，添加到控制器中，后者自己新建一个 ActiveController 类。</p>
+
+<p><code>
+public function actions()
+{
+   $actions = parent::actions();
+    // 注销系统自带的实现方法
+    unset($actions['index'], $actions['update'], $actions['create'], $actions['delete'], $actions['view']);
+    return $actions;
+}
+</code></p>
+
+<p>然后下面我们就可以写自己的 actionIndex、actionCreate、actionUpdate 和 actionDelete 了。</p>
+
+<h3 id="section">实现用户验证</h3>
+
+<p>框架其实是提供三种验证方式的，我就说一下最长用的 token 实现验证吧。</p>
+
+<p>首先你要在控制器中加入下面代码：</p>
+
+<p><code>
+public function behaviors()
+{
+    $behaviors = parent::behaviors();
+    $behaviors['authenticator'] = [
+        'class' =&gt; CompositeAuth::className(),
+        'authMethods' =&gt; [
+            QueryParamAuth::className(),
+        ],
+    ];
+    return $behaviors;
+}
+</code></p>
+
+<p>然后你要去修改 user 的 model，具体参照这块代码：<a href="https://github.com/iiYii/yii2-rest-demo/commit/02db1711bcaa42040360d50ffcf771626474f5ad">添加 restful 授权认证</a></p>
+
+<h2 id="section-1">参考文章</h2>
+
+<ul>
+  <li><a href="http://www.ruanyifeng.com/blog/2011/09/restful.html">理解RESTful架构</a></li>
+  <li><a href="http://segmentfault.com/blog/cloudmario/1190000000635914">RESTful实践总结</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+</feed>

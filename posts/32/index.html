@@ -1,0 +1,1304 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="js代码： 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+$(document).ready(function(){ //如果鼠标移动到class为stripe的表格的tr上时，执行函数 $(&quot;.stripe tr&quot;).mouseover(function(){ // &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/posts/32/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/01jQuery-shuang-se-biao-ge.html">01、jQuery双色表格</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2011年12月08日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>js代码：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">    <span class="c1">//如果鼠标移动到class为stripe的表格的tr上时，执行函数</span>
+</span><span class="line">    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.stripe tr&quot;</span><span class="p">).</span><span class="nx">mouseover</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">        <span class="c1">//给这行添加class值为over并且当鼠标经过该行时执行函数</span>
+</span><span class="line">            <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;over&quot;</span><span class="p">);</span>
+</span><span class="line">        <span class="p">}).</span><span class="nx">mouseout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">            <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;over&quot;</span><span class="p">);</span><span class="c1">//移除该行的class</span>
+</span><span class="line">        <span class="p">})</span>
+</span><span class="line">    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.stripe tr:even&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;alt&quot;</span><span class="p">);</span><span class="c1">//给class为stripe的表格的偶数添加class值为alt</span>
+</span><span class="line"><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>知识点：</p>
+
+<ul>
+  <li>mouseover(fn) 在每一个匹配元素的mouseover事件中绑定一个处理函数。mouseover事件会在鼠标移入对象时触发。</li>
+  <li>mouseout(fn) 在每一个匹配元素的mouseout事件中绑定一个处理函数。mouseout事件在鼠标从元素上离开后会触发。</li>
+  <li>removeClass(<em>[class]</em>) 从所有匹配的元素中删除全部或者指定的类。</li>
+  <li>addClass(class) 为每个匹配的元素添加指定的类名。一个或多个要添加到元素中的CSS类名，请用空格分开。</li>
+</ul>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/ci-zhi-de-yi-ge-xing-qi.html">辞职的一个星期</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2011年12月08日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>结束最后一天班的那天。晚上，刚好一兄弟带着火锅材料，来我们这要吃火锅，大家好久没聚聚了，那次我们用这煤气煮着火锅，喝着小酒（白的），在那样冷的天气里，怎一个爽子了得。</p>
+
+<p>这次，大家是又散了，我们的“根据地”又没有了，大家又是各奔东西了，来年再聚吧。</p>
+
+<p>我们平时总是说时间过的快，但是你有没有想过时间为什么过的那么快呢？我们每天做的重复的一件事，不停的，那时间能不快吗？因为每天都是一样的，这样下去的话，你会在不知道什么时候的情况下结了婚，甚至都不知道在什么的时候当上父亲，你信不信？所以我必须对我的青春负责。趁现在还年轻，去做点什么吧，即使我失败了，但是起码我现在输得起。</p>
+
+<p>辞职后的第一天，我当然首先是睡到自然醒，然后再就是睡到自然醒，然后疯狂地逛了两天街，买了一件羽绒服。可能是我觉得还是不够吧，于是我就在网上买了一个单反，钱也用得差不多了吧，嗯，房租也马上到期了，休息一天，然后该滚回学校来了。</p>
+
+<p>于是我就花了三天时间搬东西，三趟才搬完，我到底有多少东西呢？还赶上小雨了。 回到学校的感觉有点让人亲切，特别是自己寝室。这次我是回来是有目的，只有一个月了，时间可能有点不够，所以我要抓紧时间，不能浪费我辞职的苦心。特别是这个时候，大家都往外面找工作呢，我还辞职回来了。要让我辞职变得有意义。  </p>
+
+<p>差不多有以下几个任务：</p>
+
+<ul>
+  <li>毕业设计（话说到现在我都没动手呢）</li>
+  <li>你丫闭嘴</li>
+  <li>博客导航</li>
+  <li>学JS、Jquery</li>
+  <li>拍视频</li>
+</ul>
+
+<p>马上就该放假了，还不到一个月了，时间有点紧。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/gan-en-yue-dian.html">感恩乐点</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2011年12月02日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前天跟经理说了辞职的事了。准确点说应该是大前天（11月29号），他问了我辞职的原因然后就同意了。 关于辞职的事，我首先想说的是，感谢乐点，让我成长，让我离我的梦想又近了一步，感谢。 公司刚开始招人的时候给我工资待遇确实挺不错的，特别是对于一个实习生，都还没毕业的我来说，那时候我一点经验的没有。 公司一开始气氛很不错，大家挤在一间小房间里，很有干劲。但是后来这股干劲就没有了，为什么呢？是大家每天重复的做着同一件事，不停的复制、粘贴呢？是从公司搬到大房间之后，经理的作风、态度问题呢？还是公司经理和员工的关系问题呢？我觉得吧，都有影响。 至于我为什么辞职呢？因为吃得太饱、因为小孩还小、因为天气很好阳光普照…… 好吧说实话：</p>
+
+<ul>
+  <li>想做自己的项目了。（这个比较靠谱）</li>
+  <li>房租到期了，再交的话，就有得要交三个月的。不住这，另找房子？大家都不租了，我一个人住的话，不想找。</li>
+  <li>两个同学被裁员了，有这个原因吗？</li>
+  <li>上班太累了，眼睛受不了。在哪上班估计都不轻松。</li>
+  <li>不想干了，觉得没意思。我是一个比较追求完美的人，每次的项目客户给的时间短，我们就加紧时间做，为了达到一种结 果，就可能没考虑到很多Bug。（这个比较靠谱）</li>
+  <li>现在觉得工资有点少了，加工资又没有希望。</li>
+  <li>喜欢自己折腾自己喜欢的东西，上班没多少时间去做。（这个比较靠谱）</li>
+  <li>大的项目我又做不了，小的项目重复的功能我又不想做，在公司技术没人带头，技术都靠自己自学，进步非常慢。（这个比较靠谱）</li>
+  <li>想来想去也就这些理由了吧。不想接单做了，想自己做一款产品，然后不停的去升级，完美她，想实现有百万级的用户，不想给人打工了，想自己干了。</li>
+</ul>
+
+<p>在乐点5个月里，我学会了很多东西，自己也跑了几个客户，写过项目需求书，也和客户签过合同。遇到过坑爹的客户，也遇到过被我们坑爹的客户，遇到过签了合同最后还不算做网站的客户，遇到过要发票的客户，也遇到过打钱还只能打对公账户的客户。。。自己做过外卖网站 （虽然现在感觉有点稀烂），做过租车网站，做过企业网站，做过电子商务网站，也做过抽奖类的网站。。。</p>
+
+<p>简单总结一下，每个项目都是 一个很纠结的单子，直到你把客户的尾款全部拿到手，做事情要从客户的角度去考虑问题，这样就省事多了。做的最好的项目，永远只是下 一个，为什么不是这个呢？是没有时间。 至于接下来的打算：还是先回学校吧，这学期的住宿费我都交了。然后自己学JS。自己做两个自己的项目出来，看到过年的时候前景怎么样 ？如果还行的话，那就来年接着搞。如果不行的话，就和几个同学一起去上海等其他一线城市去转转吧，看有没有人收留，尽量挤进大公司 去上班，去感受一下大公司的气氛也不错。</p>
+
+<p>附加： 人最宝贵的东西是生命，生命对于我们来说只有一次，人的一生应当这样度过，当回忆往事的时候，他不会因虚度年华而悔恨，也不会因为 碌碌无为而羞愧，在临死的时候，他能够说“我把整个生命和全部精力，都奉献给了人世间最壮丽的事业。</p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#22" title="2011-12-05 18:49:31">流金漩涡</a>:</strong> 听出了一丝无奈，希望能坚持下去</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/yi-ge-duo-yue-yi-lai-de-zong-jie.html">一个多月以来的总结</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2011年11月26日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>距上一次我的《<a href="http://www.nowhisky.com/?p=86">三个月以来的总结</a>》已经有一个月零13天了。</p>
+
+<p>现在的公司已经不是当初的公司了，就一个月，给我的感觉发生了很多的事情。 先说公司的气氛，记得我刚来公司的时候，大家在一间小工作室里面一起工作，虽然地方小、人多。但是大家在一起，有时候销售的接单接累了，大家开一个玩笑，放松一下心情，缓解一下疲劳的身体。嗯，感觉还不错，但是就怕有人偷懒。。。。那时候公司有个规定，下班之前大家都会报告一下，今天的各自都做了些什么？其实我觉得也不错，虽然有时候下班之前我都不知道自己一天都忙了些什么，为不知道说什么挺头疼的。但这样至少让我们每天过的都有意义了，至少对我来说是这样的。</p>
+
+<p>暑假的时候，公司有邢卓在，也就是经理的弟弟，他说过一句话让我记忆很深刻的，他说“让我们一起来实现一下自我价值”（原话是什么，我记不清了，大致是这个意思）。这句话我第一次亲口听有人说，呃，觉得很激励。很简单的一句话，但是做起来很难，坚持下来更难，指不定那天你早就忘了。可惜他还要去上大三了，觉得这个人挺不错的，记得我们还一起去见客户了得，虽然后来知道被别人经理嘲笑我们是“小孩”。嗯，没错，我们确实是没有什么经验，但是呢？谁又不是这么过来的呢？谁一开始就有经验呢？？这都是需要时间去成长的。说到这，我就想到了《海贼王》，两年了，路飞的伙伴们失散，大家花了两年时间，各自拼命的成长，嗯，确实现在他们好强大了，看着挺激动的。</p>
+
+<p>记得刘彪的时候，我心里就想“这熊孩子，来的真是时候，再过几天我们就是月终酒会了，爽死他了”。没想到那天他喝多了，第二天去医院打针了，哈哈。。。不行，不行。好像还是那次康利民喝多了，结果上厕所没回来，我们喝完了，找他人找半天，最后发现他喝多了，上厕所都在里面睡着了，坑爹呢？上厕所蹲着还能睡着。</p>
+
+<p>好像那次月终酒会还是我生日，我记得不清了。。。。经理还给我买了个仟吉蛋糕，很是感谢。</p>
+
+<p>后来公司在9月26号的时候，一起去梨园搞了一次“拓展训练”，那一次大家玩的还挺开心的，虽然有点累吧，不过我觉得唯一有点遗憾的就是，没有一个数码相机拍一些照片，我觉得这些就可以做为公司的“企业文化”。再后来也就是前天吧，公司在上班的小区篮球场上又搞了一次拓展训练，以前玩过了，觉得没意思了，有个“一个比划一个猜”玩的还不错，这个上次没玩过。下午本来大家打算玩“天黑请闭眼”的，结果玩DOTA玩上瘾了，结果就玩了一下玩DOTA。玩的挺嗨的。我以为我技术增长了不少了，没想到还是一样的菜鸟。。。</p>
+
+<p>其实我讨厌公司很正规，有很多的规矩，但是这些规矩也是为了公司的发展而设定的，但是真的能为公司的发展很有用吗？谁又能说不是呢？感觉现在的公司大家都有点在混工资了。嗯，公司如果倒闭了，大家就走人了。但是为什么会有这种感觉呢？是谁让我有这种感觉了呢？这里面主要原因我觉得是经理，他是一个公司的头，CEO，他一定要是一个能把持住大局的人。</p>
+
+<p>我现在又一种很慌的感觉，特别是公司的二部全部搬过来的时候，我发现公司的销售只有一个人了，有的人被辞职了，有的人自己辞职了，但是走的人有点太多了吧。现在公司没有单子做。我发现一个单子很难接到，客户在嫌我们开的价格太高，但是为什么价格高呢？因为我们写代码真的很累。这个职业真是各种伤不起。。。我还是觉得自己去研发一个项目，一个产品，然后我们不停的去完善她，比较靠谱。</p>
+
+<p>把一个鸡蛋放在一个篮子里，并看好它。</p>
+
+<p>我现在最讨厌做的就是一个类似于门户的网站了，谁让我做，我跟谁急，我最讨厌一个网站什么都有，并且看上去很乱了，我绝对不会去用这样的网站的，打开我都不知道看哪了？我是个极简主义。</p>
+
+<p>但是呢？如果现在去让我做这款产品，我有这个能力吗？</p>
+
+<p>我希望我能有一个《海贼王》里面的路飞那样的团队，大家各自有着自己的梦想，但是大家又同时有着一个共同的梦想，大家都有着自己的技能。但是要作为路飞，你并须有着最强大的技能。</p>
+
+<p>##</p>
+
+<p>Comments</p>
+
+<p><strong><a href="#16" title="2011-11-28 15:59:44">湖北网</a>:</strong> 大爱海贼</p>
+
+<p><strong><a href="#17" title="2011-11-30 20:12:44">法桐</a>:</strong> 博主也玩dota那 哈哈</p>
+
+<p><strong><a href="#18" title="2011-11-30 22:11:16">caicai</a>:</strong> 无兄弟不DOTA，哈哈。。。</p>
+
+<p><strong><a href="#19" title="2011-12-02 09:25:20">流金漩涡</a>:</strong> 呃。。好总结的总结。。高度</p>
+
+<p><strong><a href="#20" title="2011-12-02 09:46:45">caicai</a>:</strong> 哈哈、、、让您见笑了</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/CI-kuang-jia-xue-xi-zhi-shang-chuan-wen-jian.html">CI框架学习之上传文件</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2011年11月26日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>视图代码：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nx">form_open_multipart</span><span class="p">(</span><span class="s1">&#39;chome/do_upload&#39;</span><span class="p">);</span><span class="cp">?&gt;</span><span class="x"></span>
+</span><span class="line">
+</span><span class="line"><span class="x">&lt;dl&gt;</span>
+</span><span class="line"><span class="x">    &lt;dt&gt;文件名称：&lt;/dt&gt;</span>
+</span><span class="line"><span class="x">    &lt;dd&gt;</span>
+</span><span class="line"><span class="x">        &lt;input type=&quot;text&quot; name=&quot;filename&quot;&gt;</span>
+</span><span class="line"><span class="x">    &lt;/dd&gt;</span>
+</span><span class="line"><span class="x">    &lt;dt&gt;选择文件：&lt;/dt&gt;</span>
+</span><span class="line"><span class="x">    &lt;dd&gt;</span>
+</span><span class="line"><span class="x">        &lt;input type=&quot;file&quot; name=&quot;userfile&quot;&gt;</span>
+</span><span class="line"><span class="x">    &lt;/dd&gt;</span>
+</span><span class="line"><span class="x">    &lt;dt&gt;&lt;/dt&gt;</span>
+</span><span class="line"><span class="x">    &lt;dd&gt;</span>
+</span><span class="line"><span class="x">        &lt;input type=&quot;submit&quot; value=&quot;上传&quot;&gt;</span>
+</span><span class="line"><span class="x">    &lt;/dd&gt;</span>
+</span><span class="line"><span class="x">&lt;/dl&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>CI模型中的代码如下： 之前要加载两个CI自带的类：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">model</span><span class="p">(</span><span class="s1">&#39;mhome&#39;</span><span class="p">);</span>
+</span><span class="line"><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">helper</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>下面是方法：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="k">function</span> <span class="nf">do_upload</span><span class="p">(){</span>
+</span><span class="line">	<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;upload_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;./uploads/&#39;</span><span class="p">;</span><span class="c1">//绝对路径</span>
+</span><span class="line">	<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;allowed_types&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;txt|php|cdr|gif|jpg|png&#39;</span><span class="p">;</span><span class="c1">//文件支持类型</span>
+</span><span class="line">	<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;max_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span><span class="p">;</span>
+</span><span class="line">	<span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;encrypt_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span><span class="c1">//重命名文件</span>
+</span><span class="line">	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;upload&#39;</span><span class="p">,</span><span class="nv">$config</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">	<span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">upload</span><span class="o">-&gt;</span><span class="na">do_upload</span><span class="p">())</span> <span class="p">{</span>
+</span><span class="line">		<span class="nv">$upload_data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">upload</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">();</span>
+</span><span class="line">		<span class="nv">$query</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class="line">		<span class="c1">//调用模型，写入数据库</span>
+</span><span class="line">		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">mhome</span><span class="o">-&gt;</span><span class="na">upload</span><span class="p">(</span><span class="nv">$upload_data</span><span class="p">[</span><span class="s1">&#39;file_name&#39;</span><span class="p">]);</span>
+</span><span class="line">	<span class="p">}</span>
+</span><span class="line">	<span class="k">else</span> <span class="p">{</span>
+</span><span class="line">		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">upload</span><span class="o">-&gt;</span><span class="na">display_errors</span><span class="p">();</span>
+</span><span class="line">		<span class="nv">$query</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class="line">	<span class="p">}</span>
+</span><span class="line">	<span class="c1">//提示</span>
+</span><span class="line">	<span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;succ&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$query</span><span class="p">;</span>
+</span><span class="line">	<span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;su1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;提交成功&quot;</span><span class="p">;</span>
+</span><span class="line">	<span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;su0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;文件上传失败,请检查文件再重新上传&quot;</span><span class="p">;</span>
+</span><span class="line">	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">view</span><span class="p">(</span><span class="s1">&#39;admin/success&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>值得注意</strong>：有图片上传的时候表单必须用form_open_multipart；还有用于上传的input:file的name如果不是userfile,则必须改成 $this-&gt;upload-&gt;do_upload(‘你自己命名的name’)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/qi-ye-wang-zhan-jian-she-shi-zhan-ji-shu-ke-cheng-ji-shu-diao-cha-bao-gao-PHP.html">《企业网站建设实战技术》课程技术调查报告&#8211;PHP</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2011年11月25日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>我的第一份正式的工作就是PHP程序员。</p>
+
+<p>第一个项目是一个外卖网。由我和陈小霞、许东一起完成。首先按照客户的效果图我负责完成了效果图，然后挂到公司的网站上，给客户看，不满意的地反，改之，直到满意为止。</p>
+
+<p>然后我们就开始做前台，然后首页是最不好做的页面之一。记得当时首页我们都是分工做的，首页做的差不多了之后我们就分工了，他们两个继续做前台的子页，我就开始建数据库，开始做后台的程序。由于好久都没碰PHP了，有些生疏了，还好有之前在学校老师做的案例，然后看着做，不懂的就在网上查资料，那时候我是知其然，不知其所以然。后来慢慢的做的多了，资料也查的多了，慢慢的有种焕然大悟的感觉，思路在大脑里也就清晰多了。</p>
+
+<p>当时公司也是刚开没多久，销售人员在网上谈客户，不知道该怎么报价，然后我就查了一些资料，大致了解行情之后就好报价了，其实这个报价是个很头疼的时，有时候我报少了我自己做的话觉得划不来，报多了吧，怕吓到客户。还有一种情况，就是这个东西我们没做过，对我们来说可能做起来有点麻烦，事实上行情却是要便宜的多。但是没办法，我们没有经验，不敢接，这样的单子一般都接不到，比如就有客户想做3D全景效果的网站，我们没那么技术，包给别人做的话，理所当然的高了，我们也不是一些很大的公司，我们完全没有优势。我倒想问一句是谁让网站的变成了这么一个不值钱的东西了？程序员真是很累的，你伤不起。</p>
+
+<p>再说这个外卖网，客户要求有一个比较炫的JS效果，点击“订餐”，相应的“菜”，有一个划到右上角餐盒的效果，那时候公司没有一个会JS的，一般都只是简单的改改效果，自己不会写，但是苦于客户急要，我们有收钱了，没办法，刚开始我们是到处找同学，请教老师，但是没有结果，这个时候千万没指望别人了，没办法了，我使用了一个最笨了办法了，在另一个网站上把那个JS效果硬是扣下来了，我本人是最不赞同的这种不完美的方法了，先不说这个方法会把我们不知道的多余的代码加进去，造成无法预测的结果，并且调用的过程中，会有种种意想不到的问题在等待着里，不过，最终结果还是不错的，我们成功的实现了客户想要的效果。</p>
+
+<p>总结，PHP一定要会JS，一定要会自己写，每次想要个效果都要在网上到处找，到处找，好不容易找到一个自己觉得满意的了吧，还不会使用。之前自己也在学校的图书馆借了好几本书想学JS，但最终都没学到手，只怪自己太懒了，太累了，太忙了。这都是借口。</p>
+
+<p>再谈谈客户要的百度地图API效果，这个效果也是让我们为之头疼的一个效果。我们连JS都不会更别说这个了，这个有关Ajax、API开发。虽然官网有提供开发文档，但是自己要开发一个，还真不简单，最后没办法，这个效果我们外包给别人了，但是最终我觉得这个地图做的还是很垃圾，但是没办法，我没没那个技术，客户要的那个效果其实是挺不错的，但是我想的话，要开发那个一定很不简单。这个地图API开发也是一个有很大的市场需求的。</p>
+
+<p>再谈客户要求的后台实时提醒功能，客户要求前台有用户下订单，后台就立马能实现提醒功能的效果，并且这个效果，最好还能有声音的那种。这个功能我们眼看就可以成功的时候，但是最终整合进去的时候还是没能实现。说实话这个功能应该有的，但是我们不知道怎么做，应该运用了Ajax技术。到目前为止我还没能会，要找时间研究下。</p>
+
+<p>这个项目结束的没那么简单，我们快做完的时候，客户要求把之前的一个门店效果，改成店铺效果，这个我们可是要改很多的代码了，这个就是签合同之前一定要和客户把功能需求确定好，省去后续的麻烦。</p>
+
+<p>我们到目前为止做的项目大部分都是一些小的，也有两个大的项目。大项目的话，一定要考虑网站的整个流程，一定要比客户先发现Bug，最好不要出现没有必要的Bug。不知道为什么我们做的这个外卖网访问很慢，可能是数据库连接完了之后没有关闭到导致的吧。所以刚开始做一个项目的时候前期的规划一定要规划好，要考虑到很多问题，特别是一个大的项目，这个非常重要。</p>
+
+<p>还有一个小项目，是做黄金市场的网站，客户要求有一种实时更新黄金市场走势的效果，这个数据库只能用别人的，自己没有那么强大的数据库，好吧，这个技术我也不会，应该是XML技术，很是强大。这个我们有必要去了解一下。</p>
+
+<p>最近在学习使用PHP框架，我们选的是CI框架，这个应该早点学，先把类学习好，再学习MVC思想，然后去学习框架的使用，提高PHP运行效率，提高做网站的速度。至于二次开发，我想的话等你学了框架再学的话，应该好上手多了。</p>
+
+<p>总结一下，就是PHP程序员一定要会写JS效果，这是我有深深的体会。然后要会Ajax技术，也要会使用框架，用框架学PHP效果真的有很大的提高。有必要去了解XML，CSS3，HTML5。感觉在学校学的技术都比较落后了，还是要靠自己平常多写写代码，自己自学。</p>
+
+<p>平常的话一定不要太骄傲了，要记得这个世界还是山外有山 人外有人的，比你厉害的人多了去了，但是也别自暴自弃，踏踏实实的走好每一步。 其实很感谢有这个工作的机会，如果没有这个机会，没有当初的选择。我可能这个时候还是教室上课，或者寝室上网、玩。更是不会了解这么多，也不会学到很多东西，不会二次开发，不会使用框架，更是不会去搭建自己的博客。但是这份工作也是很累的，整天的坐在办公室，眼睛对着电脑，不停在写代码，测试代码，有时候真的很头疼。所以作为PHP程序员，一定要学会缓解，放松。 有一种说法，说一个程序员一定要削尖了脑袋去一个大公司去上班，先是学习，长点见识，然后做点什么。以后出来找工作什么的就不愁了。还有一种出路就是自己做一个产品，然后去不停的完善它。</p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#13" title="2011-11-26 00:34:10">29的博客</a>:</strong> 都是武汉的，估计你的博客才开的，所以来看看，以后都交流学习！</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/ti-jiao-biao-dan-shi-xian-tan-chuang-shi-de-jing-gao.html">提交表单实现，弹窗试的警告</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2011年11月25日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>适合使用编辑器的时候的验证。JS代码如下(第二个为UEditor的特殊判断用法)：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">language</span><span class="o">=</span><span class="s2">&quot;javascript&quot;</span><span class="o">&gt;</span>
+</span><span class="line"><span class="kd">function</span> <span class="nx">chkinput</span><span class="p">(</span><span class="nx">form</span><span class="p">)</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="nx">form</span><span class="p">.</span><span class="nx">title</span><span class="p">.</span><span class="nx">value</span><span class="o">==</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;请输入新闻标题!&quot;</span><span class="p">);</span>
+</span><span class="line">        <span class="nx">form</span><span class="p">.</span><span class="nx">title</span><span class="p">.</span><span class="nx">select</span><span class="p">();</span>
+</span><span class="line">        <span class="k">return</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">var</span> <span class="nx">content</span><span class="o">=</span><span class="nx">editor</span><span class="p">.</span><span class="nx">hasContents</span><span class="p">()</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">content</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;你的输入为空&quot;</span><span class="p">);</span>
+</span><span class="line">        <span class="k">return</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">return</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>html代码如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;&lt;?php echo site_url(&#39;chome/news_ok&#39;)?&gt;&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">onSubmit=</span><span class="s">&quot;return chkinput(this)&quot;</span><span class="nt">&gt;</span>
+</span><span class="line">    <span class="nt">&lt;dl&gt;</span>
+</span><span class="line">        <span class="nt">&lt;dt&gt;</span>标题：<span class="nt">&lt;/dt&gt;</span>
+</span><span class="line">        <span class="nt">&lt;dd&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;title&quot;</span> <span class="nt">/&gt;&lt;/dd&gt;</span>
+</span><span class="line">        <span class="nt">&lt;dt&gt;</span>分类：<span class="nt">&lt;/dt&gt;</span>
+</span><span class="line">        <span class="nt">&lt;dd&gt;</span>
+</span><span class="line">            <span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;navid&quot;</span><span class="nt">&gt;</span>
+</span><span class="line">            <span class="cp">&lt;?php foreach ($nav as $row){</span>
+</span><span class="line"><span class="cp">                if ($row[&#39;nav_id&#39;]!=1 &amp;&amp; $row[&#39;nav_type&#39;]==$nav_type) {</span>
+</span><span class="line"><span class="cp">                    echo &#39;&lt;option value=&#39;.$row[&#39;nav_name&#39;].&#39;&gt;&#39;.$row[&#39;nav_name&#39;].&#39;&lt;/option&gt;&#39;;</span>
+</span><span class="line"><span class="cp">                };</span>
+</span><span class="line"><span class="cp">            }?&gt;</span>
+</span><span class="line">            <span class="nt">&lt;/select&gt;</span>
+</span><span class="line">        <span class="nt">&lt;/dd&gt;</span>
+</span><span class="line">        <span class="nt">&lt;dt&gt;</span>时间：<span class="nt">&lt;/dt&gt;</span>
+</span><span class="line">        <span class="nt">&lt;dd&gt;&lt;input</span> <span class="na">id=</span><span class="s">&quot;d11&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">onClick=</span><span class="s">&quot;WdatePicker()&quot;</span> <span class="na">name=</span><span class="s">&quot;addtime&quot;</span> <span class="na">value=</span><span class="s">&quot;&lt;?php echo date(&quot;</span><span class="na">Y-m-d</span><span class="err">&quot;);?</span><span class="nt">&gt;</span>&quot; autocomplete=&quot;off&quot;/&gt;<span class="nt">&lt;/dd&gt;</span>
+</span><span class="line">        <span class="nt">&lt;dt&gt;&lt;/dt&gt;</span>
+</span><span class="line">        <span class="nt">&lt;dd&gt;</span>
+</span><span class="line">            <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/plain&quot;</span> <span class="na">id=</span><span class="s">&quot;myEditor&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class="line">            <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+</span><span class="line">                <span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">baidu</span><span class="p">.</span><span class="nx">editor</span><span class="p">.</span><span class="nx">ui</span><span class="p">.</span><span class="nx">Editor</span><span class="p">();</span>
+</span><span class="line">                <span class="nx">editor</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s2">&quot;myEditor&quot;</span><span class="p">);</span>
+</span><span class="line">            <span class="nt">&lt;/script&gt;</span>
+</span><span class="line">        <span class="nt">&lt;/dd&gt;</span>
+</span><span class="line">        <span class="nt">&lt;dt&gt;&lt;/dt&gt;</span>
+</span><span class="line">        <span class="nt">&lt;dd</span> <span class="na">class=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">name=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;&amp;nbsp;&quot;</span> <span class="nt">/&gt;&lt;/dd&gt;</span>
+</span><span class="line">    <span class="nt">&lt;/dl&gt;</span>
+</span><span class="line"><span class="nt">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>这个表单里面有两个效果，一个是<a href="http://www.my97.net/dp/demo/index.htm">My97日期控件</a>JS，还有一个<a href="http://ueditor.baidu.com/teach.html">百度Ueditor编辑器</a>。 使用百度编辑器的时候注意editor_config.js 配置文件里面的URL路径。 注：autocomplete=”off”是关闭记忆功能。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/shi-xian-checkbox-quan-xuan-he-PHP-shan-chu-duo-ge-shu-ju.html">实现checkbox全选和PHP删除多个数据</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2011年11月24日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>首先定义表单中checkbox的name为一个数组range[]</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;range[]&quot;</span> <span class="na">value=</span><span class="s">&quot;你设定的值&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>示例：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;range[]&quot;</span> <span class="na">value=</span><span class="s">&quot;&lt;?php echo $row[&#39;id&#39;];?&gt;&quot;</span><span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>下面是“全选”、“反选”、“删除”。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">value=</span><span class="s">&quot;全选&quot;</span> <span class="na">id=</span><span class="s">&quot;selectAll&quot;</span><span class="nt">&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;button&quot;</span> <span class="na">value=</span><span class="s">&quot;反选&quot;</span> <span class="na">id=</span><span class="s">&quot;unSelect&quot;</span><span class="nt">&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;删除&quot;</span> <span class="na">onclick=</span><span class="s">&quot;return queren()&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>JS代码如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class="line"><span class="kd">function</span> <span class="nx">$</span><span class="p">(</span><span class="nx">id</span><span class="p">){</span>
+</span><span class="line">    <span class="k">return</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">    <span class="kd">var</span> <span class="nx">selectAll</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;selectAll&quot;</span><span class="p">),</span>
+</span><span class="line">    <span class="nx">unSelect</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;unSelect&quot;</span><span class="p">),</span>
+</span><span class="line">    <span class="nx">inputs</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">&#39;range[]&#39;</span><span class="p">),</span>
+</span><span class="line">    <span class="nx">len</span> <span class="o">=</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+</span><span class="line">    <span class="nx">selectAll</span><span class="p">.</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">        <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">len</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class="line">            <span class="nx">inputs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">checked</span><span class="o">=</span><span class="kc">true</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="nx">unSelect</span><span class="p">.</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">        <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">len</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class="line">            <span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="nx">inputs</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+</span><span class="line">            <span class="nx">o</span><span class="p">.</span><span class="nx">checked</span><span class="o">?</span><span class="nx">o</span><span class="p">.</span><span class="nx">checked</span><span class="o">=</span><span class="kc">false</span><span class="o">:</span><span class="nx">o</span><span class="p">.</span><span class="nx">checked</span><span class="o">=</span><span class="kc">true</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class="line"><span class="kd">function</span> <span class="nx">queren</span><span class="p">(){</span>
+</span><span class="line">    <span class="kd">var</span> <span class="nx">info</span><span class="o">=</span><span class="nx">confirm</span><span class="p">(</span><span class="s1">&#39;确认删除么？&#39;</span><span class="p">);</span>
+</span><span class="line">    <span class="k">if</span><span class="p">(</span><span class="nx">info</span><span class="o">==</span><span class="kc">true</span><span class="p">){</span>
+</span><span class="line">        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>JS代码如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class="line"><span class="kd">function</span> <span class="nx">$</span><span class="p">(</span><span class="nx">id</span><span class="p">){</span>
+</span><span class="line"><span class="k">return</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">	<span class="kd">var</span> <span class="nx">pan</span><span class="p">;</span>
+</span><span class="line">	<span class="kd">var</span> <span class="nx">conf</span><span class="p">;</span>
+</span><span class="line">	<span class="kd">var</span> <span class="nx">selectAll</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;selectAll&quot;</span><span class="p">),</span>
+</span><span class="line">	<span class="nx">unSelect</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;unSelect&quot;</span><span class="p">),</span>
+</span><span class="line">	<span class="nx">del</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;del&quot;</span><span class="p">),</span>
+</span><span class="line">	<span class="nx">inputs</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByName</span><span class="p">(</span><span class="s1">&#39;range[]&#39;</span><span class="p">),</span>
+</span><span class="line">	<span class="nx">len</span> <span class="o">=</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+</span><span class="line">	<span class="nx">selectAll</span><span class="p">.</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">		<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">len</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class="line">			<span class="nx">inputs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">checked</span><span class="o">=</span><span class="kc">true</span><span class="p">;</span>
+</span><span class="line">		<span class="p">}</span>
+</span><span class="line">	<span class="p">}</span>
+</span><span class="line">	<span class="nx">unSelect</span><span class="p">.</span><span class="nx">onclick</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">		<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">len</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class="line">			<span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="nx">inputs</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+</span><span class="line">			<span class="nx">o</span><span class="p">.</span><span class="nx">checked</span><span class="o">?</span><span class="nx">o</span><span class="p">.</span><span class="nx">checked</span><span class="o">=</span><span class="kc">false</span><span class="o">:</span><span class="nx">o</span><span class="p">.</span><span class="nx">checked</span><span class="o">=</span><span class="kc">true</span><span class="p">;</span>
+</span><span class="line">		<span class="p">}</span>
+</span><span class="line">	<span class="p">}</span>
+</span><span class="line">
+</span><span class="line">	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;form1&quot;</span><span class="p">).</span><span class="nx">onsubmit</span><span class="o">=</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">		<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">len</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class="line">			<span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="nx">inputs</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+</span><span class="line">			<span class="k">if</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">checked</span><span class="p">){</span>
+</span><span class="line">				<span class="nx">pan</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span><span class="line">				<span class="k">break</span><span class="p">;</span>
+</span><span class="line">			<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span><span class="line">				<span class="nx">pan</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span><span class="line">			<span class="p">}</span>
+</span><span class="line">		<span class="p">}</span>
+</span><span class="line">
+</span><span class="line">		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">pan</span><span class="p">){</span>
+</span><span class="line">			<span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;请选择&quot;</span><span class="p">);</span>
+</span><span class="line">			<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class="line">		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span><span class="line">			<span class="nx">conf</span><span class="o">=</span><span class="nx">confirm</span><span class="p">(</span><span class="s2">&quot;确定删除&quot;</span><span class="p">);</span>
+</span><span class="line">		<span class="p">}</span>
+</span><span class="line">
+</span><span class="line">		<span class="k">if</span><span class="p">(</span><span class="nx">conf</span><span class="p">){</span>
+</span><span class="line">		  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class="line">		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span><span class="line">			<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class="line">		<span class="p">}</span>
+</span><span class="line">	<span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>删除按钮：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;删除&quot;</span> <span class="na">id=</span><span class="s">&quot;del&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>form表单id=”form1” 并且还要调用一个jquery。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/PHP-huo-qu-bian-ji-qi-li-mian-de-di-yi-zhang-tu-pian-zuo-wei-suo-lve-tu.html">PHP获取编辑器里面的第一张图片做为缩略图</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2011年11月23日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>思路是这样的：使用正则表达式 查询到文章所在的字段，获取到图片的绝对路径。 代码如下：（这个我使用的是CI框架开发的，下面是控制器里面的代码）</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="c1">//获取文章字段的内容</span>
+</span><span class="line">
+</span><span class="line"><span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;sel_news&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">mhome</span><span class="o">-&gt;</span><span class="na">sel_news</span><span class="p">();</span>
+</span><span class="line">
+</span><span class="line"><span class="k">foreach</span> <span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;sel_news&#39;</span><span class="p">]</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">];</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="c1">//正则表达式查找图片的绝对路径，并且获取</span>
+</span><span class="line"><span class="nb">preg_match_all</span> <span class="p">(</span><span class="s2">&quot;/&lt;(img|IMG)(.*)(src|SRC)=[</span><span class="se">\&quot;</span><span class="s2">|&#39;|]{0,}([h|\/].*(jpg|JPG|gif|GIF|png|PNG))[</span><span class="se">\&quot;</span><span class="s2">|&#39;|\s]{0,}/isU&quot;</span><span class="p">,</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">],</span><span class="nv">$out</span><span class="p">);</span>
+</span><span class="line"><span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;get_image&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$out</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>视图输出代码：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&#39;&lt;?php echo $get_image[0];?&gt;&#39;</span><span class="nt">&gt;&lt;/img&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如是是想输出多张图片的话，视图就用foreach 输出。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/CI-kuang-jia-xue-xi-er-fen-ye-lei.html">CI框架学习（二）——分页类</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2011年11月23日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>手册写的很简单，看了无从下手，不过后来看了一个国外的视频教程。立马就懂了，国内的不行。 先看一下效果图：</p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160806.png" alt="" /></p>
+
+<p>下面是控制器中的代码：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="k">function</span> <span class="nf">list_news</span><span class="p">(</span><span class="nv">$offset</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">model</span><span class="p">(</span><span class="s1">&#39;mhome&#39;</span><span class="p">);</span><span class="c1">//加载模型</span>
+</span><span class="line">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;pagination&#39;</span><span class="p">);</span> <span class="c1">// 加载分页类</span>
+</span><span class="line">    <span class="nv">$limit</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="c1">// 每页显示数量</span>
+</span><span class="line">    <span class="nv">$total</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">mhome</span><span class="o">-&gt;</span><span class="na">count_news</span><span class="p">();</span><span class="c1">// 统计数量</span>
+</span><span class="line">    <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;sel_news&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">mhome</span><span class="o">-&gt;</span><span class="na">sel_news</span><span class="p">(</span><span class="nv">$limit</span><span class="p">,</span><span class="nv">$offset</span><span class="p">);</span><span class="c1">//调用模型，查询数据库</span>
+</span><span class="line">
+</span><span class="line">    <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;base_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">base_url</span><span class="p">()</span><span class="o">.</span><span class="s1">&#39;chome/list_news/&#39;</span><span class="p">;</span><span class="c1">// 分页的基础 URL</span>
+</span><span class="line">    <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;total_rows&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$total</span><span class="p">;</span><span class="c1">//记录总数</span>
+</span><span class="line">    <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;per_page&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$limit</span><span class="p">;</span> <span class="c1">//每页条数</span>
+</span><span class="line">
+</span><span class="line">    <span class="c1">//几行可选设置</span>
+</span><span class="line">    <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;full_tag_open&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;div class=&quot;pagination&quot;&gt;&#39;</span><span class="p">;</span> <span class="c1">// 分页开始样式</span>
+</span><span class="line">    <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;full_tag_close&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="p">;</span> <span class="c1">// 分页结束样式</span>
+</span><span class="line">    <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;first_link&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;首页&#39;</span><span class="p">;</span> <span class="c1">// 第一页显示</span>
+</span><span class="line">    <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;last_link&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;末页&#39;</span><span class="p">;</span> <span class="c1">// 最后一页显示</span>
+</span><span class="line">    <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;next_link&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;下一页 &gt;&#39;</span><span class="p">;</span> <span class="c1">// 下一页显示</span>
+</span><span class="line">    <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;prev_link&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt; 上一页&#39;</span><span class="p">;</span> <span class="c1">// 上一页显示</span>
+</span><span class="line">    <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;cur_tag_open&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39; &lt;a class=&quot;current&quot;&gt;&#39;</span><span class="p">;</span> <span class="c1">// 当前页开始样式</span>
+</span><span class="line">    <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;cur_tag_close&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&lt;/a&gt;&#39;</span><span class="p">;</span> <span class="c1">// 当前页结束样式</span>
+</span><span class="line">    <span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;num_links&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="c1">// 当前连接前后显示页码个数</span>
+</span><span class="line">
+</span><span class="line">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pagination</span><span class="o">-&gt;</span><span class="na">initialize</span><span class="p">(</span><span class="nv">$config</span><span class="p">);</span> <span class="c1">// 配置分页</span>
+</span><span class="line">
+</span><span class="line">    <span class="nv">$data</span><span class="p">[</span><span class="s1">&#39;pag_links&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pagination</span><span class="o">-&gt;</span><span class="na">create_links</span><span class="p">();</span><span class="c1">//显示分页</span>
+</span><span class="line">
+</span><span class="line">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">view</span><span class="p">(</span><span class="s1">&#39;admin/list_news&#39;</span><span class="p">,</span><span class="nv">$data</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>模型中是代码：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="c1">//查询数据</span>
+</span><span class="line">
+</span><span class="line"><span class="k">function</span> <span class="nf">sel_news</span><span class="p">(</span><span class="nv">$limit</span><span class="p">,</span><span class="nv">$offset</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="nv">$limit</span><span class="p">,</span><span class="nv">$offset</span><span class="p">);</span>
+</span><span class="line">    <span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;news&#39;</span><span class="p">);</span>
+</span><span class="line">    <span class="nv">$row</span> <span class="o">=</span> <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">row</span><span class="p">(</span><span class="s1">&#39;navid&#39;</span><span class="p">);</span>
+</span><span class="line">    <span class="k">return</span> <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">result_array</span><span class="p">();</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">//查询数量</span>
+</span><span class="line"><span class="k">function</span> <span class="nf">count_news</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">    <span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get_where</span><span class="p">(</span><span class="s1">&#39;news&#39;</span><span class="p">);</span>
+</span><span class="line">    <span class="k">return</span> <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">num_rows</span><span class="p">();</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>视图显示代码：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;page&quot;</span><span class="o">&gt;</span>
+</span><span class="line"><span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$pag_links</span><span class="p">;</span> <span class="cp">?&gt;</span><span class="x"></span>
+</span><span class="line"><span class="x">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>CSS样式如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+</pre></td><td class="code"><pre><code class="css"><span class="line"><span class="c">/*************** Pagination for MeMo Blog ***************/</span>
+</span><span class="line"><span class="nf">#page</span> <span class="nc">.pagination</span> <span class="p">{</span>
+</span><span class="line">    <span class="k">border-top</span><span class="o">:</span><span class="m">1px</span> <span class="k">solid</span> <span class="m">#dfdfdf</span><span class="p">;</span>
+</span><span class="line">    <span class="k">padding-top</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+</span><span class="line">    <span class="k">text-align</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
+</span><span class="line">    <span class="k">margin-bottom</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+</span><span class="line">    <span class="k">font-size</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="nc">.pagination</span> <span class="nt">a</span> <span class="o">,</span><span class="nc">.pagination</span> <span class="nt">a</span><span class="nc">.number</span> <span class="p">{</span>
+</span><span class="line">    <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="m">5px</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
+</span><span class="line">    <span class="k">padding</span><span class="o">:</span> <span class="m">3px</span> <span class="m">6px</span><span class="p">;</span>
+</span><span class="line">    <span class="k">border</span><span class="o">:</span> <span class="m">1px</span> <span class="k">solid</span> <span class="m">#d0d0d0</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="nc">.pagination</span> <span class="nt">a</span><span class="nd">:hover</span><span class="o">,</span><span class="nc">.pagination</span> <span class="nt">a</span><span class="nc">.current</span> <span class="p">{</span>
+</span><span class="line">    <span class="k">border-color</span><span class="o">:</span> <span class="m">#000</span> <span class="cp">!important</span><span class="p">;</span>
+</span><span class="line">    <span class="k">color</span><span class="o">:</span> <span class="m">#000</span> <span class="cp">!important</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="nf">#page</span><span class="p">{</span>
+</span><span class="line">    <span class="k">float</span><span class="o">:</span><span class="k">right</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>说实话，不是很喜欢CI自带的分页类，默认第4页才显示 【首页】、倒数第4页显示【尾页】。</p>
+
+<p>下次有机会自己研究一个分页。</p>
+
+<p> </p>
+
+<p><strong>注：</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="nv">$config</span><span class="p">[</span><span class="s1">&#39;uri_segment&#39;</span><span class="p">]</span><span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>分页方法自动测定你 URI 的哪个部分包含页数。如果你需要一些不一样的，你可以明确指定它。默认是3。 $offset 默认是：$this-&gt;uri-&gt;segment(3)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/33">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/31">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

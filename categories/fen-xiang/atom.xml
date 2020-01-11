@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 分享 | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/fen-xiang/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[函数式编程初探]]></title>
+    <link href="https://blog.forecho.com/a-preliminary-study-on-functional-programming.html"/>
+    <updated>2019-08-29T13:48:22+00:00</updated>
+    <id>https://blog.forecho.com/a-preliminary-study-on-functional-programming</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">什么是函数式编程</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">入门示例</a></li>
+  <li><a href="#section-3" id="markdown-toc-section-3">函数式编程有哪些特性</a>    <ul>
+      <li><a href="#first-class-functions" id="markdown-toc-first-class-functions">头等函数（First-class functions）</a></li>
+      <li><a href="#pure-functions-" id="markdown-toc-pure-functions-">纯函数（Pure functions）和 不可变状态</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-4" id="markdown-toc-section-4">尾递归优化</a></li>
+  <li><a href="#section-5" id="markdown-toc-section-5">对比命令式编程比较</a></li>
+  <li><a href="#section-6" id="markdown-toc-section-6">函数式编程优缺点</a>    <ul>
+      <li><a href="#section-7" id="markdown-toc-section-7">优点</a></li>
+      <li><a href="#section-8" id="markdown-toc-section-8">缺点</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-9" id="markdown-toc-section-9">最后</a></li>
+  <li><a href="#section-10" id="markdown-toc-section-10">参考链接</a></li>
+</ul>
+
+<h2 id="section">引言</h2>
+
+<h2 id="section-1">什么是函数式编程</h2>
+
+<p>函数式编程是是一种编程范式，它将计算机运算视为函数运算，并且避免使用程序状态以及易变对象。其中，λ演算（lambda calculus）为该语言最重要的基础。而且，λ演算的函数可以接受函数当作输入（引数）和输出（传出值）。</p>
+
+<!--more-->
+
+<h2 id="section-2">入门示例</h2>
+
+<p>输出前 25 个整数的平方值，PHP 语言：</p>
+
+<p><code>php
+for ($i=0; $i &lt; 25; $i++) { 
+	echo $i * $i . ',';
+}
+// 0,1,4,9,16,25,36,49,64,81,100,121,144,169,196,225,256,289,324,361,400,441,484,529,576,
+</code></p>
+
+<p>如果是函数式编程语言:</p>
+
+<p><code>haskell
+print(map (^2) [0 .. 25])
+-- [0,1,4,9,16,25,36,49,64,81,100,121,144,169,196,225,256,289,324,361,400,441,484,529,576,625]
+</code></p>
+
+<p><code>print</code> 是一个函数，<code>map</code> 也是一个函数。</p>
+
+<h2 id="section-3">函数式编程有哪些特性</h2>
+
+<h3 id="first-class-functions">头等函数（First-class functions）</h3>
+
+<p><strong>头等函数</strong>指的是函数与其他数据类型一样，处于平等地位，可以赋值给其他变量，也可以作为参数，传入另一个函数，或者作为别的函数的返回值。PHP 支持头等函数。围绕这一特性的应用有：</p>
+
+<ul>
+  <li><strong>高阶函数（Higher-order function）</strong>：一个函数满足至少一个参数是函数或者返回一个函数时，我们可以称这个函数为高阶函数。</li>
+</ul>
+
+<p>高阶函数的示例一（参数是函数），返回一个数组中的偶数：</p>
+
+<p><code>php
+$input = [1, 2, 3, 4, 5, 6];
+// 匿名函数赋值给变量
+$filterEven = function($item) {
+    return ($item % 2) == 0;
+};
+$output = array_filter($input, $filterEven);
+print_r($output);
+// 不使用变量，直接使用闭包的版本
+$output = array_filter($input, function($item) {
+    return ($item % 2) == 0;
+});
+print_r($output);
+</code></p>
+
+<p>高阶函数的示例二（返回函数），返回一个数组中的偶数：</p>
+
+<p><code>php
+/**
+ * 返回一个大于n的匿名函数
+ */
+function criteriaGreaterThan($min)
+{
+    return function($item) use ($min) {
+        return $item &gt; $min;
+    };
+}
+$input = [1, 2, 3, 4, 5, 6];
+$output = array_filter($input, criteriaGreaterThan(3));
+print_r($output); // items &gt; 3
+</code></p>
+
+<p>PHP 自带的高阶函数还有 <code>array_map</code>、<code>array_reduce</code>……</p>
+
+<ul>
+  <li><strong>柯里化 (Currying)</strong>：又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。（<a href="https://zh.wikipedia.org/wiki/%E6%9F%AF%E9%87%8C%E5%8C%96">来源</a>）</li>
+</ul>
+
+<p><code>php
+// 柯里化之前
+function foo($x, $y, $z) {
+	echo $x + $y + $z;
+}
+echo foo(1, 2, 3); // 6
+// 柯里化之后
+function fnFoo($x, $y) {
+	return function($z) use($x, $y) {
+		foo($x, $y, $z);
+	};
+}
+$bar = fnFoo(1,2);
+echo $bar(3); // 6
+</code></p>
+
+<p>使用场合（或者说是优点）：</p>
+
+<ul>
+  <li>参数复用</li>
+  <li>延迟执行</li>
+</ul>
+
+<h3 id="pure-functions-">纯函数（Pure functions）和 不可变状态</h3>
+
+<p><strong>纯函数</strong></p>
+
+<p>若一个函数符合以下要求，则它可能被认为是纯函数（也可以叫表达式）：</p>
+
+<ul>
+  <li>不依赖外部：该函数的返回结果只依赖于它的参数。</li>
+  <li>不改变外部：该函数不能有语义上可观察的函数副作用，诸如『触发事件』，使输出设备输出，或更改输出值以外物件的内容等。</li>
+</ul>
+
+<p>我们来看一个例子：</p>
+
+<p><code>js
+// 不是纯函数
+const a = 1
+const foo = (b) =&gt; a + b
+foo(2) // =&gt; 3
+// 纯函数
+const a = 1
+const bar = (x, b) =&gt; x + b
+bar(1, 2) // =&gt; 3
+</code></p>
+
+<p><code>foo</code> 函数不是一个纯函数，因为它返回的结果依赖于外部变量 a，我们在不知道 a 的值的情况下，并不能保证 <code>foo(2)</code> 的返回值是 3。
+<code>bar</code> 的返回结果只依赖于它的参数 x 和 b，<code>bar(1, 2)</code> 永远是 3。</p>
+
+<p>纯函数的好处是没有副作用，保证了无论在什么时候调用函数，对于相同的输入，总会得到相同的输出。</p>
+
+<p><strong>不可变状态</strong></p>
+
+<p>在纯函数式编程语言中，变量被赋值之后就不可以修改值了。在其他类型的语言中，变量往往用来保存一个临时状态。没有变量就不能写复杂的程序了吗？</p>
+
+<p>事实上函数式程序是可以保存状态的，只不过它们用的不是变量，而是函数。状态保存在函数的参数中，也就是说在栈上。如果你需要保存一个状态一段时间并且时不时的修改它，那么你可以编写一个递归函数。举个例子：</p>
+
+<p><code>php
+//递归实现字符串翻转
+function reverseString($str)
+{
+	if(strlen($str) &gt; 0) {
+		reverseString(substr($str,1));
+	}
+	echo substr($str,0,1);
+	return;
+}
+reverseString('forecho'); // ohcerof
+</code></p>
+
+<h2 id="section-4">尾递归优化</h2>
+
+<p>在函数式编程中，由于没有可变状态，for, while 这些循环都只能通过递归来实现，因此函数式编程严重依赖递归，如上面的代码示例。</p>
+
+<p>我们知道递归的害处，那就是如果递归很深的话，栈受不了，并会导致性能大幅度下降。所以为了防止函数栈肆意扩展(导致栈溢出)，通常函数式语言的编译器都会实现尾调用优化。</p>
+
+<h2 id="section-5">对比命令式编程比较</h2>
+
+<ul>
+  <li>命令式编程（imperative）：命令『机器』如何去做事情(how)，这样不管你想要的是什么(what)，它都会按照你的命令实现。</li>
+  <li>声明式编程（Declarative）：告诉『机器』你想要的是什么(what)，让机器想出如何去做(how)。</li>
+</ul>
+
+<p>以生活中打车到王府井大街作为例子：</p>
+
+<ul>
+  <li>命令式编程：下个路口左转 -&gt; 下个有红灯的路口右转 -&gt; 前进100米 -&gt; 在下个路口掉头 -&gt; 前进1500米 -&gt; 到达王府井大街出租车停车区</li>
+  <li>声明式编程：带我到王府井大街。</li>
+</ul>
+
+<p>SQL 是典型的声明式编程语言，示例</p>
+
+<p><code>sql
+SELECT * from `user` WHERE `username` = 'forecho';
+</code></p>
+
+<p>如果用命令式编程语言改写的话：</p>
+
+<p><code>php
+$users = ['forecho', 'cai'];
+foreach ($users as $key =&gt; $user) {
+	if($user == "forecho") {
+     print("find");
+     break;
+    }
+}
+</code></p>
+
+<p>除了 SQL，网页编程中用到的 HTML 和 CSS 也都属于声明式编程，函数式编程也属于声明式编程，但是他又不仅仅局限于声明式编程。</p>
+
+<h2 id="section-6">函数式编程优缺点</h2>
+
+<h3 id="section-7">优点</h3>
+
+<ul>
+  <li>代码简洁，开发快速</li>
+  <li>接近自然语言，易于理解</li>
+  <li>更方便的代码调试与 debug：因为是纯函数</li>
+  <li>易于『并发编程』：无副作用</li>
+  <li>代码的热升级</li>
+</ul>
+
+<h3 id="section-8">缺点</h3>
+
+<ul>
+  <li>执行效率并不高，性能比命令式编程差</li>
+  <li>函数式编程用类似管道的方式来处理数据，因此不适合处理可变状态。</li>
+  <li>函数式编程不适合做 IO 操作，也不适合写 GUI。</li>
+</ul>
+
+<h2 id="section-9">最后</h2>
+
+<p>除了本篇文章介绍的函数式编程，其他常见编程范式都有响应式编程、命令式编程、面向对象编程、结构式编程等等。</p>
+
+<p>需要说明的是在整理这篇文章的时候其实我本人并没有函数式编程的经验，所以这里只做了初步分享，等以后我有了经验再来分享。</p>
+
+<h2 id="section-10">参考链接</h2>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Functional_programming">函数式编程</a></li>
+  <li><a href="https://coolshell.cn/articles/10822.html">函数式编程</a></li>
+  <li><a href="https://zh.wikipedia.org/wiki/%CE%9B%E6%BC%94%E7%AE%97">λ演算</a></li>
+  <li><a href="https://phptherightway.com/pages/Functional-Programming.html">Functional Programming in PHP</a></li>
+  <li><a href="https://juejin.im/post/5af13664f265da0ba266efcf">大佬，JavaScript 柯里化，了解一下？</a></li>
+  <li><a href="https://wudaijun.com/2018/05/understand-functional-programing/">理解函数式编程</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[参加 OpenResty 技术沙龙活动]]></title>
+    <link href="https://blog.forecho.com/participate-in-the-openresty-technical-salon.html"/>
+    <updated>2019-08-17T13:48:22+00:00</updated>
+    <id>https://blog.forecho.com/participate-in-the-openresty-technical-salon</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">关键词</a>    <ul>
+      <li><a href="#perl" id="markdown-toc-perl">Perl</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">阅读</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">编程</a></li>
+      <li><a href="#openresty" id="markdown-toc-openresty">OpenResty</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">机器写代码</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">性能优化</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">其他</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-7" id="markdown-toc-section-7">最后</a></li>
+</ul>
+
+<p><img src="https://i.loli.net/2019/08/19/MnqFwm5hd4GQEAK.jpg" alt="" /></p>
+
+<h2 id="section">引言</h2>
+
+<p>起因是公司另外一个项目组老大说，章亦春（下文简称春哥）最近回国，他可以请春哥来公司做个小分享会。之前就对春哥略有耳闻，这次可以见他本人，也是难得的机会。</p>
+
+<p>前两天听完春哥在公司的分享，两个小时他讲了很多他的编程经验和经历，听完收益很大，但是两个小时根本不够他讲，我也没听过瘾，于是又报名了他的<a href="https://www.huodongxing.com/event/7502793207200">《OpenResty 2019 深圳技术沙龙》</a>活动，又跑去听了他讲了 5 个小时。</p>
+
+<p>这篇文章我主要是分享一下他分享的几个点（仅限于我能理解和认为的），以及我的收获。</p>
+
+<blockquote>
+  <p>如果你还不知道春哥是谁的话，可以先读读这篇文章<a href="http://www.ituring.com.cn/article/504549">《从抄书到开源之巅：章亦春的程序人生》</a></p>
+</blockquote>
+
+<!--more-->
+
+<h2 id="section-1">关键词</h2>
+
+<h3 id="perl">Perl</h3>
+
+<p>春哥很早就接触了编程，说是1999年。而且他非常喜欢 <a href="https://www.perl.org/">Perl</a> 语言。到现在他也一直在用 Perl，甚至自己去实现了 Perl6 的方言，他称之为 <a href="https://doc.openresty.com.cn/en/fanlang/">Fanlang</a>，效率比 Perl6 要高，不开源。</p>
+
+<p>这之前我一直以为 Perl 是一个过时的语言，没想到现在还有人用。这次听完分享会，也看了春哥现场写的代码，改变了我对 Perl 的印象，决定去学一学。</p>
+
+<h3 id="section-2">阅读</h3>
+
+<p>春哥抄书学习，大家都有听过了。抄书、抄代码学习的关键在于<strong>延缓阅读速度，不至遗漏每一个重要的细节：眼到，手到，心到。</strong></p>
+
+<p>至于阅读，春哥有自己的一套方法，先阅读 30% 的内容，再猜测结论，然后接着阅读剩下的 70%。有时候猜测的结论与作者截然相反，即撞车的情况，但有时候会出现与自己的猜测一直的情况。</p>
+
+<p>再有就是多读书，多读一手的书（即英文原版），远离二手知识，会影响独立思考。</p>
+
+<h3 id="section-3">编程</h3>
+
+<p>多学习和接触不同的语言，每一类语言都有自己的思维方式，除了可以开阔眼界，也可以开阔思维。春哥是推荐一个月学习一门语言。这里我推荐<a href="http://www.ituring.com.cn/book/829">《七周七语言：理解多种编程范型》</a> 这本书。</p>
+
+<p>上面做的一类语言，可以理解为 PHP、JavaScript、Perl 等脚本语言算一类语言，<a href="https://www.haskell.org/">Haskell</a> 等函数式又算另一类语言。</p>
+
+<p>春哥自己发明了很多小语种，每一种小语种做一个领域的事情。想在线体验这些语言可以访问 <a href="https://demo.openresty.com.cn/langs/fanlang">https://demo.openresty.com.cn/langs/fanlang</a> 体验，还有文档，弹出要输入 Email 的输入框，随便输入一个以 <code>@openresty.com</code> 结尾的邮箱即可。这些小语言的编译器都是春哥用上面提到的 Fanlang 实现的。</p>
+
+<p>特别是给我们大家演示 <a href="https://doc.openresty.com.cn/en/navlang/">Navlang</a> 的时候，我被惊艳到了。Navlang 可以实现基于视觉的自动化操作，可以用来自动化测试、也可以用来写爬虫、还能用来写产品文档，这个时候还可以自动录音、截图。你只要负责写脚本，剩下的交给 Navlang 就可以了。<a href="https://doc.openresty.com.cn/en/mini-cdn-demo/ep01-intro.html">Mini CDN Demo</a> 的文档就是用这种方式实现的，反正我对这个语言最感兴趣了。听说他们 9 月份上线（付费使用），到时候可以想试试。</p>
+
+<p>能写编译器的程序员不简单的，必须要有很强的能力。如果对编译器感兴趣的朋友，春哥推荐三个：</p>
+
+<ul>
+  <li>一本书：<a href="https://book.douban.com/subject/5288601/">《Engineering a Compiler, Second Edition》</a></li>
+  <li>学好正则表达式</li>
+  <li>学好 Linux 的 awk 命令，特别是多看看复杂的 awk 命令</li>
+</ul>
+
+<p>另外就是在学习软件开发的时候可以多看看源码或者参与开源项目，在参与开源项目之前可以先看看 <a href="https://book.douban.com/subject/1459281/">《The Practice of Programming》</a>。代码都是有气味的，在参与开源项目之前先把自己的气味修正，即多注重代码细节。</p>
+
+<h3 id="openresty">OpenResty</h3>
+
+<p>命令的由来，是因为当初 OpenAPI 这个词非常火，然后 <code>resty</code> 是来自于 <code>restful</code>。</p>
+
+<p>第一代 OpenResty 是基于 Perl。第二代 OpenResty 是基于 Nginx + Lua。</p>
+
+<p>现在几乎所有的 CND 服务都是基于 OpenResty，这得意与春哥在 <a href="https://www.cloudflare.com/">CloudFlare</a> 工作了四年多的原因。</p>
+
+<h3 id="section-4">机器写代码</h3>
+
+<p>春哥高中的时候就开始开发程序让机器解高考题。后来自己创业开公司也是因为想继续做这方面的事情，让机器写代码。这个挺有意思的，包括他讲述他在淘宝根据文档生成代码的故事，让我大开眼界。</p>
+
+<h3 id="section-5">性能优化</h3>
+
+<p>技术沙龙的时候讲了很多这方面的点，由于我没有从事这方面的工作，就记录以下几个关键点：</p>
+
+<ul>
+  <li>DTrace：动态追踪技术</li>
+  <li><a href="https://sourceware.org/systemtap/">systemtap</a>：内核调试神器</li>
+  <li><a href="http://www.brendangregg.com/">Brendan Gregg</a>：性能优化领域专家</li>
+</ul>
+
+<h3 id="section-6">其他</h3>
+
+<ul>
+  <li><a href="https://github.com/google/AFL">google/AFL</a>: 模糊测试工具</li>
+  <li><a href="https://github.com/Olivine-Labs/busted">Olivine-Labs/busted</a>: Lua 单元测试</li>
+  <li><a href="https://www.graphviz.org/">Graphviz</a>：一个开源的图可视化工具</li>
+  <li><a href="https://github.com/openresty/programming-openresty">openresty/programming-openresty</a>：一本基于 OpenResty 编程的书</li>
+</ul>
+
+<h2 id="section-7">最后</h2>
+
+<p>春哥再次让我体会到了，牛逼的程序员可以顶十个甚至百个普通的程序员。虽然春哥分享的经历我们能借鉴的不多（写编译器这种事情不是每个程序员都能做的），但是我们可以：</p>
+
+<ul>
+  <li>尝试他的阅读方法</li>
+  <li>多接触不同类型的语言</li>
+  <li>看他分享的两本书</li>
+  <li>……</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用泛用型播客客户端订阅播客节目]]></title>
+    <link href="https://blog.forecho.com/subscribe-to-podcasts-using-the-ubiquitous-podcast-client.html"/>
+    <updated>2018-04-17T05:09:58+00:00</updated>
+    <id>https://blog.forecho.com/subscribe-to-podcasts-using-the-ubiquitous-podcast-client</id>
+    <content type="html"><![CDATA[<h2 id="section">引言</h2>
+
+<p>由于换了一家创业公司（等过一阵子有时间会细说这个事情），最近一个月会比较忙，都没时间写博客了，但是又不想停更，所以就有了这篇文章。</p>
+
+<h2 id="section-1">诞生记</h2>
+
+<p>我听播客已经有几年了，每次做饭、跑步、打扫家务或者上下班比较累的时候听播客真是一举两得的事情。近两年由于喜马拉雅FM、蜻蜓FM等一系列的国内播客平台的火爆，提高了国内播客节目的产出。</p>
+
+<!--more-->
+
+<p>但是有些播主并不注重 Apple 的 Podcast，干脆就没去上架。一直喜欢使用 <a href="https://3li3.com/app/view?id=8052">Overcast</a> 听播客的我，自然是不能忍。想到得第一件事情当然是先搜索，在网上找找看有没有人做类似的工具，我肯定不是一个人有这个需求。果然被我找到了 <a href="https://miao.li/2016/podcast_beta_miao_li/">https://miao.li/2016/podcast_beta_miao_li/</a> ，不过用了大半年，无法使用了。也没找到其他解决办法，最后只能自己再造轮子了。</p>
+
+<p>GitHub 地址：<a href="https://github.com/forecho/Quicksilver">https://github.com/forecho/Quicksilver</a> ，选了一个非常中二的名字，其实就是漫威里面快银的名字。</p>
+
+<h2 id="section-2">实现思路</h2>
+
+<p>其实就是写爬虫，这几年自己做<a href="https://3li3.com/">三立三</a>没少用 Python 写爬虫，所以对我来说就是分分钟的事情。刚开始还想使用 <a href="https://scrapy.org/">Scrapy</a> 来实现的，结果第一次用 Scrapy，卡住一个地方了，花了点时间也没找到解决思路，后来又换回我熟悉的方式了。</p>
+
+<p>写喜马拉雅FM的时候，获取时间上被坑了，接口的创建时间是月日时分，类似这样：12月11日 17:00，没有年啊，坑爹。这个非常重要，因为播客客户端一般都是根据时间排序的。不过几天之后发现页面上有年月日，正好结合一下，算是可以满足了。</p>
+
+<p>基本的实现思路就是，循环抓取到自己想要的数据，重组，生成符合 Podcast 规范的 RSS 即可。不需要保存到数据库，尽量保持简单。每天晚上自动定时更新文件。</p>
+
+<h2 id="section-3">代码开源</h2>
+
+<p>选择开源出于以下几点考虑：</p>
+
+<ul>
+  <li>想吸点粉丝。</li>
+  <li>这种实现方式不太稳定，只要官网数据结构有改动，我这边就可能用不了了。所以选择开源，就算我以后不维护了（这可能性比较小），其他人有这个需求也可以提供代码，帮助维护。</li>
+  <li>我只有听喜马拉雅FM的需求，其他人有其他改进的需求可以贡献代码。</li>
+</ul>
+
+<p>在几个社区宣传之后，Star 数量还算客观。在 <a href="https://www.v2ex.com/t/433381#reply7">V2EX 上宣传</a>之后，当天就有人提交了蜻蜓FM的支持，效率就是这么高，感觉很开心。</p>
+
+<h2 id="section-4">最后</h2>
+
+<p>最后再说两句，如果你是程序员建议你学一下 Python，不需要学得有多精通，会用就行，Python 写小工具真是神奇。我写 Python 的过程基本上就是看<a href="https://www.liaoxuefeng.com/">廖雪峰的官方网站</a>，教程写的简单实用。然后自己再多实践。</p>
+
+<p>最后再贴几个链接：</p>
+
+<ul>
+  <li>前两天看到一个类似的功能的网站，有兴趣可以看一下：<a href="http://getpodcast.xyz/">http://getpodcast.xyz/</a></li>
+  <li>如果你可以访问 YouTube，而且想把 YouTube 频道当播客听，不要错过这个： <a href="http://podsync.net/">http://podsync.net/</a></li>
+  <li>如果你还不知道听什么节目，快看看我这篇文章：<a href="https://blog.forecho.com/im-listening-to-podcasts.html">https://blog.forecho.com/im-listening-to-podcasts.html</a></li>
+  <li>目前已经支持的节目列表：<a href="https://git.io/vpU3y">https://git.io/vpU3y</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[分享我经常看的 YouTube 的频道]]></title>
+    <link href="https://blog.forecho.com/share-YouTube-channels-that-I-often-watch.html"/>
+    <updated>2017-11-16T08:01:58+00:00</updated>
+    <id>https://blog.forecho.com/share-YouTube-channels-that-I-often-watch</id>
+    <content type="html"><![CDATA[<h2 id="section">引言</h2>
+
+<p>使用 YouTube 差不多一年了，每天中午休息之前都会去看看上面的视频，借这次机会好好分享一个我订阅的一些频道。</p>
+
+<p>需要说明的是，我会给推荐的频道打分，打分完全按照自己的喜好。参照豆瓣的打分制度，满分5颗星：</p>
+
+<ul>
+  <li>力荐：⭐⭐⭐⭐⭐</li>
+  <li>推荐：⭐⭐⭐⭐</li>
+</ul>
+
+<h2 id="super-yhttpswwwyoutubecomcsuperycinema"><a href="https://www.youtube.com/c/superycinema">超級歪 Super Y</a></h2>
+
+<p><a href="https://www.youtube.com/c/superycinema"><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424163513.png" alt="超級歪 Super Y" /></a></p>
+
+<p>推荐指数：⭐⭐⭐⭐⭐<br />
+分类：书、电影</p>
+
+<p>此频道主要是的是影评和书评，数量虽然不多，但是每个视频却非常有深度。看完之后常常会让我陷入思考。</p>
+
+<!--more-->
+
+<h2 id="httpswwwyoutubecomusershintaroreview"><a href="https://www.youtube.com/user/shintaroReview">冏星人</a></h2>
+
+<p><a href="https://www.youtube.com/user/shintaroReview"><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424163552.png" alt="冏星人" /></a></p>
+
+<p>推荐指数：⭐⭐⭐⭐⭐<br />
+分类：书</p>
+
+<p>看此频道也主要是书评，她的囧说书系列，我是非常喜欢。听完她推荐的书，我一般都会去图书馆把书借来读读，如果你正处于书荒，不知道读什么书的时候，不妨去听听她介绍的书。</p>
+
+<h2 id="httpswwwyoutubecomusertruemovie1"><a href="https://www.youtube.com/user/truemovie1">觸電網</a></h2>
+
+<p><a href="https://www.youtube.com/user/truemovie1"><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424163604.png" alt="觸電網" /></a></p>
+
+<p>推荐指数：⭐⭐⭐⭐<br />
+分类：电影</p>
+
+<p>这是一个专门收录电影预告片的频道，非常赞，每天中午都是一边吃饭一边看最近有什么电影要上映了。以前根本不知道还有这么多新电影，毕竟国内有很多电影并不会引进的。</p>
+
+<h2 id="httpswwwyoutubecomuserfrankyin1"><a href="https://www.youtube.com/user/Frankyin1">電影法蘭克</a></h2>
+
+<p><a href="https://www.youtube.com/user/Frankyin1"><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424163614.png" alt="電影法蘭克" /></a></p>
+
+<p>推荐指数：⭐⭐⭐⭐<br />
+分类：电影、漫画</p>
+
+<p>我可以说当初上 YouTube 就是为了他吗？无意中在 B站有看到这个频道的搬运工，但是根本不够看，想订阅，发现这个B站没有，UP主只在 YouTube 上。</p>
+
+<p>这个频道主要是看他介绍各种漫威角色的生平事迹，谁让我是漫威和DC迷的。</p>
+
+<h2 id="section-1">其他</h2>
+
+<ul>
+  <li><a href="https://www.youtube.com/channel/UCJ17rw_iNBH9VXIvwPxEySg/">誰不重要</a>: 分享一些影视新闻、对电影的想法或预告分析。</li>
+  <li><a href="https://www.youtube.com/channel/UCZ5MMmvfyBh4A3GZAGlTc5w">速食電影</a>: 非常精彩的电影分析。</li>
+  <li><a href="https://www.youtube.com/channel/UCZ5MMmvfyBh4A3GZAGlTc5w">半瓶醋</a>: 影评。</li>
+  <li><a href="https://www.youtube.com/channel/UCTPPmVw8pCUmw9tfY_MaKNg">三個字SunGuts</a>: 跟健康有关系的小知识。</li>
+  <li><a href="https://www.youtube.com/channel/UCRNsHFT7BFoAPBcuAa5sgEQ">Taiwan Bar</a>: 自己制作动画，讲述知识。</li>
+  <li><a href="https://www.youtube.com/channel/UCeo3JwE3HezUWFdVcehQk9Q">阿滴英文</a>: 跟着一对兄妹俩学习英语。</li>
+  <li><a href="https://www.youtube.com/channel/UCOPRIQpsikpMDmI_VOwnbmw">兆佑 ChaoYo Fitness</a>: 一个关于健身知识的频道。</li>
+  <li><a href="https://www.youtube.com/channel/UCqhnX4jA0A5paNd1v-zEysw">GoPro</a>: GoPro 官方频道。</li>
+  <li><a href="https://www.youtube.com/channel/UCu8ucb1LRJd1gwwXutYDgTg">Erik Conover</a>: 一个旅游的频道。</li>
+</ul>
+
+<h2 id="section-2">总结</h2>
+
+<p>YouTube 做为一个全球最大的视频网站，里面各种优秀的资源非常多，于国内视频网站最大的不同就是 YouTube 是一个 UGC 为主的视频网站，而国内视频网站主要还是买影视版权。这直接就导致了 YouTube 上的资源丰富多彩，我当初学 Angular JS 的时候就是去 YouTube 搜索教学视频学习的。</p>
+
+<p>本来当初是打算靠 YouTube 学习英语的，但是后来发现台湾那边有很多质量很高的频道。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[我在听的播客节目]]></title>
+    <link href="https://blog.forecho.com/im-listening-to-podcasts.html"/>
+    <updated>2017-03-15T15:33:58+00:00</updated>
+    <id>https://blog.forecho.com/im-listening-to-podcasts</id>
+    <content type="html"><![CDATA[<h2 id="section">引言</h2>
+
+<p>大概是3、4年前无意中接触到了播客这种东西，因为上下班地铁上非常挤，通常连手机都掏不出来的那种挤，所以这个时候就非常适合带耳机听点东西，而我之前公司离地铁又有一小段路程，走路的时候也可以边走边听，1个小时左右刚好听完一个节目，久而久之就有了一个人的时候喜欢听播客的习惯。</p>
+
+<p>这篇文章主要是分享一些我常听的播客节目，以下内容完全是根据带有个人偏见的，如果内容感兴趣，你也可以尝试听一下。</p>
+
+<ul>
+  <li>力荐：⭐⭐⭐⭐⭐</li>
+  <li>推荐：⭐⭐⭐⭐</li>
+  <li>一般：⭐⭐⭐</li>
+</ul>
+
+<!--more-->
+
+<h2 id="section-1">偏科技类的播客</h2>
+
+<p><strong><a href="http://teahour.fm/">Teahour</a></strong></p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162858.png" alt="Imgur" /></p>
+
+<p>推荐指数：⭐⭐⭐⭐⭐</p>
+
+<p>现在回想起来这个节目应该是我第一个听的播客了，也是收听最久的播客了，几乎是每一期都必听。这个播客是采访类的节目，常常会邀请一个大牛（Robbin、尤小右、池建强、许式伟等等）或者创业公司创始人（掘金、简书、蝉游记、码农周刊、墨刀等等）来分享经验，干货满满的，而且非常喜欢他们节目的最后一个分享环节。<br />
+每期一个半小时左右。</p>
+
+<p><strong><a href="http://checked.fm/">Checked</a></strong></p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162910.png" alt="Imgur" /></p>
+
+<p>推荐指数：⭐⭐⭐</p>
+
+<p>有采访也有他们三个主播一起聊一个话题的节目，主要是聊 App，效率等一些问题，如果对这方面感兴趣，可以听听看，我在其中收获到很多东西。<br />
+每期一个半小时左右。</p>
+
+<p><strong><a href="https://codetimecn.com/">代码时间</a></strong></p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162920.png" alt="Imgur" /></p>
+
+<p>推荐指数：⭐⭐⭐⭐</p>
+
+<p>也是一个采访类的播客节目，目前为止采访的嘉宾大多数都来自于程序员（陈皓、郝培强、余凡等），也能收获到很多东西。<br />
+每期一个小时左右。</p>
+
+<p><strong><a href="http://www.weareones.com/2">迟早更新</a></strong></p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162928.png" alt="Imgur" /></p>
+
+<p>推荐指数：⭐⭐⭐⭐</p>
+
+<p>偏科技偏商业的播客节目，一般情况下也是采访别人的节目。<br />
+每期一个小时左右。</p>
+
+<h2 id="section-2">其他</h2>
+
+<p><strong><a href="http://www.ximalaya.com/83432108/album/8475135/">冬吴同学会</a></strong></p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162942.png" alt="冬吴同学会" /></p>
+
+<p>推荐指数：⭐⭐⭐⭐⭐</p>
+
+<p>一档商业评论与生活哲思的播客节目，很早之前听他们的 《冬吴相对论》，认识他们的时候比较晚，刚开始听几期，他们就停播了。当时觉得挺可惜的。</p>
+
+<p>前几个月无意中发现他们又开始了，只是改了名字，一样的精彩。每次跑步必听的节目。</p>
+
+<p><strong>吴晓波频道</strong></p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162951.png" alt="吴晓波频道" /></p>
+
+<p>推荐指数：⭐⭐⭐⭐</p>
+
+<p>认识吴晓波是因为几年前看过他写的书，文本确实非常不错，看《激荡三十年》的时候有点热血沸腾。后来也知道他也在开播客，自然就收听了。<br />
+每期20分钟左右，偶尔会听听商业的资讯。</p>
+
+<p><strong><a href="http://www.yixi.tv/">一席</a></strong></p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424163005.png" alt="一席" /></p>
+
+<p>推荐指数：⭐⭐⭐⭐</p>
+
+<p>名字取自「听君一席话，胜读十年书」，非常有意思的节目。在上面我曾经听过饿了么的创始人，法医清明的作者，大冰等人的分享，可以增强你的知识广度。本身是一档视频节目，但是大部分情况下当播客听也可以。我把这个节目当初中国的 TED。<br />
+每期不到半小时。</p>
+
+<p><strong><a href="https://geek.wasai.org/">极客电台</a></strong></p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424163014.png" alt="极客电台" /></p>
+
+<p>推荐指数：⭐⭐⭐</p>
+
+<p>听《新闻酸菜馆》节目的时候发现的，每期20分钟不到，收获一些电脑操作或者生活小技巧，时间短的时候听听。<br />
+每期20分钟左右。</p>
+
+<h2 id="section-3">最后</h2>
+
+<p>推荐大家用泛用型播客客户端订阅收听播客节目，比喜马拉雅、荔枝 FM 或网易云音乐收听要功能强大的多，而且体验要好的多。</p>
+
+<p>iOS 上我推荐 <a href="https://itunes.apple.com/cn/app/overcast-podcast-player/id888422857?mt=8&amp;uo=4&amp;ct=pc&amp;at=1010lmKs">Overcast</a> 和 <a href="https://itunes.apple.com/cn/app/castro-podcast-player/id1080840241?mt=8&amp;uo=4&amp;ct=pc&amp;at=1010lmKs">Castro</a> 两款应用。最后再配合<a href="http://miao.li/2016/podcast_beta_miao_li/">泛用型播客客户端订阅网易云音乐、喜马拉雅、荔枝FM、蜻蜓FM</a>使用，爽得不要不要的。</p>
+
+]]></content>
+  </entry>
+  
+</feed>

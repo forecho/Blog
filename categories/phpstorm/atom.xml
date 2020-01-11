@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Phpstorm | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/phpstorm/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PHP 代码规范之工具篇]]></title>
+    <link href="https://blog.forecho.com/php-code-formatter-tips.html"/>
+    <updated>2018-10-12T12:50:59+00:00</updated>
+    <id>https://blog.forecho.com/php-code-formatter-tips</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">前言</a></li>
+  <li><a href="#phpstorm" id="markdown-toc-phpstorm">Phpstorm</a>    <ul>
+      <li><a href="#psr2-" id="markdown-toc-psr2-">设置 PSR2 代码风格</a></li>
+      <li><a href="#section-1" id="markdown-toc-section-1">录制宏</a></li>
+    </ul>
+  </li>
+  <li><a href="#grumphphttpsgithubcomphprogrumphp--php-codesnifferhttpsgithubcomsquizlabsphpcodesniffer" id="markdown-toc-grumphphttpsgithubcomphprogrumphp--php-codesnifferhttpsgithubcomsquizlabsphpcodesniffer">GrumPHP + PHP CodeSniffer</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">安装</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">使用</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-4" id="markdown-toc-section-4">扩展连接</a></li>
+</ul>
+
+<h2 id="section">前言</h2>
+
+<p>团队合作开发，保证代码的规范、统一是一个非常重要的事情。除了有文档明确的说明规范之外，我们还可以利用一些工具来辅助我们轻松实现代码的规范和统一。</p>
+
+<!--more-->
+
+<h2 id="phpstorm">Phpstorm</h2>
+
+<h3 id="psr2-">设置 PSR2 代码风格</h3>
+
+<p>Phpstorm 依次点击菜单栏 <code>File -&gt; Settings -&gt; Editor -&gt; Code Style -&gt; PHP</code> 找到 <code>Set from</code> 选择 <code>Predefinded Style -&gt; PSR1/PSR2</code></p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424163723.png" alt="" /></p>
+
+<p>只有当使用 <code>Ctrl + Alt + L</code> 才会按照上面代码风格自动格式化。</p>
+
+<h3 id="section-1">录制宏</h3>
+
+<p>如果没有使用 <code>Ctrl + Alt + L</code> 的习惯的话，你可以使用录制宏的方式，制定『当我们按 <code>Ctrl + S</code> 保存的时候自动执行代码格式化』的规则：</p>
+
+<ul>
+  <li>点击 <code>Edit -&gt; Macros -&gt; Start Macro Recording</code> 开始录制宏，然后依次按快捷键 <code>Ctrl + Alt + L</code>、<code>Ctrl + Alt + O</code> 、<code>Ctrl + S</code> (Mac 对应的是 option + command + L、option + control + O 、command + S)。</li>
+  <li>然后点击 <code>Edit -&gt; Macros -&gt; Stop Macro Recording</code> 结束录制。会自动弹出一个窗口，自己设置个名称， 比方说 <code>Super Save</code>。</li>
+  <li>然后点击 <code>File -&gt; Settings -&gt; Keymap</code> 修改快捷键，把之前保存快捷键修改为 <code>Alt + S</code> 或者其他快捷键或者取消。然后搜索 <code>Super Save</code> 添加快捷键为 <code>Ctrl + S</code> 就可以了。</li>
+</ul>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162037.png" alt="" /></p>
+
+<h2 id="grumphphttpsgithubcomphprogrumphp--php-codesnifferhttpsgithubcomsquizlabsphpcodesniffer"><a href="https://github.com/phpro/grumphp">GrumPHP</a> + <a href="https://github.com/squizlabs/PHP_CodeSniffer">PHP CodeSniffer</a></h2>
+
+<h3 id="section-2">安装</h3>
+
+<p><code>sh
+composer require squizlabs/php_codesniffer --dev
+composer require phpro/grumphp --dev
+</code></p>
+
+<ul>
+  <li><a href="https://github.com/squizlabs/PHP_CodeSniffer">PHP CodeSniffer</a> 是一个代码风格检测工具，可以实现检查代码是否符合 PSR2 规范。</li>
+  <li><a href="https://github.com/phpro/grumphp">GrumPHP</a> 配合 Git 强制规范代码格式，提供 Git Hooks 来检测每次提交的代码，格式不通过 Git Commit 执行失败。</li>
+</ul>
+
+<h3 id="section-3">使用</h3>
+
+<p>Composer 执行完毕之后，会自动在项目根目录生成 <code>grumphp.yml</code> 文件，而且会自动添加 Git Hooks，具体可以查看项目根目录的 <code>.git/hooks/pre-commit</code> 和 <code>.git/hooks/commit-msg</code> 文件代码。要想到达我们想要的效果就得改 <code>grumphp.yml</code> 文件，修改之后的代码：</p>
+
+<p><code>
+parameters:
+    git_dir: .
+    bin_dir: ./vendor/bin
+    tasks:
+      phpcs:
+        standard: PSR2
+        ignore_patterns:
+          - ./resources/*
+          - ./database/*,
+          - ./bootstrap/*,
+          - _ide_helper*
+          - ./vendor/*
+</code></p>
+
+<ul>
+  <li><code>standard: PSR2</code> 使用 PSR2 标准。</li>
+  <li><code>ignore_patterns</code> 是不检测的目录或者文件。</li>
+</ul>
+
+<p>安装完之后，我们还可以直接在项目根目录使用 phpcbf 的命令帮我们修复代码的规范：</p>
+
+<p><code>sh
+./vendor/bin/phpcbf --standard=psr2 文件目录
+</code></p>
+
+<h2 id="section-4">扩展连接</h2>
+
+<ul>
+  <li><a href="https://phpstorm.tips/">PhpStorm Tips</a></li>
+  <li><a href="https://github.com/php-cpm/clean-code-php">PHP版的代码整洁之道 中文翻译</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于 PhpStorm 的小技巧]]></title>
+    <link href="https://blog.forecho.com/tips-about-phpstorm.html"/>
+    <updated>2016-01-29T08:36:58+00:00</updated>
+    <id>https://blog.forecho.com/tips-about-phpstorm</id>
+    <content type="html"><![CDATA[<h2 id="section">前言</h2>
+
+<p>如果一个工具是你每天工作都必须要用的，请认真阅读官方文档，花几个小时好好研究使用技巧，这将为你以后工作带来很高的效率。</p>
+
+<p>这篇文章内容其实很早就在我印象笔记里面了，今天整理出来，分享给大家。</p>
+
+<h2 id="section-1">快捷键</h2>
+
+<p><strong>常用快捷键</strong></p>
+
+<ul>
+  <li>全局搜索文件  按两下shift</li>
+  <li>显示项目类列表 alt + 1</li>
+  <li>显示方法列表  alt + 7</li>
+  <li>全局搜索类 ：ctrl+n</li>
+  <li>更新注释：alt+enter</li>
+</ul>
+
+<!--more-->
+
+<p><strong>Mac 快捷键</strong></p>
+
+<ol>
+  <li>显示或者隐藏左边栏：command+1</li>
+  <li>查找文件名：command+shift+o</li>
+  <li>查看文件结构：command+F12</li>
+  <li>查看函数、方法：command+alt+o</li>
+  <li>关闭所有文件的时候 command+↑ 、command+n 快速新建文件</li>
+  <li>command+e 查看历史打开文件</li>
+  <li>Live  Templates：先选中一个模板，再按两下 shift ，再输入 「Live」找到「Save as Live  Templates」就可以新建一个模板</li>
+  <li>alt+command+L 格式化代码</li>
+  <li>代码块转换成独立方法：control+t</li>
+  <li>函数操作 command+n / control+enter</li>
+  <li>方法参数操作：alt+enter</li>
+  <li>调用其他类的时候自动use：设置-》搜索「Import」勾选「Enable auto-import in namespace scope」</li>
+  <li>多个光标：按住 alt 健点击鼠标</li>
+  <li>多选：control+g</li>
+  <li>分屏：「Window」-》「Editor Tabs」-》Split XX</li>
+  <li>设置命名空间：设置-》Directories-》Sources-》p</li>
+</ol>
+
+<p><strong>Windows 快捷键</strong></p>
+
+<ol>
+  <li>项目名右键选择”Local History -&gt; Show History”可查看本地修改记录</li>
+  <li>Ctrl + E 可查看最近打开文件或项目</li>
+  <li>打开File -&gt; Setting -&gt; Editor，选择Appearance下面的Show Method Separators。它会将你的代码按方法，用灰色线框进行智能分割。你还可以使用：alt+↑或↓，在方法之间进行跳转</li>
+  <li>Ctrl + Shift + V，可选择要粘贴的最近内容</li>
+  <li>Ctrl + D，复制粘贴选中的文本</li>
+  <li>Ctrl + Y，删除当前行或选中行</li>
+  <li>Ctrl + Alt + 左右方向键，定位到上一次编辑的位置</li>
+  <li>Alt + 上下方向键，跳转到上/下函数</li>
+  <li>Alt + 左右方向键，导航标签切换</li>
+  <li>Ctrl + N，根据类名称查找</li>
+  <li>Ctrl + Shift + N，根据文件名查找</li>
+  <li>Ctrl + Shift + Alt + N，根据函数名查找</li>
+  <li>Ctrl + Shift + F，Find in Path</li>
+  <li>Ctrl + Shift + I，查看变量初始化的值</li>
+  <li>Ctrl + F12，快速查看当前文件的所有方法</li>
+  <li>Ctrl + /，单行注释</li>
+  <li>Ctrl + Shift + /，多行注释</li>
+  <li>修改默认打开的文件模版：”file” —&gt; “setting” —&gt; “file and code template”</li>
+  <li>/** + Enter 或者  /** + 空格键，自动生成注释</li>
+  <li>Ctrl + Alt + L，格式化代码</li>
+  <li>选中文件或者文件，Alt+Insert 新建文件</li>
+</ol>
+
+<p><strong>更换为 sublime 快捷键</strong></p>
+
+<p>因为以前用习惯了 sublime，改不过来快捷键方式了，所以但是了这个项目 <a href="https://github.com/forecho/PHPStorm-Config">PHPStorm-Config</a></p>
+
+<h2 id="section-2">其他</h2>
+
+<p><strong>视频教程</strong></p>
+
+<p><a href="https://laracasts.com/series/how-to-be-awesome-in-phpstorm">https://laracasts.com/series/how-to-be-awesome-in-phpstorm</a></p>
+
+<p><strong>换主题</strong></p>
+
+<p><a href="http://daylerees.github.io/">http://daylerees.github.io/</a>
+<a href="https://github.com/daylerees/colour-schemes">https://github.com/daylerees/colour-schemes</a></p>
+
+<p>添加主题：
+<code>
+cd ~/Library/Preferences/WebIde80/colors
+wget https://raw.githubusercontent.com/daylerees/colour-schemes/master/jetbrains/yule.icls
+</code></p>
+
+<p><strong>安装插件</strong></p>
+
+<ul>
+  <li>command+shift+a 输入 plugins</li>
+  <li>点击 Browse Repositories</li>
+  <li>输入 color 选择 color ide 安装 重启IDE</li>
+</ul>
+
+<p><strong>更换新建文件模板</strong></p>
+
+<p>Setting -&gt; File and Code Templates</p>
+
+<p><code>
+/**
+* author     : forecho &lt;caizhenghai@gmail.com&gt;
+* createTime : ${DATE} ${TIME}
+* description:
+*/
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

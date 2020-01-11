@@ -1,0 +1,938 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="去年开始接触的 Yii，感谢上个公司，给了我这个机会。 刚开始接触Yii 的时候，头很大，不知道怎么看，之前也有用 CodeIgniter 框架的经验，但是还是不知道怎么入手这个框架，因为你按照他的教程来安装一个 webapp 只需要一条命令就可以了，对，就是一条命令，然后基本的该有的都有了， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/posts/21/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/wo-wei-shen-me-re-ai-Yii.html">我为什么热爱 Yii</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年11月17日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>去年开始接触的 Yii，感谢上个公司，给了我这个机会。</p>
+
+<p>刚开始接触Yii 的时候，头很大，不知道怎么看，之前也有用 CodeIgniter 框架的经验，但是还是不知道怎么入手这个框架，因为你按照他的教程来安装一个 webapp 只需要一条命令就可以了，对，就是一条命令，然后基本的该有的都有了，然后我就开始傻眼了，因为我不知道我该改什么代码了。</p>
+
+<p>CodeIgniter入门很简单，功能也很简单，你把框架文件丢进项目里面，改怎么写还是要怎么写，要自己写表单验证，自己写验证码，自己写分页等等（可能是这样的，太久没用CodeIgniter 了，有些东西可能记不太清楚了）。有人说 CodeIgniter 是一个 PHP 的类，我觉得这也不为过。这个框架只是简化你对 PHP 的写法。至于 MVC 应该怎么写，应该怎么命名是可以很随意的，对于入门PHP 没多久的我来说，是一件很头疼的事，始终不知道这个是写在 M 里面还是要写在 C 里面。</p>
+
+<p>但是 Yii 就不一样了，Gii 功能非常强大，每一个表都可以生成「一套 MVC 文件」，代码都给你生成了，结构很清晰，给你定制了一个很好的标准，你只需要参照这个标准开发就好了，非常棒。Yii 的强大之处在于他的组建，分页？验证码？表单验证？该有的它都有了，你直接调用非常的简单，<strong>让你开发项目的时候更注重业务逻辑的处理，而不是把大把的时间都浪费在调试该死的表单验证，该死的验证码，</strong>这点在我最近用 CakePHP 是深有体会（我目前这个项目是 CakePHP 开发的，我是半路插进来的，对 CakePHP 也是刚了解，但是这个项目的分页没有用框架的，表单验证也没有用框架的，好像连验证码都是自己写的？后期改起来非常的蛋疼！并且如果没有用框架的自带的话，代码是很多的，为了赶项目这个方式是非常不可取的）。</p>
+
+<p>Yii 框架继承了 ROR 的 ActiveRecord 所以操作数据库起来也是非常简单有效的，但是有人就说效率不行，我想说的是在中国互联网产品的环境下，大家的产品都是你抄我、我抄你的情况下，一个项目刚开始就别跟我谈程序执行效率了，快速的赶上你的竞品的功能，让开发人员少加班才是最实在的。我现在算是明白了为什么大家很热爱 Ruby 了。</p>
+
+<p>前提是入门可能没有 CodeIgniter那么简单，但是也没你想象的那么难。下面摘录来一段来自 yiichina 对 yii 的介绍：</p>
+
+<blockquote>
+  <p><strong>Yii是一个高性能的，适用于开发WEB2.0应用的PHP框架。</strong> Yii是一个基于组件、用于开发大型 Web 应用的 <a href="http://www.yiichina.com/performance/">高性能</a> PHP 框架。Yii 几乎拥有了 <a href="http://www.yiichina.com/features/">所有的特性</a> ，包括 MVC、DAO/ActiveRecord、I18N/L10N、caching、基于 JQuery 的 AJAX 支持、用户认证和基于角色的访问控制、脚手架、输入验证、部件、事件、主题化以及 Web 服务等等。Yii 采用严格的 OOP 编写，Yii 使用简单，非常灵活，具有很好的可扩展性。</p>
+</blockquote>
+
+<p>以上是我加了半个月班，每天11点回家的一点吐槽。我上面说的话都是错的，但你最好能证明我是对的。</p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#193" title="2013-11-21 17:12:00">开飞机的小蜗牛</a>:</strong> CI 很简单易用。其他的框架没接触过。尝试着看过一次 laravel ，搞不懂是怎么一回事。</p>
+
+<p><strong><a href="#194" title="2013-11-21 17:20:00">ForEcho</a>:</strong> CI 是很简单，但是很多东西都要自己写。我不认为那是一个框架。建议你学习Yii。</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/MacBook-sheng-ji-dao-SSD-gu-tai-ying-pan.html">MacBook 升级到 SSD（固态硬盘）</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年11月05日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在内存条已经是白菜价格的时代，笔记本电脑性能的瓶颈就是机械硬盘了。机械硬盘的速度早已跟不上内存的反应的速度了。 每次开机很慢，开完机之后还有等几秒钟才能使用，不满于电脑的性能，然后我就买了块固态硬盘。选什么牌子好？镁光、浦科特和三星的 SSD 还算不错，要买就考虑这三个品牌吧，其他的就不用考虑了，固态硬盘还是要考虑稳定性的。 至于如何安装，网上一搜一大把，我就不说了，大致就是买个「笔记本光驱位硬盘托架」，打开笔记本后盖，把光驱卸载下来，然后使用把硬盘固定到硬盘托架里，然后安装硬盘托架到光驱的位置，上好螺丝，就 OK 了。 MacBook 系统很人性化，安装完 SSD 之后进入系统，如果正常的话就可以看到你的固态硬盘了，这个时候你去「磁盘工具」里面「抹掉」一下你的 SSD 盘，就是格式化一下，才能使用。然后准备好你的系统固件，点击安装，选择 SSD 盘，安装，下一步，下一步，等待完成。 安装完系统，初次使用的时候会有一个「系统引导」步骤，其中有一步是「数据迁移」，然后你就可以把机械硬盘里面「已经安装过的软件」系统帮你迁移过来，就可以避免再次安装了。多么省事。注意固态硬盘容量有限，像电影、照片数据比较大的就不要迁移过来了。（迁移数据都比较耗时，我花了大概2个小时） 接下来就把机械硬盘用来专门放资料的了。<del>用磁盘工具在机械硬盘新建分区，把系统分区的Home目录下的Movies、downloads之类的目录转移到新分区上，然后格式化系统分区，最后合并两个分区。</del>OS X和软件装在SSD，终端开启TRIM。Home目录下的Downloads、Pictures之类的文件夹在终端用Unix命令强行删除，最后建立软链接到机械硬盘上，比如 <code>sodo rm -rf ~/Movies </code>和 <code>ln -s /Volumes/Data/Movies ~/Movies</code> 第一个是强行删除当前用户目录的movies，第二个是建立软链接（Data用你的机械硬盘名字替代，如名字有空格，要嘛换名字，要嘛在空格前加上\），这样新的OS X就和之前的OS X的Home下的各个目录链接上了，这种方式对系统和软件是透明的，不会出错，升级系统有可能要重新建立软链接。 固态硬盘的系统开机秒开，十几秒完成开机，大型软件也是秒开，妈妈再也不用担心我电脑卡了。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/cheng-xu-yuan-de-quan-li-fa-an.html">程序员的《权利法案》</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年11月02日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>「程序员应有的权利你都要去争取！而且记住：你可以让公司做出改变，要不然你就换一家公司。」</p>
+
+<ol>
+  <li>每个程序员都应该有两台显示器</li>
+  <li>每个人程序员都应该有一台快速的电脑</li>
+  <li>每个程序员都应该自己选择鼠标和键盘</li>
+  <li>每个程序员都应该有一把舒适的椅子</li>
+  <li>每个程序员都应该能快速接入互联网</li>
+  <li>每个程序员都应该有安静的工作环境</li>
+</ol>
+
+<p>– 《高效能程序员的修炼》</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/tian-fu-hai-shi-nu-li.html">天赋还是努力</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年10月27日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>刚开始听说《怪兽大学》这个动漫电影的时候，看了一下预告片，然后海报，觉得，哇，真的是怪兽，第一次看的话还有点「吓人」，就跟我看《卑鄙的我》一样，还是不适应那个主角的画风，腿那么细，不过「小黄人」确实很可爱。</p>
+
+<p>后来没想到《怪兽大学》还有上一部，叫《怪兽电力公司》，于是先看的这部。想象力真的丰富，我是怎么也想不到电力是由一群怪兽通过吓小孩，然后由收集到的小孩尖叫获取到的，绝对想不到。然后到故事的结尾还把收集吓小孩的尖叫声变成手机小孩的笑声，真是很好的转变，美好的结局，这是皮克斯的一贯的作风。</p>
+
+<p>《怪兽大学》是《怪兽电力公司》的前传，这一部主要讲的是比赛谁最吓人，大家都想获得冠军。大眼仔麦克·华斯基为了这个目标一直非常的努力，课本被的滚瓜烂熟，没事就跑去图书馆看书，知道各种吓人的方法。同学毛怪詹姆士·苏利文却整天玩，他们两个比赛吓人的话，结果确是毛怪赢。就是因为大眼仔天生长的不吓人，个头又小。而毛怪长的个头大，随便那么一吓就挺吓人的，这就是在拼天赋，无论你后天怎么努力有些东西你就是不行。</p>
+
+<p>知乎上有个问题是：<a href="http://www.zhihu.com/question/21107274">人不聪明怎么办？</a>有个人是这样回答的：「真正努力过的人，就会明白天赋的重要。」但是又有这样一句话「以大多数人的努力程度之低，根本轮不到拼天赋。」这就让人变的比较疑惑了。</p>
+
+<p>在看《怪兽大学》的时候，到后面我其实是很想看到大眼仔通过努力变成一个吓人的高手的，但是事实是他再怎么努力也是没有毛怪厉害的，这就是天赋的力量。但是就这样结束了吗？这样的结局并不美好，不符合皮克斯的风格啊。所以最后在毛怪的鼓励下，大眼仔找到了自己的方向，正确的说他找到自己擅长的事了，就是用自己智慧做毛怪的搭档，做自己最擅长的策划。所以说找准方向还是很重要的。 前几天买了本《高效能程序员的修炼》，是 Jeff Atwood 写的，其实之前也没听过这个人，后来才知道他是<a href="http://stackoverflow.com/">Stack Overflow</a>的创始人之一，非常了不起，这个网站也非常好。其中有一段是这样的：</p>
+
+<blockquote>
+  <p>其实，天赋跟成功的关系并不大。如果你有敏锐的商业嗅觉和不错的人际交往能力，你依然可以变得很成功。如果你是一个普通的程序员，但你还能靠这一行过上不错的生活，这已经说明你是很有才的了，只是你不必非得干程序员这一行。 人贵有自知之明。通常你的能力都会比你自认为的要低。缺乏天赋并不是什么大不了的事情。要勇敢一点，发掘自己的特长，并且充分加以发挥。</p>
+</blockquote>
+
+<p>这不正是我看的这部《怪兽大学》所阐述的观点吗？这不禁让我想起了毛姆在《月亮与六便士》里的观点，「文学或是艺术品它是一种基于个人经验的产物，如果你没有体验过某种类似的情景或是做过接近的思考，你很难直接通过文字或是画面获得共鸣。」</p>
+
+<p>所以我认为平常还是多看看书，如果你遇到什么问题，说不定就能在书里面找到答案的。可能是受到《暗时间》这本书的影响，我现在一有点想法就想写下来，不然他会一直停留在我的脑海中，如果没有记下来，总感觉有什么事没做一样。建议大家平常有什么一瞬间的想法要立刻记录下来，这是一笔很宝贵的资源。如果不记录下来，你下次就可能真的想不起来了。</p>
+
+<p>最后感谢皮克斯的动漫电影，他们的电影通常都是很温馨很搞笑，老少皆宜。是他们让世界多了一份欢笑。大部分的作品我都喜欢。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/dai-ma-bu-zhi-qian.html">代码不值钱</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年10月21日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近发现 Podcast 这个好玩的东西，分享给大家。比方说这个：<a href="http://teahour.fm/">http://teahour.fm/</a> 如果有 iPhone 的话直接去下载 Podcast ，可以直接去订阅，非常 cool。</p>
+
+<p>其实 teahour 这个网站我以前有知道过，那时候还听过一集，是讲「暴走漫画」架构的。那个时候对这种纯音频形式的播客没能感兴趣，一直到「十一」之前，无意中又登录到这个网站了，并且还比较认真的听完了一集，听完之后感觉还真不错，很喜欢这个分享。（其实主要是十一要回家，而路途接近三个小时，听这个来打发时间的）</p>
+
+<p>据我了解这个 teahour 创始人是比较偏向 Ruby 语言的，去 <a href="http://ruby-china.org/">Ruby-China</a> 的论坛去看看，你会发现其实的氛围真不错，之前就在知乎上看到有人这样说：「假如你想帮他尽快找个活儿，赚到钱，推荐PHP。假如你想让他成为一个高效工程师，推荐 Python。假如你想让他爱上他的工作，推荐Ruby。」，在后来发现 PHP 的很多框架（比方说 Yii、CakePHP）设计思想很多都有借鉴 Ruby On Rails 的，这些都不禁让我对 Ruby 产生了好感，很想去学习。为此我还买了本 Ruby 创始人写过的《<a href="http://www.amazon.cn/gp/product/B005KGBTQ8/ref=oh_details_o01_s00_i01?ie=UTF8&amp;psc=1">松本行弘的程序世界</a>》。好吧，有点扯远了，可能是介于这个原因，所以我觉得 teahour 上面请的人都比较偏向 Ruby 开发者，比方说我最近听的「跟简书的赵波聊从大公司到创业」和「和Rei一起聊聊他的创业项目 - Writings.io」。</p>
+
+<p>根据我听到的这两个 Podcast 再加上最近的一些「思考」就有了想写这篇文章的想法了。</p>
+
+<p>一个好的互联网项目，绝对不会是因为代码写的好而成功的。而一个失败的互联网产品可能是因为代码写的不好、功能满足不了需求而失败的。想想 Facebook 做社交为什么能成功，而 Google 做的 Google+ 为什么就没有那么的成功，为什么新浪做微博成功了，其他网易、腾讯、搜狐做微博就不能成功。你能说他们的技术不给力吗？不可能的，Google 的技术绝对不会必 Facebook 的差。首页每个公司都会有属于自己的属性的，比方说新浪是属于媒体公司，所以他去做微博这样一款具备媒体功能的产品必定是有成绩的，如果他去做搜索肯定是不合适的。当年有人跟马云说阿里巴巴是一家电子商务公司，他就跟人家急了，阿里巴巴是一家服务型的功能，他只不过是借助互联网这个目前看来最好的方式来完成自己的服务的，如果未来有很好的服务方式，他们会立刻用那种方式的。</p>
+
+<p>用过 ERP、RTX 等一些企业级的软件的你，可能会感叹，怎么会有这么落后的 UI，界面怎么还这么丑，其实我以前这样想过，然后还想着为什么不开发一款这样的软件，但是界面做的好看一点呢？这样一定会有很多人用的。但是真的会这样的吗？简述的赵波以前在 SAP 上了四年班，SAP 就是转为大型企业提供管理系统的，听了他的经历真是很受益。SAP 的系统软件都是那种很丑的，但是他们的系统却卖的非常的好，他们公司有专门的行业研究人员做需求，比方说他们公司有专门研究化学工厂需求方面的人员，有专门研究药厂需求的人员等等，他们了解企业的需求，抓住了这个核心，他们的界面做的丑一点，运行速度多1秒钟，这些客户都不会在乎的，他们在乎的是，我要的功能你要有，我要的数据要准确，要同步。所以当时赵波出来之后没有去做一个会计软件，虽然你有那个技术，但是他完全不懂会计的需求。</p>
+
+<p>关于 Rei 一个人开发的这个 Writings.io 项目，技术方面肯定是没话说的，但是就在前一段时间，Rei 宣布这个项目失败了。其实项目是好的，但是运营没做好，或者说没有这个项目找准路，所以这个项目失败了。<a href="https://news.ycombinator.com/news">Hacker News</a></p>
+
+<p>为什么在 IT 界这么火，完全是因为这个项目是由 <a href="http://ycombinator.com/">Y Combinator</a> 创建的，他们能带动很多牛人在他网站上去讨论，有了这些牛人做核心会员，这个网站访问量还会有不高的吗？国内的冯大辉做了一个中国版的叫 <a href="http://news.dbanotes.net/news">Startup News</a>，在他的带领下这个网站还是不错的，其实你简单研究下这个网站发现功能都是很简答的，我自己都能写开发这样的网站来。他们的成功并不是因为项目的代码写的好。</p>
+
+<p>接下来我们来聊聊微信，微信现在是越来越火了，之前的米聊我是没用过了，界面做的太丑了。前一阵子网易和电信合作开发出来了一款 App 叫「易信」，以及最近比较火的、阿里巴巴出品的「来往」。其实我都觉得微信在背后有在偷笑，这些产品都是在模仿微信，最典型的例子是模仿微信出的公众平台了，真是一点创意都没有，连我都不看好这些产品。但是他们花了那么多钱和尽力去推广，多多少少还是会有人用的，但是最终呢？那就不好说了，社交这个东西没有人用，你做的再好，这个产品也是失败的。Evernote 是比较喜欢的一个公司，他们很火的时候，国内也出了很多不少类似的笔记产品，什么为知、麦库、有道笔记，我都体验过，但是最让我满意的还是印象笔记（Evernote 的中文版，英文版服务器太慢了）。在爱范儿上看到过一些关于这个公司的报道，发现是一个很有区的公司，你去了解一下这个公司的产品你就知道了。他们是在打造一个以「生活方式」为主题的公司，那些模仿印象笔记的产品最好能找到自己的出路，作出一点创新，找准自己产品要走的路，要不然只知道模范，你会死的很惨的。我抄袭抄的比较好的有新浪微博、微信（特别是最近比较火的微信 、QQ出的手机小游戏，加了社交的功能，很不错，完全是模仿 LINE 的。）多想想为什么他们会成功。 但是也不能一味的去否定代码，你的想法以及运营能力很不错，但是你不能实现这个技术，也是没有用的。</p>
+
+<blockquote>
+  <p>「技术的作用从短期来看往往被高估，但是从长期来看又往往容易被低估」这句话很多电商公司 CEO 可能永远都不会明白。重视你们的技术团队，重视你们的技术人才，在技术上持续做投入才是王道。否则的话，学亚马逊也没有用。众所周知，亚马逊的技术是业界第一流的。</p>
+</blockquote>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#178" title="2013-10-24 17:07:00">Rui Chopper</a>:</strong> 在卖erp的公司，技术人员往往得不到重视，尤其在用友，做技术的根本得不到重视。工作一年半深有体会。。。但是ui那么烂的产品，价格那么高，事业机关单位任然会高高兴兴买单，这一点为什么，嘻，自己体会~</p>
+
+<p><strong><a href="#179" title="2013-10-24 17:08:00">Rui Chopper</a>:</strong> 发现你的东西越写越多啦，看来思维的力量很强大，独立思考的能力就是在大量阅读和思考下培养出来的吧，学习学习~</p>
+
+<p><strong><a href="#183" title="2013-10-24 18:08:00">ForEcho</a>:</strong> 我现在有点想法就想写下来，越写越来劲。</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/gui-gu-chuan-qi.html">硅谷传奇</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年10月18日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前一段时间一部叫做《乔布斯》的电影上映了，但是评价很差，以为精彩的故事要开始的时候，缺是影片结束的时候。反正是个烂片吧。</p>
+
+<p>就在这个时候我发现了这部电影，是1999年上映的电影了，但是确是一部还不错的电影，电影主要讲了乔布斯和比尔盖茨的故事，看完电影之后我对他们俩又有重新的认识了。但是电影中的又有多少是真实的呢？这是我所不知道的，我现在只讨论这部电影。</p>
+
+<p>《乔布斯传》我看了一点，还在看，基本上影片中的片段书中都有，所以我觉得这部电影还是挺靠谱的。</p>
+
+<p>电影是以倒序插叙的形式来讲述的，所以刚开始看的时候我看得是一头雾水的。乔布斯是一个很有个人魅力的人，他能打电话说服别人免费为他提供某个硬件，他能在一群人围着他的情况下稳而不乱的为他们讲述，但是沃兹不会，他甚至有社交恐惧症，但是他技术牛。他们俩在一起真是绝配。他一边在HP上班的时候，一边开发电脑，当它开发成功，给HP高管展示的时候，他们根本不懂这个东西，还好他们不喜欢，这才有了后续的故事。（沃兹在HP工作的时候签订的合同中有一条是，工作期间开发的任何东西都属于HP所有，所以要私自使用这个电脑，必须要通过他们的同意。）</p>
+
+<p>然后他们开始展示他们的电脑，然后乔布斯去找投资，自然是很难找到，因为别人都看不懂电脑。但是有人主动找上来了。然后apple公司的迅速发展，乔布斯性格变的非常的暴躁，对员工的要求也非常的苛刻，要去员工非常的忠诚，要是我是apple的员工我也受不了乔布斯的，那就不能怪有员工受不了乔布斯都跟他打起架来了。后来一个叫施乐的研究室研究出了图形化界面，他向公司展示结果，但是那帮「老头」显然看不起这个东西，也看不懂这是什么。但是乔布斯看到了，他很激动，并且说服了施乐把这个成果送给他们，他真的有这个能力。公司发展的太快了，连沃兹都跟不上了，直达有一天，他受不了乔布斯了，提出离开apple。一直没能理解为什么乔布斯把她的女朋友和女儿抛弃了，难道是因为他从小也是被抛弃的原因吗？看到那段觉得乔布斯挺可恶的。</p>
+
+<p>比尔盖茨没有沃兹技术这么好的朋友，他们的电脑是他用自己开发出来的编程语言换来的「奖品」。盖茨也非常的痴迷电脑，他是第一个意识到软件版权的，他还把操作系统卖给了IBM（虽然这个有他母亲的帮助），他卖给IBM的系统甚至是自己另花钱买的操作系统，他卖给IBM的操作系统只是使用费，操作系统还是盖茨的，他太聪明了。乔布斯发现施乐的图形化操作系统的时候，盖茨也发现了这其中的无限潜力，但是其他人根本看不到，这是不是他们成功的原因呢？真是英雄所见略同，但是被乔布斯强先一步了，所以盖茨为了得到这个，使用了点「卑鄙」的手段，那时候的乔布斯根本没把盖茨放在眼里。从windows诞生开始起，他们就开始反目成仇了。他们俩都说过相同的一句话 - 「好的艺术家复制，伟大的艺术家偷窃。Good artists copy.Great artists steal.」。</p>
+
+<p>不过跟IOS相比，windows确实很稀烂，但是有没有想过如果当初没有windows的话我们的生活会是怎样？</p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#181" title="2013-10-24 17:30:00">Rui Chopper</a>:</strong> 我觉得这些伟大的人总会有相同的地方，比如执着</p>
+
+<p><strong><a href="#184" title="2013-10-28 10:40:00">ForEcho</a>:</strong> 确实有相同的地方，都有远见，看到了一般人没有看到的东西。</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/CakePHP-ming-ming-gui-ze.html">CakePHP 命名规则</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年10月17日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>表名和控制器为复数，模型名为单数。</strong></p>
+
+<ol>
+  <li>一般来说，文件名是由下划线将单词分开，但是类名通常使用驼峰命名法。</li>
+  <li>模型类别名称是单数且使用骆驼命名法。</li>
+  <li>数据表名称对应到CakePHP 模型是复数且以下划线分隔单字。</li>
+  <li>控制器的类别名称是复数，使用骆驼命名法，并在最后加上Controller 。</li>
+  <li>如果一控制器的函数已加上下划线，函数将不可直接从网站上取存，但是可以供内部使用。</li>
+  <li>url 应该由小写字母和下划线组成。</li>
+  <li>网址遵循下面这种形式 http://域名/Cake应用文件夹名/控制器名/操作名</li>
+  <li>Cake所有的视图文件都保存在app文件夹下的视图文件夹里，在这个文件夹里，单个控制器的所有视图都被保存在以控制器命名的子文件夹里</li>
+</ol>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/da-xing-wang-zhan-jia-gou-de-yan-hua.html">大型网站架构的演化</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年10月14日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>网站一般分三个部分：应用程序、文件、数据库。</p>
+
+<ol>
+  <li>初级阶段的网站架构就是把所有的资源放在一台服务器上就够了。</li>
+  <li>应用服务和数据服务分离：整个网站使用三台服务器 - 应用服务器、文件服务器、数据库服务器。</li>
+  <li>使用缓存改善网站性能：一种是本地缓存，更好的是远程分布式缓存。（本地缓存虽然速度更快，但是受应用服务器内存的限制，其缓存数据量有限，而且会出现和应用服务器争用内存的情况）</li>
+  <li>使用应用服务器集群改善网站的并发处理能力，通过负载均衡调度服务器。</li>
+  <li>数据库读写分离：通过配置两台数据库主从关系，实现主数据库同步更新从数据库，读数据库的时候通过从数据库获取到数据。</li>
+  <li>使用反向代理和CDN加速网站响应：CDN部署在网络供应商的机房里，可以从距离最近的网络提供商机房获取数据。反向代理部署在网站的中心机房，访问机房的时候，如果反向代理服务器中缓存着用户请求的资源，就将其直接返回给用户。</li>
+  <li>使用分布式文件系统和分布式数据库系统。</li>
+  <li>使用NoSQL和搜索引擎。</li>
+  <li>业务拆分：将一个网站拆分成许多不同的应用，每个应用独立部署。（通常还是访问同一个数据库）</li>
+  <li>分布式服务：把每一个应用系统相同的业务提取出来，独立部署。可复用的业务链接数据库，提供公用业务服务，而应用系统只需要管理用户界面，通过分布式服务调用共用业务服务完成具体业务操作。</li>
+</ol>
+
+<p>–The End–</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/use-git.html">Git 初使用</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年10月11日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+  <li>
+    <p>Mac 安装 Git，软件下载地址：<a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">https://git-scm.com/book/en/v2/Getting-Started-Installing-Git</a></p>
+  </li>
+  <li>
+    <p>第一个要配置的是你个人的用户名称和电子邮件地址。这两条配置很重要，每次 Git 提交时都会引用这两条信息，说明是谁提交了更新，所以会随更新内容一起被永久纳入历史记录：</p>
+  </li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>git config --global user.name <span class="s2">&quot;forecho&quot;</span>
+</span><span class="line"><span class="nv">$ </span>git config --global user.email caizhenghai@gmail.com
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>建立 SSH key 可以让你在你的电脑和 Git @ OSC 之间建立安全的加密连接。</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>ssh-keygen -t rsa -C <span class="s2">&quot;caizhenghai@gmail.com&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>查看你的 public key，并把他添加到 SSH keys 中 <a href="https://github.com/settings/ssh">https://github.com/settings/ssh</a></li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>cat ~/.ssh/id_rsa.pub
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>Clone 项目</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>git clone https://github.com/iiYii/getyii.git
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>复制文件到这个目录下，然后跟踪新的文件：</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>git add .    # 跟踪所有改动过的文件
+</span><span class="line"><span class="nv">$ </span>git add -u    # 只加修改过的文件, 新增的文件不加入.
+</span><span class="line"><span class="nv">$ </span>git add -i     <span class="c"># 进入互动模式</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>提交变更：</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>git commit -m <span class="s2">&quot;xxxx&quot;</span>
+</span><span class="line"><span class="nv">$ </span>git commit -a -m <span class="s1">&#39;xxxx&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<blockquote>
+  <p><strong>commit和commit -a的区别:</strong>
+commit -a相当于：
+第一步：自动地add所有改动的代码，使得所有的开发代码都列于index file中
+第二步：自动地删除那些在index file中但不在工作树中的文件
+第三步：执行commit命令来提交 ​</p>
+</blockquote>
+
+<ul>
+  <li>推送到服务器上：</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>git push
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>恢复单个文件</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>git checkout -- hello.rb
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>远程服务器覆盖当前的改动：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>git checkout -f
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>添加被忽略的文件以及文件夹</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>git add -f 文件路径
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>服务器更新本地</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>git pull
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>git如何查看某一个文件的详细提交记录</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>git log -p filename
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>配置常用别名</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line">git config --global alias.co checkout
+</span><span class="line">git config --global alias.br branch
+</span><span class="line">git config --global alias.ci commit
+</span><span class="line">git config --global alias.st status
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>使用 vim 作为默认编辑器</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line">git config --global core.editor <span class="s2">&quot;vim&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>忽略 <code>new mode old mode</code> 修改</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line">git config core.filemode <span class="nb">false</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/zheng-li-yi-xia-wo-jing-li-de-PHP-mian-shi-ti.html">整理一下我经历的PHP面试题</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年10月08日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>1、用css、html编写一个两列布局的网页，右侧固定宽度200px，左侧自适应。（答案如下，IE下没测试，Chrome下正常）</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta http-equiv="content-type" content="text/html; charset=utf-8" /&gt;
+	&lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;style type="text/css"&gt;
+div{
+	height: 200px;
+}
+#left{
+	float: left;
+	width: 100%;
+	margin-left: -210px;
+}
+#content{
+	margin-left: 210px;
+	border: 1px solid #ccc;
+}
+#right{
+	float: right;
+	width: 200px;
+	border: 1px solid #ccc;
+}
+
+&lt;/style&gt;
+&lt;body&gt;
+&lt;div id="left"&gt;
+	&lt;div id="content"&gt;
+		我在左边 可以自动适应
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="right"&gt;
+	我在右边 固定宽度200px
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>2、简单描述mysql中，索引，主键，唯一索引，联合索引的区别，对数据库的性能有什么影响（从读写两方面）</p>
+
+<blockquote>
+  <p>索引是一种特殊的文件(InnoDB数据表上的索引是表空间的一个组成部分)，它们包含着对数据表里所有记录的引用指针。 普通索引(由关键字KEY或INDEX定义的索引)的唯一任务是加快对数据的访问速度。普通索引允许被索引的数据列包含重复的值。如果能确定某个数据列将只包含彼此各不相同的值，在为这个数据列创建索引的时候就应该用关键字UNIQUE把它定义为一个唯一索引。也就是说，唯一索引可以保证数据记录的唯一性。 主键，是一种特殊的唯一索引，在一张表中只能定义一个主键索引，主键用于唯一标识一条记录，使用关键字PRIMARYKEY来创建。 索引可以覆盖多个数据列，如像INDEX(columnA,columnB)索引，这就是联合索引。索引可以极大的提高数据的查询速度，但是会降低插入、删除、更新表的速度，因为在执行这些写操作时，还要操作索引文件。</p>
+</blockquote>
+
+<p>3、JS 表单弹出对话框函数是 ?获得输入焦点函数是 ?</p>
+
+<blockquote>
+  <p>弹出对话框函数:alert(), prompt(), confirm() 获得输入焦点函数: focus()</p>
+</blockquote>
+
+<p>4、JS 的转向函数是?怎么引入一个外部 JS 文件?</p>
+
+<blockquote>
+  <p>转向使用 window.location.href=”” 引入外部 js 使用 <script src=""></script></p>
+</blockquote>
+
+<p>5、include 和 require 都能把另外一个文件包含到当前文件中 ,他们有什么区别? Include 和 include_once 又有什么区别?</p>
+
+<blockquote>
+  <p>二者区别只有一个,那就是对包含文件的需求程度, include就是包含,如果被包含的 文件不存在的话,那么则会提示一个错误,但是程序会继续执行下去。而 require 意思是需要,如果被包含文件不存在或者无法打开的时候,则会提示错误, 并且会终止程序的执行。这两种结构除了在如何处理失败之外完全一样 。once 的意思是一次,那么 include_once 和 require_once 表示只包含一次,避免重复包含。</p>
+</blockquote>
+
+<p>6、echo(),print(),print_r()的区别?</p>
+
+<blockquote>
+  <p>echo 是一个语言结构,输出一个或多个字符串; print() 实际上不是一个函数(它是一个语言结构),因此你可以不必使用圆括号来括起 它的参数列表 ,它输出一个字符串 ; print_r () 是一个函数,打印变量的信息,基本类型,数组,对象。</p>
+</blockquote>
+
+<p>7、用 PHP 打印出前一天的时间格式是 2006-5-10 22:21:21。</p>
+
+<pre><code>&lt;?php echo date("Y-m-d H:i:s", time()-3600*24); ?&gt;
+&lt;?php echo date("Y-m-d H:i:s", strtotime("-1 days")); ?&gt;
+</code></pre>
+
+<p>8、求两个日期的差数,例如 2009-3-1 ~ 2009-4-4 的日期差数？</p>
+
+<pre><code>&lt;?php echo (strtotime("2009-4-4")-strtotime("2009-3-1"))/3600*24;?&gt;
+</code></pre>
+
+<p>9、用 PHP 写出显示客户端 IP 与服务器 IP 的代码。</p>
+
+<blockquote>
+  <p>客户端 IP:$_SERVER[“REMOTE_ADDR”] 服务器端 IP:$_SERVER[“SERVER_ADDR”]</p>
+</blockquote>
+
+<p>10、sql 语句应该考虑哪些安全性?</p>
+
+<blockquote>
+  <p>防止 Sql 注入,对特殊字符进行转义、过滤或者使用预编译的 sql 语句绑定变量。 最小权限原则,特别是不要用 root 账户,为不同的类型的动作或者组建使用不同的账户。当 sql 运行出错时,不要把数据库返回的错误信息全部显示给用户 ,以防止泄露服务器和数据库相关信息。</p>
+</blockquote>
+
+<p>11、MYSQL 取得当前时间的函数是?,格式化日期的函数是?</p>
+
+<blockquote>
+  <p>current_time() 用于取得当前时间 date_format(datetime, format)用于格式化日期,如:select date_format(now(),’%Y%m%d’);</p>
+</blockquote>
+
+<p>12、请简述项目中优化 sql 语句执行效率的方法,从哪些方面,sql 语句性能如何分析?</p>
+
+<blockquote>
+  <p>1) 尽量选择较小的列 2) 将where中用的比较频繁的字段建立索引 3) select子句中避免使用‘*’ 4) 避免在索引列上使用计算 、not in 和&lt;&gt;等操作 5) 当只需要一行数据的时候使用 limit 1 6) 保证单表数据不超过 200W,适时分割表。 针对查询较慢的语句,可以使用explain 来分析该语句具体的执行情况。</p>
+</blockquote>
+
+<p>13、简述在 MySQL 数据库中 MyISAM 和 InnoDB 的区别？</p>
+
+<blockquote>
+  <p>区别主要有以下几个: 构成上,MyISAM 的表在磁盘中有三个文件组成,分别是表定义文件( .frm)、数据文 件(.MYD)、索引文件(.MYI),而 InnoDB 的表由表定义文件(.frm)、表空间数据和日志文 件组成。 安全方面, MyISAM 强调的是性能,其 查询 效率较高,但不支持事务和外键等安全性 方面的功能,而 InnoDB 支持事务和外键等高级功能 ,查询效率稍低。 对锁的支持,MyISAM 支持表锁,而 InnoDB 支持行锁。</p>
+</blockquote>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/22">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/20">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

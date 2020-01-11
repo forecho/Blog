@@ -1,0 +1,575 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>CI自定义分页类 - forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="之前我写过一篇文章，介绍了CI如何分页，请猛击~ 那么考虑到一个项目要分页的地方比较多，所以后来我们写了一个单独的分页类，这样一个项目的效率会大大提升。 1、首先，我们在  application / libraries /下面创建page.php（扩展分页类）文件，代码如下： &lt;?php &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/CI-zi-ding-yi-fen-ye-lei.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">CI自定义分页类</h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年10月29日
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>之前我写过一篇文章，介绍了CI如何分页，<a href="/?p=286">请猛击~</a> 那么考虑到一个项目要分页的地方比较多，所以后来我们写了一个单独的分页类，这样一个项目的效率会大大提升。 1、首先，我们在  application / libraries /下面创建page.php（扩展分页类）文件，代码如下：</p>
+
+<pre><code>&lt;?php
+
+class Page
+{ 
+	protected $url;
+	protected $total;
+	protected $size;
+	protected $segment;
+	protected $CI;
+
+	function __construct($value){
+
+		$this-&gt;url=$value['url'];
+		$this-&gt;size=$value['size'];
+		$this-&gt;total=$value['total'];
+		//$this-&gt;segment=$value['uri'];
+
+		$this-&gt;CI=&amp; get_instance();
+
+		$this-&gt;CI-&gt;load-&gt;library('pagination');
+
+	}
+
+	function fy(){
+
+		return $this-&gt;page();
+
+	}
+
+	protected function page(){
+
+		$config['base_url']=base_url($this-&gt;url);
+		$config['total_rows']=$this-&gt;total;
+		$config['per_page']=$this-&gt;size;
+		//$config['uri_segment']=$this-&gt;segment;
+		//GET分页 传参
+		$config['page_query_string'] = TRUE;
+
+		$config['num_links']=3;
+		$config['first_link']='首页';
+		$config['last_link']='末页';
+		$config['prev_link']='上一页';
+		$config['next_link']='下一页';
+		$config['cur_tag_open'] = ' &lt;a class="current"&gt;'; // 当前页开始样式  
+		$config['cur_tag_close'] = '&lt;/a&gt;'; // 当前页结束样式  
+
+//      $this-&gt;CI-&gt;load-&gt;library('pagination', $config);
+
+		$this-&gt;CI-&gt;pagination-&gt;initialize($config);
+
+		return $this-&gt;CI-&gt;pagination-&gt;create_links();
+
+	}
+
+}
+
+?&gt;
+</code></pre>
+
+<p>2、那分页类写好了，如何使用呢？在控制器里面 controllers / feadmin.php文件（此处要结合你自己的项目，feadmin.php是我的控制器文件名）。下面是我们文章列表的示例代码：</p>
+
+<pre><code>function postsList() {
+		$data['posts'] = $this-&gt;fe_model-&gt;page('posts', 'feadmin/postsList?',  @$_GET['per_page'], 2, 'id desc','category','posts.category = category.cid ');
+		//print_r($data['posts']);
+		$data['category'] = $this-&gt;fe_model-&gt;selectCate();
+		//$data['category1'] = $this-&gt;fe_model-&gt;selectFormWhere('category',);
+		//print_r($data['category1']);
+        $data['title_for_layout'] = '文章列表';
+
+        $this-&gt;load-&gt;view('admin/postsView', $data);
+    }
+</code></pre>
+
+<p>此处我使用的是CI** GET分页**方法，具体需要看你的项目是否需要，此处可参考手册开启GET翻页功能。 fe_model是我项目的模型文件，那么要实现翻页，还需要在模型中写下面的方法：</p>
+
+<pre><code>//分页
+	function page($form, $url, $offset, $size, $order, $join, $joinArray){
+
+		$fy['url'] = $url;
+		$fy['total'] = $data['total'] = $this-&gt;fy_n($form);
+		$fy['size'] = $data['size'] = $info['size'] = $size;
+		//$fy['uri'] = $offset;
+		$this-&gt;load-&gt;library('page', $fy);
+		$data['fy'] = $this-&gt;page-&gt;fy();
+		//print_r($data['fy']);
+		//$info['start'] = $data['start'] = $this-&gt;uri-&gt;segment($offset, 0);
+		$info['start'] = $data['start'] = $offset;
+		$info['order'] = $order;
+		$data['admin'] = $this-&gt;fy_info($form, $info, $join, $joinArray);
+
+		return $data;
+
+	}
+
+	function fy_n($form){
+
+		return $this-&gt;db-&gt;get($form)-&gt;num_rows();
+
+	}
+
+	function fy_info($form,$value,$join,$joinArray){
+
+		$this-&gt;db-&gt;order_by($value['order']);
+		$this-&gt;db-&gt;limit($value['size'],$value['start']);
+		if($join != ""){
+			$this-&gt;db-&gt;join($join,$joinArray);
+		}
+		return $this-&gt;db-&gt;get($form)-&gt;result();
+
+	}
+
+	function pageWhere($form, $url, $offset, $size, $where, $order, $join, $joinArray){
+
+			$fy['url'] = $url;
+			$fy['total'] = $data['total'] = $this-&gt;p_numWhere($form, $where);
+			$fy['size'] = $data['size'] =$info['size'] = $size;
+			//$fy['uri'] = $offset;
+			$this-&gt;load-&gt;library('page', $fy);
+			$data['fy'] = $this-&gt;page-&gt;fy();
+			//print_r($data['fy']);
+			//$info['start'] = $data['start'] = $this-&gt;uri-&gt;segment(offset, 0);
+			$info['start'] = $data['start'] = $data['start'] = $offset;
+			$info['order'] = $order;
+			$data['admin'] = $this-&gt;fy_infoWhere($form, $where, $info, $join, $joinArray);
+
+			return $data;
+
+	}
+	function p_numWhere($form, $where){
+
+		if(isset($where['where'])){
+			$this-&gt;db-&gt;where($where['where']);
+		}
+		if(isset($where['like'])){
+			$this-&gt;db-&gt;like($where['like'])	;
+		}
+
+		return $this-&gt;db-&gt;get($form)-&gt;num_rows();
+
+	}
+
+	function fy_infoWhere($form, $where, $value, $join, $joinArray){
+
+		if(isset($where['where'])){
+			$this-&gt;db-&gt;where($where['where']);
+		}
+		if(isset($where['like'])){
+			$this-&gt;db-&gt;like($where['like']);
+		}
+
+		$this-&gt;db-&gt;order_by($value['order']);
+		$this-&gt;db-&gt;limit($value['size'],$value['start']);
+		if($join != ""){
+			$this-&gt;db-&gt;join($join,$joinArray);
+		}
+
+		return $this-&gt;db-&gt;get($form)-&gt;result();
+
+	}
+</code></pre>
+
+<p>3、下面的视图文件的代码：</p>
+
+<pre><code>&lt;tbody&gt;
+	&lt;?php foreach ($posts['admin'] as $post):
+		?&gt;
+	&lt;tr&gt;
+		&lt;td&gt;
+		  &lt;input type="checkbox" name="checkbox[]" value="&lt;?php echo $post-&gt;id; ?&gt;" /&gt;
+		&lt;/td&gt;
+		&lt;td&gt;&lt;a href="feadmin/posts/&lt;?php echo $post-&gt;id;?&gt;" title="修改文章"&gt;&lt;?php echo $post-&gt;title;?&gt;&lt;/a&gt;&lt;/td&gt;
+		&lt;td&gt;&lt;a href="feadmin/postsSearch/?category=&lt;?php echo $post-&gt;category;?&gt;" title="查询“&lt;?php echo $post-&gt;name;?&gt;”分类"&gt;&lt;?php echo $post-&gt;name;?&gt;&lt;/a&gt;&lt;/td&gt;
+		&lt;!-- &lt;td&gt;&lt;?php //echo date('Y-m-d', strtotime($post-&gt;addtime));?&gt;&lt;/td&gt; --&gt;
+		&lt;td&gt;&lt;?php echo $post-&gt;addtime;?&gt;&lt;/td&gt;
+		&lt;td&gt;
+			&lt;a href="feadmin/posts/&lt;?php echo $post-&gt;id;?&gt;" title="修改"&gt;&lt;img src="resources/images/icons/pencil.png" alt="修改" /&gt;&lt;/a&gt; 
+			&lt;?php if($post-&gt;type != 1){?&gt;
+				&lt;a href="feadmin/postsDelete/&lt;?php echo $post-&gt;id;?&gt;" title="删除" onclick="return(confirm('确定删除?'))"&gt;&lt;img src="resources/images/icons/cross.png" alt="删除" /&gt;&lt;/a&gt; 
+				&lt;!-- &lt;a href="#" title="Edit Meta"&gt;&lt;img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /&gt;&lt;/a&gt; --&gt;
+			&lt;?php }?&gt;
+		&lt;/td&gt;
+	&lt;/tr&gt;
+  &lt;?php 
+  endforeach;?&gt;
+&lt;/tbody&gt;
+</code></pre>
+
+<p>翻页的按钮代码如下：</p>
+
+<pre><code>&lt;div class="pagination"&gt;
+	&lt;?php echo $this-&gt;pagination-&gt;create_links(); ?&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>此处值得注意的是<?php foreach (**$posts['admin']** as $post):?>   完整项目代码请参考<a href="https://github.com/forecho/Fecms/">这里~</a></p>
+</div>
+
+
+  
+    <!-- 添加捐赠图标 -->
+    <div class ="post-donate">
+        <div id="donate_board" class="donate_bar">
+            <a id="btn_donate" href="javascript:;" title="Donate 打赏"></a>
+            <br>
+            <span class="donate_txt">如果这篇文章对你有帮助，并且你想小额捐款支持一下的话。</span>
+            <br>
+        </div>  
+  
+        <div id="donate_guide" class="donate_bar hidden">
+            <!-- 支付宝打赏图案 -->
+            <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153431.png" class="m10" title="支付宝打赏" >
+            <!-- 微信打赏图案 -->
+            <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153510.png" class="m10" title="微信打赏">
+        </div>
+  
+        <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+        </script>
+    </div>
+<!-- 添加捐赠图标 -->
+  
+  
+    
+        
+            
+            
+        
+
+    
+
+
+
+
+        
+    
+
+
+
+
+
+<div class="cc-license">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/deed.zh">
+        <img alt="知识共享署名-非商业性使用 4.0 国际许可协议" src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153253.png" />
+    </a><br />
+    原文地址：<a href="https://blog.forecho.com/CI-zi-ding-yi-fen-ye-lei.html">https://blog.forecho.com/CI-zi-ding-yi-fen-ye-lei.html</a><br />
+    版权声明：本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/deed.zh">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。  
+</div>
+<div style="text-align: center; margin-top: 20px;">
+    <img alt="扫码关注我的个人公众号" src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153337.png"/>   
+</div>
+
+  
+  <footer>
+    <p class="meta">
+      
+  
+
+
+<span id="busuanzi_container_page_pv">
+  <span id="busuanzi_value_page_pv"></span>次访问
+</span>
+<span class="byline author vcard">Posted by <span class="fn">forecho</span></span>
+
+      
+ 
+ 
+ 
+
+  2012年10月29日
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/iOS-kai-fa-shi-li-san-an-niu.html" title="Previous Post: iOS开发实例（三）-“按钮”">&laquo; iOS开发实例（三）-“按钮”</a>
+      
+      
+        <a class="basic-alignment right" href="/substr-mb_substr-ji-mb_strcut-de-qu-bie-he-yong-fa.html" title="Next Post: substr(),mb_substr()及mb_strcut的区别和用法">substr(),mb_substr()及mb_strcut的区别和用法 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

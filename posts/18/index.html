@@ -1,0 +1,803 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="大名鼎鼎的 Octopress 总算安装成功了，但是 WordPress 里面的文章一直导入成功，但是显示不成功，详情页打开是空白的，哎，有时间再折腾吧。 至于搭建教程网上一搜一大把，我就不说了，本博客是搭建 GitCafe 上的，国内服务器网速快。
+">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/posts/18/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/hello-octopress.html">Hello Octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年08月31日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>大名鼎鼎的 Octopress 总算安装成功了，但是 WordPress 里面的文章一直导入成功，但是显示不成功，详情页打开是空白的，哎，有时间再折腾吧。</p>
+
+<p>至于搭建教程网上一搜一大把，我就不说了，本博客是搭建 GitCafe 上的，国内服务器网速快。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/jie-qu-yi-xx-jie-wei-de-ci.html">截取以xx结尾的词</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年05月14日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="k">function</span> <span class="nf">endsWith</span><span class="p">(</span><span class="nv">$haystack</span><span class="p">,</span> <span class="nv">$needle</span><span class="p">)</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line"><span class="nx">   </span><span class="nv">$length</span> <span class="o">=</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$needle</span><span class="p">);</span>
+</span><span class="line"><span class="nx">   if</span> <span class="p">(</span><span class="nv">$length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line"><span class="nx">       return</span> <span class="k">true</span><span class="p">;</span>
+</span><span class="line"><span class="nx">   </span><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="nx">   return</span> <span class="p">(</span><span class="nb">substr</span><span class="p">(</span><span class="nv">$haystack</span><span class="p">,</span> <span class="o">-</span><span class="nv">$length</span><span class="p">)</span> <span class="o">===</span> <span class="nv">$needle</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/zui-jin-wo-you-hua-yao-shuo.html">最近我有话要说</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年04月22日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>清明节回来的第一个周五，公司搞了一次春游活动，去了一躺厦门玩。</p>
+
+<p>厦门是个好地方，可以说是旅游有好地方，可以说一年四季没有淡季。这次是跟团去的，导游带着我们逛，感觉像赶场子一样，反正每去一个地方停留的时间不会太长，导致整个厦门游回来对景区什么的倒是没什么印象。导游说话挺有意思的，跟我们讲了很多关于厦门的历史，去的时候我是对厦门一无所知的，到现在对厦门历史还算有了很大的理解。</p>
+
+<p>导游在车上讲历史的时候，喜欢问「你们知道为什么吗？」，有人就很无聊的「猜」，那种「插话」让人感觉到他很无知，会觉得他很讨厌。感觉知道的话会很博学多才，怎么说呢？反正就是第一次觉得懂得多的人其实是很重要，这一点直接导致我想看《历史是什么玩意儿》这本书了，并且昨天已经开始看了。并且以后还会继续通过看书来增长自己的见识的。</p>
+
+<p>回来之后就开始忙工作了，因为有些活很急，回来之后加了两天很晚的班。因为微信支付接口。</p>
+
+<p>「因为这个接口刚出来，除了看文档，没有其他资料了」、「因为我对这个项目不太熟，所以会比较慢」，好吧，这都不应该算借口。「没有过不去的火焰山」，同样也没有解决不了的问题。延期了一个星期，我们一边加班一边跟着总监的指导，总算最终过了这倒门槛，下面我来总结一下这个模块开发的教训：</p>
+
+<ol>
+  <li>先做 Demo。不论是不是做接口开发，能先写 Demo 的尽量先从 Demo 开始。然后慢慢的完善。这个就好比画画，我们要先画结构图，再慢慢的描，最好越画越细致。大多数我们拿到一个功能需求文档，第一件事是开始设计数据库，巴拉巴拉的，然后等开始写代码的时候就开始发现之前设计的数据库不够好，然后又要改。所以从 Demo 开始，这个习惯一定要养成。</li>
+  <li>尽量封装。能封装的模块，就封装，最好能写个接口给别人调用，然后返回给他要的数据就可以了。这样开发的好处就是可以给多个项目使用，有时候开发一个功能要考虑的周全一些。</li>
+  <li>JavaScript 是不能跨域的。之前调试发货接口的时候老是跑不通，花了一天时间都毫无进展，直到最后发现发货这块是用 JavaScript 实现的，但是 JavaScript 是不能跨域的。</li>
+  <li>出了问题先从自身的代码找原因，不要轻易的下结论。</li>
+  <li>做事情要做100%，不要做80%。</li>
+  <li>出现问题，首先要立刻拿出问题的解决方案，而不是说「这块功能不是我写的，我不知道，改怎么处理」。</li>
+</ol>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#203" title="2014-05-13 14:47:00">乔巴瑞</a>:</strong> 厚积薄发~ 我也觉得跟团玩总是急匆匆的，以后我也想去厦门玩，但是会选择自由行的那种</p>
+
+<p><strong><a href="#204" title="2014-05-13 15:12:00">ForEcho</a>:</strong> 从公司的角度来说，报团可能是最好的的选择了。但是对我们个人来说，不跟团是最好的。我自己玩是不跟团的。</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/MySQL-cha-xun-jin-ri-de-shu-ju-shu-liang.html">MySQL 查询今日的数据数量</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年04月22日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>数据库我们存放的<strong>时间戳</strong>格式。</p>
+
+<p><strong>方法一：</strong></p>
+
+<p>先用PHP计算出时间戳。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="c1">// 获取今天开始的时间戳</span>
+</span><span class="line"><span class="nv">$today</span> <span class="o">=</span> <span class="nb">strtotime</span><span class="p">(</span><span class="nb">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d 00:00:00&#39;</span><span class="p">,</span> <span class="nb">time</span><span class="p">()));</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>这个值就是今天凌晨的时间戳。 然后查询的时间大于这个值就可以了。</p>
+
+<p><strong>方法二：</strong></p>
+
+<p>直接用MySQ语句查询当天的记录。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sql"><span class="line"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">message</span> <span class="k">WHERE</span> <span class="n">DATE_FORMAT</span><span class="p">(</span><span class="n">FROM_UNIXTIME</span><span class="p">(</span><span class="n">chattime</span><span class="p">),</span><span class="s1">&#39;%Y-%m-%d&#39;</span><span class="p">)</span> <span class="o">=</span> <span class="n">DATE_FORMAT</span><span class="p">(</span><span class="n">NOW</span><span class="p">(),</span><span class="s1">&#39;%Y-%m-%d&#39;</span><span class="p">)</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">id</span> <span class="k">DESC</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/lai-shen-zhen-ye-yi-nian-le.html">来深圳也一年了</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年03月16日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>2013年3月12号的票来的深圳，到现在已经满一年了。来说说感受吧。</p>
+
+<p>慢慢的从一开始很反感加班，到现在开始接受加班，但是还是开始坚持自己的原则 - 提高自己的工作效率，尽量去减少没必要的加班。</p>
+
+<p>慢慢的也能接受深圳快节奏的生活，每天上班一个小时的路程（半个小时地铁半个小时走路）的情况，上班也开始习惯在地铁上用 Kindle看书了，有时候都会感觉上班地铁时间太少。</p>
+
+<p>1年来虽然小换了几份工作，但是对现在的公司还是比较满意的。公司有着十几个 PHP 工程师，公司氛围也还好，每天开开早会还是很不错的，虽然有时候觉得这早会的30分钟挺浪费时间的。公司给我提供了双显示器，实现了一直想要双屏开发的愿望。双屏开发还是很爽的，要是再配上我的 MacBook 开发就更爽了。</p>
+
+<p>慢慢的也有机会接触比较大的项目了，就比方说现在做的微信统一企业的项目，这个项目做好了之后，相信以后会有更多的机会接触知名公司企业的项目了，到那个时候就会有很大的成就感的，这个在武汉就很难去接触。</p>
+
+<p>深圳很潮湿的，回潮的时候楼梯上有水，刚开始我还以为是房东把楼梯给拖了一遍呢？没想到这个深圳特有的「景象」。</p>
+
+<p>前一段时间跟设计部门开早会的时候，有人提议让其他人说某个人的缺点，一天说一个人，这个想法真不错。但是如果你跟某个人不熟的话还真说不出来，有的人你连第一印象都说不出来。</p>
+
+<p>我记录了一下大家说我的缺点，以后就慢慢改正：</p>
+
+<ul>
+  <li>比较闷骚。（好吧，这个我承认）</li>
+  <li>不够 open。（这个其实跟上个差不多，特别是对女生，想来刚来公司的时候，旁边坐着一个设计的妹子，一个月我基本上没跟她说过话。-_-!!）</li>
+  <li>有时候讲话的没思路（这个确实有，以前也被人提到过。语言表达能力太差，有时候说着说着自己都不知道自己再讲什么了-_-!!）</li>
+  <li>胆小（这个确实也有，害怕跟陌生人说话）</li>
+</ul>
+
+<p>基本上我只记住了上面几个。很感谢那些提出我缺点的人，我会慢慢改正的。 最后「做正确的事，等着被开除」，一起努力吧。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/jie-jue-iPhone-iPad-an-niu-yang-shi-wen-ti.html">解决iPhone/iPad 按钮样式问题</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年03月06日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>你要的左边的按钮的样式，在Android上面显示是 OK 的，但是不知道为什么，iPad 和 iPhone 上面显示却是右边的按钮样式，很难看。 <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162256.png" alt="" /> 解决办法就是添加下面的代码：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="css"><span class="line"><span class="nt">-webkit-appearance</span><span class="o">:</span> <span class="nt">none</span><span class="o">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>或者是：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="css"><span class="line"><span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s2">&quot;button&quot;</span><span class="o">],</span> <span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span><span class="o">],</span> <span class="nt">input</span><span class="o">[</span><span class="nt">type</span><span class="o">=</span><span class="s2">&quot;reset&quot;</span><span class="o">]</span> <span class="p">{</span>
+</span><span class="line">    <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">appearance</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>参考链接：</p>
+
+<p><a href="http://stackoverflow.com/questions/5438567/css-submit-button-weird-rendering-on-ipad-iphone">CSS submit button weird rendering on iPad/iPhone</a></p>
+
+<p><a href="http://stackoverflow.com/questions/11378380/css-input-button-on-iphone">CSS input button on iPhone</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Mac-an-zhuang-PHP5-4-de-Mcrypt-kuo-zhan.html">Mac 安装 PHP5.4 的 Mcrypt 扩展</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年03月01日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>忘记什么时候把 MacBook 的 PHP 版本升级到 PHP5.4了，然后准备学一下 Laravel 这个框架的时候，提醒 Mcrypt 扩展未安装。</p>
+
+<p>安装这个扩展真是头疼，尽管有 Homebrew ，尽管能 Google 到很多英文很好的教程，有简单的命令的，有复杂命令的，但是照着教程敲代码还是安装不成功。</p>
+
+<p>在终端输入 php -v 的时候，会出现下面报错代码：</p>
+
+<pre><code>PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/lib/php/extensions/no-debug-non-zts-20100525/mcrypt.so' - dlopen(/usr/lib/php/extensions/no-debug-non-zts-20100525/mcrypt.so, 9): image not found in Unknown on line 0
+PHP 5.4.17 (cli) (built: Aug 25 2013 02:03:38)
+Copyright (c) 1997-2013 The PHP Group
+Zend Engine v2.4.0, Copyright (c) 1998-2013 Zend Technologies
+</code></pre>
+
+<p>但是我 /etc/php.ini 配置文件里面根本没有 /usr/lib/php/extensions/no-debug-non-zts-20100525/ 这个路径，也不记得这个东西在哪？怎么修改？</p>
+
+<p>剩下的我只能继续 Google，找几份教程一起来，然后我发现了这个：<a href="http://topicdesk.com/downloads/mcrypt/mcrypt-download">Mcrypt installer for OS X 10.8/10.9</a> 不注意的话，估计会忽略最下面的<a href="http://downloads.topicdesk.com/installers/topicdesk_Mcrypt_Installer_1.0.zip">下载链接</a>。</p>
+
+<p>我下载下来试了一下，安装步骤就跟安装软件是一样的，一直点下一步就好了，然后我在输出 phpinfo() 的页面，竟然搜索到了 Mcrypt ，这就说明我安装成功了，然后试了一下 Laravel 首页，果然成功了。</p>
+
+<p>还是这个方便省事，感谢这个软件。</p>
+
+<p>最后分享一个学 Laravel 的资源：<a href="https://github.com/maliang/LikeLaravel">https://github.com/maliang/LikeLaravel </a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Sublime-Text-3-pei-zhi.html">Sublime Text 3配置</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年02月10日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>安装 Packages</strong> 1、ctrl+` 2、输入命令：</p>
+
+<pre><code>import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())
+</code></pre>
+
+<p><strong>Preferences &gt; Settings -User</strong>基本的配置：</p>
+
+<pre><code>{
+    "font_size": 13,
+    "ignored_packages":
+    [
+        "Vintage"
+    ],
+    "spell_check": false,
+    "font_face": "YaHei Consolas Hybrid",
+    "trim_trailing_white_space_on_save": true, //去除空格
+    "update_check": false,
+    "word_wrap": false
+}
+</code></pre>
+
+<p>一些基本的插件：</p>
+
+<ul>
+  <li>
+    <p>Emmet：必装插件。</p>
+  </li>
+  <li>
+    <p>FileHeader：自动给文件加文件的注释信息。</p>
+  </li>
+  <li>
+    <p>TortoiseSVN：结合TortoiseSVN客户端使用。</p>
+  </li>
+  <li>
+    <p>FileDiffs：文件对比插件。</p>
+  </li>
+  <li>
+    <p>BracketHighlighter ：高亮显示匹配的括号、引号和标签</p>
+  </li>
+  <li>
+    <p>TrailingSpaces： 高亮显示多余的空格和Tab</p>
+  </li>
+  <li>
+    <p>jQuery：必装插件</p>
+  </li>
+  <li>
+    <p>Alignment ：等号对齐</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/akalongman/sublimetext-codeformatter">CodeFormatter</a>：代码格式化</p>
+  </li>
+</ul>
+
+<p>注：可能是QQ和这个冲突了，自行设置了一下快捷键就可以用了。 打开 Preferences=&gt;Package Settings=&gt;Alignment=&gt;Key Bindding - User 然后写入：</p>
+
+<pre><code>[
+    { "keys": ["ctrl+alt+f"], "command": "alignment" }
+]
+</code></pre>
+
+<p>或者改成其他不冲突的快捷键即可。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013-nian-gei-zi-ji-de-yi-ge-jiao-dai.html">2013年给自己的一个胶带</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年02月06日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>2013年发生了很多事。</p>
+
+<h2 id="section">完成的事情有：</h2>
+
+<ol>
+  <li>年后果断的辞职了。</li>
+  <li>辞职之前利用周六周末去庐山玩了一躺。</li>
+  <li>来深圳了。</li>
+  <li>找了一家小公司，被坑了。</li>
+  <li>有找了一家公司，公司环境挺好的，但是氛围很差，进去没多久就碰上裁员，继续被坑。</li>
+  <li>去了一躺云南，完成了去大理、丽江还有住青旅的心愿。</li>
+  <li>回来十一之后找了一家还不错的公司。</li>
+  <li>碰到一个志趣相投的同伴。</li>
+  <li>把「你丫闭嘴」项目上线了，虽然几乎没人访问。【泪】</li>
+  <li>学习 CakePHP 。</li>
+  <li>升级了固态硬盘，花了1500左右。</li>
+  <li>生日给自己买了一块机械手表。</li>
+  <li>生日弟弟送了一块飞利浦的剃须刀。</li>
+  <li>买了一个 iPad Air。</li>
+  <li>看完了5本书。</li>
+  <li>自认为喜欢上了思考。</li>
+  <li>开始追《全职猎人》动漫。</li>
+  <li>发现一个能让我看得进去书的好方法。</li>
+  <li>喜欢上了写作来记录自己的想法。</li>
+  <li>喜欢上了Podcast。</li>
+  <li>一如既往的对技术的热爱。</li>
+</ol>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013-nian-gei-zi-ji-de-yi-ge-jiao-dai.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/cheng-wei-yi-liu-de-ren-cai.html">成为一流的人才</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2014年01月26日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>我们经常会听到一句话「不怕神一样的对手，就怕猪一样的队友」，但是你有没有想过这个「猪一样的队友」说的是否是自己呢？</p>
+
+<p>2013年我来深圳找工作的时候，刚开始是抱着「自己工作经验不到2年，希望找个能让自己快速成长的公司」，工作找了很久，每次技术面试都很差，大多数公司都希望找到「一流」的人才，这个是事实。那段时间找工作再到换工作对自己打击很大。</p>
+
+<p>再到后来看到了《乔布斯：遗失的访谈》，这个关于乔布斯访谈的节目，乔布斯的下面几句话对自己感触很大：</p>
+
+<blockquote>
+  <p>能进入这个行业，我感到很幸运<br />
+But what I was lucky enough to spend my life in, is like this,<br />
+我的成功得益于我发现了许多才华横溢、不甘平庸的人才<br />
+and so I built lots of my success of finding these truly gifted people, and not settling for B and C players, really going for A players.<br />
+而且我发现只要召集到五个这样的人<br />
+And I found something, I found when you get enough A players together, when you go through the incredible work to find you know 5 of these A players,<br />
+他们就会喜欢上彼此合作的感觉，前所未有的感觉<br />
+they really like working with each other, because they never had a chance to do that before,<br />
+他们会不愿再与平庸者合作，只招聘一样优秀的人<br />
+and they don’t want to work with B and C players, so they become self-policing, they only want to hire more A players.</p>
+</blockquote>
+
+<p>和优秀的人工作，你进步很快，最重要的是那种工作的感觉真的是很棒，让你感觉到你不是一个人在战斗，你说的东西他们都能懂，他们说的你也感兴趣，就是这种感觉。之前看的《打造 Facebook》其中有讲到 Facebook 也是只招一流的人才。我这才恍悟过来，把自己变成一流的人才是一件多么紧急的事情啊，有更好的人才，公司为什么要选你？有现成的人才，为什么要花时间来培养你呢？</p>
+
+<p>之前老是抱着「我技术不好，但是我对工资要求也不高；能让我去大公司，提高技术，甚至不高工资，管饭就行」这样糟糕的想法。公司招来一个菜鸟，让你弄一个东西，一两个月还搞不出来，那是在浪费他们的时间，对他们来说少给你的工资又算的了什么呢？你花两个月做出来的东西，他们不能用，然后又得再去找人重新做，这个损失才是真的很大。</p>
+
+<p>之前废话了那么多，如果你认同我的观点，那么你可以继续往下看了。 前个星期一起开早会的同事提议大家，开会的时候可以说说主持早会人的一些缺点。轮到我的时候，得到了一些同事的肯定，认为我很热爱技术，说我的目标很明确的人，对我的鼓励很大。前一段时间堂弟对我推荐《全职猎人》动漫，看了几集，确实很适合我的胃口，越看越觉得很有意思，甚至是周末的时候花了一整天都在看，直到看到最新一集，很是精彩，因为很认同主角，主角现在虽然实力很弱，但是他想成为一名实力很强的猎人，在每次遇到实力比自己强的对手，不是去害怕，而是兴奋！他非常的享受战斗的过程，甚至有点让人感到「变态」，但是我是非常非常的喜欢这种精神。</p>
+
+<p>记得12年过完年找工作的时候，一家公司老板面试我，给我的评价是「热爱技术，但是技术基础太差，但是愿意给我试用几天的机会」，加上这次同事评价 - 「我是个热爱技术，并且有着明确目标的人」，再加上朋友的评价是「很享受编程的样子」。这说明我的路没有走弯，我很感谢他们的评价。</p>
+
+<p>但是这还不够，远远不够，我需要更多。我的技术其实还是很差，接触的东西越多，越觉得自己会的东西太少，我要看的书还有很多。我希望把自己打造成一流的人才。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/19">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/17">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

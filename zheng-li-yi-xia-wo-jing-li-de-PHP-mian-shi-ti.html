@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>整理一下我经历的PHP面试题 - forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="1、用css、html编写一个两列布局的网页，右侧固定宽度200px，左侧自适应。（答案如下，IE下没测试，Chrome下正常） &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt; &lt;meta http-equiv="content-type" &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/zheng-li-yi-xia-wo-jing-li-de-PHP-mian-shi-ti.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">整理一下我经历的PHP面试题</h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年10月08日
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>1、用css、html编写一个两列布局的网页，右侧固定宽度200px，左侧自适应。（答案如下，IE下没测试，Chrome下正常）</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;meta http-equiv="content-type" content="text/html; charset=utf-8" /&gt;
+	&lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;style type="text/css"&gt;
+div{
+	height: 200px;
+}
+#left{
+	float: left;
+	width: 100%;
+	margin-left: -210px;
+}
+#content{
+	margin-left: 210px;
+	border: 1px solid #ccc;
+}
+#right{
+	float: right;
+	width: 200px;
+	border: 1px solid #ccc;
+}
+
+&lt;/style&gt;
+&lt;body&gt;
+&lt;div id="left"&gt;
+	&lt;div id="content"&gt;
+		我在左边 可以自动适应
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="right"&gt;
+	我在右边 固定宽度200px
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>2、简单描述mysql中，索引，主键，唯一索引，联合索引的区别，对数据库的性能有什么影响（从读写两方面）</p>
+
+<blockquote>
+  <p>索引是一种特殊的文件(InnoDB数据表上的索引是表空间的一个组成部分)，它们包含着对数据表里所有记录的引用指针。 普通索引(由关键字KEY或INDEX定义的索引)的唯一任务是加快对数据的访问速度。普通索引允许被索引的数据列包含重复的值。如果能确定某个数据列将只包含彼此各不相同的值，在为这个数据列创建索引的时候就应该用关键字UNIQUE把它定义为一个唯一索引。也就是说，唯一索引可以保证数据记录的唯一性。 主键，是一种特殊的唯一索引，在一张表中只能定义一个主键索引，主键用于唯一标识一条记录，使用关键字PRIMARYKEY来创建。 索引可以覆盖多个数据列，如像INDEX(columnA,columnB)索引，这就是联合索引。索引可以极大的提高数据的查询速度，但是会降低插入、删除、更新表的速度，因为在执行这些写操作时，还要操作索引文件。</p>
+</blockquote>
+
+<p>3、JS 表单弹出对话框函数是 ?获得输入焦点函数是 ?</p>
+
+<blockquote>
+  <p>弹出对话框函数:alert(), prompt(), confirm() 获得输入焦点函数: focus()</p>
+</blockquote>
+
+<p>4、JS 的转向函数是?怎么引入一个外部 JS 文件?</p>
+
+<blockquote>
+  <p>转向使用 window.location.href=”” 引入外部 js 使用 <script src=""></script></p>
+</blockquote>
+
+<p>5、include 和 require 都能把另外一个文件包含到当前文件中 ,他们有什么区别? Include 和 include_once 又有什么区别?</p>
+
+<blockquote>
+  <p>二者区别只有一个,那就是对包含文件的需求程度, include就是包含,如果被包含的 文件不存在的话,那么则会提示一个错误,但是程序会继续执行下去。而 require 意思是需要,如果被包含文件不存在或者无法打开的时候,则会提示错误, 并且会终止程序的执行。这两种结构除了在如何处理失败之外完全一样 。once 的意思是一次,那么 include_once 和 require_once 表示只包含一次,避免重复包含。</p>
+</blockquote>
+
+<p>6、echo(),print(),print_r()的区别?</p>
+
+<blockquote>
+  <p>echo 是一个语言结构,输出一个或多个字符串; print() 实际上不是一个函数(它是一个语言结构),因此你可以不必使用圆括号来括起 它的参数列表 ,它输出一个字符串 ; print_r () 是一个函数,打印变量的信息,基本类型,数组,对象。</p>
+</blockquote>
+
+<p>7、用 PHP 打印出前一天的时间格式是 2006-5-10 22:21:21。</p>
+
+<pre><code>&lt;?php echo date("Y-m-d H:i:s", time()-3600*24); ?&gt;
+&lt;?php echo date("Y-m-d H:i:s", strtotime("-1 days")); ?&gt;
+</code></pre>
+
+<p>8、求两个日期的差数,例如 2009-3-1 ~ 2009-4-4 的日期差数？</p>
+
+<pre><code>&lt;?php echo (strtotime("2009-4-4")-strtotime("2009-3-1"))/3600*24;?&gt;
+</code></pre>
+
+<p>9、用 PHP 写出显示客户端 IP 与服务器 IP 的代码。</p>
+
+<blockquote>
+  <p>客户端 IP:$_SERVER[“REMOTE_ADDR”] 服务器端 IP:$_SERVER[“SERVER_ADDR”]</p>
+</blockquote>
+
+<p>10、sql 语句应该考虑哪些安全性?</p>
+
+<blockquote>
+  <p>防止 Sql 注入,对特殊字符进行转义、过滤或者使用预编译的 sql 语句绑定变量。 最小权限原则,特别是不要用 root 账户,为不同的类型的动作或者组建使用不同的账户。当 sql 运行出错时,不要把数据库返回的错误信息全部显示给用户 ,以防止泄露服务器和数据库相关信息。</p>
+</blockquote>
+
+<p>11、MYSQL 取得当前时间的函数是?,格式化日期的函数是?</p>
+
+<blockquote>
+  <p>current_time() 用于取得当前时间 date_format(datetime, format)用于格式化日期,如:select date_format(now(),’%Y%m%d’);</p>
+</blockquote>
+
+<p>12、请简述项目中优化 sql 语句执行效率的方法,从哪些方面,sql 语句性能如何分析?</p>
+
+<blockquote>
+  <p>1) 尽量选择较小的列 2) 将where中用的比较频繁的字段建立索引 3) select子句中避免使用‘*’ 4) 避免在索引列上使用计算 、not in 和&lt;&gt;等操作 5) 当只需要一行数据的时候使用 limit 1 6) 保证单表数据不超过 200W,适时分割表。 针对查询较慢的语句,可以使用explain 来分析该语句具体的执行情况。</p>
+</blockquote>
+
+<p>13、简述在 MySQL 数据库中 MyISAM 和 InnoDB 的区别？</p>
+
+<blockquote>
+  <p>区别主要有以下几个: 构成上,MyISAM 的表在磁盘中有三个文件组成,分别是表定义文件( .frm)、数据文 件(.MYD)、索引文件(.MYI),而 InnoDB 的表由表定义文件(.frm)、表空间数据和日志文 件组成。 安全方面, MyISAM 强调的是性能,其 查询 效率较高,但不支持事务和外键等安全性 方面的功能,而 InnoDB 支持事务和外键等高级功能 ,查询效率稍低。 对锁的支持,MyISAM 支持表锁,而 InnoDB 支持行锁。</p>
+</blockquote>
+</div>
+
+
+  
+    <!-- 添加捐赠图标 -->
+    <div class ="post-donate">
+        <div id="donate_board" class="donate_bar">
+            <a id="btn_donate" href="javascript:;" title="Donate 打赏"></a>
+            <br>
+            <span class="donate_txt">如果这篇文章对你有帮助，并且你想小额捐款支持一下的话。</span>
+            <br>
+        </div>  
+  
+        <div id="donate_guide" class="donate_bar hidden">
+            <!-- 支付宝打赏图案 -->
+            <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153431.png" class="m10" title="支付宝打赏" >
+            <!-- 微信打赏图案 -->
+            <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153510.png" class="m10" title="微信打赏">
+        </div>
+  
+        <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+        </script>
+    </div>
+<!-- 添加捐赠图标 -->
+  
+  
+    
+        
+            
+            
+        
+
+    
+
+
+
+
+        
+    
+
+
+
+
+
+<div class="cc-license">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/deed.zh">
+        <img alt="知识共享署名-非商业性使用 4.0 国际许可协议" src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153253.png" />
+    </a><br />
+    原文地址：<a href="https://blog.forecho.com/zheng-li-yi-xia-wo-jing-li-de-PHP-mian-shi-ti.html">https://blog.forecho.com/zheng-li-yi-xia-wo-jing-li-de-PHP-mian-shi-ti.html</a><br />
+    版权声明：本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/deed.zh">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。  
+</div>
+<div style="text-align: center; margin-top: 20px;">
+    <img alt="扫码关注我的个人公众号" src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153337.png"/>   
+</div>
+
+  
+  <footer>
+    <p class="meta">
+      
+  
+
+
+<span id="busuanzi_container_page_pv">
+  <span id="busuanzi_value_page_pv"></span>次访问
+</span>
+<span class="byline author vcard">Posted by <span class="fn">forecho</span></span>
+
+      
+ 
+ 
+ 
+
+  2013年10月08日
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/du-da-zao-Facebook.html" title="Previous Post: 读《打造Facebook》">&laquo; 读《打造Facebook》</a>
+      
+      
+        <a class="basic-alignment right" href="/use-git.html" title="Next Post: Git 初使用">Git 初使用 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

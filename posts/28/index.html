@@ -1,0 +1,938 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="Yii自动生成的登录页面已经很完善了，非常好用，但是唯一不足的就是界面是英文版的，对于我们来说非常不友好，用户可能根本看不懂。 改为中文版的方法其实很简单，找到models/LoginForm.php模型文件，找到如下代码： public function attributeLabels()
+{ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/posts/28/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Yii-guan-yu-deng-lu-biao-dan-han-hua-cao-zuo.html">Yii关于登录表单汉化操作</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年12月06日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yii自动生成的登录页面已经很完善了，非常好用，但是唯一不足的就是界面是英文版的，对于我们来说非常不友好，用户可能根本看不懂。 改为中文版的方法其实很简单，找到<code>models/LoginForm.php</code>模型文件，找到如下代码：</p>
+
+<pre><code>public function attributeLabels()
+{
+	return array(
+		'rememberMe'=&gt;'Remember me next time',
+	);
+}
+</code></pre>
+
+<p><strong>改为如下代码：</strong></p>
+
+<pre><code>public function attributeLabels()
+{
+	return array(
+		'username'=&gt;'用户名',
+		'password'=&gt;'密　码',
+		'rememberMe'=&gt;'记住并自动登录',
+	);
+}
+</code></pre>
+
+<p>OK,现在你去刷新你的登录页面，就会是中文的了，你不必去改动login.php页面的任何代码。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/yii-zen-yang-xiu-gai-zi-dong-tiao-zhuan-dao-deng-lu-ye-mian.html">Yii怎样修改自动跳转到登录页面？</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年12月05日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>1、在配置文件main.php下的components里添加下面代码：</strong></p>
+
+<pre><code>'user'=&gt;array(
+	// enable cookie-based authentication
+	'allowAutoLogin'=&gt;true,
+),
+</code></pre>
+
+<p><strong>2、在SiteController.php添加如下代码：</strong></p>
+
+<pre><code>public function filters()
+{
+	return array(
+		'accessControl', // perform access control for CRUD operations
+	);
+}
+public function accessRules()
+{
+	return array(
+		array('allow',  //未登录用户允许操作的action
+				'actions'=&gt;array('login','logout','register'),
+				'users'=&gt;array('*'),
+		),
+		array('allow',   //登录用户允许操作全部action
+				'users'=&gt;array('@')
+		),
+		array('deny',  // allow all users to perform 'index' and 'view' actions
+				'users'=&gt;array('*'),
+		),
+   );
+}
+</code></pre>
+
+<p><strong>更新一下更完善的方法：</strong> <strong>2、在SiteController.php添加如下代码：</strong></p>
+
+<pre><code>public function accessRules()
+{
+	return array(
+		array('allow',  // allow all users to perform 'index' and 'view' actions
+			'actions'=&gt;array('login','error'),
+			'users'=&gt;array('*'),
+		),
+		array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			'actions'=&gt;array('logout'),
+			'users'=&gt;array('@'),
+		),
+		array('deny',  // deny all users
+			'users'=&gt;array('*'),
+		),
+	);
+}
+</code></pre>
+
+<p><strong>3、在配置文件main.php下添加下面代码：</strong></p>
+
+<pre><code>'defaultController'=&gt;'options/welcome',//默认加载的控制器 页面
+</code></pre>
+
+<p><strong>4、在OptionsController.php修改accessRules，修改后的代码如下：</strong></p>
+
+<pre><code>public function accessRules()
+{
+	return array(
+		array('allow', // allow admin user to perform 'admin' and 'delete' actions
+			'actions'=&gt;array('welcome'),
+			'users'=&gt;array('admin'),
+		),
+		array('deny',  // deny all users
+			'users'=&gt;array('*'),
+		),
+	);
+}
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Yii-guan-yu-messages-duo-yu-yan-qie-huan.html">Yii关于messages，多语言切换</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年12月05日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>1. 设置全局默认的语言</strong> 之前提到过在protected/config/main.php 文件内添加如下代码，默认语言为中文（有限的为中文）</p>
+
+<pre><code>'language' =&gt; 'zh_cn',
+</code></pre>
+
+<p><strong>2.控制器根据用户选择动态切换语言</strong></p>
+
+<pre><code>public function init()
+{
+    if(isset($_GET['lang']) &amp;&amp; $_GET['lang'] != "")
+    {
+        Yii::app()-&gt;language = $_GET['lang'];
+        Yii::app()-&gt;request-&gt;cookies['lang'] = new CHttpCookie('lang', $_GET['lang']);
+    }
+    else if(!empty(Yii::app()-&gt;request-&gt;cookies['lang']))
+    {
+        Yii::app()-&gt;language = Yii::app()-&gt;request-&gt;cookies['lang'];
+    }
+    else
+    {
+        $lang = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        Yii::app()-&gt;language = strtolower(str_replace('-', '_', $lang[0]));
+    }
+}
+</code></pre>
+
+<p><strong>3. 页面提供切换语言选项</strong> 在公用的 layouts 头部，加入</p>
+
+<pre><code>&lt;?php echo CHtml::link('中文', Yii::app()-&gt;createUrl('/', array('lang' =&gt; 'zh_cn')));?&gt;
+&lt;?php echo CHtml::link('English', Yii::app()-&gt;createUrl('/', array('lang' =&gt; 'en_us')));?&gt;
+</code></pre>
+
+<p><strong>4. 多语言描述文字</strong></p>
+
+<pre><code>//admin是对应的语言文件，路径：protected/messages/zh_cn/admin.php
+Yii::t('admin', 'Management Center');
+</code></pre>
+
+<p>zh_cn/admin.php代码如下：</p>
+
+<pre><code>&lt;?php
+return array(
+    'Management Center' =&gt; '管理中心',
+);
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Yii-kuang-jia-zhong-shi-yong-bootstrap.html">Yii框架中使用bootstrap</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年12月04日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>把下载下来的<a href="http://pan.baidu.com/share/link?shareid=145927&amp;uk=2684558169">bootstrap</a>解压之后的整个文件夹，拷贝到项目中的protected\extensions文件夹里面，并且命名为bootstrap。 修改config目录下的main.php配置文件，修改完成之后的代码如下：</p>
+
+<pre><code>'preload'=&gt;array('log','bootstrap'),
+
+
+'gii'=&gt;array(
+	'class'=&gt;'system.gii.GiiModule',
+	'password'=&gt;'password',
+	// If removed, Gii defaults to localhost only. Edit carefully to taste.
+	'ipFilters'=&gt;array('127.0.0.1','::1'),
+	'generatorPaths'=&gt;array(
+		'bootstrap.gii', // since 0.9.1
+	),
+),
+
+
+// application components
+'components'=&gt;array(
+	'user'=&gt;array(
+		// enable cookie-based authentication
+		'allowAutoLogin'=&gt;true,
+	),
+	// uncomment the following to enable URLs in path-format
+	
+	'bootstrap'=&gt;array(
+		 'class'=&gt;'ext.bootstrap.components.Bootstrap', // assuming you extracted bootstrap under extensions
+	 ),
+</code></pre>
+
+<p>使用方法参考如下：<a href="http://www.cniska.net/yii-bootstrap/">http://www.cniska.net/yii-bootstrap/</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Mac-shu-ru-fa-shen-qi-shu-xu-guan.html">Mac输入法神器-鼠须管？</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年11月30日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>是不是神器我不知道，只有等我用过一阵子之后才能知道。 本篇文章就是讲讲我安装的过程以及一些最基本的配置，还有就是体验一下刚装上的这个神器。 <a href="http://code.google.com/p/rimeime/">官方的下载地址</a>在这~，但是有时候会很慢，我共享的一个地址，目前最新的版本0.9.11，你可以在这<a href="http://pan.baidu.com/share/link?shareid=138796&amp;uk=2684558169">下载~</a> 下载完之后，尼玛找半天没找到，为此还重启了一回电脑还是没发现，后来是网上搜了一些资料，这才发现位置，你可以参考下图：<img src="http://m1.img.libdd.com/farm5/2012/1128/21/E15D546A9674892A5BA87D1B06649D481C48B49D2E937_664_353.JPEG" alt="" /> 我只想说隐藏的好深，不注意看很难找到。  安装好之后简单的配置一下： <strong>一. 配置简繁体输入</strong> 鼠须管默认是繁体输入，需要切换到简体输入的话，请用快捷键 <strong>control+“~”</strong>  打开切换菜单，选“漢字→汉字” 即可。 <img src="http://m3.img.libdd.com/farm4/2012/1128/21/63BCA0BC2A6649E98F6A30371DBC8FB764A5D0362C762_245_270.PNG" alt="" /> <strong>二、配置显示方式</strong> 复制default.yaml和squirrel.yaml，并重命名为default.custom.yaml和squirrel.custom.yaml。 1、default.custom.yaml可以改输入的候选词个数。代码如下：</p>
+
+<pre><code>patch:
+  "menu/page_size": 8
+</code></pre>
+
+<p>2、squirrel.custom.yaml可以改输入法<a href="https://gist.github.com/2309739">配色方案</a>和字号、横向展示等功能，具体请参考这个<a href="http://code.google.com/p/rimeime/wiki/CustomizationGuide">网址</a>。代码如下：</p>
+
+<pre><code>patch:
+  us_keyboard_layout: true      # 鍵盤選項：應用美式鍵盤佈局
+  style/horizontal: true        # 候選窗横向顯示
+  style/font_face: "Hiragino Sans GB W3"    # 我喜歡的字體名稱
+  style/font_point: 18          # 字號
+  style/corner_radius: 5       # 窗口圓角半徑
+  style/border_height: 8        # 窗口邊界高度，大於圓角半徑才有效果
+  style/border_width: 8         # 窗口邊界寬度，大於圓角半徑才有效果
+  style/color_scheme: luna      # 選擇配色方案
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/iOS-kai-fa-shi-li-wu-zi-dong-xuan-zhuan.html">iOS开发实例（五）- 自动旋转</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年11月28日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>自动旋转屏幕有3种常用方法： <strong>一、自动调整属性（适用比较简单的界面）。</strong> <strong>       </strong>1、创建一个项目<code>Autosize</code>，系统是默认支持<code>Portrait</code>（纵版）、<code>Landscape Left</code>（向左横向）、<code>Landscape Right</code>（向右横向），不支持<code>Upside Down</code>（倒过来），如下图：** ** <strong><img src="http://m2.img.libdd.com/farm4/2012/1121/23/3AE597CB846B2D7F4088044E43CA64F30E8F6AB6F1AC6_479_131.PNG" alt="" /> ** 2、打开.xib文件，在IB中拖出6个Round Rect Button，按下图摆放和命名： <img src="http://m1.img.libdd.com/farm4/2012/1121/23/8AD91C50170E0A62231370F87495642C190C42E210C75_354_516.PNG" alt="" /> 这个时候Run一下程序，然后在菜单处找到硬件-&gt;向左旋转。然后得到如下图结果： <img src="http://m1.img.libdd.com/farm5/2012/1121/23/183A9CB8272F0D3BE0AC8236D1884596B96F4860DE0B8_716_363.PNG" alt="" /> 你会发现只有UL位置是对的，其他的都有问题。 3、选中按钮，在属性处找到大小检查器，如下图： <img src="http://m2.img.libdd.com/farm4/2012/1121/23/9E85DA47E72390220DEEE923E5E0F5F14316732D21E0B_264_297.PNG" alt="" /> 方块里面箭头（→）：实线表示可在调整窗口大小时自由更改对象的宽度，虚线表示将对象尽可能的保持原始值。 方块周围的“I”形：表示选定对象的边与包含它的视图的同侧边之间的距离。虚线表示距离是可以灵活可变的，实线表示间距的指应尽可能的保持不变。 4、根据上面的规则修改，如下图： <img src="http://m3.img.libdd.com/farm5/2012/1121/23/8E37B775DD89797ECD128C0575CC3F1F1119DD31E9728_259_267.PNG" alt="" /><img src="http://m1.img.libdd.com/farm4/2012/1121/23/8C6A2DFC4F266FD1457629F9874C057EB88E51293E916_259_267.PNG" alt="" /><img src="http://m1.img.libdd.com/farm4/2012/1121/23/9471BF6FA41620297854F761F7E9C181BF109E6EA8E5A_259_267.PNG" alt="" /><img src="http://m2.img.libdd.com/farm5/2012/1121/23/3F1D573B73A663CFF17E04EB5FAA115CB6FEDB498342C_259_267.PNG" alt="" /><img src="http://m1.img.libdd.com/farm4/2012/1121/23/53960D31310BAD0569F508E555A29C3E5AC96771F72AD_259_267.PNG" alt="" /><img src="http://m2.img.libdd.com/farm4/2012/1121/23/750CD4749D564A2C925C021A6A6943037C0734F3ECF6F_259_267.PNG" alt="" /> 然后我们在Run一下程序，然后依次点击硬件-&gt;向左旋转，如果得到如下图结果，那就证明你成功了。 <img src="http://m1.img.libdd.com/farm5/2012/1121/23/63FA6072C2B8DD53ACC858E9BDACF5C75FB7716FDCC31_718_363.PNG" alt="" />   **二、看到视图旋转提示时，手动调整视图中的对象位置。</strong> 1、选中6个按钮，同时把他们的高度和宽度设置成125点，然后效果图如下： <img src="http://m3.img.libdd.com/farm5/2012/1125/02/28D38E6AF23163A7DE3654562A0B99A859569CC8942F8_355_516.PNG" alt="" /> 2、这个时候我们Run一下程序，然后旋转就会得到如下面的效果： <img src="http://m2.img.libdd.com/farm5/2012/1125/02/E194DDFFDC3CE0C0A28CF24CE741388A140EEF803B254_715_368.PNG" alt="" /> 好混乱，感觉不会再看了。这样的问题要怎么样去解决呢？ 3、手动调整视图位置：按住control键分别把6个按钮拖到.h文件的@end前，依次分别命名为：<code>buttonUL</code>，<code>buttonUR</code>，<code>buttonL</code>，<code>buttonR</code>，<code>buttonLL</code>，<code>buttonLR</code>。生成的代码如下：</p>
+
+<pre><code>@property (weak, nonatomic) IBOutlet UIButton *buttonUL;
+@property (weak, nonatomic) IBOutlet UIButton *buttonUR;
+@property (weak, nonatomic) IBOutlet UIButton *buttonL;
+@property (weak, nonatomic) IBOutlet UIButton *buttonR;
+@property (weak, nonatomic) IBOutlet UIButton *buttonLL;
+@property (weak, nonatomic) IBOutlet UIButton *buttonLR;
+</code></pre>
+
+<p>4、在旋转时移动代码：在.m文件@end前写一个旋转开始之后的方法，最后的旋转动画发生之前自动调用。代码如下：</p>
+
+<pre><code>-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration{
+    if(UIInterfaceOrientationIsPortrait(interfaceOrientation)){
+        buttonUL.frame = CGRectMake(20, 20, 125, 125);
+        buttonUR.frame = CGRectMake(175, 20, 125, 125);
+        buttonL.frame = CGRectMake(20, 168, 125, 125);
+        buttonR.frame = CGRectMake(175, 168, 125, 125);
+        buttonLL.frame = CGRectMake(20, 315, 125, 125);
+        buttonLR.frame = CGRectMake(175, 315, 125, 125);
+    }else{
+        buttonUL.frame = CGRectMake(20, 20, 125, 125);
+        buttonUR.frame = CGRectMake(20, 155, 125, 125);
+        buttonL.frame = CGRectMake(177, 20, 125, 125);
+        buttonR.frame = CGRectMake(177, 155, 125, 125);
+        buttonLL.frame = CGRectMake(328, 20, 125, 125);
+        buttonLR.frame = CGRectMake(328, 155, 125, 125);
+    }
+}
+</code></pre>
+
+<p>所有的视图的大小位置都在frame属性中指定，<code>CGRectMake</code>函数支持通过指定的x和y的位置以及<code>width</code>和<code>height</code>来轻松创建<code>CGRect</code>。然后我们Run一下程序，得到如下效果： <img src="http://m2.img.libdd.com/farm5/2012/1125/02/AAA523B63744F1C1B8F38BD5362C6886DE825EA56E99F_715_368.PNG" alt="" /> 其实这样做的有点复杂的。   <strong>三、在IB中为视图设计两个不同的版本，一个适用于纵版，一个适用于横板。</strong> 1、需要我们新建一个<code>Swap</code>项目。我们需要在nib文件中添加两个视图。默认的就是第一个视图，然后我们可以按住 option 键复制另一份视图，然后在属性检查器中的 <code>Simulated Metrics</code> 找到<code>Orientation</code> 菜单把 <code>Portrait</code> 改为 <code>Landscape</code> ，如下图所示： <img src="http://m1.img.libdd.com/farm4/2012/1127/22/C808D665F6C2921F6B7B1E3A3805876465940AF1EE675_256_156.PNG" alt="" /> 2、创建两个视图：打开辅助编辑器，按住 Control 把视图拖到.h文件中，创建一名为 <code>portrait </code>的输出口，Storage 为 <code>Strong</code>，如下图： <img src="http://m2.img.libdd.com/farm5/2012/1127/22/50C08C98ADDA5D5C576339688E0D09CA69A7AC6FB5366_267_152.PNG" alt="" /> 为横向视图重复以上操作，创建一名为 landscape 的输出口。 3、在IB库中拖出Round Rect Buttons，分别放入每个视图中，然后是大小检查器中将Width和Height属性改为125，然后移动位置，并且将标签改为<code>Foo</code>和 <code>Bar</code>。结果如下图所示： <img src="http://m2.img.libdd.com/farm5/2012/1127/22/F3767BA302E80F7B350728D7B31A72A87AA574BC38925_800_467.jpg" alt="" /> 4、创建和关联按钮的输出口：按住control 把横向视图中的Foo按钮拖到.h文件中，将Connection 弹出菜单的值从Outlet 改为<code>Outlet </code>Collection，并且命名为<code>foos</code>。从纵向视图中的Foo 按钮拖至已存在的foos 输出口，与之关联。 对Bar 按钮进行以上重复动作，命名为<code>bars</code>。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/CI-shi-yong-PHP-ExcelReader-lei.html">CI使用PHP-ExcelReader类</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年11月27日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>关于PHP怎么使用<code>PHP-ExcelReader</code>，请参考<a href="http://haimingyoung.iteye.com/blog/1442544">这篇文章~</a>，这个demo，你可以在这<a href="http://pan.baidu.com/share/link?shareid=134586&amp;uk=2684558169">下载~</a>。修改一下数据库资料就能使用。 <strong>下面转入正题，CI如何使用PHP-ExcelReader？</strong> 先把下载好的PHP-ExcelReader文件中的<code>oleread.php</code>和<code>reader.php</code>文件拷贝出来（reader.php文件可能需要把第 261行 “<code>=&amp;</code>”  改为 “<code>=</code>” ）放在<code>phpexcelreader</code>文件夹（这个文件夹可以放在项目更目录下），然后我们最好写一个函数文件命名为：<code>my_excel_helper.php</code>，放在<code>application/helpers</code>文件夹里面，代码如下：</p>
+
+<pre><code>&lt;?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+function excel()
+{
+	$CI = &amp;get_instance();
+	if(!isset($CI-&gt;excel))
+	{
+		require_once '/resources/phpexcelreader/reader.php';//此处是reader.php文件的相对路径，根据项目自行修改
+		$CI-&gt;excel = new Spreadsheet_Excel_Reader();
+		$CI-&gt;excel-&gt;setOutputEncoding('utf-8');
+	}
+	return $CI-&gt;excel;
+}
+</code></pre>
+
+<p><code>ExcelController</code>控制器代码如下：</p>
+
+<pre><code>&lt;?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+class Excel extends CI_Controller {
+
+    function __construct() {
+        parent::__construct();
+		$this-&gt;load-&gt;library('session');
+    }
+	
+	function excelList()
+	{
+		// 读取 excel 内容
+		$this-&gt;load-&gt;helper('my_excel');
+		$excel = excel();
+		$excel-&gt;read('themes/default/demo.xls');
+		$data['excel_datas'] = $excel-&gt;sheets[0]['cells'];
+		//$data['excel_rows'] = $excel-&gt;sheets[0]['numRows'];//表的行数
+		$data['excel_cols'] = $excel-&gt;sheets[0]['numCols'];//表的列数
+
+		$data['title_for_layout'] = "Excel表格";
+		// 加载视图输出
+		$this-&gt;layout-&gt;view('admin/excelList', $data);
+	}
+	
+
+}
+</code></pre>
+
+<p><code>View</code>视图文件主要代码如下：</p>
+
+<pre><code>&lt;h2&gt;读取 excel 内容&lt;/h2&gt;
+&lt;table cellpadding="0" cellspacing="0"&gt;
+	&lt;?php foreach($excel_datas as $row): ?&gt;
+    &lt;tr&gt;
+		&lt;?php for ($i = 1; $i &lt;= $excel_cols; $i++):?&gt;
+    	&lt;td width="80"&gt;&lt;?php echo $row[$i]; ?&gt;&lt;/td&gt;
+		&lt;?php endfor;?&gt;
+    &lt;/tr&gt;
+    &lt;?php endforeach; ?&gt;
+&lt;/table&gt;
+</code></pre>
+
+<p>然后就完成了，如果你能正确的浏览Excel内容，那么说明你成功了，<strong>注意本教程CI使用PHP-ExcelReader时没有涉及到数据库方面，需要自行扩充。</strong></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/iOS-kai-fa-shi-li-si-yong-hu-jie-mian-xia.html">iOS开发实例（四）- 用户界面（下）</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年11月20日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong><a href="/archives/739">上上篇文章**</a></strong><strong>我们讲了键盘的调用以及关闭，</strong><a href="http://old.forecho.com/archives/749">上篇文章</a>我们讲了滑块控件，本篇文章主要讲开关、按钮和分段控件。** ** ** <strong>一、添加分段控件：</strong>打开.xib文件在IB里找到<code>Segmented Control</code>分段控件，直接拖过来，然后调整大小，改First名为<code>Switches</code>，改Second名为<code>Button</code>，完成之后如下图：   <strong>二、添加开关控件：</strong> 1、在IB里直接找到<code>Switch</code>开关控件拖过来，然后按住键盘option键。拖动刚才的Switch，移动到另外一边生成另外一个开关。 2、链接开关的输出口和操作：按住control拖动左边的开关控件到.h文件的@end前，添加一个输出口，name输入<code>leftSwitch</code>，然后回车。然后右边的开关也是同样的操作，name名为<code>rightSwitch</code>，效果如下图： <img src="http://m2.img.libdd.com/farm5/2012/1119/22/C06B25713F77FD53D22F4042DC3593E3D0FCC872901A9_283_150.PNG" alt="" /><img src="http://m3.img.libdd.com/farm5/2012/1119/22/523B0610F7DCD9B09019DCE4EB4538232BFC9BB7525A3_279_152.PNG" alt="" /> 3、关联两个开关：这个比较关键，关联之后，操作一个开关另一个开关也跟着动。先按住control键拖动左边的开关到.h文件的@end前，然后将Connection改为<code>Action</code>，将name输入<code>switchChanged</code>，然后回车。如下图： <img src="http://m1.img.libdd.com/farm4/2012/1119/22/EE2A8CCB8BAE30A666118D77A52E9E80EBB369DCF6140_277_169.PNG" alt="" /> 比较关键的是下一步，你要按住control键拖动右边的开关控件，<strong>拖到已经创建的<code>switchChanged</code>上面。</strong>只有这样才能时两个开关关联起来，并且同时操作。如下图： <img src="http://m1.img.libdd.com/farm4/2012/1119/22/AF1E6523572A757EC9FF5BD2CBEC7A267F31FCB556786_493_131.PNG" alt="" /> 最后，按住control把分段控件拖到.h文件中，创建一个操作方法：将Connection改为<code>Action</code>，将name输入<code>toggleControls</code>。 4、实现功能还需要在.m的<code>switchChanged</code>操作方法添加代码，完成之后代码如下：</p>
+
+<pre><code>- (IBAction)switchChanged:(id)sender {
+    UISwitch *whichSwitch = (UISwitch *)sender;
+    BOOL setting = whichSwitch.isOn;//获得开关状态
+    [leftSwitch setOn:setting animated:YES];//设置开关状态
+    [rightSwitch setOn:setting animated:YES];//设置开关状态
+}
+</code></pre>
+
+<p>这时候我们Run一下程序，当你操作一个开关时另一个开关也同时动，那就说明我们成功了。   <strong>三、添加按钮</strong> 1、在IB库里面找到<code>Round Rect Button</code>，直接拖到.xib文件的开关控件上面，并且调整大小，使之完全覆盖两个开关控件，并且添加名<code>Do Something</code>。 2、按住control键拖到按钮到.h文件的@end前，添加一个输出口，在name输入<code>doSomethingButton</code>，然后回车。再一次按住control键拖到按钮到.h文件的@end前，添加一个操作，将Connection改为<code>Action</code>，将name输入<code>buttonPressed</code>。如下图： <img src="http://m3.img.libdd.com/farm5/2012/1119/22/EEE2AE4F26B7C93FD97A543A013239A8C539ADA29C8C5_278_152.PNG" alt="" /><img src="http://m1.img.libdd.com/farm4/2012/1119/22/EBE28CE67D9A1798C6F1217CEF778041FF8EE2E313171_275_169.PNG" alt="" /> 3、为了让程序启动时隐藏按钮，在按钮属性中找到View部分的Drawing，选中<code>Hidden</code>复选框。   <strong>四、实现分段控件的操作方法</strong> <strong>   </strong>在.m文件中找到<code>toggleControls</code>方法，添加操作，完成之后代码如下：</p>
+
+<pre><code>- (IBAction)toggleControls:(id)sender {
+    //0 == switchs index 判断当前选择的分段控件是哪一部分
+    if ([sender selectedSegmentIndex] == 0) {
+        leftSwitch.hidden = NO;
+        rightSwitch.hidden = NO;
+        doSomethingButton.hidden = YES;
+    }else{
+        leftSwitch.hidden = YES;
+        rightSwitch.hidden = YES;
+        doSomethingButton.hidden = NO;
+    }
+}
+</code></pre>
+
+<p>这时候Run一下程序，如果能使用分段控件正确切换开关和按钮的话，那么你成功了。   <strong>五、实现操作表和警报</strong>（两者类似但是有区别，操作表需要用户做出选择，然后根据选择会得到不同的结果，而警报只是一个通知，可能只有一个按钮） 1、遵从操作表的委托方法：在.h文件中添加<code>&lt;UIActionSheetDelegate&gt;</code>，位置如下：</p>
+
+<pre><code>@interface BIDViewController : UIViewController &lt;UIActionSheetDelegate&gt;
+</code></pre>
+
+<p>2、显示操作表：在.m文件中找到<code>buttonPressed</code>方法。添加代码之后如下：</p>
+
+<pre><code>- (IBAction)buttonPressed:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] //分配一个UIActionSheet对象并进行初始化
+                                  initWithTitle:@"Are you sure?" //设置标题，将会显示在Action Sheet的顶部
+                                  delegate:self //设置操作表的委托，该表被按下时收到通知。通过self传递。
+                                  cancelButtonTitle:@"No Way" //设置取消按钮的标题，将会显示在Action Sheet的最下边
+                                  destructiveButtonTitle:@"Yes,I'm Sure!" //设置第一个确定按钮的标题，“继续”按钮
+                                  otherButtonTitles:nil];
+                                  //otherButtonTitles: @"New Button 1", @"New Button 2", nil]; //可以设置任意多的确定按钮
+    [actionSheet showInView:self.view]; //显示操作表
+}
+</code></pre>
+
+<p>3、然后在下面添加这个方法，代码如下：</p>
+
+<pre><code>//actionSheet didDismissWithButtonIndex是UIActionSheetDelegate委托方法中的一个
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (buttonIndex != [actionSheet cancelButtonIndex]) {//buttonIndex表示用户所轻触的按钮的编号，编号从上往下从0开始。actionSheet cancelButtonIndex表示取消按钮的编号。
+        NSString *msg = nil;
+
+        if (nameField.text.length &gt; 0) 
+            msg = [[NSString alloc] initWithFormat:
+                   @"You can breathe easy, %@, everything went OK.",
+                   nameField.text];
+        else
+            msg = @"You can breathe easy, everything went OK.";
+
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"Something was done" //设置标题，将会显示在Alert的顶部
+                              message:msg //设置提示消息内容
+                              delegate:self //设置警告视图self委托
+                              cancelButtonTitle:@"Phew" //设置取消按钮的标题
+                              otherButtonTitles:nil];
+                              //otherButtonTitles: @"New Button 1", @"New Button 2", nil]; //可以设置任意多的确定按钮
+            [alert show];
+    }
+}
+</code></pre>
+
+<p>这时候Run一下我们的程序，点击分段控件，切换到Button，点击<code>Do Something</code> 按钮，会出现一个操作表，然后选择yes的时候除弹出一个警报。   <strong>六、美化我们的按钮。</strong></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/iOS-kai-fa-shi-li-si-yong-hu-jie-mian-zhong.html">iOS开发实例（四）- 用户界面（中）</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年11月20日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>接着<a href="/archives/739">上一篇文章</a>。这一篇文章主要讲滑块功能。 <strong>一、添加滑块和标签，达到下图效果：</strong> <strong>   <img src="http://m3.img.libdd.com/farm5/2012/1119/21/22D01842EE388B6C934B9DDF0218F10C1FF33EAB6C3FB_317_47.PNG" alt="" /> ** 1、打开.xib文件直接在IB库里面拖过来<code>Slider</code>和<code>Label</code>控件，然后改动位置以及长度。</strong> ** 2、改动Slider属性参数：Value的<code>Maximum</code>改为100（即最大值为100），Current改为50（即默认值为50），如下图： <img src="http://m2.img.libdd.com/farm5/2012/1119/21/A1DE08CFA129B877F21C5CE05D756F2DFB041729A42C3_243_94.PNG" alt="" /> 3、改Label的Text为100，然后依次选择Editor-&gt;Size to Fit Content，这样滑块大小正好包容“100”的字符长度。  <strong>二、实现滑块功能：</strong> 1、按住control拖动Slider控件到.h文件，创建一个操作：将Connection改为<code>Action</code>，name输入<code>sliderChanged</code>，然后回车，如下图： <img src="http://m2.img.libdd.com/farm5/2012/1119/21/A05C6551F9146869B37805445182F63FBBC0FD9B0D0BC_284_170.PNG" alt="" /> 2、按住control拖动Lable控件到.h文件，创建一个输出口：在name处输入<code>sliderLable</code>，然后回车，如下图： <img src="http://m2.img.libdd.com/farm4/2012/1119/21/1C55F373F18FE8FC03228FFF9765B5C1633FD7F6853A7_281_154.PNG" alt="" /> 3、在.m文件找到空的<code>sliderChanged</code>方法，添加代码，变成如下代码：</p>
+
+<pre><code>- (IBAction)sliderChanged:(id)sender {
+    UISlider *slider = (UISlider *)sender;//将sender赋给一个UISlider指针
+    int progressAsInt = (int)roundf(slider.value);//获取滑块的当前值，四舍五入为整数。然后赋值给整型变量
+    sliderLabel.text = [NSString stringWithFormat:@"%d",progressAsInt];//创建一个字符串，使其包含该数值，并把字符串赋给标签
+}
+</code></pre>
+
+<p>现在我们Run一下，如果你滑动滑块，左边的数字也在变化，那就证明你成功了。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/iOS-kai-fa-shi-li-si-yong-hu-jie-mian-shang.html">iOS开发实例（四）- 用户界面（上）</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年11月18日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这次要完成的效果图如下： <img src="http://m3.img.libdd.com/farm5/2012/1117/22/A54C73690D46FFAFDE62B89335284BDAAB8B30EC1B215_366_716.PNG" alt="" /><img src="http://m2.img.libdd.com/farm5/2012/1117/22/14C06C68CF4FB1D4A96DFA310C6D45AACD078888FB659_361_709.PNG" alt="" /><img src="http://m1.img.libdd.com/farm4/2012/1117/22/170D6C85A1976A9E739FB616BF3CDC2FF9B1C00C01240_361_709.PNG" alt="" /><img src="http://m3.img.libdd.com/farm4/2012/1117/22/B067D08869DD06595F1C2A9FF2557B312E3224496905F_361_709.PNG" alt="" /> <strong>一、创建一个名为<code>Control Fun</code>的项目</strong>，选择的依旧的<code>Single View Application</code>模板。  <strong>二、用Photoshop做一张宽度小于300px高度小于100px的图片</strong>，此处我们使用的是（172px*80px），下图文件： <img src="http://m3.img.libdd.com/farm4/2012/1117/23/8AAA7EA45E95ADE646F32F8C5DBEBF38D0E650BC3F1CA_172_80.PNG" alt="" /> 然后把图片直接拖到我们的Xcode项目中。记得在提示框中选中<code>Copy items into destination group's folder(if needed)</code>复选框。PS:我习惯性的把图片文件拖到Supporting Files文件夹下面。   <strong>三、根据上一节学到的知识</strong>，我们在BIDViewController.xib中制作出下图的效果来： <img src="http://m2.img.libdd.com/farm4/2012/1118/00/1665242F22F864799674D3BCDC06F4FEFF57D2EC28608_310_189.PNG" alt="" /> 1、在IB中找到<code>image View</code>库，然后拖到视图中，刚拖过来时会自动全屏显示，然后需要我们手动调试大小，大致调的差不多就好了，然后在右边属性框找到<code>Image View</code>中，下拉选择我们需要的图片文件。（此处系统会自动识别图片文件）。 2、调整图片大小：有个最简单的方法，依次选择Editor-&gt;Size to Fit Content，那么Xcode会自动调试成图片原尺寸大小。 3、调整图片的位置：最简单的方法依次选择Editor-&gt;Align-&gt;Horizontal Conter in Container，Xcode会自动帮我们把图片放在视图中间位置。 4、接下来就是该设置图片属性了，下面是我总结的一张表（其实是<code>Text</code>文本库的属性，但是后面的属性跟图片是一样的）： <img src="http://m3.img.libdd.com/farm4/2012/1117/23/6615B31A2F2ECC10456802FE2FF233B5969E1595FA756_600_950.PNG" alt="" /> 此处基本上所以属性我们都不用该，只需要取消<code>Drawing </code>下面的<code>Clip Subviews</code>和<code>Autoresize Subviews</code>这两个选项即可，因为此处我们根本不需要这两项。 5、在IB里面直接拖过来各俩个Text和Lable库，然后按照上上图布局即可。（小窍门：同时选中Lable的两个标签然后依次选择Editor-&gt;Align-&gt;Right Edges可以使两个标签文字右对齐）。 6、选中Text标签，然后根据自己的需要来选择或修改属性。（可以查看上图注释）此处我们在<code>Placeholder</code>添加了Type in a name；<code>Capitalization</code> 选择Words；<code>Drawing</code>选中Opaque取消Clears Graphics Context和Clip Subviews；Number的Text基本上和Name的Text一样，除了<code>Placeholder</code>添加了Type in a number；<code>Capitalization</code>保持默认，<code>Keyboard</code>选择Number Pad。   <strong>四、创建链接和输出口:</strong> 根据上一节学习的，按住<code>control</code>按键拖动<code>Text</code>到.h文件中，Name的Text在Name字段中填写<code>nameField</code>，Number的Text在Name字段中填写<code>numberField</code>，如下图： <img src="http://m2.img.libdd.com/farm4/2012/1118/00/5444F5C95288E8863F0DF72BE724104CB06AB8D43ED25_285_151.PNG" alt="" /> 此时我们可以Run一下我们的程序，得到如下结果即为成功： <img src="http://m3.img.libdd.com/farm5/2012/1118/00/7D5852BC22C9F050865DAF1A208232F66B035BA0A1FFC_365_708.PNG" alt="" />   <strong>五、关闭键盘</strong> 1、完成输入之后关闭键盘：只需在.h文件@end前加入如下代码即可：</p>
+
+<pre><code>- (IBAction)textFieldDoneEditing:(id)sender;
+</code></pre>
+
+<p>在.m文件中@end前加入如下代码：</p>
+
+<pre><code>- (IBAction)textFieldDoneEditing:(id)sender {
+    [sender resignFirstResponder];
+}
+</code></pre>
+
+<p>选中Name的Text，找到右边属性的最后一个图标，找到<code>Did End ON Exit</code> 将旁边那个圈拖到<code>File's Owner</code>，如下图，然后选择<code>textFieldDoneEditing</code>操作。 <img src="http://m3.img.libdd.com/farm5/2012/1118/00/05C715A190F0D622362E024A4CCEE36B0176BA992ABF4_800_74.jpg" alt="" /> 2、通过触摸背景关闭键盘:在.h文件@end前添加如下代码：</p>
+
+<pre><code>- (IBAction)backgroundTop:(id)sender;
+</code></pre>
+
+<p>在.m文件中@endq前加入如下代码：</p>
+
+<pre><code>-(IBAction)backgroundTop:(id)sender{
+    [nameField resignFirstResponder];
+    [numberField resignFirstResponder];
+}
+</code></pre>
+
+<p>现在我们需要把View在右边属性中找到class从<code>UIView</code>改成<code>UIControl</code>，只有这样背景才能有触发操作。然后找到右边属性的最后一个图标，找到<code>Tounch Down</code> 将旁边那个圈拖到<code>File's Owner</code>，选择<code>backgroundTop</code>操作。   接下来我们Run一下，如果程序没有出问题的话，就能实现点击背景关闭键盘功能。   -———-上部分完，下部分请点击这里。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/29">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/27">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

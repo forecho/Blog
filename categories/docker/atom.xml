@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Docker | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/docker/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Docker 使用定时任务]]></title>
+    <link href="https://blog.forecho.com/docker-use-cron.html"/>
+    <updated>2019-05-27T02:58:22+00:00</updated>
+    <id>https://blog.forecho.com/docker-use-cron</id>
+    <content type="html"><![CDATA[<h2 id="section">使用定时任务</h2>
+
+<p>在宿主主机使用 <code>crontab -e</code> 添加如下示例命令就可以了，非常简单：</p>
+
+<p><code>
+*/15 * * * * docker exec laradock_workspace_1 php /var/www/erp/yii sync/order &gt;&gt; /tmp/out-docker.log 2&gt;&amp;1
+</code></p>
+
+<p>说明：</p>
+
+<ul>
+  <li><code>*/15 * * * *</code> 代表 15 分钟执行一次</li>
+  <li><code>&gt;&gt; /tmp/out-docker.log 2&gt;&amp;1</code> 代表把命令的输出结果输入到 <code>/tmp/out-docker.log</code> 文件中。</li>
+</ul>
+
+<p><strong>需要特别说明的是：</strong></p>
+
+<p>以往我们进入一个 Docker 终端都带 <code>-it</code> 参数，如进入 <code>laradock_workspace_1</code> 容器的命令是 <code>docker exec -it laradock_workspace_1</code>，但是定时任务的时候不需要这个参数。</p>
+
+<blockquote>
+  <p>原因是加了 <code>-it</code> 就要开启了一个终端，而计划任务是无法进入任何终端的。</p>
+</blockquote>
+
+<!--more-->
+
+<h2 id="section-1">解决定时任务无法工作</h2>
+
+<p>定时任务如果没按照我们预期的工作，往往很难排查，但是我们可以通过以下几种方式来快速的定位问题：</p>
+
+<h3 id="cron-">开启系统 cron 日志</h3>
+
+<p>修改系统日志配置信息：</p>
+
+<p><code>sh
+sudo vim /etc/rsyslog.d/50-default.conf
+</code></p>
+
+<p>将 cron 前面的注释符去掉，完成之后的代码如下：</p>
+
+<p><code>
+cron.*  /var/log/cron.log
+</code></p>
+
+<p>重启 rsyslog</p>
+
+<p><code>sh
+#sudo /etc/init.d/rsyslog restart
+sudo service rsyslog restart
+sudo service cron restart
+</code></p>
+
+<p>然后通过查看 cron 日志文件确认定时任务是否执行：</p>
+
+<p><code>sh
+sudo tail -n 50 /var/log/cron.log
+</code></p>
+
+<h3 id="section-2">命令必须要有输出结果</h3>
+
+<p>在我们写脚本的时候，无论成功或者失败都要养成写输出文字的习惯，这样我们就可以方便的使用 <code>&gt;&gt; /tmp/out-docker.log 2&gt;&amp;1</code> 的方式把输出结果输入一个日志文件中，我们通过查看这个日志文件进一步确认定时任务的结果。</p>
+
+<h2 id="section-3">最后</h2>
+
+<p>本篇文章主要分享了自己再使用 Docker ，在配置定时任务所踩过的坑，希望对你有用。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用 Laradock]]></title>
+    <link href="https://blog.forecho.com/use-laradock.html"/>
+    <updated>2018-11-27T13:03:58+00:00</updated>
+    <id>https://blog.forecho.com/use-laradock</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">快速使用</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">换中国源</a></li>
+  <li><a href="#php-" id="markdown-toc-php-">开启 PHP 扩展</a></li>
+  <li><a href="#xdebug" id="markdown-toc-xdebug">使用 Xdebug</a></li>
+  <li><a href="#xhprof-" id="markdown-toc-xhprof-">安装 xhprof 扩展</a>    <ul>
+      <li><a href="#section-3" id="markdown-toc-section-3">2019年08月06日 更新：</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">旧版</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-5" id="markdown-toc-section-5">修改配置情况</a></li>
+  <li><a href="#section-6" id="markdown-toc-section-6">补充几个常用命令</a></li>
+  <li><a href="#section-7" id="markdown-toc-section-7">写在最后</a></li>
+  <li><a href="#section-8" id="markdown-toc-section-8">参考连接</a></li>
+</ul>
+
+<h2 id="section">引言</h2>
+
+<p>PHP开发，想用 Docker 但又没太多时间去学，那你可以试试 <a href="https://github.com/laradock/laradock">Lavadock</a> 项目，它是一套完整的基于 Docker 的 PHP 开发环境。包含了预先打包的 Docker 镜像，所有预先配置都是为了提供一个完美的 PHP 开发环境。</p>
+
+<p>你可以很方便的搭建各种环境，比方说 redis、MongoDB、MySQL、Nginx 等等。</p>
+
+<!--more-->
+
+<h2 id="section-1">快速使用</h2>
+
+<ul>
+  <li>下载代码</li>
+</ul>
+
+<p><code>
+git clone https://github.com/laradock/laradock.git --depth=1
+</code>
+&gt; depth 用于指定克隆深度，为1即表示只克隆最近一次 commit，可以加快 clone 速度。</p>
+
+<ul>
+  <li>修改配置</li>
+</ul>
+
+<p><code>
+cd laradock
+cp env-example .env
+</code></p>
+
+<ul>
+  <li>修改 <code>.env</code> 的 <code>APP_CODE_PATH_HOST</code> 的值，相对路径就可以。</li>
+</ul>
+
+<p>比方说我的文件结构是这样的：</p>
+
+<p><code>
+├── env
+│   ├── laradock
+├── php
+│   ├── 3li3
+</code>
+那么我的 <code>APP_CODE_PATH_HOST=../../php</code>。</p>
+
+<p>另外需要注意的就是由于 MySQL 5.8 开始连接方式有变化，所以推荐使用 5.7 的版本。也就是说我们要改 <code>.env</code> 文件的 MySQL 版本，即 <code>MYSQL_VERSION=5.7</code>。</p>
+
+<p>连接的 MySQL 的时候 <code>DB_HOST=mysql</code> 而不是 <code>127.0.0.1</code>。</p>
+
+<ul>
+  <li>然后修改添加 nginx 配置，比方说 <code>nginx/sites/blog.conf</code>：</li>
+</ul>
+
+<p>&#8220;`
+server {</p>
+
+<pre><code>listen 80;
+listen [::]:80;
+
+server_name blog.dev.work;
+root /var/www/blog/public;
+index index.php index.html index.htm;
+
+location / {
+     try_files $uri $uri/ /index.php$is_args$args;
+}
+
+location ~ \.php$ {
+    try_files $uri /index.php =404;
+    fastcgi_pass php-upstream;
+    fastcgi_index index.php;
+    fastcgi_buffers 16 16k;
+    fastcgi_buffer_size 32k;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    #fixes timeouts
+    fastcgi_read_timeout 600;
+    include fastcgi_params;
+}
+
+location ~ /\.ht {
+    deny all;
+}
+
+location /.well-known/acme-challenge/ {
+    root /var/www/letsencrypt/;
+    log_not_found off;
+} } ```
+</code></pre>
+
+<ul>
+  <li>修改 <code>/etc/hosts</code> 文件，添加：</li>
+</ul>
+
+<p><code>
+127.0.0.1 blog.dev.work
+</code></p>
+
+<ul>
+  <li>然后就可以在 laradock 目录下执行命令开始使用了，示例：</li>
+</ul>
+
+<p><code>
+docker-compose up -d nginx workspace redis mysql phpmyadmin mongo
+</code></p>
+
+<h2 id="section-2">换中国源</h2>
+
+<ul>
+  <li>新建 <code>php-fpm/sources.list</code> 文件，添加代码（基本上就是只换域名地址，其他不换）：</li>
+</ul>
+
+<p><code>
+deb http://mirrors.163.com/debian stretch main
+deb http://mirrors.163.com/debian/ stretch-updates main
+deb http://mirrors.163.com/debian-security stretch/updates main
+</code>
+- 然后修改 <code>php-fpm/Dockerfile</code> 文件， 在首部添加：</p>
+
+<p><code>
+COPY ./sources.list /etc/apt/sources.list
+</code></p>
+
+<h2 id="php-">开启 PHP 扩展</h2>
+
+<ul>
+  <li>修改 <code>.env</code> 文件的 workspace 和 php-fpm 部分，把对应的改成 <code>true</code>。</li>
+  <li>重新 build <code>docker-compose build --no-cache php-fpm workspace</code></li>
+  <li>重启 docker <code>docker-compose restart php-fpm workspace</code></li>
+</ul>
+
+<h2 id="xdebug">使用 Xdebug</h2>
+
+<ul>
+  <li>修改 <code>.env</code> 文件 workspace 和 php-fpm 部分， 把对应的 <code>WORKSPACE_INSTALL_XDEBUG</code> 和 <code>PHP_FPM_INSTALL_XDEBUG</code> 改成 <code>true</code>。</li>
+  <li>修改文件 <code>laradock/workspace/Dockerfile</code> (261 行)， 把 <code>apt-get install -y php${LARADOCK_PHP_VERSION}-xdebug &amp;&amp; \</code> 改成
+<code>apt-get update &amp;&amp; apt-get install -y php${LARADOCK_PHP_VERSION}-xdebug &amp;&amp; \</code></li>
+  <li>修改文件 <code>laradock/workspace/Dockerfile</code> （ImageMagick RUN）， 把 <code>apt-get install -y imagemagick php-imagick \</code> 改成 <code>apt-get update &amp;&amp; apt-get install -y --force-yes imagemagick php-imagick \</code></li>
+  <li>修改 <code>Laradock/PHP-FPM/xdebug.ini</code> 和 <code>Laradock/workspace/xdebug.ini</code> 两个文件的配置， 并且保持一致。配置参考（以下路径全部是 php-fpm 容器里面的路径，需要手动创建文件夹和文件，最好提前创建）：</li>
+</ul>
+
+<p><code>
+xdebug.remote_connect_back=1
+xdebug.remote_port=9000
+xdebug.idekey=PHPSTORM
+;
+xdebug.remote_autostart=1
+xdebug.remote_enable=1
+xdebug.cli_color=1
+xdebug.profiler_enable=1
+xdebug.profiler_output_dir = "/var/www/xdebug/xdebug_profiler"
+xdebug.max_nesting_level=250
+xdebug.remote_log="/var/www/xdebug/xdebug_docker.log"
+;
+;内存分析
+; xdebug.auto_trace = 1
+; xdebug.trace_output_dir = "/var/www/xdebug/xdebug_trace"
+; xdebug.trace_format = 0
+; xdebug.show_mem_delta = 1
+; xdebug.collect_params = 4
+; xdebug.collect_return = 1
+;
+xdebug.remote_handler=dbgp
+xdebug.remote_mode=req
+;
+xdebug.var_display_max_children=-1
+xdebug.var_display_max_data=-1
+xdebug.var_display_max_depth=-1
+</code></p>
+
+<ul>
+  <li>重新 build 并且 重启命令：</li>
+</ul>
+
+<p><code>
+docker-compose up --build -d php-fpm
+docker-compose down &amp;&amp; docker-compose up -d nginx workspace redis mysql
+</code></p>
+
+<ul>
+  <li>查看配置文件：</li>
+</ul>
+
+<p><code>
+docker exec -it laradock_php-fpm_1 bash
+cat /usr/local/etc/php/conf.d/xdebug.ini
+</code></p>
+
+<h2 id="xhprof-">安装 xhprof 扩展</h2>
+
+<h3 id="section-3">2019年08月06日 更新：</h3>
+
+<p>此扩展我已经发了 PR : <a href="https://github.com/laradock/laradock/pull/2077">feat: Add PHP_FPM_INSTALL_XHPROF as an option to install xhprof extension </a> 和 <a href="https://github.com/laradock/laradock/pull/2141">fix: fix install xhprof error</a> 更新到了官方库，使用最新版 Laradock 直接改 <code>.env</code> 配置文件就可以了。</p>
+
+<hr />
+
+<h3 id="section-4">旧版</h3>
+
+<ul>
+  <li>修改 <code>.env</code> 和 <code>env-example</code> 文件，在 PHP_FPM 处添加配置代码，控制开启或者关闭：</li>
+</ul>
+
+<p><code>
+# ...
+PHP_FPM_INSTALL_XHPROF=true
+# ...
+</code></p>
+
+<ul>
+  <li>修改 <code>docker-compose.yml</code> 文件，在对应的 php-fpm 地方添加代码：</li>
+</ul>
+
+<p><code>
+- INSTALL_XHPROF=${PHP_FPM_INSTALL_XHPROF}
+</code></p>
+
+<ul>
+  <li>在 laradock 目录下添加 <code>php-fpm/xhprof.ini</code> 文件，代码示例如下：</li>
+</ul>
+
+<p><code>
+[xhprof]
+; extension=xhprof.so
+extension=tideways.so
+xhprof.output_dir=/var/www/xhprof
+; 不需要自动加载，在程序中控制就行
+tideways.auto_prepend_library=0
+; 频率设置为100，在程序调用时能改
+tideways.sample_rate=100
+</code></p>
+
+<ul>
+  <li>然后修改 laradock 目录的 <code>php-fpm/Dockerfile</code> 文件，在安装扩展的中间找地方（比方说 MongoDB 下面）添加代码：</li>
+</ul>
+
+<p>&#8220;`
+###########################################################################
+# Xhprof:
+###########################################################################</p>
+
+<p>ARG INSTALL_XHPROF=false</p>
+
+<p>RUN if [ ${INSTALL_XHPROF} = true ]; then \
+    # Install the php xhprof extension 
+    if [ $(php -r “echo PHP_MAJOR_VERSION;”) = 7 ]; then \
+      curl -L -o /tmp/xhprof.tar.gz “https://github.com/tideways/php-xhprof-extension/archive/v4.1.6.tar.gz”; \
+    else \ 
+      curl -L -o /tmp/xhprof.tar.gz “https://codeload.github.com/phacility/xhprof/tar.gz/master”; \
+    fi \
+    &amp;&amp; mkdir -p xhprof \
+    &amp;&amp; tar -C xhprof -zxvf /tmp/xhprof.tar.gz –strip 1 \
+    &amp;&amp; ( \
+        cd xhprof \
+        &amp;&amp; phpize \
+        &amp;&amp; ./configure \
+        &amp;&amp; make \
+        &amp;&amp; make install \
+    ) \
+    &amp;&amp; rm -r xhprof \
+    &amp;&amp; rm /tmp/xhprof.tar.gz \
+;fi</p>
+
+<p>COPY ./xhprof.ini /usr/local/etc/php/conf.d
+&#8220;`</p>
+
+<ul>
+  <li>重新 build 并且 重启 php-fpm 命令：</li>
+</ul>
+
+<p><code>
+docker-compose up --build -d php-fpm
+docker-compose down &amp;&amp; docker-compose up -d nginx workspace redis mysql
+</code></p>
+
+<ul>
+  <li>检查是否安装成功：</li>
+</ul>
+
+<p><code>
+docker exec -it laradock_php-fpm_1 php -m | grep tideways
+</code></p>
+
+<p>或者
+<code>
+docker exec -it laradock_php-fpm_1 php --ri tideways
+</code></p>
+
+<h2 id="section-5">修改配置情况</h2>
+
+<p>如果单纯的只是改 <code>.ini</code> 配置文件，改完之后只需要重新 <code>build</code> 对应的服务然后重启所有服务就可以了，不需要 <code>build --no-cache</code>，这个太耗时间了。</p>
+
+<p>例如：只是修改了 <code>php-fpm/xhprof.ini</code> 文件的参数信息，然后只需要如下操作：</p>
+
+<p><code>
+docker-compose up --build -d php-fpm
+docker-compose down &amp;&amp; docker-compose up -d nginx workspace redis mysql
+</code></p>
+
+<h2 id="section-6">补充几个常用命令</h2>
+
+<p>看 Log 日志命令：</p>
+
+<p><code>
+docker logs -f laradock_workspace_1
+</code></p>
+
+<p>进入 xx（比方说 MySQL） 容器命令：</p>
+
+<p><code>
+docker exec -it laradock_mysql_1 bash
+</code></p>
+
+<p>进入 workspace 容器</p>
+
+<p><code>
+docker exec -it laradock_workspace_1 bash
+</code></p>
+
+<p>停止容器命令：</p>
+
+<p><code>
+docker-compose down
+</code></p>
+
+<p>安装和启动命令：</p>
+
+<p><code>
+docker-compose up -d nginx workspace redis mysql
+</code></p>
+
+<h2 id="section-7">写在最后</h2>
+
+<blockquote>
+  <p>特喜欢 Laradock 官方仓库上的一句话 <code>Use Docker First And Learn About It Later</code>,可能你并不清楚 Docker 是什么，更不知道 Laradock 是什么，当然我也一样并不是很了解 Docker，但是就像 Laradock 作者写的这句话先用它，然后再去学习它。</p>
+</blockquote>
+
+<h2 id="section-8">参考连接</h2>
+
+<ul>
+  <li><a href="https://laravel-china.org/articles/8105/translated-the-chinese-document-of-laradock">翻译了一下 Laradock 的中文文档</a></li>
+  <li><a href="http://laradock.io/">Laradock 官网</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 安装 Docker]]></title>
+    <link href="https://blog.forecho.com/mac-install-docker.html"/>
+    <updated>2015-07-26T14:55:53+00:00</updated>
+    <id>https://blog.forecho.com/mac-install-docker</id>
+    <content type="html"><![CDATA[<h2 id="section">前言</h2>
+
+<p>前几天 MacBook 拿去修了，回来时候貌似覆盖的方式重装了一回系统了。反正就是 Apache 环境都没了，索性借这次机会使用一下 Docker 吧。</p>
+
+<h2 id="section-1">安装</h2>
+
+<p>根据<a href="https://docs.docker.com/mac/step_one/">官网的文档</a>安装 Docker，如果一切正常的话就是下载一个软件，双击傻瓜式的安装就可以了。</p>
+
+<h2 id="section-2">下载太慢怎么办？</h2>
+
+<p>刚才找到一个国内的<a href="http://get.daocloud.io/#install-boot2docker">镜像</a>，速度还不错，推荐。</p>
+
+<h2 id="section-3">安装失败报错怎么办？</h2>
+
+<p><code>sh
+&gt; docker run hello-world
+&gt; FATA[0000] Post http:///var/run/docker.sock/v1.18/containers/create: dial unix /var/run/docker.sock: no such file or directory. Are you trying to connect to a TLS-enabled daemon without TLS?
+  FAIL
+</code></p>
+
+<!--more-->
+
+<p>解决办法参考<a href="http://chinhui-blog.logdown.com/posts/263035-note-on-a-mac-using-the-docker">[DevOp] Mac上使用Docker</a> 和 <a href="http://blog.csdn.net/delphiwcdj/article/details/41780063">Mac OS X Yosemite 10.10.1安装Docker</a></p>
+
+<h2 id="section-4">测试是否安装成功</h2>
+
+<p>参考这篇文章：<a href="http://chinhui-blog.logdown.com/posts/263794-note-docker-on-mac-2">[DevOp] Mac上使用Docker (2)</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,997 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="1.在控制器里面新建Helloworld控制器 class HelloworldController extends Controller{ public function actionFeedback(){ $model= new FeedbackForm;//实例化一个from $model &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/posts/25/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Yii-kuang-jia-From-biao-dan-yan-zheng.html">Yii框架From表单验证</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年06月03日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>1.在控制器里面新建Helloworld控制器</strong></p>
+
+<pre><code>class HelloworldController extends Controller{
+    public function actionFeedback(){
+        $model= new FeedbackForm;//实例化一个from
+        $model-&gt;unsetAttributes();  // 清除默认值
+        if(isset($_POST['FeedbackForm'])){//判断是否提交
+            $model-&gt;attributes=$_POST['FeedbackForm'];//获得from表单的内容
+            if($model-&gt;validate()){//进行验证（FeedbackForm方法里面的rules验证）
+                $this-&gt;renderPartial('feedbackshow',array('model'=&gt;$model));
+            }else{
+                var_dump($model-&gt;geterrors());//验证失败把失败原因打印出来
+            } 
+        }else{
+            $this-&gt;renderPartial('feedback',array('model'=&gt;$model));
+        }
+    }
+}
+</code></pre>
+
+<p><strong>2.在model下面新建FeedbackForm</strong></p>
+
+<pre><code>class FeedbackForm extends CFormModel{
+    public $name;
+    public $email;
+    public $subject;
+    public $body;
+    public function rules(){
+        return array(
+                array('name,email,subject,body','required'),//不能为空
+                array('email','email'),//email格式验证
+                );
+    }
+    public function attributeLabels()//给变量别名
+    {
+        return array(
+            'subject'=&gt;'主题',
+            'name'=&gt;'用户名',
+            'email'=&gt;'E-mail',
+            'body'=&gt;'内容'
+        );
+    }
+}
+</code></pre>
+
+<p><strong>3.在view里面新建Helloworld文件夹，在文件夹里面新建feedback、feedbackshow视图</strong> <strong>feedback:</strong></p>
+
+<pre><code>&lt;?php header('Content-Type:text/html;charset=UTF-8');?&gt;
+&lt;div&gt;
+&lt;?php $form=$this-&gt;beginWidget('CActiveForm', array(
+    'id'=&gt;'feedback-form',
+    'enableAjaxValidation'=&gt;false,//是否使指定的属性的AJAX验证可用。默认值是false。
+    'enableClientValidation'=&gt;true,  //是否使客户端验证可用。默认值是false。 
+    //下面是当表单被提交时是否执行AJAX验证。如果存在任何验证错误，表单的提交动作将被停止。默认值是false。   
+    'clientOptions'=&gt;array('validateOnSubmit'=&gt;true),
+
+)); ?&gt;
+&lt;?php echo $form-&gt;hiddenField($model,'uid',array('value'=&gt;Yii::app()-&gt;user-&gt;userid));//隐藏input示例 ?&gt;
+    &lt;div&gt;
+        &lt;?php echo $form-&gt;labelEx($model,'name');?&gt;
+        &lt;?php echo $form-&gt;textField($model,'name');?&gt;
+        &lt;?php echo $form-&gt;error($model,'name'); ?&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;?php echo $form-&gt;labelEx($model,'email');?&gt;
+        &lt;?php echo $form-&gt;textField($model,'email');?&gt;
+        &lt;?php echo $form-&gt;error($model,'email'); ?&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;?php echo $form-&gt;labelEx($model,'subject');?&gt;
+        &lt;?php echo $form-&gt;textField($model,'subject',array('size'=&gt;60,'maxlength'=&gt;128));?&gt;
+        &lt;?php echo $form-&gt;error($model,'subject'); ?&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;?php echo $form-&gt;labelEx($model,'body');?&gt;
+        &lt;?php echo $form-&gt;textArea($model,'body',array('rows'=&gt;6,'cols'=&gt;50));?&gt;
+        &lt;?php echo $form-&gt;error($model,'body'); ?&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;?php echo CHtml::submitButton('提交');?&gt;
+    &lt;/div&gt;
+&lt;?php $this-&gt;endWidget();?&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p><strong>feedbackshow:</strong></p>
+
+<pre><code>&lt;?php header('Content-Type:text/html;charset=UTF-8');?&gt;
+&lt;div&gt;
+    &lt;div&gt;
+        &lt;?php echo "姓名:";?&gt;
+        &lt;?php echo $model-&gt;name;?&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;?php echo "E-mail:";?&gt;
+        &lt;?php echo $model-&gt;email;?&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;?php echo "主题：";?&gt;
+        &lt;?php echo $model-&gt;subject;?&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;?php echo "内容:";?&gt;
+        &lt;?php echo $model-&gt;body;?&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Yii-quan-xuan-shan-chu.html">Yii全选删除</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年05月30日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>目前功能还是能用，但是删除不是Ajax操作的。等待下次完善。 <strong>Views：</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="o">&lt;</span><span class="nx">form</span> <span class="nx">action</span><span class="o">=</span><span class="s2">&quot;/member/msglog/deleteordmsg&quot;</span> <span class="nx">method</span><span class="o">=</span><span class="s2">&quot;post&quot;</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;deleteForm&quot;</span><span class="o">&gt;</span>
+</span><span class="line">	<span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class="line">	    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">widget</span><span class="p">(</span><span class="s1">&#39;zii.widgets.CListView&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class="line">	        <span class="s1">&#39;dataProvider&#39;</span><span class="o">=&gt;</span><span class="nv">$dataProvider</span><span class="p">,</span>
+</span><span class="line">	        <span class="s1">&#39;itemView&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;_view&#39;</span><span class="p">,</span>
+</span><span class="line">	        <span class="s1">&#39;emptyText&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;暂时没有数据&#39;</span><span class="p">,</span>
+</span><span class="line">	       	<span class="s1">&#39;template&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;{items}{pager}&#39;</span><span class="p">,</span>
+</span><span class="line">	        <span class="s1">&#39;pager&#39;</span><span class="o">=&gt;</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;CLinksPager&#39;</span><span class="p">),</span>
+</span><span class="line">	        <span class="s1">&#39;itemsTagName&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;table&#39;</span><span class="p">,</span>
+</span><span class="line">	        <span class="s1">&#39;itemsOptions&#39;</span><span class="o">=&gt;</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;list_table&#39;</span><span class="p">,</span> <span class="s1">&#39;width&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;100%&#39;</span><span class="p">),</span>
+</span><span class="line">	        <span class="s1">&#39;buttonCssClass&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;bg btn_page&#39;</span><span class="p">,</span>
+</span><span class="line">	        <span class="s1">&#39;batchItemOptions&#39;</span><span class="o">=&gt;</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="o">=&gt;</span><span class="s2">&quot;filter f_l&quot;</span><span class="p">),</span>
+</span><span class="line">	        <span class="s1">&#39;batchItem&#39;</span><span class="o">=&gt;</span><span class="k">array</span><span class="p">(</span>
+</span><span class="line">	            <span class="c1">//删除</span>
+</span><span class="line">	            <span class="s1">&#39;&lt;input id=&quot;allcheckbox1&quot; onchange=&quot;checkAll(\&#39;select-on-check\&#39;,\&#39;allcheckbox1\&#39;);&quot; class=&quot;chk select-on-check&quot; type=&quot;checkbox&quot; name=&quot;&quot;&gt;全选</span>
+</span><span class="line"><span class="s1">                 &lt;button class=&quot;mem_bgx link_btn mr5&quot; onclick=&quot;$(\&#39;#deleteForm\&#39;).submit();&quot; title=&quot;&quot;&gt;删除选中&lt;/button&gt;&#39;</span>			        <span class="p">),</span>
+</span><span class="line">	    <span class="p">));</span>
+</span><span class="line">	<span class="cp">?&gt;</span><span class="x"></span>
+</span><span class="line"><span class="x">&lt;/form&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>_view.php文件：</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;tr&gt;</span>
+</span><span class="line">	<span class="nt">&lt;td</span> <span class="na">width=</span><span class="s">&quot;6%&quot;</span><span class="nt">&gt;&lt;input</span> <span class="na">class=</span><span class="s">&quot;select-on-check chk f_l&quot;</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;ids[]&quot;</span> <span class="na">value=</span><span class="s">&quot;&lt;?php echo $data-&gt;id; ?&gt;&quot;</span> <span class="nt">/&gt;&lt;/td&gt;</span>
+</span><span class="line">    <span class="nt">&lt;td</span> <span class="na">width=</span><span class="s">&quot;15%&quot;</span><span class="nt">&gt;</span><span class="cp">&lt;?php echo $data-&gt;fromMember-&gt;name;?&gt;</span><span class="nt">&lt;/td&gt;</span>
+</span><span class="line">    <span class="nt">&lt;td</span> <span class="na">width=</span><span class="s">&quot;58%&quot;</span><span class="nt">&gt;&lt;p</span> <span class="na">class=</span><span class="s">&quot;pub_tit02&quot;</span><span class="nt">&gt;</span><span class="cp">&lt;?php echo CHtml::link($data-&gt;title, array(&#39;/member/msgLog/inboxDetail&#39;, &#39;id&#39;=&gt;$data-&gt;id));?&gt;</span><span class="nt">&lt;/p&gt;&lt;/td&gt;</span>
+</span><span class="line">    <span class="nt">&lt;td&gt;</span><span class="cp">&lt;?php echo date(&quot;Y-m-d H:i:m&quot;, $data-&gt;inputtime);?&gt;</span><span class="nt">&lt;/td&gt;</span>
+</span><span class="line"><span class="nt">&lt;/tr&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>*jQuery验证是否有选择：**</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class="line"><span class="c1">//表单验证</span>
+</span><span class="line"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#deleteForm&#39;</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;submit&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">	<span class="kd">var</span> <span class="nx">data</span><span class="o">=</span><span class="k">new</span> <span class="nb">Array</span><span class="p">();</span>
+</span><span class="line">	<span class="nx">$</span><span class="p">(</span><span class="s2">&quot;input:checkbox[name=&#39;ids[]&#39;]&quot;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span>
+</span><span class="line">    	<span class="p">{</span>
+</span><span class="line">		<span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;checked&quot;</span><span class="p">)</span><span class="o">==</span><span class="s1">&#39;checked&#39;</span><span class="p">)</span>
+</span><span class="line">		<span class="p">{</span>
+</span><span class="line">			<span class="nx">data</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">());</span>
+</span><span class="line">		<span class="p">}</span>
+</span><span class="line">	<span class="p">});</span>
+</span><span class="line">	<span class="k">if</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class="line">	<span class="p">{</span>
+</span><span class="line">	<span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span><span class="line">        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">})</span>
+</span><span class="line"><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>jQuery全选：</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="cm">/*全选</span>
+</span><span class="line"><span class="cm">classs:被选框class</span>
+</span><span class="line"><span class="cm">selfid：全选框id</span>
+</span><span class="line"><span class="cm">*/</span>
+</span><span class="line"><span class="kd">function</span> <span class="nx">checkAll</span><span class="p">(</span><span class="nx">classs</span><span class="p">,</span><span class="nx">selfid</span><span class="p">){</span>
+</span><span class="line">	<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="nx">classs</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="o">+</span><span class="nx">selfid</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">)</span><span class="o">?</span><span class="s1">&#39;checked&#39;</span><span class="o">:</span><span class="kc">false</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>Controller：</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="c1">//删除选中</span>
+</span><span class="line"><span class="k">public</span> <span class="k">function</span> <span class="nf">actionDeleteordmsg</span><span class="p">()</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">	<span class="k">if</span> <span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="na">app</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">isPostRequest</span><span class="p">)</span>
+</span><span class="line">	<span class="p">{</span>
+</span><span class="line">		<span class="nv">$criteria</span><span class="o">=</span> <span class="k">new</span> <span class="nx">CDbCriteria</span><span class="p">;</span>
+</span><span class="line">		<span class="nv">$criteria</span><span class="o">-&gt;</span><span class="na">addInCondition</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;ids&#39;</span><span class="p">]);</span>
+</span><span class="line">		<span class="nx">MsgLog</span><span class="o">::</span><span class="na">model</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">deleteAll</span><span class="p">(</span><span class="nv">$criteria</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">		<span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nx">Yii</span><span class="o">::</span><span class="na">app</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">isAjaxRequest</span><span class="p">))</span> <span class="p">{</span>
+</span><span class="line">			<span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;删除成功。&#39;</span><span class="p">;</span>
+</span><span class="line">			<span class="nv">$path</span> <span class="o">=</span> <span class="s1">&#39;../index/success&#39;</span><span class="p">;</span>
+</span><span class="line">		<span class="p">}</span> <span class="k">else</span><span class="p">{</span>
+</span><span class="line">			<span class="nv">$message</span> <span class="o">=</span> <span class="s1">&#39;删除失败。&#39;</span><span class="p">;</span>
+</span><span class="line">			<span class="nv">$path</span> <span class="o">=</span> <span class="s1">&#39;../index/error&#39;</span><span class="p">;</span>
+</span><span class="line">		<span class="p">}</span>
+</span><span class="line">	<span class="p">}</span>
+</span><span class="line">	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="nv">$path</span><span class="p">,</span><span class="k">array</span><span class="p">(</span>
+</span><span class="line">			<span class="s1">&#39;message&#39;</span><span class="o">=&gt;</span><span class="nv">$message</span><span class="p">,</span>
+</span><span class="line">		<span class="p">));</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/jie-jue-Yii-1-12-zhong-Session-diu-shi-de-wen-ti.html">解决 Yii 1.12 中 Session 丢失的问题</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年05月28日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>（这篇文章是转载的，原文排版有问题，网页也错乱了，没办法我只有转载这篇文章了，<a href="http://www.woqilin.net/2012/12/yii-112-session.html">来源</a>。）</em> Session 丢失的问题在运用一些框架来开发比较常见。原因是你对框架 Session 的机制不是很了解，它有可能运用了自己的一套机制。 情况一般是用 header 跳转后才发生的，因为在 header 之前还能够成功打印出来。 一般 Session 跨页面丢失的问题有以下几种情况： 1.客户端禁用 Cookie 。因为 Session 默认是基于 Cookie 的，因为找不到相应的 Cookie，所以 Session 会为空。 2.你在给 Session 赋值时，前面已经调用了 session_write_close() 函数。在原页面虽然能够成功打印，但是并没有成功保存 Session。 而这2中情况在 Yii 都不是，打开文件 yii\framework\web\auth\CWebUser.php #700</p>
+
+<pre><code>Yii::app()-&gt;getSession()-&gt;regenerateID(true);
+</code></pre>
+
+<p>把这个语句注释掉就可以了。它默认调用了PHP 自带的一个函数</p>
+
+<pre><code>bool session_regenerate_id ( [bool delete_old_session] )
+</code></pre>
+
+<p>按常理来说是不会出现 Session 丢失问题的。这可能和我的配置或者它内部实现 Seesion 的机制有关系。 你还可以查看PHP 手册 《Session 会话处理函数》 一章，了解更多详情。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Yii-CListView-shi-yong-fang-fa.html">Yii CListView使用方法</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年05月22日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><?php   
+        $this->widget(&#8216;zii.widgets.CListView&#8217;, array(  
+            &#8217;dataProvider&#8217;=>$model->search(20),  
+            &#8217;itemView&#8217;=>&#8217;_view&#8217;,    
+            &#8217;emptyText&#8217;=>&#8217;暂时没有数据&#8217;,  
+           //&#8217;template&#8217;=>&#8217;{items}{pager}&#8217;,
+            &#8217;pager&#8217;=>array(&#8216;class&#8217;=>&#8217;CLinksPager&#8217;),
+            &#8217;htmlOptions&#8217;=>array(&#8216;class&#8217;=>&#8217;list-view pro_list bd&#8217;),
+            &#8217;itemsTagName&#8217;=>&#8217;ul&#8217;,
+            &#8217;itemsOptions&#8217;=>array(&#8216;class&#8217;=>&#8217;list c_f&#8217;),
+            &#8217;summaryText&#8217;=>&#8217;第 {start}-{end} 条, 共<strong class="c_red2">{count}</strong> 条   第{page}页/共{pages}页&#8217;,
+            &#8217;pagerTemplate&#8217;=>&#8217;onlyPager&#8217;,
+            &#8217;buttonCssClass&#8217;=>&#8217;bg_x btn_page&#8217;,
+            &#8217;batchItemOptions&#8217;=>array(&#8216;class&#8217;=>&#8221;f_l batchItem&#8221;),
+            &#8217;batchItem&#8217;=>array(  
+                //移动到分类  
+                &#8217;<span class="c_666">排序：</span>&#8217;,  
+                //添加到分类  
+                CHtml::link(&#8216;默认排序&#8217;,array(&#8216;list&#8217;,&#8217;id&#8217; => $model->catgory_id,&#8217;att&#8217; =>$g_att,&#8217;sort&#8217;=>&#8221;),array(&#8216;class&#8217;=>empty($model->list_order)?&#8221;default price&#8221;:&#8221;default&#8221;)),
+                CHtml::link(($model->list_order==4)?&#8217;价格<b class="ico ico_up"></b>&#8217;:&#8217;价格<b class="ico ico_down"></b>&#8216;,array(&#8216;list&#8217;,&#8217;id&#8217; => $model->catgory_id,&#8217;att&#8217; =>$g_att,&#8217;sort&#8217;=>($model->list_order==4)?6:4),array(&#8216;class&#8217;=>($model->list_order==4||$model->list_order==6)?&#8221;bg_x price&#8221;:&#8221;bg_x&#8221;)),  
+                CHtml::link(($model->list_order==5)?&#8217;销量<b class="ico ico_up"></b>&#8217;:&#8217;销量<b class="ico ico_down"></b>&#8216;,array(&#8216;list&#8217;,&#8217;id&#8217; => $model->catgory_id,&#8217;att&#8217; =>$g_att,&#8217;sort&#8217;=>($model->list_order==2)?5:2),array(&#8216;class&#8217;=>($model->list_order==2||$model->list_order==5)?&#8221;bg_x price&#8221;:&#8221;bg_x&#8221;)),
+                CHtml::link(($model->list_order==7)?&#8217;上架时间<b class="ico ico_up"></b>&#8217;:&#8217;上架时间<b class="ico ico_down"></b>&#8216;,array(&#8216;list&#8217;,&#8217;id&#8217; => $model->catgory_id,&#8217;att&#8217; =>$g_att,&#8217;sort&#8217;=>($model->list_order==1)?7:1),array(&#8216;class&#8217;=>($model->list_order==1||$model->list_order==7)?&#8221;bg_x price&#8221;:&#8221;bg_x&#8221;)),
+             ),  
+            ));  
+    ?>
+
+<p>简单说明： template是整个CListView的模板；</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/PHP-zhong-de-dan-yin-hao-he-shuang-yin-hao.html">PHP中的单引号和双引号</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年05月18日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>被双引号的内容能被PHP检测其中的变量，并且自动转换变量，示例：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&lt;?php
+</span><span class="line">	$name = 'forecho';
+</span><span class="line">	echo 'Hello world $name';
+</span><span class="line">	echo '&lt;/br&gt;';
+</span><span class="line">	echo "Hello world $name";
+</span><span class="line">?&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>输出的结果就是：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">Hello world $name
+</span><span class="line">Hello world forecho</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>这样就可以得出结论，其实单引号更快，因为单引号不用去考虑变量问题，而是直接输出。</p>
+
+<p>更多资料，请参考鸟哥的<a href="http://www.laruence.com/2008/08/19/338.html">这篇文章</a>。但是写HTML的时候，写页面一些属性的时候，W3C标准，还是要用双引号。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/qian-tan-CSS-de-yi-xie-xie-fa.html">浅谈CSS的一些写法</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年05月15日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>开发网站的时候，DIV最好是先用上class，因为id的权限比class要高。 写class样式的的时候最好也要带上父级的class名称。比如：</p>
+
+<pre><code>.header .topbar{ padding-top:10px;}
+.nav_bar .main_nav li{ float:left;}
+</code></pre>
+
+<p>写div的时候尽量少用float的，因为很多莫名其妙的兼容性问题都可能是浮动害的。 <code>clear: both;</code>是个好东西。 最重要的是写语义化的CSS，让人一看就能看出来是什么意思。比如：</p>
+
+<pre><code>.fl { float: left; }
+.mt10 { margin-top: 10px; }
+.w980 { width: 980px; }
+</code></pre>
+
+<p>这个语义化CSS很实用，就举这三个例子。 以后知道怎么用CSS了吧？</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/lao-luo-he-ta-de-chui-zi.html">老罗和他的锤子</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年05月05日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>下面这段视频是『锤子智能手机操作系统发布会官方版』</strong></p>
+
+<p>知道罗永浩（下面简称「老罗」）这个人是在我大学大的时候，那时候刚配上电脑，那会儿网上他在各大学巡回演讲的视频，找了一个时间看了其中一个最火的，但是视频很长，记得那会儿只看了一半然后下午就跑去上课了，然后就没有然后了。只是记得他很牛，以前在新东方教英语，然后写了一本书叫「我的奋斗」（跟希特勒的书同名），只记得他说自己是个「理想主义者」。这事件过了之后就没怎么关注他了，貌似被我遗忘了。</p>
+
+<p>后来新浪微博火了，开始玩微博了，后来罗永浩开始砸冰箱了，火了一阵子。我只是关注了一下。</p>
+
+<p>记得那会儿我辞职很久了，在宿舍待着很久了，然后不知道什么原因，他们都去上班的时候，那天我就开始看老罗的视频了，没想到这家伙每年都会有一次的创业分享演讲，并且现在改为每半年一次了，那天我一口气看完了他的所以视频，顺序是倒着来的，看完我才发现：「他真的是说相声的，他有才了，很长的视频其实你听起来并不会感觉很无聊。」</p>
+
+<p>老罗这一生注定是牛X的，他貌似连大学都没上过。然后开始在社会上混生活了，直到快30岁的时候都没什么钱，后来为了赚钱去做了当时他最讨厌的两件事-学英语和当老师。然后去当了新东方英语教师，直接给俞敏洪写的信，面试了三次才成功的。开始了忙碌的生活（周一到周五忙着又是打牌、旅游的，然后周末下午去教两个小时的英语）。后来辞职了之后，老罗做了一个牛博网，效益还不错，但是偶尔会被封掉，原因你懂得，每一次封掉之后再次开启的时候流量都会翻倍，但是这个牛博网确实没赚到钱，这个再次证明IT是苦逼的。后来老罗自己开了一家英语培训机构就叫「老罗英语培训学校」，</p>
+
+<p>每张海报设计的都很赞。然后直到现在他开始做手机了，用他的话说就是「感觉自己被历史选中了」。</p>
+
+<p>这个发布会可算是出来了，之前有「跳票」。老罗之前在微博上有说过大概这样一句话「使用我们出品的ROM之后，你还想用iPhone的话，你的终身手机费用我就给包了」。这样一来，大家的期望就变得很高了，当然也有很多人不看好。发布会的票卖的老贵了，然后还有「黄牛」倒票。发布会之后的结果其实是嘘声一片的。</p>
+
+<p>其实我倒是觉得还不错的。</p>
+
+<p>首先老罗把Mac上的拟物图标发挥出来了，然后结合Andriod的特色，把整个Andriod的图标都换了个新，有人笑称「老罗的锥子ROM就是一款主题」，其实这只是锤子ROM的其中一个特色。我觉得锤子ROM最大的特色就是人性化设计和语音助手以及老罗本身的个人情怀。</p>
+
+<p>都有哪些人性化设计我就不说了，反正现在所有的设计都在追求人性化，老罗大体上研究了iPhone，把一些iPhone不人性化的设计都改进了，值得称赞。</p>
+
+<p>iPhone的Siri可以说是改变了语音的使用，刚出来的时候可以说是很火。确实是非常了不起的功能，但是也确实如老罗所说，iPhone上的Siri实用性非常差，刚开始你可能无聊的时候，调戏过他，但是之后几乎你很少使用她，没人会在公共场合对着手机喊「给XXX打电话」，这确实是一件很傻逼的事情。但是老罗的设计真的很牛（具体怎么牛，你可以看上面的发布会视频），说不定未来可以让语音助手这个功能变得更加实用。</p>
+
+<p>至于个人情怀，其实我是很喜欢的，比方说Mac百度输入法的产品经理就是一个有情怀的人。用Mac百度输入法可以很方便的使用「」作为引号，自从知乎上讨论过关于引号的使用问题的之后，我也是越来越喜欢用「」作为引号了。锤子ROM的这次也有个人情怀设计，至于什么我就不说了，自己看视频吧。</p>
+
+<p>最后我不得不感叹一下移动应用以及智能手机的发展速度了，不敢相信Android的发展速度。Android绝对是个潜力股，也是Android改变了手机世界的格局，发展到现在国产手机也被人认同的格局，国产手机不再只是山寨机了。最后再次感叹一下Google觉对是一家伟大的公司，而中国正缺少这样的伟大公司，真希望若干年之后阿里巴巴也能算上？</p>
+
+<p>最最后一起来期待 Smartisan OS （锤子系统）吧！</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Django-er--shi-tu-he-URL-pei-zhi.html">Django(二) - 视图和URL配置</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年05月04日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Django的URl都是需要单独设计的，每个URL指定一个视图中的函数。 Django和URL配置背后的哲学：松耦合原则（决定URL返回哪个视图函数和实现这个视图函数是在两个不同的地方。 这使得开发人员可以修改一块而不会影响另一块。） <strong>永远的Hello world</strong> 首先找到<code>urls.py</code>文件，代码修改为：</p>
+
+<pre><code>from django.conf.urls.defaults import *  #导入django.conf.urls.defaults下的所有模块
+from views import hello  #从mysite/views.py模块中引入了hello视图。
+
+#第二行调用 patterns() 函数并将返回结果保存到 urlpatterns 变量
+urlpatterns = patterns('',
+    (r'^hello/$', hello), #第一个元素是模式匹配字符串（正则表达式）；第二个元素是那个模式将使用的视图函数。
+)
+</code></pre>
+
+<p><em>注：正则表达式字符串的开头字母“r”。 它告诉Python这是个原始字符串，不需要处理里面的反斜杠（转义字符）。例如：“\n”是两个字符串：“\”和“n”。</em> 然后新建一个<code>views.py</code>文件（跟urls.py同级目录），写入如下代码：</p>
+
+<pre><code>from django.http import HttpResponse  #从 django.http 模块导入（import） HttpResponse 类
+
+#hello 的视图函数 每个视图函数至少要有一个参数，通常被叫作request。
+def hello(request):
+    return HttpResponse("Hello world")
+</code></pre>
+
+<p>运行命令行 <code>python manage.py runserver</code> 打开你的浏览器访问 <a href="http://127.0.0.1:8000/hello/">http://127.0.0.1:8000/hello/</a> 如果你看到了 Hello world 页面，那就表示你成功了。 <strong>附件：正则表达式</strong> <img src="http://m2.img.libdd.com/farm5/2013/0115/21/86FA1A22D0DEAF0365359189033DD492AAE58F7491351_592_302.PNG" alt="正则表达式" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Django-chu-shi-yong.html">Django初使用</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年04月26日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Python的项目可以放在你电脑的任何一个文件夹中。 转到你创建的目录，运行命令<code>django-admin.py startproject mysite</code>。这样会在你的当前目录下创建一个目录。（名为<code>mysite</code>的项目） <strong>文件如下：</strong> <strong>init</strong>.py ：让 Python 把该目录当成一个开发包 (即一组模块)所需的文件。 这是一个空文件，一般你不需要修改它。 manage.py ：一种命令行工具，允许你以多种方式与该 Django 项目进行交互。 键入python manage.py help，看一下它能做什么。 你应当不需要编辑这个文件；在这个目录下生成它纯是为了方便。 settings.py ：该 Django 项目的设置或配置。 查看并理解这个文件中可用的设置类型及其默认值。 urls.py：Django项目的URL设置。 可视其为你的django网站的目录。 目前，它是空的。   <strong>启动服务器</strong> 切换到项目目录里 (cd mysite )，运行下面的命令： <code>python manage.py runserver</code> 于是就会返回一个项目的浏览地址（默认一般是：http://127.0.0.1:8000）。 退出这个状态可以使用：CTRL+C。 默认情况下， runserver 命令在 8000 端口启动开发服务器，且仅监听本地连接。 要想要更改服务器端口的话，可将端口作为命令行参数传入： <code>python manage.py runserver 8080</code> 通过指定一个 IP 地址，你可以告诉服务器–允许非本地连接访问。 如果你想和其他开发人员共享同一开发站点的话，该功能特别有用。 <code>0.0.0.0</code> 这个 IP 地址，告诉服务器去侦听任意的网络接口。（这个IP必须是本机的IP地址） <code>python manage.py runserver 0.0.0.0:8000</code> 注：三引号，是python换行字符串的格式。</p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#146" title="2013-05-01 22:00:57">baocaixiong</a>:</strong> 这个主题。。我想要。。。</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Mac-OS-shang-an-zhuang-MySQLdb-yi-xi-lie-wen-ti.html">Mac OS 上安装MySQLdb一系列问题</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年04月24日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>话说装这个插件非常麻烦。 首先你得先装MySQL。先去下载64 位的MySQL，然后安装。步骤你可以参照<a href="http://yan-yan.info/2011/install-mysql-5.5-on-mac-os-10.7-with-python-support.html">这篇文章~</a> 其实他写的已经很详细了，但是我安装的过程中遇到的很多问题。 声明一下：我是下载MySQLdb然后手动安装的，没有用 easy_install去安装。 <strong>1、</strong>报错：</p>
+
+<pre><code>sh: mysql_config: command not found
+......
+......
+EnvironmentError: mysql_config not found
+</code></pre>
+
+<p>解决办法是：在MySQLdb源码里面找到site.cfg 修改为：</p>
+
+<pre><code>mysql_config = /usr/local/mysql/bin/mysql_config
+</code></pre>
+
+<p>然后python setup.py install <strong>2、</strong>报错：</p>
+
+<pre><code>......
+import _mysql
+......
+Reason: image not found
+</code></pre>
+
+<p>解决方法是：需要解决动态引入的问题了（重新做一遍，并且设置环境变量）：</p>
+
+<pre><code>$ python setup.py clean
+$ python setup.py build
+$ python setup.py install
+$ export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+</code></pre>
+
+<p>或者运行下面两行命令：</p>
+
+<pre><code>sudo ln -s /usr/local/mysql/lib/libmysqlclient.18.dylib /usr/lib/libmysqlclient.18.dylib
+
+sudo ln -s /usr/local/mysql/lib /usr/local/mysql/lib/mysql
+</code></pre>
+
+<p>参考资料：<a href="http://stackoverflow.com/questions/4730787/python-import-mysqldb-error-mac-10-6">http://stackoverflow.com/questions/4730787/python-import-mysqldb-error-mac-10-6 </a> <strong>3、</strong>报错： error: command ‘clang’ failed with exit status 1报错的时候 解决方法是：去Xcode的Preference的Download下的Components下载command line tool <strong>4、</strong>在$ python manage.py syncdb 的时候报错：</p>
+
+<pre><code>ImportError: cannot import name smart_unicode
+</code></pre>
+
+<p>解决办法是：在「/Library/Python/2.7/site-packages/tinymce/widgets.py」文件里找到下面代码：</p>
+
+<pre><code>from django.forms.util import smart_unicode
+</code></pre>
+
+<p>替换为：</p>
+
+<pre><code>from django.utils.encoding import smart_unicode
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/26">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/24">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

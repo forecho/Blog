@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Php | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/php/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu 使用 PPA 安装 PHP 扩展]]></title>
+    <link href="https://blog.forecho.com/ubuntu-use-ppa-install-php-extension.html"/>
+    <updated>2015-11-19T02:57:35+00:00</updated>
+    <id>https://blog.forecho.com/ubuntu-use-ppa-install-php-extension</id>
+    <content type="html"><![CDATA[<h2 id="section">简介</h2>
+
+<p>PPA，即 Personal Package Archives 缩写，也就是个人软件包集。</p>
+
+<blockquote>
+  <p>有很多软件因为种种原因，不能进入官方的 Ubuntu 软件仓库。 为了方便 Ubuntu 用户使用，launchpad.net 提供了 ppa，允许用户建立自己的软件仓库， 自由的上传软件。PPA 也被用来对一些打算进入 Ubuntu 官方仓库的软件，或者某些软件的新版本进行测试。</p>
+</blockquote>
+
+<h2 id="section-1">使用</h2>
+
+<p>我一直不太喜欢用源码编译的方式安装 PHP 扩展，主要是麻烦。然后偶然发现了这种方式安装 PHP 扩展，真是太方便了。</p>
+
+<p>下面我们来讲讲怎么使用：</p>
+
+<p>安装 PPA</p>
+
+<p><code>
+sudo add-apt-repository ppa:ondrej/php5
+sudo apt-get update
+</code></p>
+
+<p>安装 php mcrypt 扩展</p>
+
+<p><code>
+sudo apt-get install php5-mcrypt
+</code></p>
+
+<!--more-->
+
+<p>安装 php imagemagick 扩展</p>
+
+<p><code>
+sudo apt-get install imagemagick
+sudo apt-get install php5-imagick
+sudo php5enmod mcrypt
+</code></p>
+
+<p>安装 php gd 扩展</p>
+
+<p><code>
+sudo apt-get install php5-gd
+</code></p>
+
+<p>安装 php apc 扩展</p>
+
+<p><code>
+sudo apt-get install php-apc
+</code></p>
+
+<p>安装 php intl 扩展</p>
+
+<p><code>
+sudo apt-get install php5-intl
+</code></p>
+
+<p><strong>切记：安装扩展完要重启 PHP 才能看效果</strong></p>
+
+<p><code>
+sudo service php5-fpm reload
+</code></p>
+
+<p>PPA 这么强大当然也可以安装 PHP</p>
+
+<p><code>
+sudo apt-get install php5-fpm
+</code></p>
+
+<h2 id="section-2">参考文章</h2>
+
+<ul>
+  <li><a href="http://people.ubuntu.com/~happyaron/udc-cn/lucid-html/ch11s02.html">软件包管理</a></li>
+  <li><a href="http://blog.x228.com/archives/316.html">ubuntu通过ppa源安装php5.4或php5.5</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP 中的动态属性和 StdClass]]></title>
+    <link href="https://blog.forecho.com/dynamic-properties-in-php-and-stdclass.html"/>
+    <updated>2015-11-08T13:52:15+00:00</updated>
+    <id>https://blog.forecho.com/dynamic-properties-in-php-and-stdclass</id>
+    <content type="html"><![CDATA[<blockquote>
+  <p>翻译 <a href="http://krisjordan.com/dynamic-properties-in-php-with-stdclass">Dynamic Properties in PHP and StdClass</a></p>
+</blockquote>
+
+<p>JavaScript 和 Python 允许对象实例的动态属性。事实证明,PHP 也是如此。看官方 PHP 对象和类文档可能会导致你相信动态实例属性需要自定义 __get 和 __set 魔术方法。其实不用。</p>
+
+<h2 id="section">简单,内置的动态属性</h2>
+
+<p>看看以下代码:</p>
+
+<p><code>php
+class DynamicProperties { }
+$object = new DynamicProperties;
+echo isset($object-&gt;foo) ? 't' : 'f'; // f
+echo PHP_EOL;
+// Set Dynamic Properties foo and fooz
+$object-&gt;foo = 'bar';
+$object-&gt;fooz = 'baz';
+// Isset and Unset work
+isset($object-&gt;foo); // true
+unset($object-&gt;foo);
+// Iterate through Properties and Values
+foreach($object as $property =&gt; $value)  {
+    echo $property . ' = ' . $value . PHP_EOL;
+}
+// Prints:
+// fooz = baz
+</code></p>
+
+<!--more-->
+
+<p>使用内置动态实例属性的速度比使用魔法 __get 和 __set 方法快一个数量级（30倍,通过我的分析）。在 PHP 中动态属性访问时是没有回调方法。</p>
+
+<p>因此,什么情况下需要使用 __get 和 __set 呢？如果你需要更复杂的行为,比如需要计算属性,你必须使用__get和__set。另外，如果你不愿意让类拥有动态属性你可以使用__get和__set抛出错误。</p>
+
+<h2 id="stdclass-anonymous-objects">StdClass: Anonymous Objects</h2>
+
+<p>有时一个属性包扔到键值对是必要的。一种方法是使用数组,但这需要引用所有的键。另一种方法是使用动态属性 StdClass 的实例。StdClass 是 PHP 中没有预定义的成员属性的特殊类。</p>
+
+<p><code>
+$object = new StdClass;
+$object-&gt;foo = 'bar';
+json_encode($object);
+</code></p>
+
+<p>接下来我使用 SPL’s 的 Countable 和 ArrayAccess 可以实现下面的几个动作:</p>
+
+<p><code>
+class MyClass implements Countable, ArrayAccess { ... }
+$myObject = new MyClass();
+// Using array access notation
+$myObject[0] = 'hello';
+$myObject[1] = 'world';
+$myObject['foo'] = 'bar';
+</code></p>
+
+<p>实现动态属性功能并不需要继承 stdClass！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac PHP 环境下新增虚拟主机]]></title>
+    <link href="https://blog.forecho.com/mac-php-huan-jing-xia-xin-zeng-xu-ni-zhu-ji.html"/>
+    <updated>2015-01-16T14:30:17+00:00</updated>
+    <id>https://blog.forecho.com/mac-php-huan-jing-xia-xin-zeng-xu-ni-zhu-ji</id>
+    <content type="html"><![CDATA[<p>注：这里只是新增，如果是第一次开启虚拟主机，请参考<a href="http://dancewithnet.com/2010/05/09/run-apache-php-mysql-in-mac-os-x/">这篇文章</a>。</p>
+
+<p>1、运行<code>sudo vim /etc/apache2/extra/httpd-vhosts.conf</code>，就打开了配置虚拟主机文件httpd-vhost.conf，配置虚拟主机了。增加虚拟主机代码如下：</p>
+
+<p><code>
+&lt;VirtualHost *:80&gt;
+    DocumentRoot "/Users/[用户名]/Sites/site"
+    ServerName www.site.com
+    ErrorLog "/private/var/log/apache2/sites-error_log"
+    CustomLog "/private/var/log/apache2/sites-access_log" common
+    &lt;Directory /&gt;
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride All
+                Order deny,allow
+                Allow from all
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</code></p>
+
+<p>2、保存退出，并重启Apache。</p>
+
+<p><code>sh
+sudo apachectl restart
+</code></p>
+
+<p>3、运行<code>sudo vim /etc/hosts</code>，打开hosts配置文件，加入「127.0.0.1 www.site.com」，
+这样就可以配置完成sites虚拟主机了，访问「http://www.site.com」就相当于访问<code>/Users/[用户名]/Sites/site</code>文件下面的项目了。</p>
+
+<p>补充：Mac默认PHP配置文件在 <code>/private/etc/php.ini</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 升级 Yosemite 之后 PHP 环境修复]]></title>
+    <link href="https://blog.forecho.com/macbook-sheng-ji-yosemite-zhi-hou-php-huan-jing-xiu-fu.html"/>
+    <updated>2014-10-19T14:06:38+00:00</updated>
+    <id>https://blog.forecho.com/macbook-sheng-ji-yosemite-zhi-hou-php-huan-jing-xiu-fu</id>
+    <content type="html"><![CDATA[<p>Yosemite 终于发布了，我第一时间升级了。但是没想到 PHP 环境受到影响了，直到现在终于修复好了。</p>
+
+<h2 id="apache">修复 Apache</h2>
+
+<p>Apache 好像是换新版本了，升级完系统之后项目打不开了。之前设置好的虚拟主机都无效了。</p>
+
+<p>首先打开 <code>sudo vim /etc/apache2/httpd.conf</code>  这个文件，</p>
+
+<h3 id="section">开启虚拟主机功能，去掉下面代码的「#」注释：</h3>
+
+<p><code>
+#Include /private/etc/apache2/extra/httpd-vhosts.conf
+</code>
+改过的代码如下：</p>
+
+<p><code>
+Include /private/etc/apache2/extra/httpd-vhosts.conf
+</code></p>
+
+<h3 id="section-1">如果想开启伪静态，去掉下面代码的「#」注释：</h3>
+
+<p><code>
+#LoadModule rewrite_module libexec/apache2/mod_rewrite.so
+</code>
+改过的代码如下：</p>
+
+<p><code>
+LoadModule rewrite_module libexec/apache2/mod_rewrite.so
+</code>
+### 如果想使用系统自带的 PHP 版本的话，去掉下面代码的「#」注释：</p>
+
+<p><code>
+#LoadModule php5_module libexec/apache2/libphp5.so
+</code>
+改过的代码如下：</p>
+
+<p><code>
+LoadModule php5_module libexec/apache2/libphp5.so
+</code></p>
+
+<p>以上操作完了之后记得要重启Apache:</p>
+
+<p><code>sh
+sudo apachectl restart
+</code></p>
+
+<h2 id="section-2">修复虚拟主机</h2>
+<!--more-->
+<p>现在我们虽然能用虚拟主机了，但是好像不能解析 PHP 了，打开 <code>/private/etc/apache2/extra/httpd-vhosts.conf</code> 文件在每一个配置里面添加一行下面的代码就可以了：</p>
+
+<p><code>Require all granted</code></p>
+
+<p>示例如下：</p>
+
+<p><code>
+&lt;Directory "/Users/$USER/Sites/"&gt;
+Options Indexes MultiViews FollowSymLinks
+AllowOverride All
+Require all granted
+&lt;/Directory&gt;
+</code>
+记得要重启 Apache：</p>
+
+<p><code>sh
+sudo apachectl restart
+</code>
+##安装 PHP Mcrypt 扩展</p>
+
+<p>这个花费我很长时间，主要是我本来还想用 brew 安装的，省事，但是还是没效果，最后没办法还是编译安装了。</p>
+
+<p><code>sh
+cd ~/Downloads
+wget https://github.com/php/php-src/archive/PHP-5.5.14.zip
+unzip PHP-5.5.14.zip
+cd php-src-PHP-5.5.14/ext/mcrypt/
+/usr/bin/phpize
+./configure
+make
+sudo make install
+</code>
+然后拷贝一份 php.ini 配置文件，重装系统这个文件没了：</p>
+
+<p><code>sh
+sudo cp /etc/php.ini.default /etc/php.ini
+</code>
+然后记得在 php.ini 文件里面添加这个扩展，如下面代码：</p>
+
+<p><code>
+extension = mcrypt.so
+</code></p>
+
+<p>以上操作完之后你的 PHP 环境应该又回来了。：）</p>
+
+<p>—————–update 2014年11月02日—————-</p>
+
+<p>Yosemite 自带编译安装之后的 PHP 环境 GD 库不支持 png 和 FreeType ，会导致各种验证码出不来，坑。</p>
+
+<p>一键解决办法如下（重新编译使用 PHP5.6）：</p>
+
+<p><code>sh
+curl -s http://php-osx.liip.ch/install.sh | bash -s 5.6
+</code></p>
+
+<h2 id="section-3">参考文章：</h2>
+
+<ol>
+  <li><a href="http://tobschall.de/2014/08/04/yosemite-mamp/">Apache, MySQL &amp; PHP on OS X Yosemite</a></li>
+  <li><a href="http://digitizor.com/2014/06/29/build-install-php-mcrypt-mac-os-x-manually/">How to Manually Build &amp; Install php-mcrypt on Mac OS X</a></li>
+  <li><a href="http://www.pixelfolio.co.uk/blog/installing_and_configuring_apache_php_mysql_on_yosemite">Installing and Configuring Apache, PHP and MySQL on OSX 10.10 Yosemite</a></li>
+  <li><a href="http://stackoverflow.com/questions/26443242/after-upgrade-php-no-longer-supports-png-operations">After upgrade, PHP no longer supports PNG operations</a></li>
+</ol>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP 裁剪数组]]></title>
+    <link href="https://blog.forecho.com/php-cai-jian-shu-zu.html"/>
+    <updated>2014-09-05T14:05:01+00:00</updated>
+    <id>https://blog.forecho.com/php-cai-jian-shu-zu</id>
+    <content type="html"><![CDATA[<ul>
+  <li>用 array_splice 可以裁剪，原来的数组会被改变，键值会重组</li>
+  <li>用 array_slice ，原来的数组不会改变，键值可以不用重组</li>
+</ul>
+
+<p>示例：</p>
+
+<p>&#8220;` php
+echo ‘&lt;pre&gt;’;
+$arrayRaw = array(‘2’ =&gt; ‘c’,’3’ =&gt; ‘d’, ‘4’ =&gt; ‘e’, ‘5’ =&gt; ‘f’);
+echo “0”, PHP_EOL;
+print_r(array_splice($arrayRaw, 2));
+echo “1”, PHP_EOL;
+print_r($arrayRaw);</p>
+
+<p>$arrayRaw = array(‘2’ =&gt; ‘c’,’3’ =&gt; ‘d’, ‘4’ =&gt; ‘e’, ‘5’ =&gt; ‘f’);
+array_slice($arrayRaw, 0, 2, true);
+echo “2”, PHP_EOL;
+print_r(array_slice($arrayRaw, 0, 2, true));
+echo “3”, PHP_EOL;
+print_r($arrayRaw);
+echo ‘&lt;/pre&gt;’;
+&#8220;`
+<!--more-->
+以上代码输出结果：</p>
+
+<p><code>
+0
+Array
+(
+    [0] =&gt; e
+    [1] =&gt; f
+)
+1
+Array
+(
+    [0] =&gt; c
+    [1] =&gt; d
+)
+2
+Array
+(
+    [2] =&gt; c
+    [3] =&gt; d
+)
+3
+Array
+(
+    [2] =&gt; c
+    [3] =&gt; d
+    [4] =&gt; e
+    [5] =&gt; f
+)
+</code></p>
+
+<p>** 参考链接 **</p>
+
+<p><a href="http://stackoverflow.com/questions/4804424/php-array-splice-keep-previous-keys">http://stackoverflow.com/questions/4804424/php-array-splice-keep-previous-keys </a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,689 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>MWS 开发 - 订单篇 - forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="引言 SDK 订单相关的功能 同步订单 发货 总结 相关文章 引言 最近这几个月都在帮一个朋友在开发亚马逊 ERP 系统，使用了 MWS 接口，自己一路摸索，花了不少时间和精力，现在想把这些经验记录分享出来，让大家少走一些弯路。 这将是一系列文章，本篇主要讲与订单相关的接口。 SDK MWS &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/mws-order.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">MWS 开发 - 订单篇</h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2019年07月08日
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#sdk" id="markdown-toc-sdk">SDK</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">订单相关的功能</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">同步订单</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">发货</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-4" id="markdown-toc-section-4">总结</a></li>
+  <li><a href="#section-5" id="markdown-toc-section-5">相关文章</a></li>
+</ul>
+
+<h2 id="section">引言</h2>
+
+<p>最近这几个月都在帮一个朋友在开发亚马逊 ERP 系统，使用了 <a href="http://docs.developer.amazonservices.com/en_US/dev_guide/index.html">MWS 接口</a>，自己一路摸索，花了不少时间和精力，现在想把这些经验记录分享出来，让大家少走一些弯路。</p>
+
+<p>这将是一系列文章，本篇主要讲与订单相关的接口。</p>
+
+<!--more-->
+
+<h2 id="sdk">SDK</h2>
+
+<p>MWS 的接口文档在<a href="http://docs.developer.amazonservices.com/en_US/orders-2013-09-01/Orders_Overview.html">这里</a>（中文文档不是最新的）查看，但是官方给的 PHP SDK 非常的老了，而且每个功能模块还是分散的，于是我就去 Github 找到了 Star 最多的一个，即 <a href="https://github.com/meertensm/amazon-mws">meertensm/amazon-mws</a>，好用是好用，但是我使用之前没发现作者好像没维护了，有一些坑在里面。</p>
+
+<p>好在这些坑我都帮你踩过了，你接着往下看就可以了。</p>
+
+<h2 id="section-1">订单相关的功能</h2>
+
+<h3 id="section-2">同步订单</h3>
+
+<p><strong>订单列表</strong></p>
+
+<p>文档地址：<a href="http://docs.developer.amazonservices.com/zh_CN/orders/2013-09-01/Orders_ListOrders.html">ListOrders</a></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MCS\MWSClient</span><span class="p">([</span>
+</span><span class="line">    <span class="s1">&#39;Marketplace_Id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="s1">&#39;Seller_Id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="s1">&#39;Access_Key_ID&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="s1">&#39;Secret_Access_Key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="s1">&#39;MWSAuthToken&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span> <span class="c1">// Optional. Only use this key if you are a third party user/developer</span>
+</span><span class="line"><span class="p">]);</span>
+</span><span class="line"><span class="nv">$fromDate</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTime</span><span class="p">(</span><span class="s1">&#39;2016-01-01&#39;</span><span class="p">);</span>
+</span><span class="line"><span class="nv">$states</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Unshipped&#39;</span><span class="p">,</span><span class="s1">&#39;PartiallyShipped&#39;</span><span class="p">,</span><span class="s1">&#39;Shipped&#39;</span><span class="p">,</span><span class="s1">&#39;PendingAvailability&#39;</span><span class="p">,</span><span class="s1">&#39;Pending&#39;</span><span class="p">,</span><span class="s1">&#39;InvoiceUnconfirmed&#39;</span><span class="p">,</span><span class="s1">&#39;Canceled&#39;</span><span class="p">,</span><span class="s1">&#39;Unfulfillable&#39;</span><span class="p">];</span>
+</span><span class="line"><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">ListOrders</span><span class="p">(</span><span class="nv">$fromDate</span><span class="p">,</span> <span class="k">false</span><span class="p">,</span> <span class="nv">$states</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>SDK 的 <a href="https://github.com/meertensm/amazon-mws/blob/master/src/MWSClient.php#L383">ListOrders()</a> 默认的 <code>states</code> 只有两个状态。</p>
+
+<p><strong>订单商品</strong></p>
+
+<p>要想获取订单里的商品信息要调用 <a href="https://github.com/meertensm/amazon-mws/blob/master/src/MWSClient.php#L493">ListOrderItems()</a></p>
+
+<p><strong>订单商品的属性和图片</strong></p>
+
+<p>要想获取订单商品里的属性和图片信息得调用 <a href="https://github.com/meertensm/amazon-mws/blob/master/src/MWSClient.php#L553">GetMatchingProductForId()</a>，商品属性目前应该只有 <code>Size</code> 和 <code>Color</code>。</p>
+
+<p>注意：如果接口返回 <code>Request is throttled</code>，那你就要考虑接口频率问题了，详情就得查看文档<a href="http://docs.developer.amazonservices.com/zh_CN/dev_guide/DG_Throttling.html">《限制：针对提交请求频率的限制》</a>了。</p>
+
+<h3 id="section-3">发货</h3>
+
+<p><strong>思路</strong></p>
+
+<p>发货是一个异步接口，流程就是先创建一个类型为 <code>_POST_ORDER_FULFILLMENT_DATA_</code> 的 <code>SubmitFeed</code>，获取到一个 <code>FeedSubmissionId</code>，然后稍候通过另外一个接口传 <code>FeedSubmissionId</code> 查询发货结果。</p>
+
+<p><strong>实践</strong></p>
+
+<p>坑的是前面提到的 <a href="https://github.com/meertensm/amazon-mws">meertensm/amazon-mws</a> 库作者没有实现发货方法，提了 PR 作者也没时间管了，所以我自己实现了。</p>
+
+<ul>
+  <li>先创建一个 <code>core/replace/MWSClient.php</code> 文件:</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class="line"><span class="sd">/**</span>
+</span><span class="line"><span class="sd"> * author     : forecho &lt;caizhenghai@gmail.com&gt;</span>
+</span><span class="line"><span class="sd"> * createTime : 2019/6/11 9:53 PM</span>
+</span><span class="line"><span class="sd"> * description:</span>
+</span><span class="line"><span class="sd"> */</span>
+</span><span class="line">
+</span><span class="line"><span class="k">namespace</span> <span class="nx">app\core\helpers</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">use</span> <span class="nx">Exception</span><span class="p">;</span>
+</span><span class="line">
+</span><span class="line"><span class="k">class</span> <span class="nc">MWSClient</span> <span class="k">extends</span> <span class="nx">\MCS\MWSClient</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="sd">/**</span>
+</span><span class="line"><span class="sd">     * Sets the shipping status of an order</span>
+</span><span class="line"><span class="sd">     * @param array $data required data</span>
+</span><span class="line"><span class="sd">     * @return array feed submission result</span>
+</span><span class="line"><span class="sd">     * @throws Exception</span>
+</span><span class="line"><span class="sd">     */</span>
+</span><span class="line">    <span class="k">public</span> <span class="k">function</span> <span class="nf">setDeliveryState</span><span class="p">(</span><span class="k">array</span> <span class="nv">$data</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s2">&quot;shippingDate&quot;</span><span class="p">]))</span> <span class="p">{</span>
+</span><span class="line">            <span class="nv">$data</span><span class="p">[</span><span class="s2">&quot;shippingDate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">date</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">);</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s2">&quot;carrierCode&quot;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s2">&quot;carrierName&quot;</span><span class="p">]))</span> <span class="p">{</span>
+</span><span class="line">            <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s1">&#39;Missing required carrier data&#39;</span><span class="p">);</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">        <span class="nv">$feed</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class="line">            <span class="s1">&#39;MessageType&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;OrderFulfillment&#39;</span><span class="p">,</span>
+</span><span class="line">            <span class="s1">&#39;Message&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span><span class="line">                <span class="s1">&#39;MessageID&#39;</span> <span class="o">=&gt;</span> <span class="nb">rand</span><span class="p">(),</span>
+</span><span class="line">                <span class="s2">&quot;OrderFulfillment&quot;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span><span class="line">                    <span class="s2">&quot;AmazonOrderID&quot;</span> <span class="o">=&gt;</span> <span class="nv">$data</span><span class="p">[</span><span class="s2">&quot;orderId&quot;</span><span class="p">],</span>
+</span><span class="line">                    <span class="s2">&quot;FulfillmentDate&quot;</span> <span class="o">=&gt;</span> <span class="nv">$data</span><span class="p">[</span><span class="s2">&quot;shippingDate&quot;</span><span class="p">]</span>
+</span><span class="line">                <span class="p">]</span>
+</span><span class="line">            <span class="p">]</span>
+</span><span class="line">        <span class="p">];</span>
+</span><span class="line">        <span class="nv">$fulfillmentData</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s2">&quot;carrierCode&quot;</span><span class="p">]))</span> <span class="p">{</span>
+</span><span class="line">            <span class="nv">$fulfillmentData</span><span class="p">[</span><span class="s2">&quot;CarrierCode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$data</span><span class="p">[</span><span class="s2">&quot;carrierCode&quot;</span><span class="p">];</span>
+</span><span class="line">        <span class="p">}</span> <span class="k">elseif</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s2">&quot;carrierName&quot;</span><span class="p">]))</span> <span class="p">{</span>
+</span><span class="line">            <span class="nv">$fulfillmentData</span><span class="p">[</span><span class="s2">&quot;CarrierName&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$data</span><span class="p">[</span><span class="s2">&quot;carrierName&quot;</span><span class="p">];</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s2">&quot;shippingMethod&quot;</span><span class="p">]))</span> <span class="p">{</span>
+</span><span class="line">            <span class="nv">$fulfillmentData</span><span class="p">[</span><span class="s2">&quot;ShippingMethod&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$data</span><span class="p">[</span><span class="s2">&quot;shippingMethod&quot;</span><span class="p">];</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s2">&quot;trackingCode&quot;</span><span class="p">]))</span> <span class="p">{</span>
+</span><span class="line">            <span class="nv">$fulfillmentData</span><span class="p">[</span><span class="s2">&quot;ShipperTrackingNumber&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$data</span><span class="p">[</span><span class="s2">&quot;trackingCode&quot;</span><span class="p">];</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="nb">sizeof</span><span class="p">(</span><span class="nv">$fulfillmentData</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">            <span class="nv">$feed</span><span class="p">[</span><span class="s2">&quot;Message&quot;</span><span class="p">][</span><span class="s2">&quot;OrderFulfillment&quot;</span><span class="p">][</span><span class="s2">&quot;FulfillmentData&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$fulfillmentData</span><span class="p">;</span>
+</span><span class="line">        <span class="p">}</span>
+</span><span class="line">        <span class="nv">$feed</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">SubmitFeed</span><span class="p">(</span><span class="s1">&#39;_POST_ORDER_FULFILLMENT_DATA_&#39;</span><span class="p">,</span> <span class="nv">$feed</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">        <span class="k">return</span> <span class="nv">$feed</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>然后修改第一步调用 <code>MWSClient</code> 类的时候使用我们自己的类：</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">app\core\helpers\MWSClient</span><span class="p">([</span>
+</span><span class="line">    <span class="s1">&#39;Marketplace_Id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="s1">&#39;Seller_Id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="s1">&#39;Access_Key_ID&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="s1">&#39;Secret_Access_Key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="s1">&#39;MWSAuthToken&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span> <span class="c1">// Optional. Only use this key if you are a third party user/developer</span>
+</span><span class="line"><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>这样之后我们就可以这样发货了：</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">setDeliveryState</span><span class="p">([</span>
+</span><span class="line">    <span class="s2">&quot;orderId&quot;</span> <span class="o">=&gt;</span> <span class="mi">3456342</span><span class="p">,</span>
+</span><span class="line">    <span class="s2">&quot;carrierCode&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;UPS&quot;</span><span class="p">,</span>
+</span><span class="line">    <span class="s2">&quot;trackingCode&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;34JD943T6&quot;</span><span class="p">,</span>
+</span><span class="line">    <span class="s2">&quot;shippingMethod&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;1 Day&quot;</span><span class="p">,</span>
+</span><span class="line"><span class="p">]);</span>
+</span><span class="line">
+</span><span class="line"><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">setDeliveryState</span><span class="p">([</span>
+</span><span class="line">    <span class="s2">&quot;orderId&quot;</span> <span class="o">=&gt;</span> <span class="mi">3456342</span><span class="p">,</span>
+</span><span class="line">    <span class="s2">&quot;carrierName&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Mini transporters A.C.&quot;</span><span class="p">,</span>
+</span><span class="line">    <span class="s2">&quot;trackingCode&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;34JD943T6&quot;</span><span class="p">,</span>
+</span><span class="line"><span class="p">]);</span>
+</span><span class="line">
+</span><span class="line"><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">setDeliveryState</span><span class="p">([</span>
+</span><span class="line">    <span class="s2">&quot;orderId&quot;</span> <span class="o">=&gt;</span> <span class="mi">3456342</span><span class="p">,</span>
+</span><span class="line">    <span class="s2">&quot;carrierName&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;Mini transporters A.C.&quot;</span><span class="p">,</span>
+</span><span class="line">    <span class="s2">&quot;trackingCode&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;34JD943T6&quot;</span><span class="p">,</span>
+</span><span class="line">    <span class="s2">&quot;shippingDate&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;2018-06-21T12:32:24+02:00&quot;</span>
+</span><span class="line"><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>以上实践代码我是根据 <a href="https://github.com/meertensm/amazon-mws/issues/55">Update order - set delivery state #55</a> 这个 Issues 采坑而来的。</p>
+
+<ul>
+  <li>查询发货结果</li>
+</ul>
+
+<p>无论成功或者失败都可以通过 <a href="https://github.com/meertensm/amazon-mws/blob/master/src/MWSClient.php#L956">GetFeedSubmissionResult()</a> 方法获取结果。</p>
+
+<p>PS: 可以分享一下我发货采坑的过程：</p>
+
+<p>MWS 对应的接口都会有对应的参数 XMLSchema，是专门用来校验接口传过去的参数，我们可以找一个在线 XML 校验的网站，校验我们要传过去的值是否正确。异步接口调试非常的麻烦，而且亚马逊返回的错误信息又不足够详细。</p>
+
+<ul>
+  <li><a href="https://images-na.ssl-images-amazon.com/images/G/01/rainier/help/xsd/release_1_9/OrderFulfillment.xsd">OrderFulfillment 的 XMLSchema</a></li>
+  <li><a href="https://www.liquid-technologies.com/online-xsd-validator">在线 XML 校验</a></li>
+</ul>
+
+<h2 id="section-4">总结</h2>
+
+<p>发现国内使用 MWS 的文档和资料比较少，自己辛辛苦苦踩的坑，当然要分享出来，希望对你有用。</p>
+
+<h2 id="section-5">相关文章</h2>
+
+<ul>
+  <li><a href="https://blog.forecho.com/mws-order.html">《MWS 开发 - 订单篇》</a></li>
+  <li><a href="https://blog.forecho.com/mws-product.html">《MWS 开发 - 产品上传篇》</a></li>
+</ul>
+</div>
+
+
+  
+    <!-- 添加捐赠图标 -->
+    <div class ="post-donate">
+        <div id="donate_board" class="donate_bar">
+            <a id="btn_donate" href="javascript:;" title="Donate 打赏"></a>
+            <br>
+            <span class="donate_txt">如果这篇文章对你有帮助，并且你想小额捐款支持一下的话。</span>
+            <br>
+        </div>  
+  
+        <div id="donate_guide" class="donate_bar hidden">
+            <!-- 支付宝打赏图案 -->
+            <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153431.png" class="m10" title="支付宝打赏" >
+            <!-- 微信打赏图案 -->
+            <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153510.png" class="m10" title="微信打赏">
+        </div>
+  
+        <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+        </script>
+    </div>
+<!-- 添加捐赠图标 -->
+  
+  
+    
+        
+            
+            
+        
+
+    
+
+
+
+
+        
+    
+
+
+
+
+
+<div class="cc-license">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/deed.zh">
+        <img alt="知识共享署名-非商业性使用 4.0 国际许可协议" src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153253.png" />
+    </a><br />
+    原文地址：<a href="https://blog.forecho.com/mws-order.html">https://blog.forecho.com/mws-order.html</a><br />
+    版权声明：本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/deed.zh">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。  
+</div>
+<div style="text-align: center; margin-top: 20px;">
+    <img alt="扫码关注我的个人公众号" src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153337.png"/>   
+</div>
+
+  
+  <footer>
+    <p class="meta">
+      
+  
+
+
+<span id="busuanzi_container_page_pv">
+  <span id="busuanzi_value_page_pv"></span>次访问
+</span>
+<span class="byline author vcard">Posted by <span class="fn">forecho</span></span>
+
+      
+ 
+ 
+ 
+
+  2019年07月08日
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/mwskai-fa/'>mws开发</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/bose-qc30-vs-airpods.html" title="Previous Post: Bose QC30 VS AirPods">&laquo; Bose QC30 VS AirPods</a>
+      
+      
+        <a class="basic-alignment right" href="/How-does-GetYii-prevent-spam.html" title="Next Post: GetYii 是如何防止垃圾内容">GetYii 是如何防止垃圾内容 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

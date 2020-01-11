@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Codeigniter | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/codeigniter/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CI框架学习（二）——分页类]]></title>
+    <link href="https://blog.forecho.com/CI-kuang-jia-xue-xi-er-fen-ye-lei.html"/>
+    <updated>2011-11-23T09:54:00+00:00</updated>
+    <id>https://blog.forecho.com/CI-kuang-jia-xue-xi-er-fen-ye-lei</id>
+    <content type="html"><![CDATA[<p>手册写的很简单，看了无从下手，不过后来看了一个国外的视频教程。立马就懂了，国内的不行。 先看一下效果图：</p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160806.png" alt="" /></p>
+
+<p>下面是控制器中的代码：</p>
+
+<p>&#8220;`php
+function list_news($offset=’’) {
+    $this-&gt;load-&gt;model(‘mhome’);//加载模型
+    $this-&gt;load-&gt;library(‘pagination’); // 加载分页类
+    $limit = 1;// 每页显示数量
+    $total = $this-&gt;mhome-&gt;count_news();// 统计数量
+    $data[‘sel_news’] = $this-&gt;mhome-&gt;sel_news($limit,$offset);//调用模型，查询数据库</p>
+
+<pre><code>$config['base_url'] = base_url().'chome/list_news/';// 分页的基础 URL
+$config['total_rows'] = $total;//记录总数
+$config['per_page'] = $limit; //每页条数
+
+//几行可选设置
+$config['full_tag_open'] = '&lt;div class="pagination"&gt;'; // 分页开始样式
+$config['full_tag_close'] = '&lt;/div&gt;'; // 分页结束样式
+$config['first_link'] = '首页'; // 第一页显示
+$config['last_link'] = '末页'; // 最后一页显示
+$config['next_link'] = '下一页 &gt;'; // 下一页显示
+$config['prev_link'] = '&lt; 上一页'; // 上一页显示
+$config['cur_tag_open'] = ' &lt;a class="current"&gt;'; // 当前页开始样式
+$config['cur_tag_close'] = '&lt;/a&gt;'; // 当前页结束样式
+$config['num_links'] = 2;// 当前连接前后显示页码个数
+
+$this-&gt;pagination-&gt;initialize($config); // 配置分页
+
+$data['pag_links'] = $this-&gt;pagination-&gt;create_links();//显示分页
+
+$this-&gt;load-&gt;view('admin/list_news',$data); } ```
+</code></pre>
+
+<p>模型中是代码：</p>
+
+<p>&#8220;`php
+//查询数据</p>
+
+<p>function sel_news($limit,$offset) {
+    $this-&gt;db-&gt;limit($limit,$offset);
+    $query = $this-&gt;db-&gt;get(‘news’);
+    $row = $query-&gt;row(‘navid’);
+    return $query-&gt;result_array();
+}</p>
+
+<p>//查询数量
+function count_news() {
+    $query = $this-&gt;db-&gt;get_where(‘news’);
+    return $query-&gt;num_rows();
+}
+&#8220;`</p>
+
+<p>视图显示代码：</p>
+
+<p>&#8220;`php</p>
+<div id="page">
+<?php echo $pag_links; ?>
+</div>
+<p>&#8220;`</p>
+
+<p>CSS样式如下：</p>
+
+<p>&#8220;`css
+/<strong>**</strong><strong>**</strong><strong>* Pagination for MeMo Blog **</strong><strong>**</strong>*****/
+#page .pagination {
+    border-top:1px solid #dfdfdf;
+    padding-top: 10px;
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 10px;
+}
+.pagination a ,.pagination a.number {
+    margin: 0 5px 0 0;
+    padding: 3px 6px;
+    border: 1px solid #d0d0d0;
+}
+.pagination a:hover,.pagination a.current {
+    border-color: #000 !important;
+    color: #000 !important;
+}</p>
+
+<h1 id="page">page{</h1>
+<pre><code>float:right; } ```
+</code></pre>
+
+<p>说实话，不是很喜欢CI自带的分页类，默认第4页才显示 【首页】、倒数第4页显示【尾页】。</p>
+
+<p>下次有机会自己研究一个分页。</p>
+
+<p> </p>
+
+<p><strong>注：</strong></p>
+
+<p><code>php
+$config['uri_segment']= 3;
+</code></p>
+
+<p>分页方法自动测定你 URI 的哪个部分包含页数。如果你需要一些不一样的，你可以明确指定它。默认是3。 $offset 默认是：$this-&gt;uri-&gt;segment(3)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[去掉CodeIgniter URL中的index.php]]></title>
+    <link href="https://blog.forecho.com/qu-diao-CodeIgniter-URL-zhong-de-index-php.html"/>
+    <updated>2011-11-14T17:30:00+00:00</updated>
+    <id>https://blog.forecho.com/qu-diao-CodeIgniter-URL-zhong-de-index-php</id>
+    <content type="html"><![CDATA[<p>CI默认的rewrite url中是类似这样的，例如你的CI根目录是在/CodeIgniter/下，你的下面的二级url就类似这样http://localhost/CodeIgniter/index.php/welcome。不太好看，怎么把其中的index.php取掉呢？</p>
+
+<ul>
+  <li>打开apache的配置文件，conf/httpd.conf ：</li>
+</ul>
+
+<p><code>
+LoadModule rewrite_module modules/mod_rewrite.so
+</code></p>
+
+<p>把该行前的#去掉。</p>
+
+<p>搜索 AllowOverride None（配置文件中有多处），看注释信息，将相关.htaccess的该行信息改为AllowOverride All。</p>
+
+<ul>
+  <li>在CI的根目录下，即在index.php，system的同级目录下，建立.htaccess，直接建立该文件名的不会成功，可以先建立记事本文件，另存为该名的文件即可。内容如下（CI手册上也有介绍）：</li>
+</ul>
+
+<p><code>
+RewriteEngine on
+RewriteCond $1 !^(index\.php|images|robots\.txt)
+RewriteRule ^(.*)$ /index.php/$1 [L]
+</code></p>
+
+<p>如果文件不是在www的根目录下，例如我的是：http://www.nowamagic.net/CodeIgniter/，第三行需要改写为</p>
+
+<p><code>
+RewriteRule ^(.*)$ /CodeIgniter/index.php/$1 [L]
+</code></p>
+
+<p>另外，我的index.php的同级目录下还有js文件夹和css文件夹，这些需要过滤除去，第二行需要改写为：</p>
+
+<p><code>
+RewriteCond $1 !^(index\\.php|images|js|css|robots\\.txt)
+</code></p>
+
+<ul>
+  <li>将CI中配置文件（system/application/config/config.php）中$config[‘index_page’] = “index.php”;改成$config[‘index_page’] = “”; 。</li>
+</ul>
+
+<p><code>
+/*
+|--------------------------------------------------------------------------
+| Index File
+|--------------------------------------------------------------------------
+|
+| Typically this will be your index.php file, unless you've renamed it to
+| something else. If you are using mod_rewrite to remove the page set this
+| variable so that it is blank.
+|
+*/
+$config['index_page'] = '';
+</code></p>
+
+<p>ok，完成。还要记得重启apache。 就这么简单，好好体验CI吧～</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CI 框架学习笔记（一）]]></title>
+    <link href="https://blog.forecho.com/learning-codeigniter.html"/>
+    <updated>2011-11-07T14:54:00+00:00</updated>
+    <id>https://blog.forecho.com/learning-codeigniter</id>
+    <content type="html"><![CDATA[<ul>
+  <li><strong>模型(Model)</strong>代表你的数据结构。通常来说，你的模型类将包含取出、插入、更新你的数据库资料这些功能。 （操作数据库）</li>
+  <li><strong>视图(View)</strong>是展示给用户的信息。一个视图通常是一个网页，但是在 CodeIgniter 中，一个视图也可以是一个页面片段，如页头、页尾。它还可以是一个 RSS 页面，或任何其它类型的“页面”。（前台页面）</li>
+  <li><strong>控制器(Controller)</strong>是模型、视图以及其他任何处理 HTTP 请求所必须的资源之间的_中介_，并生成网页。 （链接两者）
+1. 模型文档名字如果与数据库重名则不能使用常规方法使用写。
+2. 控制器里面，一个方法代表一个页面。
+3. 自动加载数据库：在autoload.php中写入代码（42行）</li>
+</ul>
+
+<p><code>php
+$aotoload['libraries']=array('database');
+</code></p>
+
+<ol>
+  <li>设定相对路径前面的前缀：（放在header.php文件title下面）</li>
+</ol>
+
+<p>&#8220;`php</p>
+<base href="&lt;?php echo base_url();?&gt;" />
+
+<p>&#8220;`</p>
+
+<ol>
+  <li>获取变量：（3代表index.php之后的第三个参数）</li>
+</ol>
+
+<p><code>
+$this-&gt;uri-&gt;segment(3)
+</code></p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160745.png" alt="" /></p>
+
+<ol>
+  <li>config.php下的代码（266行）(如果为 true 则开启：自动防止攻击。)</li>
+</ol>
+
+<p><code>
+$config['global_xss_filtering'] = FALSE
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

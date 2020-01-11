@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 想法 | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/xiang-fa/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[征集友情链接]]></title>
+    <link href="https://blog.forecho.com/collect-friendship-links.html"/>
+    <updated>2019-03-16T13:58:22+00:00</updated>
+    <id>https://blog.forecho.com/collect-friendship-links</id>
+    <content type="html"><![CDATA[<h2 id="section">引言</h2>
+
+<p>一直以来我的博客都是没加搞友情链接，前几天突然有一个想法。想搞一个『友情链接』。但是我想搞的这个『友情链接』更像是一个联盟，现在认真写博客的人越来越少了，我想把这些人集合到一起，决定暂时把联盟称之为『联盟链接』。</p>
+
+<!--more-->
+
+<h2 id="section-1">联盟链接</h2>
+
+<h3 id="section-2">加入要求</h3>
+
+<p>加入联盟链接只要三个要求：</p>
+
+<ul>
+  <li>独立博客，必须是独立博客程序，不能是第三个如简书、知乎专栏等等程序。</li>
+  <li>每月能坚持至少写两篇原创文章，主题不限制。（也不是说100%，但是至少90%能达到每月2篇）</li>
+  <li>必须有提供全文的 RSS 订阅地址</li>
+</ul>
+
+<p>你可以在你的博客上把成员的博客链接都列出来，但是这不是必须的。</p>
+
+<h3 id="section-3">如何加入</h3>
+
+<p>可以扫码加我微信（申请注明来意）或者给我写邮件，告诉你的博客地址。</p>
+
+<ul>
+  <li>邮箱地址：<code>Y2FpemhlbmdoYWlAZ21haWwuY29t</code> （BASE64 解码才可以看到）</li>
+  <li>扫描下面二维码加我微信</li>
+</ul>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162125.png" alt="" /></p>
+
+<h2 id="section-4">最后</h2>
+
+<p>这个想法的初衷是基于『坚持写博客』为兴趣点，结交一些朋友。所以我准备搞一个微信群，有想交朋友的可以加我微信进群（也可以只提供博客链接）。</p>
+
+<p>前一段时间，发现有网友因为经常看我的博客，而他也准备写博客，自己的输出能影响到他人，感觉到很荣幸。我希望他能坚持。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[一个里程碑]]></title>
+    <link href="https://blog.forecho.com/a-milestone.html"/>
+    <updated>2017-01-20T14:41:22+00:00</updated>
+    <id>https://blog.forecho.com/a-milestone</id>
+    <content type="html"><![CDATA[<h2 id="section">引言</h2>
+
+<p>一直以来我写博客目的只是记录自己想法，从2011年7月实习开始，我接触了 WordPress，开始搭建了属于我自己的独立博客。后来因为某些原因，我抛弃了 WordPress，
+拥抱了静态博客的 Octopress，但是说实话，WordPress 确实是一个非常优秀的博客程序，自从用了 Octopress 我的博客流量长期以来都变成个人数，虽然我时常安慰自己，
+我是为自己而写，但是摸着良心说话，我也是很渴望被更多人发现。</p>
+
+<p>新的一年里，我决定做出一些改变，即使是需要做一些我不愿意做的事情。除了给自己定了每月坚持写文章的目标之后，我还做了以下几点决定：</p>
+
+<h2 id="section-1">大统一</h2>
+
+<p>确定网络 ID，没错就是 『forecho』了，前几年就开始有意识的全部切换为此 ID，虽然确定得有些晚了，但是总算是一个不错的开始。（关于这个 ID 背后的故事我以后有机会可以讲给你们听）</p>
+
+<!--more-->
+
+<p>确定了头像，此头像是原创头像，如有雷同，绝对是盗版我的。</p>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162441.png" alt="头像" /></p>
+
+<h2 id="section-2">扩大流量</h2>
+
+<p>为了扩大流量我决定以后的博客文章，会在以下几个网站拷贝一份，选择他们的原因只有一个，他们有流量</p>
+
+<ul>
+  <li><a href="https://zhuanlan.zhihu.com/forecho">知乎专栏</a></li>
+  <li><a href="http://www.jianshu.com/u/wEcfaz">简书</a></li>
+  <li>微信公众号</li>
+</ul>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162454.png" alt="扫码关注我的公众号" /></p>
+
+<p>其实我玩微信公众号是非常早的，但是后来因为时间精力有限，刻苦钻研技术去了，就放弃了。这里面的故事和感受我以后可以分享。
+知乎专栏，我也在很早一批就收到过内测，但是也没怎么用。简书刚开始我也是非常关注的。</p>
+
+<p>需要说明的是，由于个人阅读习惯问题，我并不喜欢在以上三个网站阅读文章（对知乎专栏和微信公众号的阅读是又爱又恨），但是我愿意尝试。</p>
+
+<h2 id="section-3">总结</h2>
+
+<p>2017年我为了让更多的人认识我，我选择了更多的平台分发我写的文章。不敢说我写的文章有多好，但是我能保证的是真诚的，而且我会坚持写作，记录自己的成长。</p>
+
+<p><strong>需要说明的是，我的独立博客仍然是第一手文章发布的平台，其他平台只是给了你另外一种选择。</strong></p>
+]]></content>
+  </entry>
+  
+</feed>

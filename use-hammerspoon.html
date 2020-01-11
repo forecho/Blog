@@ -1,0 +1,921 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Mac 利器 Hammerspoon 使用指南 - forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="引言 实现 目录结构 初始化文件 配置文件 实现自动输入法切换功能 切换输入法 App 启动 自动重载配置 窗口管理 休眠自动关闭蓝牙 最后 参考链接 引言 今天要给大家分享的是一款 Mac 利器 Hammerspoon，通过编写 Lua 脚本可以让这款软件实现以下功能 管理窗口大小以及位置 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/use-hammerspoon.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Mac 利器 Hammerspoon 使用指南</h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2019年12月26日
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">实现</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">目录结构</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">初始化文件</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">配置文件</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">实现自动输入法切换功能</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">切换输入法</a></li>
+      <li><a href="#app-" id="markdown-toc-app-">App 启动</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">自动重载配置</a></li>
+      <li><a href="#section-8" id="markdown-toc-section-8">窗口管理</a></li>
+      <li><a href="#section-9" id="markdown-toc-section-9">休眠自动关闭蓝牙</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-10" id="markdown-toc-section-10">最后</a></li>
+  <li><a href="#section-11" id="markdown-toc-section-11">参考链接</a></li>
+</ul>
+
+<h2 id="section">引言</h2>
+
+<p>今天要给大家分享的是一款 Mac 利器 Hammerspoon，通过编写 Lua 脚本可以让这款软件实现以下功能</p>
+
+<ul>
+  <li>管理窗口大小以及位置</li>
+  <li>软件启动器</li>
+  <li>给特定的软件设置中/英文输入法</li>
+</ul>
+
+<p>你甚至可以通过编写代码实现</p>
+
+<ul>
+  <li>休眠状态关闭蓝牙功能</li>
+  <li>连上公司 Wi-Fi 自动静音</li>
+  <li>……</li>
+</ul>
+
+<p>接下来详细讲解如何实现以上功能。不会 Lua？没关系，只要你有一点点编程经验，代码看起来都不是问题。</p>
+
+<!--more-->
+
+<h2 id="section-1">实现</h2>
+
+<p>我自己的配置代码已经在 GitHub 上开源，有兴趣的可以直接去读源码 - <a href="https://github.com/forecho/hammerspoon-config">forecho/hammerspoon-config
+</a></p>
+
+<h3 id="section-2">目录结构</h3>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">.
+</span><span class="line">├── README.md
+</span><span class="line">├── config.lua
+</span><span class="line">├── init.lua
+</span><span class="line">└── modules
+</span><span class="line">    ├── bluetoothSleep.lua
+</span><span class="line">    ├── defaultInput.lua
+</span><span class="line">    ├── input.lua
+</span><span class="line">    ├── launcher.lua
+</span><span class="line">    ├── reload.lua
+</span><span class="line">    └── window.lua</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li><code>init.lua</code> 是入口文件</li>
+  <li><code>config.lua</code> 是配置文件，通过修改此文件，定制化自己的需求</li>
+  <li><code>modules</code> 是每个模块的文件夹，具体功能都在这里实现</li>
+</ul>
+
+<h3 id="section-3">初始化文件</h3>
+
+<p><code>init.lua</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class="lua"><span class="line"><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">modules.reload&quot;</span>
+</span><span class="line"><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">config&quot;</span>
+</span><span class="line"><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">modules.window&quot;</span>
+</span><span class="line"><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">modules.launcher&quot;</span>
+</span><span class="line"><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">modules.input&quot;</span>
+</span><span class="line"><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">modules.defaultInput&quot;</span>
+</span><span class="line"><span class="nb">require</span> <span class="s2">&quot;</span><span class="s">modules.bluetoothSleep&quot;</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">-- 调试代码</span>
+</span><span class="line"><span class="n">hs</span><span class="p">.</span><span class="n">hotkey</span><span class="p">.</span><span class="n">bind</span><span class="p">({</span><span class="s1">&#39;</span><span class="s">cmd&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">shift&#39;</span><span class="p">},</span> <span class="s1">&#39;</span><span class="s">h&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+</span><span class="line">	<span class="n">hs</span><span class="p">.</span><span class="n">alert</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">Hello World&#39;</span><span class="p">)</span>
+</span><span class="line">	<span class="n">speaker</span> <span class="o">=</span> <span class="n">hs</span><span class="p">.</span><span class="n">speech</span><span class="p">.</span><span class="n">new</span><span class="p">()</span>
+</span><span class="line">	<span class="n">speaker</span><span class="p">:</span><span class="n">speak</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Hammerspoon is online&quot;</span><span class="p">)</span>
+</span><span class="line">	<span class="n">hs</span><span class="p">.</span><span class="n">notify</span><span class="p">.</span><span class="n">new</span><span class="p">({</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">Hammerspoon launch&quot;</span><span class="p">,</span> <span class="n">informativeText</span><span class="o">=</span><span class="s2">&quot;</span><span class="s">Boss, at your service&quot;</span><span class="p">}):</span><span class="n">send</span><span class="p">()</span>
+</span><span class="line"><span class="k">end</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-4">配置文件</h3>
+
+<p><code>config.lua</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+</pre></td><td class="code"><pre><code class="lua"><span class="line"><span class="n">windowHotkey</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;</span><span class="s">control&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="s">command&#39;</span><span class="p">}</span>
+</span><span class="line"><span class="n">launcherHotkey</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;</span><span class="s">option&#39;</span><span class="p">}</span>
+</span><span class="line"><span class="n">inputHotkey</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;</span><span class="s">option&#39;</span><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="n">applist</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="line">    <span class="p">{</span><span class="n">shortcut</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">Q&#39;</span><span class="p">,</span><span class="n">appname</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">QQ&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="n">shortcut</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">G&#39;</span><span class="p">,</span><span class="n">appname</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">Google Chrome&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="n">shortcut</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">C&#39;</span><span class="p">,</span><span class="n">appname</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">Visual Studio Code&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="n">shortcut</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">I&#39;</span><span class="p">,</span><span class="n">appname</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">iTerm&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="n">shortcut</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">P&#39;</span><span class="p">,</span><span class="n">appname</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">PHPStorm&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="n">shortcut</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">W&#39;</span><span class="p">,</span><span class="n">appname</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">WeChat&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="n">shortcut</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">O&#39;</span><span class="p">,</span><span class="n">appname</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">Postman&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="n">shortcut</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">Y&#39;</span><span class="p">,</span><span class="n">appname</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">企业微信&#39;</span><span class="p">},</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line">
+</span><span class="line"><span class="n">appInputMethod</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/iTerm.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">English&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/Visual Studio Code.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">English&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/PHPStorm.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">English&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/Xcode.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">English&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/Google Chrome.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">English&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/System/Library/CoreServices/Finder.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">English&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/DingTalk.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">Chinese&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/Kindle.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">English&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/NeteaseMusic.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">Chinese&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/WeChat.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">Chinese&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/System Preferences.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">English&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/Dash.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">English&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/MindNode.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">Chinese&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/QQ.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">Chinese&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/企业微信.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">Chinese&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/wechatwebdevtools.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">English&#39;</span><span class="p">},</span>
+</span><span class="line">    <span class="p">{</span><span class="s1">&#39;</span><span class="s">/Applications/Sketch.app&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">English&#39;</span><span class="p">},</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-5">实现自动输入法切换功能</h3>
+
+<p><code>defaultInput.lua</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+</pre></td><td class="code"><pre><code class="lua"><span class="line"><span class="kd">local</span> <span class="k">function</span> <span class="nf">Chinese</span><span class="p">()</span>
+</span><span class="line">    <span class="n">hs</span><span class="p">.</span><span class="n">keycodes</span><span class="p">.</span><span class="n">currentSourceID</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">com.sogou.inputmethod.sogou.pinyin&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">local</span> <span class="k">function</span> <span class="nf">English</span><span class="p">()</span>
+</span><span class="line">    <span class="n">hs</span><span class="p">.</span><span class="n">keycodes</span><span class="p">.</span><span class="n">currentSourceID</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">com.apple.keylayout.ABC&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line"><span class="k">function</span> <span class="nf">updateFocusAppInputMethod</span><span class="p">()</span>
+</span><span class="line">    <span class="kd">local</span> <span class="n">focusAppPath</span> <span class="o">=</span> <span class="n">hs</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">frontmostWindow</span><span class="p">():</span><span class="n">application</span><span class="p">():</span><span class="n">path</span><span class="p">()</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">app</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">appInputMethod</span><span class="p">)</span> <span class="k">do</span>
+</span><span class="line">        <span class="kd">local</span> <span class="n">appPath</span> <span class="o">=</span> <span class="n">app</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span><span class="line">        <span class="kd">local</span> <span class="n">expectedIme</span> <span class="o">=</span> <span class="n">app</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</span><span class="line">
+</span><span class="line">        <span class="k">if</span> <span class="n">focusAppPath</span> <span class="o">==</span> <span class="n">appPath</span> <span class="k">then</span>
+</span><span class="line">            <span class="k">if</span> <span class="n">expectedIme</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="s">English&#39;</span> <span class="k">then</span>
+</span><span class="line">                <span class="n">English</span><span class="p">()</span>
+</span><span class="line">            <span class="k">else</span>
+</span><span class="line">                <span class="n">Chinese</span><span class="p">()</span>
+</span><span class="line">            <span class="k">end</span>
+</span><span class="line">            <span class="k">break</span>
+</span><span class="line">        <span class="k">end</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">-- helper hotkey to figure out the app path and name of current focused window</span>
+</span><span class="line"><span class="n">hs</span><span class="p">.</span><span class="n">hotkey</span><span class="p">.</span><span class="n">bind</span><span class="p">({</span><span class="s1">&#39;</span><span class="s">ctrl&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">cmd&#39;</span><span class="p">},</span> <span class="s2">&quot;</span><span class="s">.&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+</span><span class="line">    <span class="n">hs</span><span class="p">.</span><span class="n">alert</span><span class="p">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">App path:        &quot;</span>
+</span><span class="line">    <span class="o">..</span><span class="n">hs</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">focusedWindow</span><span class="p">():</span><span class="n">application</span><span class="p">():</span><span class="n">path</span><span class="p">()</span>
+</span><span class="line">    <span class="o">..</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+</span><span class="line">    <span class="o">..</span><span class="s2">&quot;</span><span class="s">App name:      &quot;</span>
+</span><span class="line">    <span class="o">..</span><span class="n">hs</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">focusedWindow</span><span class="p">():</span><span class="n">application</span><span class="p">():</span><span class="n">name</span><span class="p">()</span>
+</span><span class="line">    <span class="o">..</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+</span><span class="line">    <span class="o">..</span><span class="s2">&quot;</span><span class="s">IM source id:  &quot;</span>
+</span><span class="line">    <span class="o">..</span><span class="n">hs</span><span class="p">.</span><span class="n">keycodes</span><span class="p">.</span><span class="n">currentSourceID</span><span class="p">())</span>
+</span><span class="line"><span class="k">end</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="c1">-- Handle cursor focus and application&#39;s screen manage.</span>
+</span><span class="line"><span class="k">function</span> <span class="nf">applicationWatcher</span><span class="p">(</span><span class="n">appName</span><span class="p">,</span> <span class="n">eventType</span><span class="p">,</span> <span class="n">appObject</span><span class="p">)</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">eventType</span> <span class="o">==</span> <span class="n">hs</span><span class="p">.</span><span class="n">application</span><span class="p">.</span><span class="n">watcher</span><span class="p">.</span><span class="n">activated</span><span class="p">)</span> <span class="k">then</span>
+</span><span class="line">        <span class="n">updateFocusAppInputMethod</span><span class="p">()</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line"><span class="n">appWatcher</span> <span class="o">=</span> <span class="n">hs</span><span class="p">.</span><span class="n">application</span><span class="p">.</span><span class="n">watcher</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">applicationWatcher</span><span class="p">)</span>
+</span><span class="line"><span class="n">appWatcher</span><span class="p">:</span><span class="n">start</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-6">切换输入法</h3>
+
+<p><code>input.lua</code> 实现切换输入法功能，这个已经弃用了，最后还是使用系统自带的快捷键了，代码放出来给大家参考：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+</pre></td><td class="code"><pre><code class="lua"><span class="line"><span class="kd">local</span> <span class="k">function</span> <span class="nf">Chinese</span><span class="p">()</span>
+</span><span class="line">    <span class="n">hs</span><span class="p">.</span><span class="n">keycodes</span><span class="p">.</span><span class="n">currentSourceID</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">com.sogou.inputmethod.sogou.pinyin&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">local</span> <span class="k">function</span> <span class="nf">English</span><span class="p">()</span>
+</span><span class="line">    <span class="n">hs</span><span class="p">.</span><span class="n">keycodes</span><span class="p">.</span><span class="n">currentSourceID</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">com.apple.keylayout.ABC&quot;</span><span class="p">)</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line">
+</span><span class="line"><span class="n">hs</span><span class="p">.</span><span class="n">hotkey</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">inputHotkey</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">S&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+</span><span class="line">    <span class="n">Chinese</span><span class="p">()</span>
+</span><span class="line"><span class="k">end</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="n">hs</span><span class="p">.</span><span class="n">hotkey</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">inputHotkey</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">E&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+</span><span class="line">    <span class="n">English</span><span class="p">()</span>
+</span><span class="line"><span class="k">end</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">local</span> <span class="k">function</span> <span class="nf">cycleInputMethod</span><span class="p">()</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">hs</span><span class="p">.</span><span class="n">keycodes</span><span class="p">.</span><span class="n">currentSourceID</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">com.apple.keylayout.ABC&quot;</span> <span class="k">then</span>
+</span><span class="line">        <span class="n">hs</span><span class="p">.</span><span class="n">keycodes</span><span class="p">.</span><span class="n">currentSourceID</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">com.sogou.inputmethod.sogou.pinyin&quot;</span> <span class="p">)</span>
+</span><span class="line">    <span class="k">elseif</span> <span class="n">hs</span><span class="p">.</span><span class="n">keycodes</span><span class="p">.</span><span class="n">currentSourceID</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">com.sogou.inputmethod.sogou.pinyin&quot;</span> <span class="k">then</span>
+</span><span class="line">        <span class="n">hs</span><span class="p">.</span><span class="n">keycodes</span><span class="p">.</span><span class="n">currentSourceID</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">com.apple.inputmethod.SCIM.ITABC&quot;</span><span class="p">)</span>
+</span><span class="line">    <span class="k">elseif</span> <span class="n">hs</span><span class="p">.</span><span class="n">keycodes</span><span class="p">.</span><span class="n">currentSourceID</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">com.apple.inputmethod.SCIM.ITABC&quot;</span> <span class="k">then</span>
+</span><span class="line">        <span class="n">hs</span><span class="p">.</span><span class="n">keycodes</span><span class="p">.</span><span class="n">currentSourceID</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">com.apple.keylayout.ABC&quot;</span><span class="p">)</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line"><span class="n">hs</span><span class="p">.</span><span class="n">hotkey</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">inputHotkey</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">.&#39;</span><span class="p">,</span> <span class="n">cycleInputMethod</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="app-">App 启动</h3>
+
+<p><code>launcher.lua</code>，可以实现特定的快捷键启动指定的软件，使用最频繁的功能了，妥妥的提升效率。实现代码如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="lua"><span class="line"><span class="n">hs</span><span class="p">.</span><span class="n">fnutils</span><span class="p">.</span><span class="n">each</span><span class="p">(</span><span class="n">applist</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+</span><span class="line">    <span class="n">hs</span><span class="p">.</span><span class="n">hotkey</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">launcherHotkey</span><span class="p">,</span> <span class="n">entry</span><span class="p">.</span><span class="n">shortcut</span><span class="p">,</span> <span class="n">entry</span><span class="p">.</span><span class="n">appname</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+</span><span class="line">        <span class="n">hs</span><span class="p">.</span><span class="n">application</span><span class="p">.</span><span class="n">launchOrFocus</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="n">appname</span><span class="p">)</span>
+</span><span class="line">    <span class="k">end</span><span class="p">)</span>
+</span><span class="line"><span class="k">end</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>修改 <code>config.lua</code> 文件，定制化自己的需求。</p>
+
+<h3 id="section-7">自动重载配置</h3>
+
+<p>不用手动点击刷新，自动重载 Hammerspoon 配置</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+</pre></td><td class="code"><pre><code class="lua"><span class="line"><span class="kd">local</span> <span class="k">function</span> <span class="nf">reloadConfig</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span>
+</span><span class="line">    <span class="n">doReload</span> <span class="o">=</span> <span class="kc">false</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">file</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="k">do</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">file</span><span class="p">:</span><span class="n">sub</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">.lua&quot;</span> <span class="k">then</span>
+</span><span class="line">            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">A lua config file changed, reload&quot;</span><span class="p">)</span>
+</span><span class="line">            <span class="n">doReload</span> <span class="o">=</span> <span class="kc">true</span>
+</span><span class="line">        <span class="k">end</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line">    <span class="k">if</span> <span class="ow">not</span> <span class="n">doReload</span> <span class="k">then</span>
+</span><span class="line">        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">No lua file changed, skipping reload&quot;</span><span class="p">)</span>
+</span><span class="line">        <span class="k">return</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line">
+</span><span class="line">    <span class="n">hs</span><span class="p">.</span><span class="n">reload</span><span class="p">()</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line"><span class="n">configFileWatcher</span> <span class="o">=</span> <span class="n">hs</span><span class="p">.</span><span class="n">pathwatcher</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="nb">os.getenv</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">HOME&quot;</span><span class="p">)</span> <span class="o">..</span> <span class="s2">&quot;</span><span class="s">/.hammerspoon/&quot;</span><span class="p">,</span> <span class="n">reloadConfig</span><span class="p">)</span>
+</span><span class="line"><span class="n">configFileWatcher</span><span class="p">:</span><span class="n">start</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-8">窗口管理</h3>
+
+<p><code>window.lua</code>，我只有最大化和两个显示器换屏的需求，所以只实现的这个功能，还可以实现二分之一屏幕的需求，参考本文末尾给的参考链接。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+</pre></td><td class="code"><pre><code class="lua"><span class="line"><span class="n">hs</span><span class="p">.</span><span class="n">hotkey</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">windowHotkey</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">return&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+</span><span class="line">    <span class="n">hs</span><span class="p">.</span><span class="n">grid</span><span class="p">.</span><span class="n">maximizeWindow</span><span class="p">()</span>
+</span><span class="line"><span class="k">end</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="n">hs</span><span class="p">.</span><span class="n">hotkey</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">windowHotkey</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">F&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+</span><span class="line">    <span class="n">hs</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">focusedWindow</span><span class="p">():</span><span class="n">toggleFullScreen</span><span class="p">()</span>
+</span><span class="line"><span class="k">end</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="n">hs</span><span class="p">.</span><span class="n">hotkey</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">windowHotkey</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">left&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+</span><span class="line">    <span class="kd">local</span> <span class="n">w</span> <span class="o">=</span> <span class="n">hs</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">focusedWindow</span><span class="p">()</span>
+</span><span class="line">    <span class="k">if</span> <span class="ow">not</span> <span class="n">w</span> <span class="k">then</span>
+</span><span class="line">        <span class="k">return</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line">    <span class="kd">local</span> <span class="n">s</span> <span class="o">=</span> <span class="n">w</span><span class="p">:</span><span class="n">screen</span><span class="p">():</span><span class="n">toWest</span><span class="p">()</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">s</span> <span class="k">then</span>
+</span><span class="line">        <span class="n">w</span><span class="p">:</span><span class="n">moveToScreen</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line"><span class="k">end</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="n">hs</span><span class="p">.</span><span class="n">hotkey</span><span class="p">.</span><span class="n">bind</span><span class="p">(</span><span class="n">windowHotkey</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">right&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+</span><span class="line">    <span class="kd">local</span> <span class="n">w</span> <span class="o">=</span> <span class="n">hs</span><span class="p">.</span><span class="n">window</span><span class="p">.</span><span class="n">focusedWindow</span><span class="p">()</span>
+</span><span class="line">    <span class="k">if</span> <span class="ow">not</span> <span class="n">w</span> <span class="k">then</span>
+</span><span class="line">        <span class="k">return</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line">    <span class="kd">local</span> <span class="n">s</span> <span class="o">=</span> <span class="n">w</span><span class="p">:</span><span class="n">screen</span><span class="p">():</span><span class="n">toEast</span><span class="p">()</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">s</span> <span class="k">then</span>
+</span><span class="line">        <span class="n">w</span><span class="p">:</span><span class="n">moveToScreen</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line"><span class="k">end</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="section-9">休眠自动关闭蓝牙</h3>
+
+<p><code>bluetoothSleep.lua</code>，无意中发现 Mac 电脑休眠的时候蓝牙居然还出于开着的状态，感觉有点浪费电，使用写了一个脚本实现蓝牙自动开关功能。</p>
+
+<p>使用这个功能之前先要安装 <code>blueutil</code></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line">brew install blueutil
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+</pre></td><td class="code"><pre><code class="lua"><span class="line"><span class="k">function</span> <span class="nf">bluetoothSwitch</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</span><span class="line">    <span class="c1">-- state: 0(off), 1(on)</span>
+</span><span class="line">    <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">/usr/local/bin/blueutil --power &quot;</span><span class="o">..</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</span><span class="line">    <span class="n">result</span> <span class="o">=</span> <span class="n">hs</span><span class="p">.</span><span class="n">osascript</span><span class="p">.</span><span class="n">applescript</span><span class="p">(</span><span class="nb">string.format</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">do shell script &quot;%s&quot;&#39;</span><span class="p">,</span> <span class="n">cmd</span><span class="p">))</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line"><span class="k">function</span> <span class="nf">caffeinateCallback</span><span class="p">(</span><span class="n">eventType</span><span class="p">)</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="n">eventType</span> <span class="o">==</span> <span class="n">hs</span><span class="p">.</span><span class="n">caffeinate</span><span class="p">.</span><span class="n">watcher</span><span class="p">.</span><span class="n">screensDidSleep</span><span class="p">)</span> <span class="k">then</span>
+</span><span class="line">      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">screensDidSleep&quot;</span><span class="p">)</span>
+</span><span class="line">    <span class="k">elseif</span> <span class="p">(</span><span class="n">eventType</span> <span class="o">==</span> <span class="n">hs</span><span class="p">.</span><span class="n">caffeinate</span><span class="p">.</span><span class="n">watcher</span><span class="p">.</span><span class="n">screensDidWake</span><span class="p">)</span> <span class="k">then</span>
+</span><span class="line">      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">screensDidWake&quot;</span><span class="p">)</span>
+</span><span class="line">    <span class="k">elseif</span> <span class="p">(</span><span class="n">eventType</span> <span class="o">==</span> <span class="n">hs</span><span class="p">.</span><span class="n">caffeinate</span><span class="p">.</span><span class="n">watcher</span><span class="p">.</span><span class="n">screensDidLock</span><span class="p">)</span> <span class="k">then</span>
+</span><span class="line">      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">screensDidLock&quot;</span><span class="p">)</span>
+</span><span class="line">      <span class="n">bluetoothSwitch</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class="line">    <span class="k">elseif</span> <span class="p">(</span><span class="n">eventType</span> <span class="o">==</span> <span class="n">hs</span><span class="p">.</span><span class="n">caffeinate</span><span class="p">.</span><span class="n">watcher</span><span class="p">.</span><span class="n">screensDidUnlock</span><span class="p">)</span> <span class="k">then</span>
+</span><span class="line">      <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">screensDidUnlock&quot;</span><span class="p">)</span>
+</span><span class="line">      <span class="n">bluetoothSwitch</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class="line">    <span class="k">end</span>
+</span><span class="line"><span class="k">end</span>
+</span><span class="line">
+</span><span class="line"><span class="n">caffeinateWatcher</span> <span class="o">=</span> <span class="n">hs</span><span class="p">.</span><span class="n">caffeinate</span><span class="p">.</span><span class="n">watcher</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">caffeinateCallback</span><span class="p">)</span>
+</span><span class="line"><span class="n">caffeinateWatcher</span><span class="p">:</span><span class="n">start</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section-10">最后</h2>
+
+<p>Hammerspoon 能做的事情当然远不知这些，但是这些功能已经让我事半功倍了，最重要的是这个软件开源免费！</p>
+
+<h2 id="section-11">参考链接</h2>
+
+<ul>
+  <li><a href="https://www.hammerspoon.org/">Hammerspoon</a></li>
+  <li><a href="https://thinkhard.tech/2019/04/08/hammerspoon-introduce/">推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和我的配置方案</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/59737941">『Hammerspoon』Mac 锁屏自动开关蓝牙</a></li>
+</ul>
+</div>
+
+
+  
+    <!-- 添加捐赠图标 -->
+    <div class ="post-donate">
+        <div id="donate_board" class="donate_bar">
+            <a id="btn_donate" href="javascript:;" title="Donate 打赏"></a>
+            <br>
+            <span class="donate_txt">如果这篇文章对你有帮助，并且你想小额捐款支持一下的话。</span>
+            <br>
+        </div>  
+  
+        <div id="donate_guide" class="donate_bar hidden">
+            <!-- 支付宝打赏图案 -->
+            <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153431.png" class="m10" title="支付宝打赏" >
+            <!-- 微信打赏图案 -->
+            <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153510.png" class="m10" title="微信打赏">
+        </div>
+  
+        <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+        </script>
+    </div>
+<!-- 添加捐赠图标 -->
+  
+  
+    
+        
+            
+            
+        
+
+    
+
+
+
+
+        
+    
+
+
+
+
+
+<div class="cc-license">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/deed.zh">
+        <img alt="知识共享署名-非商业性使用 4.0 国际许可协议" src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153253.png" />
+    </a><br />
+    原文地址：<a href="https://blog.forecho.com/use-hammerspoon.html">https://blog.forecho.com/use-hammerspoon.html</a><br />
+    版权声明：本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/deed.zh">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。  
+</div>
+<div style="text-align: center; margin-top: 20px;">
+    <img alt="扫码关注我的个人公众号" src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153337.png"/>   
+</div>
+
+  
+  <footer>
+    <p class="meta">
+      
+  
+
+
+<span id="busuanzi_container_page_pv">
+  <span id="busuanzi_value_page_pv"></span>次访问
+</span>
+<span class="byline author vcard">Posted by <span class="fn">forecho</span></span>
+
+      
+ 
+ 
+ 
+
+  2019年12月26日
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/mac/'>mac</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/fitness-at-home.html" title="Previous Post: 在家健身有 Switch 就够了">&laquo; 在家健身有 Switch 就够了</a>
+      
+      
+        <a class="basic-alignment right" href="/octopress-migrate-to-hugo.html" title="Next Post: Octopress 迁移到 Hugo">Octopress 迁移到 Hugo &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

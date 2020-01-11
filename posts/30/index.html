@@ -1,0 +1,1028 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="1、iPhone图标一般都是.png格式文件。 2、一般都是57px57px，一般命名为icon.png；114px114px为Retina屏专用的，一般命名为icon@2x.png。 3、创建图标的时候为一般正方形图片即可，iPhone将自动为图标调整圆角边缘，并且自动加上玻璃质感的效果。   &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/posts/30/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/iOS-kai-fa-shi-li-er-mei-hua-iPhone-tu-biao.html">iOS开发实例（二）-“美化iPhone图标”</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年10月22日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>1、iPhone图标一般都是.png格式文件。 2、一般都是57px<em>57px，一般命名为icon.png；114px</em>114px为Retina屏专用的，一般命名为icon@2x.png。 3、创建图标的时候为一般正方形图片即可，iPhone将自动为图标调整圆角边缘，并且自动加上玻璃质感的效果。   图标制作好之后，按照下面1-》2-&gt;3找到相应的位置： <img src="http://m1.img.libdd.com/farm5/2012/1022/23/81BA7EC20DDB67C06793B4602D536F409E313CB6052A9_800_524.jpg" alt="" /> 把之前制作的.png文件拖到相应的位置即可（114px的文件放在右边窗口）。 然后两个图标文件会自动载入，为了方便起见我们可以把这两个文件拖到Supporting Files文件夹里。 我们可以在Hello_World_Info.plist能找到相应的配置，如下图： <img src="http://m1.img.libdd.com/farm5/2012/1022/23/B8658349A69C43F4D5277505CED658B93A011192B8E30_800_383.jpg" alt="" />   PS:Bundle identifier（束标示符）标准命名规则是：顶级Internet域名，之后是点号，之后是公司名或者是组织名，再点号，最后是应用名。如果要改束标示符的话就在这里改。 未完待续————</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/iOS-kai-fa-shi-li-yi-Hello-World.html">iOS开发实例（一）-“Hello World”</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年10月21日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>本教程是根据《iOS基础教程》一书总结而来。 1、首先打开Xcode，然后创建一个项目，选择iOS-》Application-》Single View Application（一个最简单的模板） 点击Next，如下图所示： <img src="http://m3.img.libdd.com/farm5/2012/1021/21/B52ABEDA9EFB595926EEA2C69A2FFB8117E8A226476BB_728_491.JPEG" alt="" /> 2、然后会出现下图所示内容，你可以安装下图填好相应的资料。 <img src="http://m1.img.libdd.com/farm5/2012/1021/21/F94AFF71CA5151176827687BFE2D87E2E2381CE00FDD3_728_491.PNG" alt="" /> 简单的解释一下： 第一项：项目名。 第二项：组织名称。 第三项：公司标识。 Class Prefix：创建所有类的前缀。 Devices：指所适用的设备。 说下最后三个复选框。 第一个就是我们说的新特性之一，用storyboards管理布局文件。 第二个ARC（自动引用计数）机制。 第三个自动生成一个测试用例。 然后点Next。   3、然后我们得到如下结构的文件： <img src="http://m3.img.libdd.com/farm4/2012/1021/22/7EAAA7A485B1917F38572648AED62CF7D7D2587207020_384_339.JPEG" alt="" /> 简单的说一下上图文件夹： Hello World：以项目名命名的文件夹，包含了大部分代码以及组成应用程序用户界面的文件 其中BIDViewController.xib：该文件包含特定于项目主试图控制器的用户界面元素。 Supporting Files：包含项目中所需的非Objective-C类的源代码文件和资源文件。（适用这个文件夹次数比较少？）。 Frameworks：一种特殊的类库。包含代码、图像、声音文件等资源。   4、点击BIDViewController.xib文件，然后出现的就是Interface Builder（整合到Xcode里面的界面设计工具），如下图： <img src="http://m2.img.libdd.com/farm5/2012/1021/22/BFD4AC2F7FEB7F3CBF008E8438EC309BEC1658C8337B7_800_500.jpg" alt="" />   5、然后你就可以在右下角的类库里面直接拖过来使用。找到Label，直接拖到用户界面任意位置，然后该文字为“Hello World”，OK，这时候基本上算是完成了，点击一下Xcode左上角的Run，然后自动会调用模拟器，然后界面会出现如下所示界面，代表你成功了。 <img src="http://m2.img.libdd.com/farm4/2012/1021/22/63FED48E278A6DA9522D044617BA3651B8C4AA4240180_368_716.PNG" alt="" />   6、回过头来，我们还可以在标签属性里面直接更改资料，然后保存，然后Run。   第一节完毕，整个过程我们还没有动过一个代码。（注意，网上有说对于新手来说最好不要用ARC来自动管理内存，因为到后面你会有很大的麻烦。但是本教程是根据《iOS基础教程》总结的，书上是这么使用的，对于新手来说的话，只能先这样了。）</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/PHP-zhi-wu-xian-ji-fen-lei.html">PHP之无限极分类</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年10月16日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>用到今天发现一个严重的错误，在id超过两位数的时候，排序是有问题的。如下图错误的排序： <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160845.png" alt="" /> 你会发现如果按照as出来的bpath排序的话，cid为55的排序错误，正确的情况是cid为55的应该在101前面，出错的原因是bpath是一个字符串，它会安装字符串来排序，以 “-”  为分节符第一位是0一位数，55的第二位为55两位数，101的第三位数为101三位数。位数不同导致排序不正确的BUG，解决办法就是让cid的位数固定下来，不够的前面填充0，这里我们就用到了MySQL的<a href="http://www.2cto.com/database/201206/135566.html">ZEROFILL</a>。</p>
+
+<blockquote>
+  <h1 id="zerofill">Zerofill</h1>
+
+  <p>用于数字类型的定长显示是最适合不过了， 长度不够时，用0填充。</p>
+</blockquote>
+
+<p>那么我们在MySQL里面执行下面的命令，改变表结构：</p>
+
+<pre><code>ALTER TABLE `category` CHANGE COLUMN `id` `id` INT(9) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT
+</code></pre>
+
+<p>现在你再执行查询，结果如下： <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160901.png" alt="" /> 现在的补救方法要么就是把子类删除掉，要么就是手动添加path的0保证位数相同。（不要太在意上图的cid，其实就是等同于本文的id。只是换了个名字而已。） ============以上信息update 于2014年1月10日============ 目前写无限极分类的大致分为三种情况：</p>
+
+<ol>
+  <li>递归（效率太慢）</li>
+  <li>ajax（不会的话，就写不出来）</li>
+  <li>继承关系（方法简单，实用）
+数据库结构如下图： <img src="http://m2.img.libdd.com/farm5/2012/0913/15/2A76C895BDF8890113334C98FDE5BAEFC40F2905049E_491_205.PNG" alt="" />   主要思想是通过path这个字段通过MySQL 的concat 函数查询实现。示例代码如下：</li>
+</ol>
+
+<pre><code>SELECT id, path, name, CONCAT( path,  '-', id ) AS bpath FROM  `category` ORDER BY bpath
+</code></pre>
+
+<p>bpath:虚拟字段 内容字段如下： <img src="http://m1.img.libdd.com/farm4/2012/0913/15/8AA38893F111837AA9473C3B36B86B939CBBE405049E_495_201.PNG" alt="" />   视图主要代码如下：</p>
+
+<pre><code>&lt;select name="id" class="small-input"&gt;
+    &lt;option value="0"&gt;根目录&lt;/option&gt;
+    &lt;?php foreach($category as $row):?&gt;
+    &lt;option value="&lt;?php echo $row-&gt;id;?&gt;"&gt;
+        &lt;?php
+          $count = count(explode('-',$row-&gt;bpath));
+          echo '|';
+          for($i=1;$i&lt;$count;$i++){
+               echo '—';
+           }   
+          echo $row-&gt;name;?&gt;
+     &lt;/option&gt;
+    &lt;?php endforeach;?&gt;
+&lt;/select&gt;
+</code></pre>
+
+<p>  添加新栏目的话，主要思想是的把父级的path 和pid链接起来，组成新的path。 详细代码请参考我的<a href="https://github.com/forecho">gitbub</a> 的Fecms项目，敬请期待。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/shi-yong-biao-dan-yan-zheng-cha-jian-Validform.html">使用表单验证插件 Validform</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年10月16日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://validform.rjboy.cn/">官方网址</a> 先下载完整的示例文档。 调用如下两个文件（注意文件路径）：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;resources/scripts/jquery-1.6.2.min.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;resources/scripts/Validform_v5.1_min.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>然后添加javascript代码（此处我使用的是示例2）：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class="line"><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">    <span class="c1">//$(&quot;.registerform&quot;).Validform();  //就这一行代码！;</span>
+</span><span class="line">
+</span><span class="line">    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.registerform&quot;</span><span class="p">).</span><span class="nx">Validform</span><span class="p">({</span>
+</span><span class="line">        <span class="nx">tiptype</span><span class="o">:</span><span class="mi">2</span>
+</span><span class="line">    <span class="p">});</span>
+</span><span class="line"><span class="p">})</span>
+</span><span class="line"><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>然后是表单的视图页面主要代码：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;p&gt;</span>
+</span><span class="line">    <span class="nt">&lt;label&gt;</span>导航名称<span class="nt">&lt;/label&gt;</span>
+</span><span class="line">    <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;text-input small-input&quot;</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;small-input&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span> <span class="na">datatype=</span><span class="s">&quot;s2-10&quot;</span> <span class="na">errormsg=</span><span class="s">&quot;昵称至少2个字符,最多10个字符！&quot;</span> <span class="nt">/&gt;</span>
+</span><span class="line">    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;Validform_checktip&quot;</span><span class="nt">&gt;&lt;/span&gt;</span>
+</span><span class="line">    <span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+</span><span class="line"><span class="nt">&lt;/p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>form表单的class是”registerform”</strong>。即：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line">class=&quot;registerform&quot;
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>PS: 此处我表单的input与提示文字Validform_checktip 属于同一级标签，而官方给我们的是都有一个父级的td标签，所以我需要改官方的Validform_v5.1_min.js文件，找到下图代码 <img src="http://m1.img.libdd.com/farm4/2012/0914/10/6490CA006AB38112DE4FE6C76AD2177A5CAFE5189977_800_86.jpg" alt="" /> 修改如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="k">if</span><span class="p">(</span><span class="nx">type</span><span class="o">==</span><span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="nx">o</span><span class="p">.</span><span class="nx">obj</span><span class="p">){</span>
+</span><span class="line"><span class="nx">o</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="s2">&quot;.Validform_checktip&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>
+</span><span class="line">    <span class="nx">Validform</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">cssctl</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="s2">&quot;.Validform_checktip&quot;</span><span class="p">),</span><span class="nx">o</span><span class="p">.</span><span class="nx">type</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>即：删掉两处的parent和find。</strong> 更多的说明文档，请参考<a href="http://validform.rjboy.cn/?cat=1">这里</a>。   样式的话，只需调用如下三个即可。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+</pre></td><td class="code"><pre><code class="css"><span class="line"><span class="c">/* 表单 */</span>
+</span><span class="line"><span class="nc">.Validform_wrong</span> <span class="p">{</span>
+</span><span class="line">    <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+</span><span class="line">    <span class="k">padding-left</span><span class="o">:</span> <span class="m">20px</span><span class="p">;</span>
+</span><span class="line">    <span class="k">white-space</span><span class="o">:</span> <span class="k">nowrap</span><span class="p">;</span>
+</span><span class="line">    <span class="k">background</span><span class="o">:</span> <span class="sx">url(../images/error.png)</span> <span class="k">no-repeat</span> <span class="k">left</span> <span class="k">center</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="nc">.Validform_right</span> <span class="p">{</span>
+</span><span class="line">    <span class="k">color</span><span class="o">:</span> <span class="m">#71B83D</span><span class="p">;</span>
+</span><span class="line">    <span class="k">padding-left</span><span class="o">:</span> <span class="m">20px</span><span class="p">;</span>
+</span><span class="line">    <span class="k">background</span><span class="o">:</span> <span class="sx">url(../images/right.png)</span> <span class="k">no-repeat</span> <span class="k">left</span> <span class="k">center</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="nc">.Validform_checktip</span> <span class="p">{</span>
+</span><span class="line">    <span class="k">margin-left</span><span class="o">:</span> <span class="m">8px</span><span class="p">;</span>
+</span><span class="line">    <span class="k">line-height</span><span class="o">:</span> <span class="m">20px</span><span class="p">;</span>
+</span><span class="line">    <span class="k">height</span><span class="o">:</span> <span class="m">20px</span><span class="p">;</span>
+</span><span class="line">    <span class="k">overflow</span><span class="o">:</span> <span class="k">hidden</span><span class="p">;</span>
+</span><span class="line">    <span class="k">color</span><span class="o">:</span> <span class="m">#999</span><span class="p">;</span>
+</span><span class="line">    <span class="k">font-size</span><span class="o">:</span> <span class="m">12px</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/PHP-zui-jian-dan-de-fang-fa-diao-yong-kindeditor-bian-ji-qi.html">PHP最简单的方法调用kindeditor编辑器</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年10月16日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>先在<a href="http://pan.baidu.com/share/link?shareid=65430&amp;uk=2684558169">这里</a>直接下载编辑器代码。 插入javascript代码如下，</p>
+
+<pre><code>&lt;script charset="utf-8" src="kindeditor/kindeditor.js"&gt;&lt;/script&gt;
+&lt;script charset="utf-8" src="kindeditor/lang/zh_CN.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+        var editor;
+        KindEditor.ready(function(K) {
+                //editor = K.create('textarea[name="content"]');
+                editor = K.create('#editor_id', {
+                    allowFileManager : true  //开启浏览服务器文件功能，比方上传图片的图片空间
+                });
+        });
+&lt;/script&gt;
+</code></pre>
+
+<p>form表单代码如下：</p>
+
+<pre><code>&lt;textarea id="editor_id" name="content" style="width:90%;height:450px;"&gt;&lt;/textarea&gt;
+</code></pre>
+
+<p><strong>Kindeditor内容区默认字体和字体的大小如何设置呢?</strong> 打开themes/default/default.css文件找到：<code>.ke-dialog-loading-content</code> 把<code>font-size: 14px;</code>改成<code>font-size: 12px;</code>保存即可。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/di-yi-zhan-cheng-dou.html">第一站，成都</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年10月15日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>话说这次国庆放8天假，不好好出去玩，都对不起自己放的这8天假。</p>
+
+<p>本着只想出去走走的心态，我就无所谓是什么目的地了，反正只要没去过就成，班长提议去成都，听说那里妹纸很多，我自然是不反对。这次旅行，是我的第一次，所以我的主要目标是找到那个旅行的感觉。</p>
+
+<p>车票是在网上买的，怕人多，我们就选择了2号出发，运气还不错，买到了坐票，买票中间有点心惊胆战那也是难免的。我们分两拨过去的，我们三个是2号下午的火车从武昌出发，从宿舍出发一到车站直接上火车，时间真是算的准。火车上我们边车边聊了会儿，然后打了下扑克，看了下杂志，然后睡了下觉，然后3号早上8点多就到了。成都东的火车站还不错的说。出站的时候发现下了点下雨，但是对我们影响不大。由于班长是下午才到，所以我们三个的任务是先找到住宿的地方再说，在车站我们上了101奔到了西南交大，然后下车找宾馆，然后就想迫不及待的出去玩了，服务员妹纸说的那句话给我印象还蛮深的，“成都就是一个耍都，在这里你只要尽情的耍就好了”。后来证明我们选的宾馆地理位置还挺靠谱的，里风景区都不远。</p>
+
+<p>宾馆找到了，我们放心东西就先去了尽情的去玩了。这时候的太阳，无疑让我们心情更开心了。我们首先去的是<strong>宽窄巷子</strong>，怎么说呢？是一个风景区，吃的蛮多的，建筑风格也不错，有宽巷子也有窄巷子。还有真人铜像，我们还和他们合了几张影，还看了几张摄影展，拍的都很不错，还看到了成都一绝“掏耳朵”，他们的装备那是杠杠的。</p>
+
+<p>然后下午吃了碗面，准备去<strong>武侯祠</strong>的干活。刚到站就发现人很多，然后转身一看，旁边的<strong>锦里</strong>人更多，我在武汉都没看到这样人贴人进去的，后来我们一想还是算了吧，就没进去了。然后就在周边随便逛了下我买了几个特产，都是很辣了那种准备带回去。然后就直奔回宾馆了，火车上还是没睡好，有点累的，回去洗了个澡，休息一下，迎接班长的到来。</p>
+
+<p>天刚黑的时候班长来了，然后我们就要去吃火锅的干活，导航了一下周围的火锅店，然后看中了一家火锅店，<strong>打渔郎</strong>。花鲢鱼火锅，第一次吃，那鱼不是一般的嫩，并且鲢鱼鱼刺又很少，所以那个我们吃的很爽，我们还喝了点酒。后来我甚至还想过要不要在回武汉之前再去那吃一回再走。成都小吃还蛮多的，各种小吃，什么冒菜啊，串串香啊，到最后我都没吃过。</p>
+
+<p>4号我们准备说是要早点起床，要在成都过早的，后来还是9点多才出门的，也还不算晚，周围不远就有<strong>老麻抄手</strong>。来成都晚当然就要吃特产了。吃完了还是觉得真是对得起这个名字，吃完了给人就一个感觉，就是麻，辣那都只能是第二感觉。然后我们商讨了下去哪玩，后来就去了<strong>杜甫草堂</strong>，在门口犹豫了一下，60块钱门票值不值。人也还算多，进去的话也只能看一下草堂，用班长的话说就是有地俗气了。但是又不知道去哪玩，最后还是进去了。然后我们就看到了各种草堂，然后各种和杜甫有关的东西，整个风景区还是有点点大的，但整个下来感觉挺没意思的，这是实话，太商业化了。逛完之后大家都饿了，我团购了一个火锅，<strong>刘一手火锅店</strong>。团购还是很划算的，4个人都吃的很饱，还不错。</p>
+
+<p>然后下午就跟老钱一起去见成都的知友，然后我们一起做饭，我做了一个，但是有点失误没做好，而且买的材料有点多了，最后都没吃完…成都的女群主艺晴妹纸看得出来很会做饭。没看出来她的笑点比我还低，哈哈…小鱼妹纸还做了一个水煮鱼，步骤好复杂的说，佩服。韩冰同学竟然是唐山人。朱德文是从武汉读完大学，然后跑到成都去读研的。最后我们几个男生喝了一小瓶二锅头，大家一边吃饭，一边说笑，感觉甚好。</p>
+
+<p>5号了，我们起床的第一件事就是在周围逛了一大圈找特产吃过早，结果找了大半圈，实在是没找到什么好吃的，后来就吃了一碗肥肠粉，还是不喜欢吃粉，有点坑了。吃饱了之后我们决定去成都周边玩一下，直奔火车站，准备去青城山或者都江堰的，后来发现没有票了，连明天的票都没有了，又不想包车去，怕晚上回不来，也怕那边人多。最后还是听从班长意见去了一下古镇，<strong>洛带</strong>。给人的感觉就是一条商业街，不是买商品就是卖吃的，只不过建筑风格是古代的而已。既然来了还是走了一圈，然后出来之后，爬了一个小山，然后时间差不多晚上了，打道回府，回去吃火锅，这次我们直奔早已看好的<strong>李雪牛杂火锅店</strong>，然后吃完了各种牛杂，牛肉，然后就回去洗澡看电视睡觉了。</p>
+
+<p>6号这天要退房了，我们起床的比较晚，我提议去吃<strong>老麻抄手</strong>，大家都同意了。吃完回来收拾一下东西准备退房了，带着行李自然是有点不方便玩。我脑子里只想到了去<strong>青羊宫</strong>，但是到了门口又不是很想进去了，然后我们逛到了<strong>四川博物馆</strong>，本着打发时间的心态我们进去了，我们是晚上22点的火车，买的有点晚了。博物馆可以放行李，我们到处逛了下，直到闭馆我们才肯出来。然后我们就只能又进去前进了，走到地铁站出发去火车站，到了车站还发现成都的妹纸真多，火车站的工作人员大多数都是妹纸。火车上的人比我想想中的要少，我们聊天、睡觉、看杂志、吃东西、听歌、看窗外的风景。时间比我想想中的要好过。回来我们还有时间做了顿饭。</p>
+
+<p>整个旅行还是很成功的，下次如下想去名胜景地节假日就别去了，人特别多，即使去了也没意思。所以我们这次的旅行只要是吃，玩倒是其次。然后就是找经验找感觉，毕竟旅行一般都是去没有去过的地方。</p>
+
+<p>现在我要做的事就是赚钱，只有努力赚钱才有可能去做很多事情。下一站，会是哪里？期待…</p>
+
+<p>如果想看照片，<a href="http://nowhisky.lofter.com/">请猛击~</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/yii-diao-yong-KindEditor-zai-xian-bian-ji-qi.html">Yii 调用KindEditor在线编辑器</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年09月28日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ol>
+  <li>先下载<a href="http://pan.baidu.com/share/link?shareid=8839&amp;uk=2684558169">这个</a>文件，然后解压，把editor 这个文件夹放在你项目的根目录里。</li>
+  <li>然后找_form.php这个文件，找到你的”content”（这里我的是名称是“news_content”），修改成如下代码：（被注释掉的是原来的代码，上面一行是新加上的。）</li>
+</ol>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">class</span><span class="o">=</span><span class="s2">&quot;row&quot;</span><span class="o">&gt;</span>
+</span><span class="line">    <span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">labelEx</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span><span class="s1">&#39;news_content&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</span><span class="line"><span class="x">    </span><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">textArea</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span><span class="s1">&#39;news_content&#39;</span><span class="p">,</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;width:90%; height:500px&#39;</span><span class="p">));</span> <span class="cp">?&gt;</span><span class="x"></span>
+</span><span class="line"><span class="x">    </span><span class="cp">&lt;?php</span> <span class="c1">// echo $form-&gt;textField($model,&#39;news_content&#39;,array(&#39;size&#39;=&gt;60,&#39;maxlength&#39;=&gt;8000)); ?&gt;</span>
+</span><span class="line">    <span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="nv">$model</span><span class="p">,</span><span class="s1">&#39;news_content&#39;</span><span class="p">);</span> <span class="cp">?&gt;</span><span class="x"></span>
+</span><span class="line"><span class="x">&lt;/div&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>然后在_form.php这个文件开头，添加如下代码，调用编辑器样式。</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class="line">    <span class="nx">Yii</span><span class="o">::</span><span class="na">app</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">clientScript</span><span class="o">-&gt;</span><span class="na">registerCssFile</span><span class="p">(</span><span class="s1">&#39;./editor/themes/default/default.css&#39;</span><span class="p">);</span>
+</span><span class="line"><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>最后在_form.php这个文件结尾处，添加如下代码，调用编辑器的js文件以及调用js</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;./editor/kindeditor.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</span><span class="line"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class="line">    <span class="nx">KindEditor</span><span class="p">.</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">K</span><span class="p">)</span> <span class="p">{</span>
+</span><span class="line">        <span class="nx">editor</span> <span class="o">=</span> <span class="nx">K</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;#News_news_content&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class="line">            <span class="nx">allowFileManager</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class="line">            <span class="nx">resizeType</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class="line">            <span class="nx">newlineTag</span><span class="o">:</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span>
+</span><span class="line">            <span class="c1">//syncType: &#39;&#39;,</span>
+</span><span class="line">            <span class="c1">// uploadJson: &#39;&lt;?php echo $this-&gt;createUrl(&#39;news/upload&#39;) ?&gt;&#39;</span>
+</span><span class="line">        <span class="p">});</span>
+</span><span class="line">    <span class="p">});</span>
+</span><span class="line"><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/yii-xue-xi-bi-ji-wu-xiu-gai-xin-jian-Create-ye-mian.html">yii学习笔记（五）-修改新建Create页面</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年07月12日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>我们可以用gii生成views里面的页面，很方便的，但是，并不是所有的东西都是我们所需要的，所以我们要学会修改代码，为我们所用。 <strong>改为下拉选项框</strong> 添加某个字段的时候，把手动输入的input表单改成下拉选项框。 首页，我们要在字段对应的表的m下写入一个方法。比方说我现在一个type_id字段对应的是news_type表。 那么我们在m文件夹中找到NewsType.php文件，在末尾加上这段代码：</p>
+
+<pre><code>// 获取type
+public function getNewsTypeList()
+{
+    $newsTypeList = NewsType::model()-&gt;findAll();
+    return CHtml::listData($newsTypeList,'id','news_type_name');
+
+    //下面是用来验证的代码
+    // $returnData = CHtml::listData($newsTypeList,'id','news_type_name');
+    // print_r($returnData);
+    // exit;
+}
+</code></pre>
+
+<p>然后我们找到Create所在的页面，这里是Admin/views/news/_form.php文件。 找到这段代码：</p>
+
+<pre><code>&lt;?php echo $form-&gt;textField($model,'type_id',array('size'=&gt;10,'maxlength'=&gt;10)); ?&gt;
+</code></pre>
+
+<p>修改为：</p>
+
+<pre><code>&lt;?php echo $form-&gt;dropDownList($model,'type_id',NewsType::model()-&gt;getNewsTypeList()); ?&gt;
+</code></pre>
+
+<p>刷新一下就会得到我们想要的下拉选项效果。 <strong>系统默认添加的信息</strong> 那么有些情况下，我们会遇到一个字段是由系统自动帮我们添加的，比方说，添加新闻的人，时间。 我们先把_form.php文件里字段相应的代码删掉。 然后去找这个表的m文件，这里是News.php文件 在末尾加上这段代码：</p>
+
+<pre><code>//自动添加新闻时间、状态
+protected function beforeSave()
+{
+    if (parent::beforeSave()) {
+        if ($this-&gt;isNewRecord) {
+
+        //如果是新的新闻
+
+            $this-&gt;create_time = date('Y-m-d H:i:s');
+            $this-&gt;create_user_id = Yii::app()-&gt;user-&gt;id;
+        }else {
+            $this-&gt;update_time = date('Y-m-d H:i:s');
+            $this-&gt;update_user_id = Yii::app()-&gt;user-&gt;id;
+        }
+            return true;
+        }else {
+            return false;
+    }
+
+}
+</code></pre>
+
+<p><strong>读取数据的时候转换</strong> 其实这个时候数据记录type_id字段的任然是数字，那么读取的时候我们还需要转换一下。 在读取页面的m对应的文件中修改代码，这里对应的是News.php文件 我们找到下面这段代码：</p>
+
+<pre><code>public function relations()
+{
+    // NOTE: you may need to adjust the relation name and the related
+    // class name for the relations automatically generated below.
+    return array();
+}
+</code></pre>
+
+<p>添加修改为：</p>
+
+<pre><code>public function relations()
+{
+    // NOTE: you may need to adjust the relation name and the related
+    // class name for the relations automatically generated below.
+    //表链接
+    return array(
+        'typeName'=&gt;array(self::BELONGS_TO,'NewsType','type_id'),
+        'statusName'=&gt;array(self::BELONGS_TO,'StatusType','status_id'),
+    );
+}
+</code></pre>
+
+<p>然后去找到要显示的页面，这里是Admin/views/news/_view.php 找到这段代码：</p>
+
+<pre><code>&lt;?php echo CHtml::encode($data-&gt;type_id); ?&gt;
+</code></pre>
+
+<p>修改为：</p>
+
+<pre><code>&lt;?php echo CHtml::encode($data-&gt;typeName-&gt;news_type_name); ?&gt;
+</code></pre>
+
+<p>statusName也是这样修改。</p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#111" title="2012-07-13 16:04:30">桂林老医</a>:</strong> :shock: 看不懂</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/yii-xue-xi-bi-ji-si-yong-hu-deng-lu.html">Yii学习笔记（四）-用户登录</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年07月10日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>先在 \protected\components\文件夹里面找到UserIdentity.php</p>
+
+<p>然后用gii的Model Generator生成User的Model</p>
+
+<p>然后在UserIdentity.php找到这段代码：</p>
+
+<pre><code>public function authenticate()
+{
+    $users=array(
+        // username =&gt; password
+        'demo'=&gt;'demo',
+        'admin'=&gt;'admin',
+    );
+    if(!isset($users[$this-&gt;username]))
+        $this-&gt;errorCode=self::ERROR_USERNAME_INVALID;
+    else if($users[$this-&gt;username]!==$this-&gt;password)
+        $this-&gt;errorCode=self::ERROR_PASSWORD_INVALID;
+    else
+        $this-&gt;errorCode=self::ERROR_NONE;
+    return !$this-&gt;errorCode;
+}
+</code></pre>
+
+<p>替换为：</p>
+
+<pre><code>private $_id;
+
+public function authenticate()
+{
+    //用户名转换为小写
+    $username=strtolower($this-&gt;username);
+
+    //$username作为条件进入数据库查询匹配
+    $user=User::model()-&gt;find('LOWER(username)=?',array($username));
+
+    //用户名不存在，报错
+    if ($user===null) {
+        $this-&gt; errorCode=self::ERROR_USERNAME_INVALID;
+    }else{
+
+        //调用一个函数，匹配相应的密码
+        if (!$user-&gt;validatePassword($this-&gt;password)) {
+            $this-&gt;errorCode=self::ERROR_PASSWORD_INVALID;
+        }else {
+
+            //匹配成功，赋值
+            $this-&gt;_id = $user-&gt;id;
+            $this-&gt;username = $user-&gt;username;
+            $this-&gt;errorCode=self::ERROR_NONE;
+        }
+    }
+    return $this-&gt;errorCode === self::ERROR_NONE;
+}
+
+public function getId() {
+    return $this-&gt;_id;
+}
+</code></pre>
+
+<p>在Models里面的User.php添加两个新的方法。添加如下代码：</p>
+
+<pre><code>// 查询密码是否匹配
+public function validatePassword($password)
+{
+    return $this-&gt;encrypt($password)===$this-&gt;password;
+}
+
+public function encrypt($pass)
+{
+    return md5($pass);
+}
+
+// 添加的密码进行MD5加密
+protected function beforeSave() {
+    if (parent::beforeSave()) {
+        //判断是否是新的密码
+        if ($this-&gt;isNewRecord) {
+            $this-&gt;password = $this-&gt;encrypt($this-&gt;password);
+        }
+        return true;
+    }else {
+        return false;
+    }
+}
+</code></pre>
+
+<p>然后用gii的Crud Generator生成User的Controllers文件UserController.php 这个文件的下面代码是一个简单的权限系统</p>
+
+<pre><code>public function accessRules()
+{
+    return array(
+        array('allow',  // allow all users to perform 'index' and 'view' actions
+            'actions'=&gt;array('index','view'),
+            'users'=&gt;array('*'),
+        ),
+        array('allow', // allow authenticated user to perform 'create' and 'update' actions
+            'actions'=&gt;array('create','update'),
+            'users'=&gt;array('@'),
+        ),
+        array('allow', // allow admin user to perform 'admin' and 'delete' actions
+            'actions'=&gt;array('admin','delete'),
+            'users'=&gt;array('admin'),
+        ),
+        array('deny',  // deny all users
+            'users'=&gt;array('*'),
+        ),
+    );
+}
+</code></pre>
+
+<p>注：
+- “ * ”—-任何人都可以访问。
+- “ @ ”—-登录用户才能访问。
+- “ admin ”—-是指只有admin用户才能访问。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/yii-xue-xi-bi-ji-san-gii-de-shi-yong-yi-ji-mo-kuai-de-shi-yong.html">Yii学习笔记（三）-gii的使用以及模块的使用</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年07月10日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>gii的使用</strong> gii可以帮你生成很多文件，很方便。</p>
+
+<p>访问：<a href="http://localhost/blog/index.php?r=newstype">http://localhost/blog/index.php?r=gii</a>  输入之前设置的密码，进入gii。</p>
+
+<p>选择 <code>Model Generator</code>在Table Name下面输入数据库 表名称，然后点Preview 预览，点Generate 生成文件。</p>
+
+<p>然后在左边再选择<code>Crud Generator</code>在Model Class 下面输入你刚才生成对应的controllers文件（也就是controllers文件夹对应的文件名，注意大小写要匹配），然后点Preview 预览，点Generate 生成文件。</p>
+
+<p><strong>模块的使用（就是使前后台分离）</strong></p>
+
+<p>在gii左边选择Module Generator 在Module ID下面输入Admin，然后点Preview 预览，点Generate 生成文件。这个时候你会发现protected文件夹下面自动生成了一个modules文件夹。</p>
+
+<p>然后修改main.php配置文件。在gii这个数组下面添加：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">'Admin'=&gt;array(
+</span><span class="line">    'class'=&gt;'application.modules.Admin.AdminModule',
+</span><span class="line">),</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>那么接下来就可以在gii中给Admin添加模块了。</p>
+
+<p>在左边再选择<code>Crud Generator</code>在Model Class 下面输入对应的controllers文件（也就是controllers文件夹对应的文件名，注意大小写要匹配），但是注意要修改Controller ID的内容，要在前面加上 “<code>Admin/</code>” ，然后点Preview 预览，点Generate 生成文件。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/31">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/29">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

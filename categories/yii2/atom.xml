@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Yii2 | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/yii2/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[关于《Yii 2.x 最佳实践》]]></title>
+    <link href="https://blog.forecho.com/about-yii2-practice-book.html"/>
+    <updated>2017-12-13T12:29:58+00:00</updated>
+    <id>https://blog.forecho.com/about-yii2-practice-book</id>
+    <content type="html"><![CDATA[<h2 id="section">起源</h2>
+
+<p>2012 年的时候我因为工作原因接触了 Yii 1.0，刚开始真是无从下手，而且大部分文档是英文的，只有少数的中文资料<a href="http://blog.yiiblog.info/">BoyLee 的 视频</a> 让我入了门， Yii 的 QQ 群一些大牛对新手的解惑，让我慢慢感受到 Yii 的强大。从此以后「除却巫山不是云」了，直到 Yii 2.0 版本推出。</p>
+
+<p>Yii 是一个很强大的框架，而且设计的很好，它的模式非常一致，一旦你入门了，那么就会有一通百通的效果，这个过程中官方文档会一直伴随着你。但是作为一个强大的框架，入门门框却非常高，有一推的概念需要你去慢慢了解，我看到很多人只是把 Yii 框架当作一个简单的 PHP MVC 框架来用，完全没用把 Yii 框架的特性用起来，为他们感到惋惜。</p>
+
+<!--more-->
+
+<p>2年前为了感谢那些帮助我的人，我特此写了一本<a href="https://github.com/forecho/yii2-practice-book">关于 Yii2 最佳实践的开源项目</a>，献给同样迷茫的你，献给那些热爱 Yii 的 Yiier。</p>
+
+<h2 id="section-1">放弃</h2>
+
+<p>后来因为无人反馈和工作太忙的借口，没那么多的动力去完成一个完全免费的项目了。慢慢地就淡忘了此事，看 <a href="https://github.com/forecho/yii2-practice-book/commits/master">Commits</a> 三个月之前我还更新过两篇文章。</p>
+
+<h2 id="section-2">卷土重来</h2>
+
+<p>最近看了一本书，看到作者有讲述自己写书的记录和一些坚持的办法，又让我燃起了斗志，让我有了填坑的打算。</p>
+
+<p>只是换了一种方式，这次准备做一个付费的内容。这样一来也可以检验大家的付费意愿；二来可以检验自己在 Yii 圈的影响力；三来可以让我更有动力的去完成这个项目，用户付了钱我肯定会认证对待。</p>
+
+<p>我刚开始准备是把书的90%内容免费开放的，只正对10%的内容收费。但是目前好像没找到能满足这个需求的付费产品，正好前一段时间有了解到<a href="https://xiaozhuanlan.com/yiier">小专栏</a>这个产品，试用了一下除了提现收取的手续费有点高外，其他的基本还算满意。</p>
+
+<h2 id="section-3">结束语</h2>
+
+<p>如果你是一个 PHP 开发者，如果你还不会 Yii 框架，那你还在犹豫什么？</p>
+
+<p>最后需要补充的是，我的编程理念是来自《计算机程序的构造和解释》（简称为SICP）中的：</p>
+
+<blockquote>
+  <p>代码是写给人看的，不是写给机器看的，只是顺便计算机可以执行而已。</p>
+</blockquote>
+
+<p>跟着我一起写人类能看得懂的代码吧？不要为了一点点性能而牺牲代码的可读性，在这个机器不值钱的年代，如果你真在乎性能还为什么用 PHP？</p>
+
+<h2 id="section-4">关于我</h2>
+
+<ul>
+  <li><a href="https://github.com/forecho">我的 GitHub 主页</a></li>
+  <li><a href="https://github.com/yiier"> GitHub Yiier 组织</a></li>
+  <li><a href="http://www.forecho.com/">我的主页</a></li>
+</ul>
+
+<p>订阅请点击 <strong><a href="https://xiaozhuanlan.com/yiier">Yiier 小专栏</a></strong>，目前正在限时特价（持续时间一周），打完折，只需要9.9块钱，你还在犹豫什么？</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用辅助函数来取代复杂的表达式]]></title>
+    <link href="https://blog.forecho.com/write-helper-functions-instead-of-complex-expressions.html"/>
+    <updated>2016-12-19T04:09:22+00:00</updated>
+    <id>https://blog.forecho.com/write-helper-functions-instead-of-complex-expressions</id>
+    <content type="html"><![CDATA[<h2 id="section">引言</h2>
+
+<p>上上上个月在图书馆淘到一本书叫<a href="https://book.douban.com/subject/26709315/">《Effective Python - 编写高质量Python代码的59个有效方法》</a>，虽然我不用 Python 写代码，但是好歹以前写过一点 Python 的皮毛。
+豆瓣看了一下评分，就果断借了这本书。当看到第四条方法《第4条：用辅助函数来取代复杂的表达式 》结合自己最近几年编程经验，深有感触，于是就有了这篇文章。</p>
+
+<h2 id="section-1">为什么要用辅助函数？</h2>
+
+<p>在编程的时候，你肯定会遇到类似这样的事情：数据库中保存的商品单价单位是分，商品详情页需要你的商品价格，但是单位肯定是元。</p>
+
+<p>那么我们可以怎么样实现呢？一般的做法肯定这样的，直接在视图页面要展示价格的地方这样写：</p>
+
+<p><code>php
+&lt;?= round(($price / 100), 2) ?&gt;
+</code></p>
+
+<p>这样写虽然能实现效果，但是如果需求有变化，需要使用强制保留两位小数，那么你需要这样改：</p>
+
+<p><code>php
+&lt;?= number_format(round(($price / 100), 2), 2, '.', ''); ?&gt;
+</code></p>
+
+<p>看上去虽然不多的代码，但是</p>
+
+<ul>
+  <li>阅读起来很困难，而且很上去也很乱。</li>
+  <li>如果涉及到很多东西的话，需要找到每个相应的地方然后做修改。同理，下次改需求的时候，修改也将会是一件很痛苦的事情。</li>
+</ul>
+
+<!--more-->
+
+<p>如果使用辅助函数来实践的话，代码将会是这样的：</p>
+
+<p><code>php
+/**		
+* 分转元		
+* @param int $price 分		
+* @return float 元		
+*/
+function fenToYuan($price)
+{
+    $price = round(($price / 100), 2);
+    return number_format($price, 2, '.', '');
+}
+// 视图层使用方式
+echo fenToYuan($price);
+</code></p>
+
+<p>一旦这样使用之后，代码将变得非常清晰，而且以后重构起来也非常方便。以上是为了说明辅助函数的作用特意列举的一个小示例，实际项目中，可能会有大量需要你使用这种方式编程的地方，你需要养成这种思维模式才是最重要的。</p>
+
+<p>PS：以上代码可以在<a href="http://ideone.com/miLLM3">这里</a>查看并且运行。</p>
+
+<h2 id="yii2-">Yii2 中是如何实践的？</h2>
+
+<p>Yii2 中有一个 <a href="https://github.com/yiisoft/yii2/tree/master/framework/helpers">helpers</a> 文件夹，里面的代码推荐各位 PHP 工程师都应该去看看，注释都给了示例，非常的友好。</p>
+
+<p>下面我来简单分享一些常用的 helpers：</p>
+
+<p><strong><a href="https://github.com/yiisoft/yii2/blob/master/framework/helpers/BaseArrayHelper.php">ArrayHelper</a></strong></p>
+
+<p><code>php
+// 最基本的用法，获取数组中的某个键对应的值。好处是不必判断 username 是否存在
+$username = \yii\helpers\ArrayHelper::getValue($_POST, 'username');
+// 也可以获取对象中的某个值
+$username = \yii\helpers\ArrayHelper::getValue($user, 'username');
+// 也可以使用匿名函数
+$fullName = \yii\helpers\ArrayHelper::getValue($user, function ($user, $defaultValue) {
+    return $user-&gt;firstName . ' ' . $user-&gt;lastName;
+});
+// 使用「.」获取关联对象的属性
+$street = \yii\helpers\ArrayHelper::getValue($users, 'address.street');
+// 获取数组键值的数组键值
+$versions = ['date' =&gt; '2016年12月19日', '1.0' =&gt; ['date' =&gt; '2016年12月18日']];
+$value = \yii\helpers\ArrayHelper::getValue($versions, ['1.0', 'date']); // $value 输出为 2016年12月18日
+</code>
+PS：以上代码可以在<a href="http://ideone.com/T9d3Qb">这里</a>查看并且运行。</p>
+
+<p>有点太花时间，以后再补充……</p>
+
+<h2 id="helpers">使用其他 helpers</h2>
+
+<p>据我了解，Yii2 的 helpers 在其他 PHP 框架中也是可以使用的，但是本人没有亲测，不作保证。</p>
+
+<p>类似这种 helpers 是可以在网上找到的，比方说我就找到了<a href="https://github.com/phpfunct/funct">phpfunct/funct</a></p>
+
+<p>当然也可以自己根据需要，收集使用，比方说根据这篇文章收集到 UUID 的生成方法：</p>
+
+<p>&#8220;`php
+class Sequence
+{
+    const EPOCH = 1000000000000;</p>
+
+<pre><code>const TIME_BITS  = 41;
+const NODE_BITS  = 10;
+const COUNT_BITS = 10;
+
+private $node = 0;
+
+private $ttl = 10;
+
+public function __construct($node)
+{
+    $max = $this-&gt;max(self::NODE_BITS);
+
+    if (is_int($node) === false || $node &gt; $max || $node &lt; 0) {
+        throw new \InvalidArgumentException('node');
+    }
+
+    $this-&gt;node = $node;
+}
+
+public function generate($time = null)
+{
+    if ($time === null) {
+        $time = (int)(microtime(true) * 1000);
+    }
+
+    return ($this-&gt;time($time) &lt;&lt; (self::NODE_BITS + self::COUNT_BITS)) |
+           ($this-&gt;node &lt;&lt; self::COUNT_BITS) |
+           ($this-&gt;count($time));
+}
+
+public function restore($id)
+{
+    $binary = decbin($id);
+
+    $position = -(self::NODE_BITS + self::COUNT_BITS);
+
+    return array(
+        'time'  =&gt; bindec(substr($binary, 0, $position)) + self::EPOCH,
+        'node'  =&gt; bindec(substr($binary, $position, - self::COUNT_BITS)),
+        'count' =&gt; bindec(substr($binary, - self::COUNT_BITS)),
+    );
+}
+
+public function setTTL($ttl)
+{
+    $this-&gt;ttl = $ttl;
+}
+
+private function time($time)
+{
+    $time -= self::EPOCH;
+
+    $max = $this-&gt;max(self::TIME_BITS);
+
+    if (is_int($time) === false || $time &gt; $max || $time &lt; 0) {
+        throw new \InvalidArgumentException('time');
+    }
+
+    return $time;
+}
+
+private function count($time)
+{
+    $key = "seq:count:{$time}";
+
+    while (!$count = apcu_inc($key)) {
+        apcu_add($key, mt_rand(0, 9), $this-&gt;ttl);
+    }
+
+    $max = $this-&gt;max(self::COUNT_BITS);
+
+    if ($count &gt; $max) {
+        throw new \UnexpectedValueException('count');
+    }
+
+    return $count;
+}
+
+private function max($bits)
+{
+    return -1 ^ (-1 &lt;&lt; $bits);
+} } ```
+</code></pre>
+
+<h2 id="section-2">最后总结</h2>
+
+<p>编写可读性，可维护性，可扩展性的代码应该是每个开发工程师去追求的目标。程序员可以说是80%的时间都是在维护代码和阅读代码（包括别人的和自己的），所以一定要重视这些小细节。</p>
+
+<p>但实际上是很多人连最基本的<a href="http://baike.baidu.com/view/4779987.htm">单一职责原则</a>都做不到，虽然有可能他们知道这个原则，但是不实践又有什么用呢？！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Yii2 高级版新建一个 Api 应用]]></title>
+    <link href="https://blog.forecho.com/yii2-create-api.html"/>
+    <updated>2015-07-27T14:25:53+00:00</updated>
+    <id>https://blog.forecho.com/yii2-create-api</id>
+    <content type="html"><![CDATA[<p>先在项目的根目录下复制一份 backend 为 api：</p>
+
+<p><code>sh
+cp backend/ api -r
+</code></p>
+
+<p>拷贝 api 环境</p>
+
+<p><code>sh
+cp -a environments/dev/frontend environments/dev/api
+cp -a environments/prod/frontend environments/prod/api
+</code></p>
+
+<p>修改 environments/index.php 文件之后的代码（主要是添加了一些 api 相关的代码）：</p>
+
+<p><code>php
+return [
+    'Development' =&gt; [
+        'path' =&gt; 'dev',
+        'setWritable' =&gt; [
+            'backend/runtime',
+            'backend/web/assets',
+            'frontend/runtime',
+            'frontend/web/assets',
+            'api/runtime',
+            'api/web/assets',
+        ],
+        'setExecutable' =&gt; [
+            'yii',
+        ],
+        'setCookieValidationKey' =&gt; [
+            'backend/config/main-local.php',
+            'frontend/config/main-local.php',
+            'api/config/main-local.php',
+        ],
+    ],
+    'Production' =&gt; [
+        'path' =&gt; 'prod',
+        'setWritable' =&gt; [
+            'backend/runtime',
+            'backend/web/assets',
+            'frontend/runtime',
+            'frontend/web/assets',
+            'api/runtime',
+            'api/web/assets',
+        ],
+        'setExecutable' =&gt; [
+            'yii',
+        ],
+        'setCookieValidationKey' =&gt; [
+            'backend/config/main-local.php',
+            'frontend/config/main-local.php',
+            'api/config/main-local.php',
+        ],
+    ],
+];
+</code></p>
+
+<!--more-->
+
+<p>然后再执行初始化命令：</p>
+
+<p><code>sh
+php init
+</code></p>
+
+<p>然后记得去 common/config/bootstrap.php 最后一行添加如下代码：</p>
+
+<p><code>php
+Yii::setAlias('api', dirname(dirname(__DIR__)) . '/api');
+</code></p>
+
+<p>修改一下配置文件 api/config/main.php</p>
+
+<p><code>php
+return [
+    'id' =&gt; 'app-api',
+    // ...
+    'controllerNamespace' =&gt; 'api\controllers',
+]
+</code></p>
+
+<p>最后 api 里面的控制器等有命名空间的文件也要修改一下。</p>
+
+<p><strong>参考资料</strong></p>
+
+<ul>
+  <li><a href="http://blog.phpor.me/%E5%B7%A5%E4%BD%9C/yii/2014/11/17/yii2-usage.html#create_new_app">在原有的Yii2框架上，新建一个api应用</a></li>
+  <li><a href="http://www.digpage.com/video_1.html">第一讲：基础配置</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Yii2 搭建最基础的 RESTful]]></title>
+    <link href="https://blog.forecho.com/yii2-base-restful.html"/>
+    <updated>2015-07-27T12:25:53+00:00</updated>
+    <id>https://blog.forecho.com/yii2-base-restful</id>
+    <content type="html"><![CDATA[<p>为了让项目更加清晰，我们可以单独新建一个 Api，用来专门开发 Api。至于怎么新建，参考这篇文章：<a href="https://blog.forecho.com/blog/yii2-create-api.html">Yii2 高级版新建一个 Api 应用</a></p>
+
+<hr />
+<p><strong>系列文章</strong></p>
+
+<p>最近半年一直在开发 restful 的 API 系统，所以打算写这系列文章来分享自己的经验，希望对大家有用。</p>
+
+<ul>
+  <li><a href="https://blog.forecho.com/blog/yii2-base-restful.html">Yii2 搭建最基础的 RESTful</a></li>
+  <li><a href="">Yii2 RESTful 添加认证</a></li>
+  <li><a href="">Yii2 RESTful 添加鉴权</a></li>
+  <li><a href="">Yii2 RESTful 添加访问速率限制</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Yii2 如何实现 RESTful？]]></title>
+    <link href="https://blog.forecho.com/yii2-use-restful.html"/>
+    <updated>2015-03-22T12:25:53+00:00</updated>
+    <id>https://blog.forecho.com/yii2-use-restful</id>
+    <content type="html"><![CDATA[<h2 id="rest">什么是REST</h2>
+
+<p>简单的说，REST 指的是一组架构约束条件和原则。满足这些约束条件和原则的应用程序或设计就是 RESTful。</p>
+
+<h2 id="restful">为什么要Restful？</h2>
+
+<p>主要遵循两个准则：</p>
+
+<ul>
+  <li>不要为了RESTful而RESTful</li>
+  <li>在能表达清楚的情况下，简单就是美</li>
+</ul>
+
+<h2 id="yii2--restful">Yii2 使用 RESTful？</h2>
+
+<p>其实 Yii2 框架本身就对 RESTful 是友好支持的，具体可以看<a href="http://www.yiiframework.com/doc-2.0/guide-rest-quick-start.html">官方文档</a>，或者去看源码，都是可以的。</p>
+
+<p><strong>下面分享我写的<a href="https://github.com/iiYii/yii2-rest-demo">Yii2 RESTful DEMO</a>。</strong></p>
+
+<p>具体实现可以看我的代码，有不懂的可以留言。下面我重点说一下值得注意的地方：</p>
+
+<!--more-->
+
+<h3 id="yii2-restful-">Yii2 RESTful 如何实现自定义方法？</h3>
+
+<p>新建一个 user 控制器，输入以下代码：</p>
+
+<p>&#8220;`
+namespace app\controllers;</p>
+
+<p>use yii\rest\ActiveController;</p>
+
+<p>class UserController extends ActiveController
+{
+    public $modelClass = ‘app\models\User’;
+}
+&#8220;`</p>
+
+<p>然后你在浏览器里面输入 用 GET 请求 <code>localhost/basic/web/users</code> 这个地址是可以跑的，因为继承的 <code>ActiveController</code> 这个类是有对 user RESTful 表的 基本操作的，包括 GET，POST，PUT，PATCH，DELETE。所以我们要注销系统自带的实现方法，代码如下，添加到控制器中，后者自己新建一个 ActiveController 类。</p>
+
+<p><code>
+public function actions()
+{
+   $actions = parent::actions();
+    // 注销系统自带的实现方法
+    unset($actions['index'], $actions['update'], $actions['create'], $actions['delete'], $actions['view']);
+    return $actions;
+}
+</code></p>
+
+<p>然后下面我们就可以写自己的 actionIndex、actionCreate、actionUpdate 和 actionDelete 了。</p>
+
+<h3 id="section">实现用户验证</h3>
+
+<p>框架其实是提供三种验证方式的，我就说一下最长用的 token 实现验证吧。</p>
+
+<p>首先你要在控制器中加入下面代码：</p>
+
+<p><code>
+public function behaviors()
+{
+    $behaviors = parent::behaviors();
+    $behaviors['authenticator'] = [
+        'class' =&gt; CompositeAuth::className(),
+        'authMethods' =&gt; [
+            QueryParamAuth::className(),
+        ],
+    ];
+    return $behaviors;
+}
+</code></p>
+
+<p>然后你要去修改 user 的 model，具体参照这块代码：<a href="https://github.com/iiYii/yii2-rest-demo/commit/02db1711bcaa42040360d50ffcf771626474f5ad">添加 restful 授权认证</a></p>
+
+<h2 id="section-1">参考文章</h2>
+
+<ul>
+  <li><a href="http://www.ruanyifeng.com/blog/2011/09/restful.html">理解RESTful架构</a></li>
+  <li><a href="http://segmentfault.com/blog/cloudmario/1190000000635914">RESTful实践总结</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+</feed>

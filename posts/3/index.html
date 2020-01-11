@@ -1,0 +1,807 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="引言 性能测试 监控统计 EFK xhprof &amp;&amp; xhgui 优化性能 最后 引言 说来惭愧，搞了这么多年 PHP 开发，最近才正儿八经的搞性能优化。打算把这些经验记录并且分享出来，这会是一系列文章，这是第一篇。 性能测试 性能优化的第一步就是要发现系统的性能瓶颈。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/posts/3/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/performance-optimization-01.html">性能优化第一篇</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2019年04月19日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">性能测试</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">监控统计</a>    <ul>
+      <li><a href="#efk" id="markdown-toc-efk">EFK</a></li>
+      <li><a href="#xhprof--xhgui" id="markdown-toc-xhprof--xhgui">xhprof &amp;&amp; xhgui</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-3" id="markdown-toc-section-3">优化性能</a></li>
+  <li><a href="#section-4" id="markdown-toc-section-4">最后</a></li>
+</ul>
+
+<h2 id="section">引言</h2>
+
+<p>说来惭愧，搞了这么多年 PHP 开发，最近才正儿八经的搞性能优化。打算把这些经验记录并且分享出来，这会是一系列文章，这是第一篇。</p>
+
+<h2 id="section-1">性能测试</h2>
+
+<p>性能优化的第一步就是要发现系统的性能瓶颈。这部分一般都会有专门的 QA 去测试，输出报告。性能测试大多都是并发测试，推荐使用 <a href="https://jmeter.apache.org/">Apache JMeter™</a> ，免费并且功能强大，支持多系统平台。至于使用教程，我就不贴了，网上一搜一大把。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/performance-optimization-01.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/rent-a-switch-to-play.html">租 Switch 玩</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2019年04月18日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">租机过程</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">游戏体验</a>    <ul>
+      <li><a href="#section-3" id="markdown-toc-section-3">塞尔达传说 旷野之息</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">分手厨房2（也叫煮胡了2）</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">任天堂明星大乱斗 特别版</a></li>
+      <li><a href="#iii" id="markdown-toc-iii">暗黑破坏神III</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">新超级马里奥兄弟</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-7" id="markdown-toc-section-7">最后</a></li>
+</ul>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20191023170804.png" alt="" /></p>
+
+<h2 id="section">引言</h2>
+
+<p>这里的 Switch 是指任天堂的 <a href="https://www.nintendo.com/switch/">Nintendo Switch</a> 游戏主机，老早就在心里种草了，没买的原因有两个：</p>
+
+<ul>
+  <li>怕买了没时间玩（这个是主要原因）</li>
+  <li>没遇到好好价格</li>
+</ul>
+
+<p>今天正好看到<a href="https://www.ithome.com/0/419/861.htm">《腾讯科技确认代理国行版本 Switch》</a>的新闻，去年过年在淘宝租了一个 Switch 玩了几天，今天趁着这新闻可以拿出来分享一下。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/rent-a-switch-to-play.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/for-yii.html">为了 Yii 的长远发展</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2019年04月17日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#yii" id="markdown-toc-yii">初次接触 Yii</a></li>
+  <li><a href="#getyii" id="markdown-toc-getyii">GetYii</a></li>
+  <li><a href="#yii-" id="markdown-toc-yii-">Yii 小专栏</a></li>
+  <li><a href="#yii--1" id="markdown-toc-yii--1">Yii 槽点</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">最后</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">参考链接</a></li>
+</ul>
+
+<h2 id="section">引言</h2>
+
+<p>3月29号，Yii 官网更新了一篇文章 <a href="https://www.yiiframework.com/news/204/preparing-yii-for-the-long-run">Preparing Yii for the long run</a> ，简单来讲就是核心团队成员想通过捐赠的资金方式，使他们能够在主要工作都放在全职开发 Yii 上，只需要很少或根本没有其他工作。</p>
+
+<p>这篇文章主要是想呼吁正在使用 Yii 开发的你，如果觉得 Yii 框架在你工作中对你很有帮助，而且又有条件的话，那么不妨通过行动来支持一下 Yii 吧，不用太多，每个月1$就够了。捐赠地址 <a href="https://opencollective.com/yiisoft">https://opencollective.com/yiisoft</a>。</p>
+
+<p>好了，到此为止，本篇文章的核心内容算是写完了，下面我主要想聊聊自己与 Yii 的几个小故事，想听的可以往下看。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/for-yii.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/collect-friendship-links.html">征集友情链接</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2019年03月16日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2 id="section">引言</h2>
+
+<p>一直以来我的博客都是没加搞友情链接，前几天突然有一个想法。想搞一个『友情链接』。但是我想搞的这个『友情链接』更像是一个联盟，现在认真写博客的人越来越少了，我想把这些人集合到一起，决定暂时把联盟称之为『联盟链接』。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/collect-friendship-links.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/use-efk.html">使用 Docker 搭建 EFK</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2019年03月14日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#efk" id="markdown-toc-efk">什么是 EFK？</a></li>
+  <li><a href="#section" id="markdown-toc-section">安装</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">测试</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">本机测试</a></li>
+      <li><a href="#docker-" id="markdown-toc-docker-">docker 测试</a></li>
+    </ul>
+  </li>
+  <li><a href="#fluentd--tag" id="markdown-toc-fluentd--tag">为 Fluentd 配置动态 tag</a></li>
+  <li><a href="#section-3" id="markdown-toc-section-3">最后</a></li>
+</ul>
+
+<h2 id="efk">什么是 EFK？</h2>
+
+<p>EFK 分别指 Elasticsearch + Fluentd + Kibana，一般用来做日志系统的。他们的作用分别是：</p>
+
+<ul>
+  <li>Elasticsearch：分布式搜索引擎。具有高可伸缩、高可靠、易管理等特点。可以用于全文检索、结构化检索和分析，并能将这三者结合起来。Elasticsearch 基于 Lucene 开发，现在使用最广的开源搜索引擎之一，Wikipedia 、StackOverflow、Github 等都基于它来构建自己的搜索引擎。</li>
+  <li>Fluentd：一个消息采集，转化，转发工具，目的是提供中心化的日志服务。</li>
+  <li>Kibana：可视化化平台。它能够搜索、展示存储在 Elasticsearch 中索引数据。使用它可以很方便的用图表、表格、地图展示和分析数据。</li>
+</ul>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/use-efk.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/about-octopress-use-%7B%7B%7D%7D.html">Octopress 显示 `{{}}`</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2019年03月06日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>注意：</strong> 本篇文章需要点击<a href="https://github.com/forecho/blog/blob/master/source/_posts/2019-03-06-about-octopress-use-%7B%7B%7D%7D.md">这里</a>才能正常阅读。</p>
+
+<p>Octopress 使用双花括号的时候就会自动把他认为是变量，会『翻译』，但是其实我们并不想要这种效果，怎么办呢？网上找了一圈发现可以用下面这种方式解决</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">{{thing}}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/about-octopress-use-%7B%7B%7D%7D.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/use-postman.html">使用 Postman</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2019年03月01日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">基本使用</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">创建环境变量</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">获取请求的代码</a></li>
+      <li><a href="#url--request--response" id="markdown-toc-url--request--response">查看 URL 请求的 <code>Request</code> 和 <code>Response</code></a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">其他</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-5" id="markdown-toc-section-5">高级玩法</a>    <ul>
+      <li><a href="#pre-request-scripts" id="markdown-toc-pre-request-scripts">Pre-request Scripts</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">内置函数</a></li>
+      <li><a href="#tests" id="markdown-toc-tests">Tests</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-7" id="markdown-toc-section-7">最后</a></li>
+</ul>
+
+<h2 id="section">引言</h2>
+
+<p><a href="http://blog.forecho.com/use-jwt.html">上篇文章</a>我们讲到 API 可能会使用到的 JWT 认证。既然讲到 API 开发就不得不讲到 API 调试以及测试神器 - <a href="https://www.getpostman.com/">Postman</a>。</p>
+
+<h2 id="section-1">基本使用</h2>
+
+<h3 id="section-2">创建环境变量</h3>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424160357.png" alt="创建环境变量" /></p>
+
+<p>根据上面截图的地方，可以找到创建环境变量的设置。设置按钮旁边的『眼睛』按钮可以查看当前使用的环境变量的值。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/use-postman.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/use-jwt.html">使用 JWT</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2019年02月25日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#jwt" id="markdown-toc-jwt">什么是 JWT</a>    <ul>
+      <li><a href="#hearder" id="markdown-toc-hearder">Hearder</a></li>
+      <li><a href="#payload" id="markdown-toc-payload">Payload</a></li>
+      <li><a href="#signature" id="markdown-toc-signature">Signature</a></li>
+    </ul>
+  </li>
+  <li><a href="#jwt-" id="markdown-toc-jwt-">JWT 特性</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">防止被篡改 &amp;&amp; 信息不加密</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">减少数据库的压力</a></li>
+    </ul>
+  </li>
+  <li><a href="#jwt-1" id="markdown-toc-jwt-1">更加安全的 JWT</a></li>
+  <li><a href="#uuid--token" id="markdown-toc-uuid--token">UUID 当 Token</a></li>
+  <li><a href="#section-3" id="markdown-toc-section-3">实战</a></li>
+  <li><a href="#section-4" id="markdown-toc-section-4">总结</a></li>
+  <li><a href="#section-5" id="markdown-toc-section-5">参考链接</a></li>
+</ul>
+
+<h2 id="section">引言</h2>
+
+<p>API 开发一定会涉及到认证问题，本篇文章就是结合我自己工作经验来分享一下我用过的 JWT 认证以及它和普通认证的区别，希望本篇文章对你在开发 API 认证时有用。</p>
+
+<h2 id="jwt">什么是 JWT</h2>
+
+<p><a href="https://jwt.io/">JWT</a> 全名是 JSON Web Tokens，是一个基于 JSON 的开放标准用于创建声明一些声明的访问令牌。JWT 由以下三部分组成：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/use-jwt.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/shennongjia-skiing.html">第七站：神农架滑雪</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2019年02月10日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">提前制定好旅游计划</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">选定日期</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">选定目的地</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">关于出行工具</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">关于住宿</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">关于饮食</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">关于门票</a></li>
+      <li><a href="#section-8" id="markdown-toc-section-8">关于装备</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-9" id="markdown-toc-section-9">行程</a>    <ul>
+      <li><a href="#section-10" id="markdown-toc-section-10">路线</a></li>
+      <li><a href="#section-11" id="markdown-toc-section-11">滑雪</a></li>
+      <li><a href="#section-12" id="markdown-toc-section-12">注意事项</a></li>
+      <li><a href="#section-13" id="markdown-toc-section-13">留下几个遗憾</a></li>
+      <li><a href="#section-14" id="markdown-toc-section-14">吐槽</a></li>
+      <li><a href="#section-15" id="markdown-toc-section-15">费用</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-16" id="markdown-toc-section-16">结束语</a></li>
+</ul>
+
+<p><img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424162101.png" alt="" /></p>
+
+<h2 id="section">引言</h2>
+
+<p>因为年前要在老家办结婚酒席，我请了一个星期假期。办完酒席之后又离过年还有几天时间，不好好利用这几天出去玩一下就不对不起自己请的事假。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/shennongjia-skiing.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/review-of-2018.html">2018年终总结</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2019年02月05日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">引言</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">回顾2018年</a>    <ul>
+      <li><a href="#section-2" id="markdown-toc-section-2">健身</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">工作</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">旅游</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">读书</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">败物</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">博客</a></li>
+      <li><a href="#https3li3com" id="markdown-toc-https3li3com">三立三</a></li>
+      <li><a href="#section-8" id="markdown-toc-section-8">其他</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-9" id="markdown-toc-section-9">展望 2019</a>    <ul>
+      <li><a href="#section-10" id="markdown-toc-section-10">健身</a></li>
+      <li><a href="#section-11" id="markdown-toc-section-11">旅游</a></li>
+      <li><a href="#section-12" id="markdown-toc-section-12">工作</a></li>
+      <li><a href="#section-13" id="markdown-toc-section-13">业余折腾</a></li>
+      <li><a href="#section-14" id="markdown-toc-section-14">读书</a></li>
+      <li><a href="#section-15" id="markdown-toc-section-15">博客</a></li>
+      <li><a href="#https3li3com-1" id="markdown-toc-https3li3com-1">三立三</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-16" id="markdown-toc-section-16">最后</a></li>
+</ul>
+
+<h2 id="section">引言</h2>
+
+<p>今天是大年初一，总算是有点时间来总结2018年的事情了。按照惯例是先回顾一下<a href="https://blog.forecho.com/review-of-2017.html">《2017年终总结》</a>，然后开始总结。</p>
+
+<h2 id="section-1">回顾2018年</h2>
+
+<h3 id="section-2">健身</h3>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/review-of-2018.html">继续阅读 &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/4">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/2">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

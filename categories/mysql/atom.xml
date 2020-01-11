@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mysql | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/mysql/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PHP MySQL 表非主键自增长]]></title>
+    <link href="https://blog.forecho.com/php-mysql-biao-fei-zhu-jian-zi-zeng-chang.html"/>
+    <updated>2014-11-13T12:34:06+00:00</updated>
+    <id>https://blog.forecho.com/php-mysql-biao-fei-zhu-jian-zi-zeng-chang</id>
+    <content type="html"><![CDATA[<h2 id="section">场景</h2>
+<p>一个活动表，一个活动记录表，活动记录表要根据活动 ID，记录每个人的活动分数和时间等用户参与信息，其中活动记录表有一个字段是用户的编号，每个活动的记录都要从1开始自增。现在的问题是怎么实现这个自增的效果？</p>
+
+<h2 id="section-1">表结构如下：</h2>
+<p>主要说一下活动记录表 activity_records 的 主要字段结构：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">字段</th>
+      <th style="text-align: right">注释</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">id</td>
+      <td style="text-align: right">主键自增</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">activity_id</td>
+      <td style="text-align: right">活动ID</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">user_id</td>
+      <td style="text-align: right">用户 ID</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">number</td>
+      <td style="text-align: right">活动记录编号</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-2">解决方案</h2>
+<!--more-->
+
+<h3 id="section-3">方案一（失败）</h3>
+<p>开始我用的是最方便的方法：使用 MySQL 的 count 一下活动记录表某个活动的数量，再+1就等于这个活动活动记录的编号。但是这个方案在并发的时候很容易出现编号重复的 BUG，显然这不是我们想要的。
+因为要执行两条分开的 MySQL 语句（下面的语句只是提供大概思路，具体代码要根据你的项目使用的框架写法不一样）：</p>
+
+<p><code>php
+$count = mysql_query("SELECT COUNT(*) FROM activity_records WHERE `activity_id` = activityId");
+mysql_query("INSERT INTO activity_records (number, user_id, activity_id) VALUES ($count+1, userId, activityId)");
+</code></p>
+
+<p>因为 MySQL 是单进程多线程架构的数据库。</p>
+
+<p>后来有朋友介绍用 MySQL 的<strong>联合唯一索引</strong>的方法把 number 字段和 activityId 字段联合一下。执行语句就可以了：</p>
+
+<p><code>sql
+ALTER TABLE activity_records add unique index(number, activityId);
+</code></p>
+
+<p>结果就是确实能阻止 number 字段的重复出现，但是这种方法是以提示插入数据库不成功并且抛出错误信息为方式的，显然是不是我们想要的。</p>
+
+<h3 id="section-4">方案二（成功）</h3>
+<p>使用 MySQL 的自定义函数功能，使用 MySQL 的存储过程。</p>
+
+<p><strong>（一）配置 MySQL</strong> 允许function的同步：</p>
+
+<p><code>sql
+SET GLOBAL log_bin_trust_function_creators = 1;
+</code></p>
+
+<p><strong>（二）写自定义函数</strong>（这里我写了俩个，其实写成一个也可以）：</p>
+
+<p>&#8220;`sql
+– —————————-
+– Function structure for <code>currval</code>
+– —————————-
+DROP FUNCTION IF EXISTS <code>currval</code>;
+DELIMITER ;;
+CREATE DEFINER=<code>root</code>@<code>%</code> FUNCTION <code>currval</code>(<code>value</code> int(11), <code>userId</code> int(11), <code>activityId</code> int(11)) RETURNS int(11)
+BEGIN
+  INSERT INTO activity_records (number, user_id, activity_id)
+  VALUES(value+1, userId, activityId);
+  RETURN value+1;
+END
+;;
+DELIMITER ;</p>
+
+<hr />
+<p>– Function structure for <code>nextval</code>
+– —————————-
+DROP FUNCTION IF EXISTS <code>nextval</code>;
+DELIMITER ;;
+CREATE DEFINER=<code>root</code>@<code>%</code> FUNCTION <code>nextval</code>(<code>userId</code> int(11), <code>activityId</code> int(11)) RETURNS int(11)
+BEGIN
+  DECLARE value INTEGER;</p>
+
+<p>SET value = 0;</p>
+
+<p>SELECT COUNT(*) INTO value</p>
+
+<p>FROM activity_records WHERE <code>activity_id</code> = activityId;</p>
+
+<p>RETURN currval(value, userId, activityId);
+END
+;;
+DELIMITER ;
+&#8220;`</p>
+
+<p><strong>（三）使用自定义函数</strong></p>
+
+<p><code>php
+mysql_query("SELECT nextval($userId, $activityId)");
+</code></p>
+
+<p><strong>（四）值得注意的地方</strong></p>
+
+<ol>
+  <li>自定义函数过程中变量不要和表字段名一样。</li>
+  <li>其中的 root 为项目中的使用数据库的连接用户。</li>
+</ol>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MySQL 查询今日的数据数量]]></title>
+    <link href="https://blog.forecho.com/MySQL-cha-xun-jin-ri-de-shu-ju-shu-liang.html"/>
+    <updated>2014-04-22T10:39:00+00:00</updated>
+    <id>https://blog.forecho.com/MySQL-cha-xun-jin-ri-de-shu-ju-shu-liang</id>
+    <content type="html"><![CDATA[<p>数据库我们存放的<strong>时间戳</strong>格式。</p>
+
+<p><strong>方法一：</strong></p>
+
+<p>先用PHP计算出时间戳。</p>
+
+<p><code>php
+// 获取今天开始的时间戳
+$today = strtotime(date('Y-m-d 00:00:00', time()));
+</code></p>
+
+<p>这个值就是今天凌晨的时间戳。 然后查询的时间大于这个值就可以了。</p>
+
+<p><strong>方法二：</strong></p>
+
+<p>直接用MySQ语句查询当天的记录。</p>
+
+<p><code>sql
+SELECT * FROM message WHERE DATE_FORMAT(FROM_UNIXTIME(chattime),'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d') ORDER BY id DESC
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[整理一下常用的MySQL语句]]></title>
+    <link href="https://blog.forecho.com/zheng-li-yi-xia-chang-yong-de-MySQL-yu-ju.html"/>
+    <updated>2013-03-07T11:10:00+00:00</updated>
+    <id>https://blog.forecho.com/zheng-li-yi-xia-chang-yong-de-MySQL-yu-ju</id>
+    <content type="html"><![CDATA[<h3 id="inner-join--on-">INNER JOIN … ON用法 查询数据库多个表</h3>
+
+<p><code>sql
+select * from table1 inner join table2 on table1.id=table2.id
+</code></p>
+
+<p>概括为： FROM (((表1 INNER JOIN 表2 ON 表1.字段号=表2.字段号) INNER JOIN 表3 ON 表1.字段号=表3.字段号) INNER JOIN 表4 ON Member.字段号=表4.字段号) INNER JOIN 表X ON Member.字段号=表X.字段号</p>
+
+<p><strong>连接两个数据表的用法：</strong></p>
+
+<p><code>sql
+FROM Member INNER JOIN MemberSort ON Member.MemberSort=MemberSort.MemberSort
+</code></p>
+
+<p>语法格式可以概括为：</p>
+
+<p>FROM 表1 INNER JOIN 表2 ON 表1.字段号=表2.字段号</p>
+
+<p><strong>连接三个数据表的用法：</strong></p>
+
+<p>语法格式可以概括为：</p>
+
+<p>FROM (表1 INNER JOIN 表2 ON 表1.字段号=表2.字段号) INNER JOIN 表3 ON 表1.字段号=表3.字段号  </p>
+
+<h3 id="distinct">DISTINCT</h3>
+
+<p>使用 DISTINCT 关键字可以去掉查询中某个字段的重复记录。 用法：</p>
+
+<p><code>
+SELECT DISTINCT(column) FROM tb_name
+</code></p>
+
+<p>语法格式可以概括为：</p>
+
+<p>SELECT DISTINCT(字段号) FROM 表  </p>
+
+<h3 id="group-by-">GROUP BY 语句</h3>
+
+<p>GROUP BY 语句用于结合合计函数，根据一个或多个列对结果集进行分组。 用法：</p>
+
+<p><code>sql
+SELECT column_name, aggregate_function(column_name) FROM table_name GROUP BY column_name
+</code></p>
+
+]]></content>
+  </entry>
+  
+</feed>

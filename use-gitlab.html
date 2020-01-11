@@ -1,0 +1,771 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>使用 GitLab - forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="安装 GitLab 配置 nginx 配置 Email 备份 恢复备份 汉化 GitLab 配置 CI 总结 安装 GitLab 1
+2
+3
+$ sudo apt-get install curl openssh-server ca-certificates postfix
+$ curl -sS &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/use-gitlab.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">使用 GitLab</h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2017年11月07日
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#gitlab" id="markdown-toc-gitlab">安装 GitLab</a></li>
+  <li><a href="#nginx" id="markdown-toc-nginx">配置 nginx</a></li>
+  <li><a href="#email" id="markdown-toc-email">配置 Email</a></li>
+  <li><a href="#section" id="markdown-toc-section">备份</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">恢复备份</a></li>
+  <li><a href="#section-2" id="markdown-toc-section-2">汉化</a></li>
+  <li><a href="#gitlab--ci" id="markdown-toc-gitlab--ci">GitLab 配置 CI</a></li>
+  <li><a href="#section-3" id="markdown-toc-section-3">总结</a></li>
+</ul>
+
+<h2 id="gitlab">安装 GitLab</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo apt-get install curl openssh-server ca-certificates postfix
+</span><span class="line">$ curl -sS http://packages.gitlab.cc/install/gitlab-ce/script.deb.sh | sudo bash
+</span><span class="line">$ sudo apt-get install gitlab-ce</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>如果需要安装指定版本，最后一步之前去 <a href="https://packages.gitlab.com/gitlab/gitlab-ce">https://packages.gitlab.com/gitlab/gitlab-ce</a> 看一下，找到指定版本，有安装指南。</p>
+
+<p>PS：查看 Linux 当前系统版本用 <code>cat /etc/lsb-release</code> 命令。</p>
+
+<p>修改 GitLab 配置文件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo vim /etc/gitlab/gitlab.rb</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>修改之后的配置如下：</p>
+
+<!--more-->
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">external_url 'http://repo.yd.com';
+</span><span class="line">web_server['external_users'] = ['www-data']
+</span><span class="line">nginx['enable'] = false // 关闭自带nginx</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>修改时区</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo vim /var/opt/gitlab/gitlab-rails/etc/gitlab.yml</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>修改后为： <code>time_zone : 'Beijing'</code></p>
+
+<p>然后重启 GitLab</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo gitlab-ctl reconfigure
+</span><span class="line">$ sudo gitlab-ctl restart</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="nginx">配置 nginx</h2>
+
+<p>GitLab 默认是集成了 nginx，但是我们一般不用他的，上面修改配置的时候，我们已经把 GitLab 集成的 nginx 关闭了。下面我们说一下如何使用 Linux 的 nginx。</p>
+
+<p>添加 gitlab nginx 配置文件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo vim /etc/nginx/conf.d/gitlab.conf</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>添加如下代码：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">upstream gitlab-workhorse {
+</span><span class="line">  server unix:/var/opt/gitlab/gitlab-workhorse/socket;
+</span><span class="line">}
+</span><span class="line">server {
+</span><span class="line">  listen 80;
+</span><span class="line">  # 此处域名可以根据情况修改，其它地方不用改
+</span><span class="line">  server_name repo.yd.com;
+</span><span class="line">  server_tokens off;
+</span><span class="line">  root /opt/gitlab/embedded/service/gitlab-rails/public;
+</span><span class="line">  access_log  /var/log/nginx/gitlab_access.log;
+</span><span class="line">  error_log   /var/log/nginx/gitlab_error.log;
+</span><span class="line">  location / {
+</span><span class="line">    client_max_body_size 0;
+</span><span class="line">    gzip off;
+</span><span class="line">    proxy_read_timeout      300;
+</span><span class="line">    proxy_connect_timeout   300;
+</span><span class="line">    proxy_redirect          off;
+</span><span class="line">    proxy_http_version 1.1;
+</span><span class="line">    proxy_set_header    Host                $http_host;
+</span><span class="line">    proxy_set_header    X-Real-IP           $remote_addr;
+</span><span class="line">    proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+</span><span class="line">    proxy_set_header    X-Forwarded-Proto   $scheme;
+</span><span class="line">    proxy_pass http://gitlab-workhorse;
+</span><span class="line">  }
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>退出 vim， 使用下面命令确认 nginx 配置是否正确：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo nginx -t -c /etc/nginx/nginx.conf</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>重启 nginx</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo service nginx reload</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="email">配置 Email</h2>
+
+<p>修改配置文件</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo vim /etc/gitlab/gitlab.rb</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>依次修改以下几处</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">gitlab_rails['smtp_enable'] = true
+</span><span class="line">gitlab_rails['smtp_address'] = "smtpdm.aliyun.com"
+</span><span class="line">gitlab_rails['smtp_port'] = 25
+</span><span class="line">gitlab_rails['smtp_user_name'] = "gitlab@no-reply.forecho.com"
+</span><span class="line">gitlab_rails['smtp_password'] = "xxxxxx"
+</span><span class="line">gitlab_rails['smtp_domain'] = "no-reply.forecho.com"
+</span><span class="line">gitlab_rails['smtp_authentication'] = "login"
+</span><span class="line">gitlab_rails['smtp_enable_starttls_auto'] = true
+</span><span class="line">gitlab_rails['smtp_tls'] = false
+</span><span class="line"># ...
+</span><span class="line">gitlab_rails['gitlab_email_from'] = "gitlab@no-reply.forecho.com"</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>重启</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo gitlab-ctl reconfigure
+</span><span class="line">$ sudo gitlab-ctl restart</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>测试</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ sudo gitlab-rails console
+</span><span class="line">// 发送测试邮件
+</span><span class="line">$ Notify.test_email('收件人邮箱', '邮件标题', '邮件正文').deliver_now</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="section">备份</h2>
+
+<p>执行备份命令：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>sudo gitlab-rake gitlab:backup:create
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>查看备份：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>sudo ls /var/opt/gitlab/backups
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>可以通过修改 <code>/etc/gitlab/gitlab.rb</code> 的  <code>gitlab_rails['backup_path']</code> 来修改默认存放备份文件的目录。</p>
+
+<p>定时任务实现每天凌晨2点进行一次自动备份:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>sudo su -
+</span><span class="line"><span class="nv">$ </span>crontab -e
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>添加代码 <code>0 2 * * * /opt/gitlab/bin/gitlab-rake gitlab:backup:create</code></p>
+
+<h2 id="section-1">恢复备份</h2>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="c"># 停止相关数据连接服务</span>
+</span><span class="line"><span class="nv">$ </span>sudo gitlab-ctl stop unicorn
+</span><span class="line"><span class="nv">$ </span>sudo gitlab-ctl stop sidekiq
+</span><span class="line"><span class="c"># 从1393513186编号备份中恢复</span>
+</span><span class="line"><span class="nv">$ </span>sudo gitlab-rake gitlab:backup:restore <span class="nv">BACKUP</span><span class="o">=</span>1393513186
+</span><span class="line"><span class="c"># 启动Gitlab</span>
+</span><span class="line"><span class="nv">$ </span>sudo gitlab-ctl start
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>备份相关参考文档<a href="https://segmentfault.com/a/1190000002439923">《使用Gitlab一键安装包后的日常备份恢复与迁移》</a>。</p>
+
+<h2 id="section-2">汉化</h2>
+
+<p>汉化参考文档<a href="https://gitlab.com/xhang/gitlab/wikis/home#omnibus-%E5%AE%89%E8%A3%85%E6%B1%89%E5%8C%96">《Omnibus 安装汉化》</a>，自己实践的命令如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span><span class="nb">cd</span> ~
+</span><span class="line"><span class="nv">$ </span>git clone https://gitlab.com/xhang/gitlab.git
+</span><span class="line"><span class="nv">$ gitlab_version</span><span class="o">=</span><span class="k">$(</span>sudo cat /opt/gitlab/embedded/service/gitlab-rails/VERSION<span class="k">)</span>
+</span><span class="line"><span class="nv">$ </span><span class="nb">cd </span>gitlab <span class="o">&amp;&amp;</span> git diff v<span class="k">${</span><span class="nv">gitlab_version</span><span class="k">}</span> v<span class="k">${</span><span class="nv">gitlab_version</span><span class="k">}</span>-zh &gt; ../<span class="k">${</span><span class="nv">gitlab_version</span><span class="k">}</span>-zh.diff
+</span><span class="line"><span class="nv">$ </span>sudo gitlab-ctl stop
+</span><span class="line"><span class="nv">$ </span>sudo patch -d /opt/gitlab/embedded/service/gitlab-rails -p1 &lt; ../<span class="k">${</span><span class="nv">gitlab_version</span><span class="k">}</span>-zh.diff
+</span><span class="line"><span class="nv">$ </span>sudo gitlab-ctl start
+</span><span class="line"><span class="nv">$ </span>sudo gitlab-ctl reconfigure
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="gitlab--ci">GitLab 配置 CI</h2>
+
+<p>本来打算安装完 GitLab 之后再安装个 Jenkins 继续集成的，但是发现现在 GitLab 自带 CI 了，虽然没有 Jenkins 强大，但是够我们用。</p>
+
+<p>解决安装源的问题</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>sudo curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh <span class="p">|</span> sudo bash
+</span><span class="line"><span class="nv">$ </span>sudo vim /etc/apt/sources.list.d/runner_gitlab-ci-multi-runner.list
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>然后把源换成 https://mirrors.tuna.tsinghua.edu.cn/gitlab-ci-multi-runner/ubuntu/ 清华大学的，然后更新和安装：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install gitlab-ci-multi-runner
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>注册</strong></p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>sudo gitlab-ci-multi-runner register
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>url 要添加你自己搭建的 GitLab 域名 + /ci</p>
+
+<p>token 为 GitLab 管理员登陆你自己搭建的 GitLab 之后去 xxx/admin/runners 网址找 token</p>
+
+<p>Please enter the executor: docker-ssh, ssh, docker+machine, kubernetes, docker, parallels, shell, virtualbox, docker-ssh+machine 输入 <code>shell</code></p>
+
+<p>其他的随便填，后期可以在页面上改。</p>
+
+<p>开启和关闭命令</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>sudo gitlab-ci-multi-runner start
+</span><span class="line"><span class="nv">$ </span>sudo gitlab-ci-multi-runner stop
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p><strong>如何使用？</strong></p>
+
+<p>这个是重点，在你项目的根目录下新建一个 <code>.gitlab-ci.yml</code> 文件。下面是我们使用 angular 实现自动编译的示例：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line">image: node:latest
+</span><span class="line">cache:
+</span><span class="line">  paths:
+</span><span class="line">    - node_modules/
+</span><span class="line">
+</span><span class="line">deploy_dev:
+</span><span class="line">  stage: deploy
+</span><span class="line">  environment: Dev
+</span><span class="line">  only:
+</span><span class="line">    - dev
+</span><span class="line">  script:
+</span><span class="line">    - whoami
+</span><span class="line">    - rm ./package-lock.json
+</span><span class="line">    - npm install
+</span><span class="line">    -  ./node_modules/@angular/cli/bin/ng build --prod --build-optimizer
+</span><span class="line">    - ls
+</span><span class="line">    - mv dist company_dev
+</span><span class="line">    - cp -R company_dev /home/www
+</span><span class="line">
+</span><span class="line">deploy_test:
+</span><span class="line">  stage: deploy
+</span><span class="line">  environment: Test
+</span><span class="line">  only:
+</span><span class="line">    - <span class="nb">test</span>
+</span><span class="line"><span class="nb">  </span>script:
+</span><span class="line">    - whoami
+</span><span class="line">    - rm ./package-lock.json
+</span><span class="line">    - npm install
+</span><span class="line">    - ./node_modules/@angular/cli/bin/ng build --prod --env<span class="o">=</span><span class="nb">test</span> --build-optimizer
+</span><span class="line">    - ls
+</span><span class="line">    - mv dist company_test
+</span><span class="line">    - cp -R company_test /home/www
+</span><span class="line">    - <span class="nb">echo</span> <span class="s2">&quot;发布到测试环境&quot;</span>
+</span><span class="line">    - rsync -avuz -e <span class="s1">&#39;ssh -i /home/www/deploy_rsa&#39;</span> /home/www/company_test root@192.168.1.48:/home/www
+</span><span class="line">    - <span class="nb">echo</span> <span class="s2">&quot;修改远程目录&quot;</span>
+</span><span class="line">    - ssh -i /home/www/deploy_rsa root@192.168.1.48 <span class="s2">&quot;rm -rf /home/www/company &amp;&amp; mv /home/www/company_test /home/www/company&quot;</span>
+</span><span class="line">    - curl --request POST --url <span class="s1">&#39;https://oapi.dingtalk.com/robot/send?access_token=xxxxx&#39;</span> --header <span class="s1">&#39;content-type:application/json&#39;</span> --data <span class="s1">&#39;{&quot;msgtype&quot;:&quot;text&quot;,&quot;text&quot;:{&quot;content&quot;:&quot;测试环境已经更新&quot;},&quot;at&quot;:{&quot;atMobiles&quot;:[&quot;xxxx&quot;,&quot;xxx&quot;],&quot;isAtAll&quot;:false}}&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>简单解释一下：</p>
+
+<ul>
+  <li>由于之前注册 GitLab CI 的时候选的是 shell，所以运行的时候用的是本台机器的环境，意味着上面的代码你要提前安装好 nodejs 环境。</li>
+  <li>GitLab CI 运行的时候使用的是 <code>gitlab-runner</code> 用户操作，你如果想实现 <code>cp</code> 等一些命令，可能需要把 <code>gitlab-runner</code> 添加到有权限的组中。先切换到 root 用户，再切换到  <code>gitlab-runner</code> 用户：</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="sh"><span class="line"><span class="nv">$ </span>sudo su -
+</span><span class="line"><span class="nv">$ </span>su gitlab-runner
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<ul>
+  <li>上面的配置实现的是 <code>dev</code> 分支推送代码之后会执行 <code>deploy_dev</code> 里面的操作。 <code>test</code> 分支推送代码之后会执行 <code>deploy_test</code> 里面的操作。</li>
+  <li>最后一行脚本是结合钉钉的<a href="https://open-doc.dingtalk.com/docs/doc.htm?treeId=257&amp;articleId=105735&amp;docType=1">群机器人</a>做一个回调通知，告诉大家测试环境代码已经更新，非常方便。</li>
+</ul>
+
+<h2 id="section-3">总结</h2>
+
+<p>GitLab 已经是一个互联网企业的标准配置了，免费，功能强大。这篇文章主要是记录自己在公司搭建 GitLab 的过程，包括基本安装，nginx 的配置，配置邮件服务以及 GitLab CI 的使用。</p>
+</div>
+
+
+  
+    <!-- 添加捐赠图标 -->
+    <div class ="post-donate">
+        <div id="donate_board" class="donate_bar">
+            <a id="btn_donate" href="javascript:;" title="Donate 打赏"></a>
+            <br>
+            <span class="donate_txt">如果这篇文章对你有帮助，并且你想小额捐款支持一下的话。</span>
+            <br>
+        </div>  
+  
+        <div id="donate_guide" class="donate_bar hidden">
+            <!-- 支付宝打赏图案 -->
+            <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153431.png" class="m10" title="支付宝打赏" >
+            <!-- 微信打赏图案 -->
+            <img src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153510.png" class="m10" title="微信打赏">
+        </div>
+  
+        <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+        </script>
+    </div>
+<!-- 添加捐赠图标 -->
+  
+  
+    
+        
+            
+            
+        
+
+    
+
+
+
+
+        
+    
+
+
+
+
+
+<div class="cc-license">
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/deed.zh">
+        <img alt="知识共享署名-非商业性使用 4.0 国际许可协议" src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153253.png" />
+    </a><br />
+    原文地址：<a href="https://blog.forecho.com/use-gitlab.html">https://blog.forecho.com/use-gitlab.html</a><br />
+    版权声明：本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/deed.zh">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。  
+</div>
+<div style="text-align: center; margin-top: 20px;">
+    <img alt="扫码关注我的个人公众号" src="https://blog-1251237404.cos.ap-guangzhou.myqcloud.com/20190424153337.png"/>   
+</div>
+
+  
+  <footer>
+    <p class="meta">
+      
+  
+
+
+<span id="busuanzi_container_page_pv">
+  <span id="busuanzi_value_page_pv"></span>次访问
+</span>
+<span class="byline author vcard">Posted by <span class="fn">forecho</span></span>
+
+      
+ 
+ 
+ 
+
+  2017年11月07日
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/gitlab/'>gitlab</a>, <a class='category' href='/categories/ji-zhu-fen-xiang/'>技术分享</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/readeep-006.html" title="Previous Post: 【深度阅读006】《德鲁克领导力·图解版》">&laquo; 【深度阅读006】《德鲁克领导力·图解版》</a>
+      
+      
+        <a class="basic-alignment right" href="/share-YouTube-channels-that-I-often-watch.html" title="Next Post: 分享我经常看的 YouTube 的频道">分享我经常看的 YouTube 的频道 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

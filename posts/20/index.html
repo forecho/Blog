@@ -1,0 +1,829 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="HTML代码如下： &lt;select name="category_f" id="category_f" class="valid"&gt; &lt;option value="1"&gt;美食&lt;/option&gt; &lt;option value="2"&gt;休闲娱乐&lt;/ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/posts/20/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/PHP-jQuery-JSON-er-ji-lian-dong.html">PHP jQuery JSON 二级联动</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年12月12日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>HTML代码如下：</p>
+
+<pre><code>&lt;select name="category_f" id="category_f" class="valid"&gt;
+    &lt;option value="1"&gt;美食&lt;/option&gt;
+    &lt;option value="2"&gt;休闲娱乐&lt;/option&gt;
+    &lt;option value="3"&gt;其他&lt;/option&gt;
+&lt;/select&gt;
+&lt;select name="category_s" id="category_s" class="valid"&gt;
+	&lt;option value="11"&gt;本帮江浙菜&lt;/option&gt;
+	&lt;option value="12"&gt;川菜&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+<p>JavaScript代码如下：</p>
+
+<pre><code>&lt;script type="text/javascript"&gt;		
+    $("#category_f").click(function() {
+        var html = '';
+    	$.ajax({
+    		url: '/getcategory', //PHP方法
+    		type: 'POST',
+            dataType: 'json',
+    		data: {f: $(this).val()},
+            success:function(msg){
+                $.each(msg,function(key,val){
+                    html += '&lt;option value="' + key + '"&gt;' + val + '&lt;/option&gt;';
+                });
+                $("#category_s").html(html);
+            }
+    	})
+    });
+&lt;/script&gt;
+</code></pre>
+
+<p> PHP action处理页面：</p>
+
+<pre><code>public function getcategory()
+{
+	$json[1]  = '{"11":"本帮江浙菜","12":"川菜"}';
+	$json[2]  = '{"30":"密室","31":"咖啡厅","32":"酒吧"}';
+	$json[3] = '{"136":"其他"}';
+
+	exit($json[$_POST['f']]);
+}
+</code></pre>
+
+<p>上面代码已经可以用了，<strong>但是修改页面如何去实现呢？所以我要重构上面的代码。</strong> JavaScript代码被改成这样了(重在理解代码，我这个代码有可能在你的场景中不适用):</p>
+
+<pre><code>&lt;script type="text/javascript"&gt;
+    // 自动加载 用于修改时
+    $(document).ready(function() {
+        ajaxSelect(&lt;?php echo ($data) ? $data['category_f'] : 1 ; ?&gt;, &lt;?php echo ($data) ? $data['category_s'] : 11 ; ?&gt;);
+    });
+    // 手动修改 二级联动
+    $("#category_f").click(function() {
+        ajaxSelect($(this).val(), 11);
+    });
+    // 二级联动
+    function ajaxSelect (argument,id) {
+        var html = '';
+        $.ajax({
+            url: '/getcategory',  //PHP方法
+            type: 'POST',
+            dataType: 'json',
+            data: {f: argument},
+            success:function(msg){
+                $.each(msg,function(key,val){
+                    if(id == key) {
+                        html += '&lt;option value="' + key + '" selected&gt;' + val + '&lt;/option&gt;';
+                    }else{
+                        html += '&lt;option value="' + key + '"&gt;' + val + '&lt;/option&gt;';
+                    }
+                });
+                $("#category_s").html(html);
+            }
+        })
+    }
+&lt;/script&gt;
+</code></pre>
+
+<p>HTML简化后如下：</p>
+
+<pre><code>&lt;select name="data[category_f]" id="category_f" class="valid"&gt;
+     &lt;option value="1" &lt;?php if($data &amp;&amp; $data["category_f"]==1) echo "selected"; ?&gt;&gt;美食&lt;/option&gt;
+     &lt;option value="2" &lt;?php if($data &amp;&amp; $data["category_f"]==2) echo "selected"; ?&gt;&gt;休闲娱乐&lt;/option&gt;
+     &lt;option value="3" &lt;?php if($data &amp;&amp; $data["category_f"]==3) echo "selected"; ?&gt;&gt;其他&lt;/option&gt;
+&lt;/select&gt;
+&lt;select name="data[category_s]" id="category_s" class="valid"&gt;&lt;/select&gt;
+</code></pre>
+
+<p>PHP action代码不变。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/jian-dan-jie-shao-Rails-mo-ren-wen-jian-jie-gou.html">简单介绍 Rails 默认文件结构</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年12月09日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>文件/文件夹 说明</p>
+
+<p><code>app/</code>
+程序的核心文件，包含模型、视图、控制器和帮助方法</p>
+
+<p><code>app/assets</code>
+程序的资源文件，如 CSS、JavaScript 和图片</p>
+
+<p><code>bin/</code>
+可执行文件</p>
+
+<p><code>config/</code>
+程序的设置</p>
+
+<p><code>db/</code>
+数据库文件</p>
+
+<p><code>doc/</code>
+程序的文档</p>
+
+<p><code>lib/</code>
+代码库文件</p>
+
+<p><code>lib/assets</code>
+代码库包含的资源文件，如 CSS、JavaScript 和 图片</p>
+
+<p><code>log/</code>
+程序的日志文件</p>
+
+<p><code>public/</code>
+公共（例如浏览器）可访问的数据，如出错页面</p>
+
+<p><code>script/rails</code>
+生成代码、打开终端会话或开启本地服务器的脚本</p>
+
+<p><code>test/</code>
+程序的测试文件（在 <a href="http://railstutorial-china.org/chapter3.html#section-3-2-1">3.1.2 节</a> 中换用 <code>spec/</code>）</p>
+
+<p><code>tmp/</code>
+临时文件</p>
+
+<p><code>vendor/</code>
+第三方代码，如插件和 gem</p>
+
+<p><code>vendor/assets</code>
+第三方代码包含的资源文件，如 CSS、JavaScript 和图片</p>
+
+<p><code>README.rdoc</code>
+程序简介</p>
+
+<p><code>Rakefile</code>
+<code>rake</code> 命令包含的任务</p>
+
+<p><code>Gemfile</code>
+该程序所需的 gem</p>
+
+<p><code>Gemfile.lock</code>
+一个 gem 的列表，确保本程序的复制版使用相同版本的 gem</p>
+
+<p><code>config.ru</code>
+<a href="http://rack.rubyforge.org/doc/">Rack 中间件</a>的配置文件</p>
+
+<p><code>.gitignore</code>
+git 忽略的文件类型
+来源：<a href="http://railstutorial-china.org/chapter1.html">http://railstutorial-china.org/chapter1.html</a> 参考资料：<a href="http://ruby-china.org/topics/2432">http://ruby-china.org/topics/2432</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/Git-fen-zhi-de-ying-yong.html">Git 分支的应用</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年12月08日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>创建分支</strong>( modify-README 为分支名)：</p>
+
+<pre><code>$ git checkout -b modify-README
+</code></pre>
+
+<p>注：创建完之后默认切换到这个分区。 <strong>列出所有的分支：</strong></p>
+
+<pre><code>$ git branch
+</code></pre>
+
+<p><strong> 合并到主分区：</strong></p>
+
+<pre><code>$ git checkout master
+$ git merge modify-README
+</code></pre>
+
+<p>注：先切换到主分区，再合并。 <strong>删除分区：</strong></p>
+
+<pre><code>$ git branch -d modify-README
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/zen-yang-ba-ben-di-xiang-mu-shang-chuan-dao-GitHub-shang-qu.html">怎样把本地项目上传到 GitHub 上去？</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年12月08日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>先进入项目根文件夹</p>
+
+<pre><code>$ cd demo
+$ git init
+$ git add .
+$ git commit -m "新建项目"
+</code></pre>
+
+<p>到这一步时，你要去你的 GitHub 上新建一个项目，命名为 demo （注意不要选择第三个 - 使用README 文件初始化仓库）</p>
+
+<pre><code>$ git remote add origin git@github.com:你GitHub的用户名/demo.git
+$ git push -u origin master
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/PHP-yi-ci-xie-ru-shang-wan-tiao-shu-ju-dao-shu-ju-ku.html">PHP一次写入上万条数据到数据库</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年12月05日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>场景：商家生成1W条以上的优惠券，随机生成的优惠券写入数据库，也就是1W多条。 按平常的写法我们肯定是这样写的：</p>
+
+<pre><code>for ($i=0; $i &lt;10000 ; $i++) { 
+	SQL语句
+	执行写入数据库操作
+}
+</code></pre>
+
+<p>但是这样效率太低，如果是1W条数据库就需要操作1W次数据库，这个成本是很大的，一般情况下，这样就是报错的，说需要执行的时间太长了。 解决办法就是，把上面代码改成如下：</p>
+
+<pre><code>for ($i=0; $i &lt;10000 ; $i++) { 
+	SQL语句
+}
+执行写入数据库操作
+</code></pre>
+
+<p>这样只需要执行一次写入数据库操作就行了，效率立刻体现出来了。 CakePHP自带有一个方法是saveAll就是用来做这件事的，使用方法如下：</p>
+
+<pre><code>for ($i=0; $i &lt;10000 ; $i++) { 
+	$data[] = array('字段名' =&gt; '值'),array('字段名' =&gt; '值');
+}
+$this-&gt;ModelData-&gt;saveAll($data);
+</code></pre>
+
+<p>  参考链接：<a href="http://www.tiandiyoyo.com/2013/08/php-insert-large-records-to-mysql/">PHP技巧：写入大量数据到mysql</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/bu-xu-lian-xiang-du-shu-bi-ji.html">《不许联想》读书笔记</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年11月26日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>2013-11-25 19:56:40 有了博客，文字将变得一钱不值；因为博客，文字美学将大打折扣，作家和评论家的门槛会变得低三下四。实际上，什么东西一旦在网络上找到位置，就变成了全民运动，这是和传统传播媒介不同的地方。传统媒介体现出的是话语权，所以，话语权是传统媒介的生命；但是网络是对话语权的颠覆，每个人都有话语权，所以就没了话语权。 2013-11-25 20:00:36 法国作家安德烈·马尔罗说过，一个人的真正面目，首先是他隐藏起来的那部分。人总是想探究到他感兴趣的人的真实面目，而探究的目的，有时也仅仅是出于好奇。 2013-11-25 20:01:52 人们为什么需要八卦？归根结底还是寻求一种放松和消遣。在媒体不发达的年代，人们就可以通过口头来传播“民间文学”，在媒体兴盛的今天，传播八卦更是得天独厚。 2013-11-25 20:08:36 倒退20年，中国人知道列侬被枪杀的消息后肯定大惑不解，为什么一个非常热爱自己偶像的人会亲自杀掉偶像？大概资本主义真的堕落到令人发指的地步了。按照查普曼当年的供词，原因是，“我不想让别人跟我一起分享我对他的崇拜”。如今，咱们越来越能理解查普曼的行为了，因为他太喜欢列侬了，喜欢一个人，做出什么荒唐的举动都不为过，哪怕是失去理智。 2013-11-25 20:06:42 《阿甘正传》的导演罗伯特·泽梅基斯曾经导演过一部电影《一亲芳泽》，描写了当年“披头士”乐队去美国演出时歌迷疯狂的景象，他用极其荒诞而又现实的手法把粉丝的种种心态展现得淋漓尽致。 2013-11-25 20:19:45 艺术的魅力会让你产生一种说不出的快感，假如用弗洛伊德的观点来解释，那就是，艺术的魅力源于性欲，艺术的形成实际是潜意识中性欲的冲动。 2013-11-25 20:54:49 其实每个人周围都有很多朋友，朋友除了用来羞辱以外，还是学习的对象，如果把朋友当成了炫耀，就什么也学不到了。我虽不爱念书，但善于从朋友身上学习，这种免费教学何乐而不为呢。 2013-11-25 21:08:53 追求平衡、中庸、和谐的文化，是很难出现幽默特色文化的。没有荒诞，就没有幽默。 2013-11-25 21:10:07 听一些人说话，是一种享受，英国作曲家弗雷德里克·德利厄斯在回答“为什么去创作”这个问题时说：“因为我不会游泳。”看似答非所问，但幽默效果就出来了。 2013-11-25 21:16:25 我说：“咱们能不能在这呆一会儿？”她说：“为什么？”我说：“我从小就爱看火车，看着火车从旁边驶过，有种心跟随火车驶向远方的感觉，那种感觉是很敞亮、很自由的。”这样，我们停在铁道旁边，等待火车经过。我两头望去，根本没有火车的影子。于是我又说：“我们打个赌吧。”她说：“怎么打赌？”我说：“我们猜火车先从哪个方向驶来，如果我赢了，你要让我亲你一下，如果我输了，你怎么惩罚都行。”她说：“好。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/qiao-bu-si-yi-shi-de-fang-tan-zhong-ying-wen-yi-gao-_V1-2-jing-xiao-ban.html">《乔布斯：遗失的访谈》中英文译稿_V1.2精校版</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年11月24日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>七印部落 译制 史蒂夫 乔布斯：遗失的访谈 Steve Jobs: The lost interview [00:27] 我是Bob Cringely I’m Bob Cringely, 16年前（1995年）我制作《书呆子的胜利》时采访了乔布斯 16 years ago when I was making my television series Triumph of the Nerds, I interviewed Steve Jobs. 1985年乔布斯被他自己引荐的CEO John Sculley排挤出苹果 That was in 1995, 10 years earlier Steve had left Apple, following a bruising struggle with John Sculley, the CEO he had brought into the company. 接受釆访时，乔布斯正在经营他创办的NeXT公司 At the time of our interview, Steve was running NeXT, the niche computer company he founded after leaving Apple. 18个月后苹果收购NeXT，半年后乔布斯重新掌管苹果 Little did we know was within 18 months he would sell NeXT to Apple, and 6 month later he’d be running the place. [00:59] 当年的节目只用了一小段采访 The way things work in television we use only a part of that interview in the series. 九十年代末采访母带从伦敦运往美国途中遗失 And for years we thought the interview was lost for forever 多年来我们一直以为再也看不到完整的采访 because the master tape were missing while being shipped from London to US in the 1990s. 然而几天前导演Paul Sen在车库里发现了一份VHS拷贝 Then just a few days ago, series director Paul Sen found a VHS copy of that interview in his garage. 乔布斯生前很少接受电视采访，如此精彩的访谈更是罕见 There are very few TV interviews with Steve Jobs and almost no good ones. 它记录了乔布斯的坦率，非凡的魅力和独特的视野 They rarely show the charisma, candor and vision that this interview does. 为了向这位奇人致敬，我们几乎一刀未剪 And so to honor an amazing man, here’s that interview in its entirety, 大部分内容是首次公布于众 Most of these has never been seen before. [01:40] Bob: 你是怎么与个人计算机结缘的？ Bob: So, how did you get involved, uh, with personal computers? Steve: 我第一次见到计算机是10或11岁 Steve: Well, I ran into my first computer when I was about 10 or 11. 很难回忆当年的情景，我快成老古董了 And it’s hard to remember back then but I’m, I’m an old fossil now, I’m an old fossil… 大约30多年前，见过电脑的人不多 So when I was 10 or 11, that was about 30 years ago and no one had ever seen a computer. 即使见到，也是在电影里 To the extent they’d seen them, they’d seen them in the movies. 那时电影里的计算机都是装有开盘机的大柜子，闪闪发光 And they were really big boxes with whirring. For some reason they fixated it on the tape drives, as being the icon of what the computer was, or flashing light somehow. 真正了解计算机功能和原理的人不多 And, so nobody had ever seen one. They were mysterious, very powerful things that did something in the background. 有机会接触计算机的人更是寥寥无几 And so to see one and actually get to use one was a real privilege back, 我有幸在NASA Ames研究中心见到一台 and I got into NASA Ames Research Center and I got to use a time sharing terminal. 那还不是一台完整的计算机，只是一台分时共享的终端机 And so I didn’t actually see a computer but I saw a time sharing terminal. 设备非常简陋，连显示器都没有 And in those days it’s hard to remember how primitive it was. There were no such things as a computer with a graphics video display. 只是一台带键盘的电传打印机 It was literally a printer. It was a teletype printer with keyboard on it, 你在键盘上输入指令耐心等待，然后它会哒哒哒地输出结果 so you would keyboard this commands in and you would wait for a while, and then things would go “tatatatatata”, and it would tell you something else. [02:58] 即便如此这玩意也太奇妙了，尤其是对十岁的男孩而言 But even with that, it was still remarkable, especially for a 10-year-old, 你可以用Basic语言或Fortran语言编写程序 that you could write a program in BASIC, let’s say, or FORTRAN. 机器接受并执行你的设想，然后把结果告诉你 And actually this machine would sort of take your idea, and it would sort of execute your idea and give you back some results. 如果结果和设想的一样，说明程序见效了，这太让人激动了 And if they were the results you predicted, your program really work, and it was incredibly thrilling experience. 我完全给计算机迷住了 So I became very err…. captivated by computer. 当然计算机对我而言仍然有些神秘 And a computer to me was still a little mysterious 因为真正的计算机藏在电缆的另一端，而我从未见过 cause it’s at the other end of wire, I had never really seen the actual computer itself. 打那以后我总想着计算机 I think I got tours of computers after that, saw the insides, 后来我参加了惠普的兴趣小组 and then I was part of this group at Hewlett-Packard 12岁时我打电话给Bill Hewlett，他当时住在惠普 when I was 12, I called up Bill Hewlett who lived in Hewlett-Packard at the time. 当时所有电话号码都印在号码簿里，又暴露了我的年龄 And again this dates me… But there was no such thing as unlisted telephone number then, 只要翻电话号码簿，就能查到他的电话 so I can just look into the book and look his name up. [04:01] 他接了电话，我说我叫Steve Jobs，你不认识我 And he answered the phone, and I said Hi, My name is Steve Jobs. You don’t know me, 我12岁，打算做频率计数器，需要些零件 but I’m 12 years old, and I’m building a frequency counter, and I’d like some spare parts. 我们聊了大概20分钟 and so he talked to me for about 20 minutes, 我永远记得他不但给了零件，还邀请我夏天去惠普打工 I will never forget as long as I live, he gave me the parts, but he also gave me a job working in Hewlett-Packard that summer. 我才12岁，这件事对我产生了不可思议的影响 and I was 12 years old. and that really made a remarkable influence on me, 惠普是我见过的第一家公司 Hewlett-Packard was really the only company I’d ever seen in my life at that age. 它让我懂得了什么是公司，如何善待员工 And it forms my view of what a company was and how well they treated their employees. [04:40] 那时还没有胆固醇偏高一说 You know, at that time, I mean they didn’t know about cholesterol back then. 每天上午十点公司拖来满满一卡车的甜面圈和咖啡 And then at that time they used to bring a big car full of donuts and coffee out at 10 o’clock every morning, 大家停下工作喝杯咖啡，品尝甜面圈 and everyone take a coffee and have a donut break, just little things like that . 很明显惠普明白公司真正的价值在于员工 It was clear that the company recognized its true values was its employees. 之后我每周二晚都去惠普的Palo Alto实验室 So anyway, things led to things with HP and I started going up to their Palo Alto Research Labs every Tuesday night, 与一些研究人员见面 with a small group of people to meet some of the researchers and staffs. 我见到了第一台台式计算机 HP 9100 and I saw the first desktop computer ever made which was the HP 9100. 大概有行李箱那么大，装着小小的CRT显示器 It was that as big as a suitcase but it actually had a small Cathode Ray Tube (CRT) display in it. 它是一台可以独立工作的一体机，我很喜欢</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/%E3%80%8CGetting-Real-37signals%C3%80du-shu-bi-ji.html">「Getting Real - 37signals」读书笔记</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年11月23日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>2013-11-06 08:29:03 做一个比预计要小巧些的好东西比做一个庞大平庸而又漏洞百出的东西要现实的多，因为你要象魔术师一样巧妙的照顾到时间，预算和产品内容的方方面面。变魔术就交给Houdini（魔术大师）。你所做的可是在运作一个真正的事业，在推出一个真实的产品。 2013-11-06 22:52:22 你能从敌人那里得到的一个好处就是：一个非常清晰的营销理念。人们很容易被冲突对立挑动。并且通过把一个产品和另一个作比较能更多地了解这个产品。 选中了这么一个敌人，你给人们灌输了他们想要知道的对立的信息。这样一来，他们不仅能更好更快地认识你的产品，也会站到你的这边。这是一个吸引注意力和引 发产品倾向性的一个万无一失的方法。 2013-11-06 22:54:51 营销人员 (和几乎所有人) 都被培训要跟从领导者。自然的本能都是在思考竞争对手做对了什么，然后你在那个基础上做得更超过。 — 如果你的对手在竞价你就一定要比他更便宜，如果他在竞速你就要比他做得更快。这么一来出现的问题是万一消费者听信了别人的故事（或谎言），你再要把他说转 回来就会象要说服他承认他是错的一样。没人喜欢承认他是错的。 2013-11-06 22:58:12 在设计这个高度主观，具争议性且难以界定的领域里，没有什么是能做到比表达激情更直接清晰的了。 2013-11-07 08:05:41 更小的质量使你快速的改变方向。你可以随机应变和演进。你可以集中于好的主意，摈弃坏的。你可以倾听并尊重你的客户。你可以集成新技术现在而不是以后。你驾驶的是蒸汽船而不是飞机货舱。为这个事实骄傲吧。 2013-11-07 08:08:03 改变是你最好的朋友，改变的代价越大，你越不可能做出改变。如果你的竞争对手可以比你更快的改变，你会处于一个很大的劣势。如果改变变得过于昂贵，你已经死了。 2013-11-07 08:09:31 很短时间内改变的能力是小团队与生俱来而大团队永远不会有的。这是大家伙嫉妒小家伙的地方。让巨大组织里的大团队花费数周才能改变的，对于小团队可能只需要1天。这个优势是无价的。低廉和迅速的改变是小团队的秘密武器。 2013-11-07 08:11:07 简单的规则，就像鸟群的模拟一样，导致复杂的行为。复杂的规则，就像许多国家的税法一样，导致愚蠢的行为。 2013-11-07 08:15:27 对于产品的1.0版本，请从只有三个人开始。三是一个魔力数字，提供足够人力的同时允许你保持流畅和敏捷。从一个开发者，一个设计者，和一个清道夫（一个可以在开发和设计中随意切换的人）开始。 2013-11-07 08:15:15 如果你不能够用三个人建造第一个版本，那么你或者需要更改人数或者需要缩减初始的版本。记住，保持你的第一个版本小而紧凑是没有问题的。你会快速的发现你的想法是否快速的进展，如果是，你会拥有一个清洁的简单的基础可以继续建造。 2013-11-07 08:17:01 团队的效率和团队人数的平方成反比。我开始觉得三个人对于1.0产品发布 是最优的 2013-11-07 08:17:13 …从减少你计划添加到团队的人数开始，接着减少更多。 2013-11-07 08:21:52 约束经常是伪装的优势。 2013-11-10 08:14:35 小公司享受着更少的形式主义，更少的官僚主义，和更多的自由。小公司天生和顾客更亲近。 那意味着他们可以以一种更加直接和人性化的方式和顾客沟通。如果你是小公司，你可以用熟悉的语言而不是晦涩的行话。你的网站和产品可以用一种人类的声音，而不是操着公司的腔调。小型意味着你可以和你的顾客在一起谈话，而不是居高临下的方式。 2013-11-10 08:15:15 小公司在内部的交流生同样有优势。你可以摈弃形式主义。所有事情都不再需要繁杂的流程和多重的签字确认。参与流程的人都可以开放和诚实的发言。这个没有被束缚的思想流是保持小型的巨大优势。 2013-11-10 08:23:55 过早专注于细节就会导致这些结果。要做完美主义者有的是时间。但不是现在。 2013-11-10 08:24:44 细节是在你使用的过程中才会显露出来的。只有在使用中你才能看到什么需要进一步关注。在使用中你才会感到缺了些什么。常常走路绊倒脚你才会清楚地上什么坑洼是需要填补的。那些是当你被迫要留意的时候才需要的细节，不是一想到细节就去搞定它。 2013-11-10 08:26:03 当问题成为问题的时候才去担心 不要把时间浪费在还未成为问题的问题 你真的的需要考虑当用户到达10万以上的时候会出现的问题吗？它可能已经是两年以后的事了。 2013-11-10 08:27:35 别整天操心还没成型的麻烦。别过度开发一个产品。到适当的时候再添加硬件和系统软件。如果进度推迟了一两个星期，别担心，还没到世界末日。只要诚实: 解释给你的客户听，说你们正经历着成长的烦恼。他们也许不会因此无比感动，但他们起码会赞同你的坦诚。 2013-11-10 08:29:07 顾客并不总是对的。现实中你要能分辨出谁是你该针对的顾客，谁是你该放弃的。庆幸的是，互联网使得发掘有共识的顾客的过程变得无比容易。 2013-11-10 08:29:18 如果你想讨好每个人那么你什么人也讨好不了。 2013-11-12 08:15:37 开始阶段，要把建造强有力的核心产品做为首要任务，不要过分执迷于需不需要服务器组和是否有能力调整规模应变。 先把一个伟大的产品推出，然后才去担心它无比成功了以后该怎么办的问题。 否则你可能只是把精力，时间和金钱花在一个永远不会发生的预期上。 2013-11-12 08:21:50 专注于真正必须的。好点子可以尽量坦白。摆出产品应该成为什么样的任何点子，然后砍掉一半。减少功能直到只剩下最必要的功能。周而复始。 2013-11-12 08:24:22 只留精髓 对于“为什么你们做这个而不做那个？”这种问题，我们青睐的回答总是“因为无所谓。” 这个陈述表达了是什么让产品变得伟大。找出紧要的，略去其他。 2013-11-12 08:25:04 这些功能如果有就更好么？当然。但是他们是不可或缺的么？他们真的重要么？不是。这就是为什么我们把他们刨除在外。最好的设计师和最好的程序员不是 技能最好的，或者手指最敏捷的，或者用Photoshop用的神乎其神的人。他们是能够决定什么不重要的人。真正的收获源自于此。 2013-11-12 08:25:21 你的大部分时间浪费在无关紧要的东西上。如果你能抛弃不重要的工作和思考，你将会获得不可思议的生产力。 2013-11-12 08:27:50 不要轻易实现每个功能。而要让每个功能证明自己，并且表明自己是幸存者。这就像加入搏击会一样（参考电影 Fight Club）。你应该只考虑那些好像为了能加入进来而站在走廊苦候了三天的功能。 这就是为什么你从说“不”开始。每一个向我们提出的 — 或者我们自己提出的 — 新功能需求都遇到一个 NO 。我们倾听但是不采取行动。最初的回应是“不是现在”，如果一个需求或者功能不停的过来，我们知道这才是时候对它进一步观察。然后，只在那时，我们才开始考 虑实现这个功能。 2013-11-12 08:29:00 关于iTunes音乐商店，Steve Jobs 私下为独立唱片制作人做了一个小型的演讲。我喜欢的瞬间是，当观众不停地举手说：“可以做[x]么？”，“你计划添加[y</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/rang-wo-bian-de-geng-jia-you-xiao-lv-de-gong-ju.html">让我变得更加有效率的工具</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年11月23日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>使用 Chrome</strong></p>
+
+<p>你还在用 IE 或者一些披着IE 外壳的浏览器（比方说360浏览器，搜狗浏览器）上网？有更好的软件你为什么不用？而且能给你带来更优质的上网体验，更重要的是他的扩展，非常强大（比方说屏蔽广告）。一键同步书签以及扩展等资料，你完全不用担心资料不见的情况，不用担心换了一台电脑然后去找书签的情况。</p>
+
+<p><strong>善用 Google</strong></p>
+
+<p>遇到任何问题首先要学会思考解决办法，如果没有一点思路，立刻去 Google，然后还是找不到答案，更换英文关键词继续 Google 相信你绝对不是第一个遇到此问题的人。</p>
+
+<p><strong>善用 Evernote（即印象笔记）</strong></p>
+
+<p>如果正好找到解决你问题的办法，安装一个 Evernote 的 Chrome 扩展，学会使用 Evernote 收藏，学会整理，使用标签，不要在后期资料多的情况下，让找资料边的很痛苦，一定要重视整理的必要性。永远让你的文件保持很干净，永远要让你的电脑比处女还要干净。</p>
+
+<p><strong>使用Dropbox</strong></p>
+
+<p>Dropbox是一个非常好的工具网盘，让你的资料同步在各个终端，多平台，永远不用担心资料丢失的情况。请把重要的文档，照片同步到网盘上去。国内代替品有百度盘、金山快盘、微云等，每个容量都够你用，请根据软件的同步网速来选择。</p>
+
+<p><strong>使用 Kindle</strong></p>
+
+<p>如果要看书，没有比 Kindle 更合适的。相对 iPad，Kindle 更专注于阅读。你用 Kindle 阅读不怕受到任何来自其他应用干扰导致的分心，而且还是水墨屏，不伤眼。「Kindle 富一生」早买早受用。</p>
+
+<p><strong>使用多看</strong></p>
+
+<p>Kindle 系统已经很久没用到了，在中国 Kindle 的优质阅读服务完全得不到展现，所以我使用了多看系统。多看系统有一个很好的功能 —— 书摘。看完一本书之后你的书摘可以一键导入 Evernote ，很方便。由于很久没有用 Kindle 原生系统，所以不确定原生系统是否有此功能。</p>
+
+<p><strong>善用 Wunderlist（任务管理软件）</strong></p>
+
+<p>要做的事情太多了,究竟该从哪里着手开始呢？学会把你要做的任务细化到一条一条的小任务清单，只做最紧急的事情。把你一瞬间想法记录下来，这将是一笔财富。</p>
+
+<p><strong>使用 Readability（稍后阅读）</strong></p>
+
+<p>如果看到一篇文章，但是没有时间阅读，或者太长在电脑上无法耐心的阅读怎么办？现在只要你安装一个Readability 的 Chrome 扩展，一键同步到你的手机，Pad 的上面，上厕所，排队，上下班的路上你就可以拿出手机或者Pad看了。</p>
+
+<p><strong>使用 iHour</strong></p>
+
+<p>一款时间投资计划软件，根据「一万小时天才理论」每天晚上花几分钟记录自己的今天的项目累计时间，让自己的项目变得更加可见性，更加清晰。离梦想更近。</p>
+
+<p><strong>坚持书写</strong></p>
+
+<p>Stack Overflow 网站创办的初衷就是想培养大家的写作习惯，而坚持写作会给你带来很多好处，让你想法表达的更加清楚，提高沟通技巧。你要做的就是记录自己的想法以及思考。</p>
+
+<p><strong>使用豆瓣</strong> 学会使用豆瓣标记自己喜欢的音乐、电影以及书。标记看过以及想看的，这是一个非常好的工具。</p>
+
+<p><strong>使用 Instagram</strong></p>
+
+<p>使用 Instagram 拍照记录自己的生活，它的网页版看起来非常的酷。   以上软件有的可以根据自己的喜好寻找代替品，但是有的是没有代替可言的。这些工具可能等你真正用到的时候才能体会其中的好。</p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#195" title="2013-12-10 12:01:00">Rui Chopper</a>:</strong> 看你一直在坚持更新，好棒！不过评论框好难用啊，每次都要登陆~~~~(&gt;_&lt;)~~~~</p>
+
+<p><strong><a href="#196" title="2013-12-10 12:56:00">ForEcho</a>:</strong> 坚持几天就变成习惯了，评论框你可以关联你的Google账号的，然后下次直接点Google就可以一键登录了。</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/jie-jue-wei-xin-textarea-huan-hang-wen-ti.html">解决微信textarea换行问题</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2013年11月21日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>这次我们的微信项目有一个是文本回复功能，文本用textarea填写，其中我们遇到一个问题『在iPhone微信手机客户端下面换行显示的是空一行在换行，显得很丑』。 要解决这个问题，我们首先要了解下textarea换行是如何实现的？网上查资料说是『textarea中的换行符是 \n  (个人检测发现按回车键是\n,好像在linux下是\r\n)』。这条信息我无从检验是否正确，用JavaScript的alert无法检测出来。如果你有检测的方法，欢迎留言告诉我。 在C语言中，\r是回车符,\n是换行符。数据库是不显示『\r』和『\n』这些东西的，所以检测起来很麻烦。下面摘录一段资料：</p>
+
+<blockquote>
+  <p>计算机还没有出现之前，有一种叫做电传打字机（Teletype Model 33）的玩意，每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候，要用去0.2秒，正好可以打两个字符。要是在这0.2秒里面，又有新的字符传过来，那么这个字符将丢失。 于是，研制人员想了个办法解决这个问题，就是在每行后面加两个表示结束的字符。一个叫做“回车”，告诉打字机把打印头定位在左边界；另一个叫做“换行”，告诉打字机把纸向下移一行。 这就是“换行”和“回车”的来历，从它们的英语名字上也可以看出一二。 后来，计算机发明了，这两个概念也就被般到了计算机上。那时，存储器很贵，一些科学家认为在每行结尾加两个字符太浪费了，加一个就可以。于是，就出现了分歧。Unix 系统里，每行结尾只有“<换行>”，即“\n”；Windows系统里面，每行结尾是“<回车><换行>”，即“ \r\n”；Mac系统里，每行结尾是“<回车>”。一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</回车></换行></回车></换行></p>
+</blockquote>
+
+<p>解决这个问题，我的方法是多试几次，思路就是用PHP的str_replace替换函数。最后 <code>str_replace("\r","", $textarea)</code> 实验成功。如果替换\n为空则会出现iPhone微信手机客户端是正常的，但是Android微信客户端则没有换行了。根据上面摘录的一段话，可能跟系统有关系，这是个坑。 注意 <code>str_replace("\r","", $textarea)</code> 中<strong>必须是双引号</strong>，单引号是不会有用的。下面摘录PHP手册中关于单双引号的使用：</p>
+
+<blockquote>
+  <p>指定一个简单字符串的最简单的方法是用单引号（字符 ‘）括起来。 要表示一个单引号，需要用反斜线（\）转义，和很多其它语言一样。如果在单引号之前或字符串结尾需要出现一个反斜线，需要用两个反斜线表示。注意如果试图转义任何其它字符，反斜线本身也会被显示出来！所以通常不需要转义反斜线本身。 如果用双引号（”）括起字符串，PHP 懂得更多特殊字符的转义序列。 此外，如果试图转义任何其它字符，反斜线本身也会被显示出来！</p>
+</blockquote>
+
+<p>  参考资料：<a href="http://www.guixiaogui.com/2013/06/24/php%E8%A1%A8%E5%8D%95%E8%BD%AC%E6%8D%A2textarea%E6%8D%A2%E8%A1%8C%E7%AC%A6%E7%9A%84%E6%96%B9%E6%B3%95.html">php表单转换textarea换行符的方法</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/21">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/19">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

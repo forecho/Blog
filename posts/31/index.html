@@ -1,0 +1,1007 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>forecho 的独立博客</title>
+  <meta name="author" content="forecho">
+
+  
+  <meta name="description" content="配置文件在 protected\config\main.php 开启gii 找到下面这段代码，把注释去掉： 1
+2
+3
+4
+5
+6
+7
+8
+/*
+&#39;gii&#39;=&gt;array( &#39;class&#39;=&gt;&#39;system.gii.GiiModule&#39 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://blog.forecho.com/posts/31/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="forecho 的独立博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <meta name="google-site-verification" content="OMI81_SJiESxwq-Fr0CLleoF7EzVdRx7QTQlbAfCVdI" />
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<script>
+function addBlankTargetForLinks () {
+  $('a[href^="http"]').each(function(){
+      $(this).attr('target', '_blank');
+  });
+}
+
+$(document).bind('DOMNodeInserted', function(event) {
+  addBlankTargetForLinks();
+});
+</script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-75634412-1']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">forecho 的独立博客</a></h1>
+  
+    <h2>把生命浪费在美好的事物上</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.forecho.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/archives">文章归档</a></li>
+  <li><a href="/about">关于我</a></li>
+  <li><a href="/friendship-links">联盟链接</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/yii-xue-xi-bi-ji-er-xiu-gai-pei-zhi-wen-jian.html">Yii学习笔记（二）-修改配置文件</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年07月09日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>配置文件在 protected\config\main.php <strong>开启gii</strong> 找到下面这段代码，把注释去掉：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="cm">/*</span>
+</span><span class="line"><span class="cm">&#39;gii&#39;=&gt;array(</span>
+</span><span class="line"><span class="cm">    &#39;class&#39;=&gt;&#39;system.gii.GiiModule&#39;,</span>
+</span><span class="line"><span class="cm">    &#39;password&#39;=&gt;&#39;Enter Your Password Here&#39;,</span>
+</span><span class="line"><span class="cm">    // If removed, Gii defaults to localhost only. Edit carefully to taste.</span>
+</span><span class="line"><span class="cm">    &#39;ipFilters&#39;=&gt;array(&#39;127.0.0.1&#39;,&#39;::1&#39;),</span>
+</span><span class="line"><span class="cm">),</span>
+</span><span class="line"><span class="cm">*/</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>修改password为自己使用的密码。 ps：如果访问gii的时候提示文件不存在，那就修改ipFilters中127.0.0.1为自己的IP。 <strong>开启数据库</strong> 找到下面这段代码：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="s1">&#39;db&#39;</span><span class="o">=&gt;</span><span class="k">array</span><span class="p">(</span>
+</span><span class="line">    <span class="s1">&#39;connectionString&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;sqlite:&#39;</span><span class="o">.</span><span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span><span class="o">.</span><span class="s1">&#39;/../data/testdrive.db&#39;</span><span class="p">,</span>
+</span><span class="line"><span class="p">),</span>
+</span><span class="line"><span class="c1">// uncomment the following to use a MySQL database</span>
+</span><span class="line"><span class="cm">/*</span>
+</span><span class="line"><span class="cm">&#39;db&#39;=&gt;array(</span>
+</span><span class="line"><span class="cm">    &#39;connectionString&#39; =&gt; &#39;mysql:host=localhost;dbname=testdrive&#39;,</span>
+</span><span class="line"><span class="cm">    &#39;emulatePrepare&#39; =&gt; true,</span>
+</span><span class="line"><span class="cm">    &#39;username&#39; =&gt; &#39;root&#39;,</span>
+</span><span class="line"><span class="cm">    &#39;password&#39; =&gt; &#39;&#39;,</span>
+</span><span class="line"><span class="cm">    &#39;charset&#39; =&gt; &#39;utf8&#39;,</span>
+</span><span class="line"><span class="cm">),</span>
+</span><span class="line"><span class="cm">*/</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>把上面一段注释掉，下面一段开启，修改之后如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class="php"><span class="line"><span class="cm">/*</span>
+</span><span class="line"><span class="cm">&#39;db&#39;=&gt;array(</span>
+</span><span class="line"><span class="cm">    &#39;connectionString&#39; =&gt; &#39;sqlite:&#39;.dirname(__FILE__).&#39;/../data/testdrive.db&#39;,</span>
+</span><span class="line"><span class="cm">),</span>
+</span><span class="line"><span class="cm">*/</span>
+</span><span class="line"><span class="c1">// uncomment the following to use a MySQL database</span>
+</span><span class="line">
+</span><span class="line"><span class="s1">&#39;db&#39;</span><span class="o">=&gt;</span><span class="k">array</span><span class="p">(</span>
+</span><span class="line">    <span class="s1">&#39;connectionString&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;mysql:host=localhost;dbname=appyii&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="s1">&#39;emulatePrepare&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class="line">    <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="s1">&#39;charset&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;utf8&#39;</span><span class="p">,</span>
+</span><span class="line">    <span class="s1">&#39;tablePrefix&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;fe_&#39;</span><span class="p">,</span><span class="c1">//指表前缀，需要的自行添加</span>
+</span><span class="line"><span class="p">),</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>dbname:指数据库名。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/yii-xue-xi-bi-ji-yi-yii-chu-shi-yong.html">Yii学习笔记（一）-yii初使用</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年07月06日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>之前学的CI框架，现在用的已经很顺手了，感觉还不错的时候找了份工作，但是这家公司是用yii框架开发项目的，没办法，只能抓紧时间自学了。好了，废话不多说，直接进入主题。</p>
+
+<p>首先刚开始学肯定是去google一下学习资料，发现了这个：<a href="http://www.yiichina.com/">http://www.yiichina.com/</a> 还有这个：<a href="http://yiiblog.info/blog/yii-go/">http://yiiblog.info/blog/yii-go/</a>。这两个网站都不错。刚开始看权威指南还是有点晕晕的感觉，感觉还是上不了手，然后想到了视频，yii-go的视频还不错，很简单易懂，安装上面操作，大致了解了这个框架的用法，下面简单总结一下；</p>
+
+<ul>
+  <li>yii框架需要执行命令启用，会自动生成一些基础的网页，功能。这个相对于ci来说，省事很多。但是刚开始我确实很不习惯。</li>
+  <li>简单说一下怎么生成，这个问题看了介绍的时候不是很明白，还是看视频才了解的。下载yii框架找打yiic这个文件，找到文件所属位置 ，打开cmd，然后执行 ：</li>
+</ul>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">D:
+</span><span class="line">xampp\htdocs\yii\framework\yiic webapp xampp\htdocs\yiiapp
+</span><span class="line">yes</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>好了，现在一个基本的web应用已经生成了，那么你现在要做的就是修改这个web为自己所用。</p>
+
+<p>ps:用win+wamp的的朋友可能会遇到下面的问题：</p>
+
+<p>在执行yiic webapp命令时，就报以下错误了： ‘”php.exe”’ 不是内部或外部命令，也不是可运行的程序或批处理文件。 这个事yiic批处理程序找不到php.exe引起的</p>
+
+<ol>
+  <li>方法一、修改yiic.bat文件 打开yii安装目录d：/www/yii/framework/yiic.bat，yiic.bat有记事本打开有如下一行： <code>if "%PHP_COMMAND%" == "" set PHP_COMMAND=php.exe</code> 由于我的WAMP安装时没有将php.exe加入到Windows环境变量中，难怪yiic找不到。这样也只需要将php.exe的绝对路径赋给PHP_COMMAND即可。如在我这环境下是这样设置的： <code>if "%PHP_COMMAND%" == "" set PHP_COMMAND=D:\xampp\php\php.exe</code></li>
+  <li>方法二：<a href="http://wuhai.blog.51cto.com/2023916/760902">参考文章</a></li>
+</ol>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/guan-yu-shi-xi-bao-gao.html">关于实习报告</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年05月25日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>马上就到了该回学校的时候了，这就意味着我们”实习”的日子也该结束了。这一段时间的实习，可以说对我们的人生影响很大，人生的路改怎样走，我更加的清晰了。</p>
+
+<p>从刚开始出校门的懵懵懂懂，到现在的”眼高手低”。记得还出校门找工作的时候，那个辛苦，为了能找到一份给自己锻炼的机会，没有考虑到很多东西，一心想着多学点经验。差点就在暑假的时候去爱普当销售员了。现在想想还好当时他们爱普招满了人，没收我们当兼职。后来就再学校快封校的时候，我不甘心就那样回家去了，于是就在网上投了几份简历，效果还不错，很快就有回复。但是不是所有的工作都适合我的，微博营销就真的不适合我。后来我接到一份PHP程序员的面试，并且面试我的是经理本人，一个看上去是跟我年纪差不多的经理。面试的内容很轻松，我们聊了几句，我就顺利被录取了，那时候我真的很高兴，能找到一个跟自己专业有关系的工作，并且待遇还不错。</p>
+
+<p>由于没有工作经验，也没有实战经验，公司也是刚创业不就的公司，刚开始做网站的时候都不知如何下手，还过还有有老师上课的案例，第一个项目我们花了半个多月的时间总算给客户交差了。功能都给人家齐了。但现在看来还有存在一定的bug。</p>
+
+<p>小公司有小公司的好处，刚开始我们很有激情，不知道为什么每天都很开心的忙碌着工作，很开心，即使有时候会很累。公司还没开始扩张的时候，我们每个月都有一次”月终酒会”，那天我们会提前一个小时下班，放开所有的工作，开心的去吃饭、KTV。小公司还有一个好处，就是你不会被人给忽视掉。不忙的时候下班我会留下来跟经理和同事一起打一盘Dota，虽然我那时候Dota技术很烂，总是坑队友，但是，现在真是很怀恋。</p>
+
+<p>随着业务的扩张，销售的给力，经理做出了扩张的决定，现在看来，当时的决定是错误的。扩张就意味着我们就要换到新的办公室了。公司来了新的员工，人数少的时候可能不存在管理的问题，但是扩张之后的公司的管理就出现了问题，即使后来我们搞了几次体能训练来增加同事之间的团队精神，但显然效果不是很明显。公司的人员增多，意味着公司要接到更多的项目，老板才能养活我们，扩张是因为那时候的项目没人手做，好吧，当时的项目做完了，我们又没能接到项目了。这直接导致公司的盈利，老板都快发不起工资了，所以就采取了裁员政策，我能在那次幸免能够留下来，确实是很不错。但是呢？我那时候突然有一种感觉上班会很累，虽然我上班都没有事干。我越想越累，就在我学完PHP框架之后，找了个机会跟老板说了我有辞职的意愿，老板也同意了。说实话，还真是有点不舍得。</p>
+
+<p>从什么时候开始上班变是一件很没有激情的事，写的代码，都是重复再重复。辞职之后我就疯狂的玩了几天，然后开始写了个博客导航的小程序，还挂到的网上。（现在不能访问了，因为用的是美国空间，现在不能访问了），现在我一直在写另外一个程序，一边写一边学习。但是效率可想而知的没有在上班的时候高，但是确实也学到了很多东西。</p>
+
+<p>我觉得我现在又站在了人生的十字路口了，我梦想着能做出一个百万级用户的产品出来。但是现在是时候吗？我的技术成熟了吗？我现在又能力吗？答案我都不能肯定。但是现在在武汉确定找不到让我满意的工作的了，要么工资开的不满意，要求还很高。要么工资还行，但是做的事情我不愿意干，二次开发、套模板，我感觉太无聊了，我是不愿意浪费那时间的了。现在的我只等着拿毕业证，然后呢？离开武汉，去深圳、杭州、北京？？都是不错的地方。但是前面的路还是未知。我只能满怀期待的走下去。希望能早点实现自己的梦想。</p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#97" title="2012-06-01 15:00:05">上海做网站</a>:</strong> 愿楼主找到心仪的工作</p>
+
+<p><strong><a href="#98" title="2012-06-09 10:19:42">石膏公仔</a>:</strong> 程序员是练出来的！</p>
+
+<p><strong><a href="#100" title="2012-06-10 19:30:59">颜成</a>:</strong> 不错 有个自己展示自己的平台 自己可以控制</p>
+
+<p><strong><a href="#104" title="2012-06-25 17:27:54">锁匠工具</a>:</strong> 一切都需要过程，在过程中慢慢成长，有梦想，就去努力。 :razz:</p>
+
+<p><strong><a href="#105" title="2012-06-27 20:18:11">刘杰</a>:</strong> 这个主题有点意思</p>
+
+<p><strong><a href="#106" title="2012-06-27 20:20:02">刘杰</a>:</strong> 这个主图不错，有点意思 http://www.57li.com</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/yi-qi-qu-zhao-dian-lu-zi-ba.html">一起去找点路子吧</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年05月06日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>貌似从1月底被辞职之后，就一直窝在宿舍里，说是在学习，在写代码，等待着拿毕业证然后出去混工作。现在想来已经都3个多月了，又啃了三个月的老，可耻啊。</p>
+
+<p>关于自己一直想做的网站，想法是有的了，但是还是没写完，功能有点多，一个人写的话确实还真是点累，想找个人一起写，但是找谁呢？功能的话只写了差不多才一半，照这速度，何时才能上线呢？现在又有点犹豫了，有在武汉找工作的想法了，毕业论文，答辩都解决了，还有两个月才能达到毕业证，那这两个月，我要干嘛呢？每天我们三个人在一起，只有打游戏跟打游戏还有打游戏，这尼玛的时间都花在打游戏上面了，错过了很多东西，这个其实我心里都有数。</p>
+
+<p>感觉自己的人生到了的十字路口了，做选择很艰难。想做自己感兴趣的时，想有一种无拘无束的生活，工作也是。现在都害怕去面试了，怕接触陌生的公司，陌生的社会。想趁着自己年轻做点自己感兴趣的事。想法有很多，但是真正去做的又是很少，正如那句话说的“<strong>晚上想想千条路，白天还是走原路</strong>”。刚开始的路很艰难，这个我知道，但是每天你至少都进步一点点啊，就像之前看的一篇许朝阳讲的关于登山的故事一样，他们不管什么天气每天前进33米，最后第一个登上了山顶，有时候生活过得太随意，也不行。</p>
+
+<p>最近在尝试很多东西，这次买了一个国内的空间把“<a href="http://www.bokedaohang.com/">博客导航</a>”给挂上去了，还在备案中。还是希望这个网站能给大家带来用处，这样我的钱才没白花。备案还是真是一件很麻烦的事。最近还把淘宝店申请成功了，可以开店了，但是不知道卖什么？？？还真不知道有什么好卖的。</p>
+
+<p>我还是在想要不要去找工作呢？</p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#95" title="2012-05-07 15:52:34">钱玉刚</a>:</strong> 这个主题太黑暗，不喜欢 事情就是这样，其实真心没啥。 就是专注力不够， 去哪，说一声 SAY GO LET US GO YOU HAVE I HAVE SO DO ALL</p>
+
+<p><strong><a href="#96" title="2012-05-08 11:46:18">钱玉刚</a>:</strong> 这么说吧，各种刷信誉先。 事情就是这样，其实没啥， 干自己想干的呗。 一起出去也行， SAY GO LET US GO YOU HAVE I HAVE SO DO ALL</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/hen-jian-dan-de-yi-ge-js-shi-xian-xia-la-lie-biao-shi-xian-tiao-zhuan.html">很简单的一个js实现下拉列表实现跳转</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年03月03日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>直接上效果页面，<a href="http://www.nowhisky.com/demo/select.html">请猛击~</a> 代码很简单，完整版的HTML代码，如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="cp">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;</span>
+</span><span class="line"><span class="nt">&lt;html</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span> <span class="na">xml:lang=</span><span class="s">&quot;en&quot;</span><span class="nt">&gt;</span>
+</span><span class="line"><span class="nt">&lt;head&gt;</span>
+</span><span class="line"><span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html;charset=UTF-8&quot;</span> <span class="nt">/&gt;</span>
+</span><span class="line"><span class="nt">&lt;title&gt;</span>下拉菜单实现页面跳转<span class="nt">&lt;/title&gt;</span>
+</span><span class="line"><span class="nt">&lt;/head&gt;</span>
+</span><span class="line"><span class="nt">&lt;body&gt;</span>
+</span><span class="line"><span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">&quot;menu122&quot;</span> <span class="na">onchange=</span><span class="s">&quot;if(this.options[this.selectedIndex].value!=&#39;&#39;){window.open(this.options[this.selectedIndex].value,&#39;_self&#39;);}&quot;</span><span class="nt">&gt;</span>
+</span><span class="line"><span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;#&quot;</span><span class="nt">&gt;</span>友情链接站点<span class="nt">&lt;/option&gt;</span>
+</span><span class="line"><span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;http://www.baidu.com&quot;</span><span class="nt">&gt;</span>百度<span class="nt">&lt;/option&gt;</span>
+</span><span class="line"><span class="nt">&lt;/select&gt;</span>
+</span><span class="line"><span class="nt">&lt;/body&gt;</span>
+</span><span class="line"><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>或者用jQuery这样写：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+</pre></td><td class="code"><pre><code class="html"><span class="line"><span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">&quot;dynamic_select&quot;</span><span class="nt">&gt;</span>
+</span><span class="line">    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;&quot;</span> <span class="na">selected</span><span class="nt">&gt;</span>Pick a Website<span class="nt">&lt;/option&gt;</span>
+</span><span class="line">    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;http://www.google.com/&quot;</span><span class="nt">&gt;</span>Google<span class="nt">&lt;/option&gt;</span>
+</span><span class="line">    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;http://www.youtube.com/&quot;</span><span class="nt">&gt;</span>YouTube<span class="nt">&lt;/option&gt;</span>
+</span><span class="line">    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;http://www.stackoverflow.com/&quot;</span><span class="nt">&gt;</span>Stack Overflow<span class="nt">&lt;/option&gt;</span>
+</span><span class="line"><span class="nt">&lt;/select&gt;</span>
+</span><span class="line">
+</span><span class="line"><span class="nt">&lt;script&gt;</span>
+</span><span class="line">    <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+</span><span class="line">      <span class="c1">// bind change event to select</span>
+</span><span class="line">      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#dynamic_select&#39;</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class="line">          <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span> <span class="c1">// get selected value</span>
+</span><span class="line">          <span class="k">if</span> <span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// require a URL</span>
+</span><span class="line">              <span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span> <span class="c1">// redirect</span>
+</span><span class="line">          <span class="p">}</span>
+</span><span class="line">          <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class="line">      <span class="p">});</span>
+</span><span class="line">    <span class="p">});</span>
+</span><span class="line"><span class="nt">&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#83" title="2012-03-05 19:49:14">yokelai</a>:</strong> 当选项不为空时执行事件,学习啦！</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/tan-tan-deng-lu-ye-mian-Div-shang-xia-zuo-you-ju-zhong-de-shi.html">谈谈登陆页面Div上下左右居中的事</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年03月02日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最主要的CSS样式</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="css"><span class="line"><span class="nc">.login</span><span class="p">{</span>
+</span><span class="line">    <span class="k">width</span><span class="o">:</span><span class="m">631px</span><span class="p">;</span>
+</span><span class="line">    <span class="k">height</span><span class="o">:</span><span class="m">314px</span><span class="p">;</span>
+</span><span class="line">    <span class="k">margin-top</span><span class="o">:-</span><span class="m">157px</span><span class="p">;</span>
+</span><span class="line">    <span class="k">margin-left</span><span class="o">:-</span><span class="m">316px</span><span class="p">;</span>
+</span><span class="line">    <span class="k">position</span><span class="o">:</span> <span class="k">absolute</span><span class="p">;</span>
+</span><span class="line">    <span class="k">top</span><span class="o">:</span><span class="m">50%</span><span class="p">;</span>
+</span><span class="line">    <span class="k">left</span><span class="o">:</span><span class="m">50%</span><span class="p">;</span>
+</span><span class="line">    <span class="k">background</span><span class="o">:</span><span class="sx">url(images/mod.gif)</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>使用 <strong>绝对定位 </strong> 然后margin-top选取div height的一半值 margin-left 选取div width的一半值  </p>
+
+<p>其他方法参考<a href="http://demo.tutorialzine.com/2010/03/centering-div-vertically-and-horizontally/demo.html">这里~</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/wo-kai-shi-shi-yong-de-yi-xie-wang-zhan-he-ruan-jian-bu-ding-shi-geng-xin.html">我开始使用的一些网站和软件（不定时更新）</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年02月27日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>现在是2012年2月27号</p>
+
+<ul>
+  <li><strong><a href="http://www.zhihu.com">知乎：</a></strong>一个问答网站，去年的5月6号我有幸获取一枚邀请码，从此就踏上知乎寻找答案的不归路了，哈哈…不过在这里你确实能学到很多东西。</li>
+  <li><strong><a href="http://xianguo.com">鲜果网：</a></strong>一个在线订阅服务网站，生活需要阅读，特别是你玩手机很无聊的时候，鲜果Android HD 版的客户端做的还不错，同类网站还有Google reader。客户端的话，网易阅读也不错。</li>
+  <li><strong><a href="http://www.luoo.net/">落网：</a></strong>在这里你将听到不一样的音乐，网站界面做的非常干净，简洁。风格很喜欢。</li>
+  <li><strong><a href="http://www.lofter.com">Lofter：</a></strong>一个轻博客，轻博客那么多，就觉得这个界面做的很舒服，网易的UI真不是盖的，现在的话，lofter我只是用来放一些我平常拍的照片。</li>
+  <li><strong><a href="http://www.xiazaiba.com">下载吧：</a></strong>一个很好软件下载的网站，界面做的很不错，下载按钮很显眼，一看就知道在哪下载。最讨厌那种广告满天飞，然后下载都不知道点哪的网站，好不容易下载一个软件然后还不是你想要的，是广告的，尼玛真是坑爹的。</li>
+  <li><strong><a href="http://www.yinyuetai.com/">音悦台：</a></strong>就是一个很好的音乐MV网站，看MV的话，我首先在这里面搜索，如果没有的话，才去优酷，土豆什么的。</li>
+  <li><strong><a href="http://www.mtime.com/">时光网：</a></strong>看电影资料什么的，我就去这个网站，很专业。上面的视频，预告片都很好。</li>
+  <li><strong><a href="http://www.v2ex.com">V2EX：</a></strong>最近发现这个网站也不错。看介绍说是 创意工作者们的社区。</li>
+  <li><strong><a href="http://www.evernote.com/">Evernote：</a> </strong>一款非常著名的免费笔记软件,具备强大的网页剪辑功能。它最大的特点就是支持多平台，而且数据能通过网络互相同步。可以随时在手机上的<strong>Evernote</strong>新增笔记，回家后在电脑上也能看到它了。</li>
+  <li><strong><a href="http://www.gokuai.com">够快：</a></strong> 一个网盘。免费版的有8G，它的强大在于能同步本地文件夹到服务器，支持自定义路径，很方便。
+2012年3月14号</li>
+  <li><strong><a href="http://yuedu.fm/">悦读FM：</a></strong>提供有质量的有声阅读体验，阅读也可以像听歌一样简单方便。适合晚上睡觉之前安静的听一下，很有感觉。</li>
+  <li><strong><a href="http://www.diandian.com">点点：</a></strong>国内首家轻博客，其实很早就注册了点点，但一直没怎么用，突然的有一天喜欢上了点点的UI，于是开始用了，很喜欢。
+2012年11月30号</li>
+  <li><strong><a href="http://doit.im/cn/">Doit.im:</a></strong>是一款跨平台的任务管理工具，并支持与iPhone, Android同步。Doit.im采用优秀的任务管理理念(GTD理念)，有条不紊地组织规划各项任务，轻松应对各项庞大繁杂的工作，在感受无压工作乐趣的同时，畅享高效工作的成就感！（这个国内开发的项目，真心不错。）</li>
+  <li><strong><a href="http://pomotodo.com/">番茄土豆：</a></strong>使用当下最高效的时间管理方式——番茄工作法作为核心模式，帮助你专注于工作，大大提高工作效率，是为“番茄”；通过 To-do List 记录和管理任务，是为“土豆”。（关于<a href="http://baike.baidu.com/view/5259318.htm">番茄工作法</a>请看这篇文章。）</li>
+</ul>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#82" title="2012-02-27 21:49:37">打篮球的女孩</a>:</strong> 博主你的网站做的不错哦，知更鸟的这个主题我也用过，挺不错的。最近闲来无事，我写了一篇小说–打篮球的女孩。在起点上，有时间了帮我顶一下哦！！！！</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012-nian-sheng-huo-hai-de-ji-xu.html">2012年，生活还得继续</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2012年02月18日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>到今天为止，上班也快差不多一个星期了吧。公司的情况还有待进一步的去了解，好像是负责运营几个视频网站和淘宝API链接的，听说公司也自己开淘宝卖衣服。</p>
+
+<p>过完年在家待一个星期左右就想出来找工作了，只是一直苦于来武汉没地方睡觉。我们学校太坑爹了，到现在都没开门，真是好意思。还有我有个舅舅在武汉，于是匆忙赶过来，找工作，找房子，以至于我走的时候，都有点不舍了，感觉在家还没待够，这是我以前每次走的时候所没有的感觉。</p>
+
+<p>到了武汉先是玩了两天，然后等待星期一，开始面各种试，因为之前有在网上发简历，武汉已经有好几家打电话让我去面试了，所以说工作的事我还不是很担心。那天真是一口气面试了三家公司，累死了都。说实话刚开始的时候对自己还是挺有自信的，毕竟自己已经上班过5个月了，有上班经验了，有时候自己都觉得自己挺牛逼的，但是那天的三个面试，让我重新认识了自己。上午面试的第一个公司，面试官看了我简历，然后跟我聊天，看了我以前做的项目，然后问我的几个问题，有的我基本上算是答上来了，有的确实还是不知道。。。我只记得两个我没能回答好的问题。其他的我都忘了。</p>
+
+<ol>
+  <li>cookie和session的区别？（当时我只是说了一下，一个缓存保存在客户端，一个缓存保存在服务器端）—-<a href="http://www.php10086.com/2011/11/4.html">查看答案</a></li>
+  <li>网站上的图片路径地址和网站地址为什么不一样？（当时我真没想出来，就说了个不知道，后来猜想，应该有两台服务器，一台专门存放图片的）</li>
+</ol>
+
+<p>第二个公司，问的问题有点专业了，说了好多转有名次我都没听说过，比方是了解B/S吗？还有什么什么的？我都忘了，还有问我们之前项目是怎样部署的。额。。。。之前我们哪有那么规范呀，就一个小公司，直接写网站的，连个说明文档都很简单的，有时候甚至都没有。好在这个面试官看我对自己职业的热爱，让我第二天去上班试用。给我布置点任务，是看我的实力吧？后来我才知道这家公司也是刚成立的，基本上都是做软件开发的，做网站的目前就我一个，感觉自己一个人还真没有挑大梁的实力，还是撤了。</p>
+
+<p>好吧，那就第三个公司了，也就是这个公司，这个公司对技术要求没那么高，上班气氛也不错，公司也有很多人，不过就技术部的人还是很少的，只不过地理位置不怎么好，并且是单休。但是话又说回来‘这个世界从来没有任何一件工作叫“钱多、事少、离家近” ’。如果在公司待着不错，有发展前途那就最好不过了，如果实在不行，那也要撑到我拿到毕业证吧，那时候不行的话，我至少可以出去也好找工作。</p>
+
+<p>找房子是一件很麻烦的事，特别是在一个我们都不怎么熟的地方找房子，找了一整天，连中介都去了，到晚上的时候我们勉强找到现在的这个房子了，房子还好吧，有不错的地方，也有不满意的地方。</p>
+
+<p>偏偏是在2月14号的时候选择下班了去搬家，那天偏偏又是下雨，那天真是有点狼狈了。 通过这几天我发现武汉的发展也不怎么样，武汉说是一线城市，其实是二线城市，乍一看是三线城市，仔细一看你会发现其实武汉就是一个大农村。</p>
+
+<p>武汉的这几年物价上涨的很快啊，但是工资没涨多少，你在武汉拿3K/月的时候，看上去还不错，但是却没有剩下多少钱，因为这边消费贵，当然肯定还是不能和深圳那边比的。 武汉的互联网公司，找来找去，也就那么几十家。并且都不怎么样。这也导致很多大学生毕业了就直接选择去了“北上广深”发展了，没有了人才，以至于恶性循环。在这边我想找个公司有人带着你一起的，那八成是不可能的，只能靠自己起摸索。哎。。。 我要是有毕业证说不定我也不在武汉待了，在外面待个两三年再回来也不迟吧，当然这是后话了。</p>
+
+<p>好了，今天就暂时写到这了，肚子都饿了，最近饭量大增啊。</p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#74" title="2012-02-18 11:51:59">PHP淮北</a>:</strong> 呵呵 原来是你引用了我的cookie和session的文章，咱们同姓都是做php的都是刚工作的新人，呵呵咱们交互一个友链：http://www.php10086.com/， PHP10086博客网–专注LAMP技术，做最靠谱的PHP技术博客分享网站</p>
+
+<p><strong><a href="#75" title="2012-02-22 12:19:18">李军的博客</a>:</strong> 博客导航有权限BUG，可任意删除添加推荐</p>
+
+<p><strong><a href="#77" title="2012-02-22 12:56:28">caicai</a>:</strong> 因为当时我做的时候 基本上算是没做后台管理 没做用户什么的 只是做了一个链接 我因为别人是不会找到得 我很好奇 你是怎么进去的？</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/ma-shang-jiu-yuan-dan-le.html">马上就元旦了</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2011年12月29日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>还有两天就到2012年了，真的会有世界末日吗？这个我不关心。</p>
+
+<p>总结一下，都快一年没回家了，好久没看到爸妈了，上回还是因为爷爷的事，看到了爸了。</p>
+
+<p>这一年，还是总结一下吧。</p>
+
+<p>上半年开学的时候，那学期主要学的是网络布线技术，感觉自己不是很敢兴趣，虽然上课也有认真地在听，动手配置路由的时候，也配置了，但确实学的不怎么样，现在更是忘的一干二净了。那时候感觉在混日子，但是时间还是很快，每天都不知道自己在捣鼓什么，每天都泡在网上。由于那学期也没学网站制作，我也就没碰代码了。然后就这样浑浑噩噩的到了期末了，按道理就应该“滚蛋”回家了，但是我就是不想回家，这越想就越不想回家，然后到了眼看就要封校的那几天跟着几个也不想回家的同学一起去找工作。先去的是爱普宽带，听说那缺暑假工，因为我本来就是想找个暑假工的，干两个月，就开学了，还上课的。还有一个原因，就是我有个堂弟刚进爱普宽带上班，他上了几天班，打听之，还不错。然后我就纠集一大帮同学去爱普的公司去看看情况，结果就是，我们去完了，人家暑假工都招满了，不收了，只收长期的，好吧，无奈，继续溜达找工作，然后走了很远，无果，累了，回学校。</p>
+
+<p>第二天听说一室友在网上投简历，被叫去面试了，好像是个“打字”的活，虽然最后没要他。我看网上投简历，还不错，于是抱着“死马当活马医”的态度，也投了几份简历，第一个是微博管理员吧，我试着编写了几天的微博，感觉自己太不擅长了，就放弃了。然后试着投了份PHP的，然后第二天去面试了，我简历上电话都写错了，还是她加我QQ，联系到我的，说是10点面试，结果我磨叽的，11点才到，打印的简历都是黑白的。本来没抱什么希望的，实在不行，我回家的。那个经理随便问了几个问题就要我了，那时候还不敢相信，因为之前有个“前程无忧”的面试经验，感觉面试挺可怕的。</p>
+
+<p>本来说是干两个月也就回去上课的，但开学的时候衡量了一下，最终还是决定留下来了，并且公司也加入两个同学。五个月学了很多东西，不过我最终在第五个月又选择辞职了，下一个公司，我希望进一个较大一点的公司，希望有写过大项目的PHPer带着我一起写大项目，不然我觉得我辞职就没有意义了。就目前我的技术来说，写一下小的项目还是可以的，但是写大项目，完全不行，需要成长。</p>
+
+<p>今天把自己的毕业设计给老师看了一下，嗯，基本功能实现了，但是需要修改一下小的细节。美工还是不够，配色是一门大学问。也简单的跟老师交流了一下。答辩也算完成了，剩下的就只有论文了，不用答辩，意味着我明年可以不用来学校了，是不是可以去外省了呢？</p>
+
+<p>大学就是教了我们发现问题，然后去解决问题。辞职回来，简单了学了一下JQuery，就开始做<a href="http://www.bokedaohang.com">博客导航</a>了，差不多花了一个多星期算了做好了，备案是件很麻烦很蛋疼的事，所以网站我给挂到一个美国的空间了，访问速度有点慢，当然也可能跟网站本身有关，有时间我会优化一下的。</p>
+
+<p>然后就忙着做毕业设计，感觉比上班都忙，不过一个人写代码，遇到问题卡住了，那就真的卡住了，不像公司卡住了，还能找个人帮你解决，初了早上起得晚一点，其他的还好，感觉晚上工作效率还是不错的，带上耳机，写代码，感觉眼睛快瞎了，耳朵也快被音乐震聋了。</p>
+
+<p>平安夜那天，接到爷爷出事的消息，然后跑回去看爷爷了，虽然离家很近，但还是回家的次数很少。爸爸他们都回来了，爷爷这回病的不轻，开电动车，撞到沙堆了，希望爷爷赶紧好起来，必须的。圣诞也就这样回家过了一次。平安夜我是趴在爷爷的病床等他打完针，我才睡的。</p>
+
+<p>2012年，我不在奢求什么，只希望身边的家人、朋友身体健康。离自己的梦想更进一步。</p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#31" title="2011-12-30 14:06:44">保健知识</a>:</strong> 2012只要平平安安就行</p>
+
+<p><strong><a href="#65" title="2012-02-16 20:18:22">空谷幽兰</a>:</strong> 支持博主</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/02jQuery-yang-shi-biao-qie-huan.html">02、jQuery样式表切换</a></h1>
+    
+    
+      <p class="meta">
+        
+ 
+ 
+ 
+
+  2011年12月09日
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>JS代码如下：</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+</pre></td><td class="code"><pre><code class="javascript"><span class="line"><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class="line">        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.styleswitch&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>
+</span><span class="line">        <span class="p">{</span>
+</span><span class="line">            <span class="nx">switchStylestyle</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s2">&quot;rel&quot;</span><span class="p">));</span>
+</span><span class="line">            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class="line">        <span class="p">});</span>
+</span><span class="line">        <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">readCookie</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">);</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="nx">switchStylestyle</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
+</span><span class="line">    <span class="p">});</span>
+</span><span class="line">
+</span><span class="line">    <span class="kd">function</span> <span class="nx">switchStylestyle</span><span class="p">(</span><span class="nx">styleName</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;link[rel*=style][title]&#39;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+</span><span class="line">        <span class="p">{</span>
+</span><span class="line">            <span class="k">this</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class="line">            <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="nx">styleName</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">disabled</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class="line">        <span class="p">});</span>
+</span><span class="line">        <span class="nx">createCookie</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="nx">styleName</span><span class="p">,</span> <span class="mi">365</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line"><span class="p">})(</span><span class="nx">jQuery</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line"><span class="kd">function</span> <span class="nx">createCookie</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">value</span><span class="p">,</span><span class="nx">days</span><span class="p">)</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="k">if</span> <span class="p">(</span><span class="nx">days</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="kd">var</span> <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+</span><span class="line">        <span class="nx">date</span><span class="p">.</span><span class="nx">setTime</span><span class="p">(</span><span class="nx">date</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span><span class="o">+</span><span class="p">(</span><span class="nx">days</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">1000</span><span class="p">));</span>
+</span><span class="line">        <span class="kd">var</span> <span class="nx">expires</span> <span class="o">=</span> <span class="s2">&quot;; expires=&quot;</span><span class="o">+</span><span class="nx">date</span><span class="p">.</span><span class="nx">toGMTString</span><span class="p">();</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">else</span> <span class="kd">var</span> <span class="nx">expires</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="nx">name</span><span class="o">+</span><span class="s2">&quot;=&quot;</span><span class="o">+</span><span class="nx">value</span><span class="o">+</span><span class="nx">expires</span><span class="o">+</span><span class="s2">&quot;; path=/&quot;</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="kd">function</span> <span class="nx">readCookie</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="kd">var</span> <span class="nx">nameEQ</span> <span class="o">=</span> <span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="p">;</span>
+</span><span class="line">    <span class="kd">var</span> <span class="nx">ca</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">);</span>
+</span><span class="line">    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">ca</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">ca</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+</span><span class="line">        <span class="k">while</span> <span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">==</span><span class="s1">&#39; &#39;</span><span class="p">)</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nx">c</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+</span><span class="line">        <span class="k">if</span> <span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">nameEQ</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="nx">c</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">nameEQ</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span><span class="nx">c</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+</span><span class="line"><span class="p">}</span>
+</span><span class="line"><span class="kd">function</span> <span class="nx">eraseCookie</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
+</span><span class="line"><span class="p">{</span>
+</span><span class="line">    <span class="nx">createCookie</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span><span class="line"><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>效果虽然有了，但有点看不懂，求解释~~~</p>
+
+<h2 id="comments">Comments</h2>
+
+<p><strong><a href="#25" title="2011-12-09 22:19:13">29的博客</a>:</strong> 学习了的。</p>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/posts/32">&larr; Older</a>
+    
+    <a href="/archives">Blog Archives</a>
+    
+    <a class="next" href="/posts/30">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>
+    如果有一天，你不再尋找愛情，只是去愛；你不再渴望成功，只是去做；你不再追求成長，只是去修；一切才真正開始！
+    <br>
+    &#8211;by 紀伯倫 Kahil · Gibran
+  </p>
+</section>
+
+    <section>
+        <a href="https://www.douban.com/people/ipzone/">forecho 的豆瓣主页</a>
+    </section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/octopress-migrate-to-hugo.html">Octopress 迁移到 Hugo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/use-hammerspoon.html">Mac 利器 Hammerspoon 使用指南</a>
+      </li>
+    
+      <li class="post">
+        <a href="/fitness-at-home.html">在家健身有 Switch 就够了</a>
+      </li>
+    
+      <li class="post">
+        <a href="/wugong-mountain-walking-tour.html">第九站：武功山两天反穿徒步</a>
+      </li>
+    
+      <li class="post">
+        <a href="/foshan-self-driving-tour.html">第八站：佛山自驾游</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/categories/ajax/'>ajax (1)</a></li>
+<li class='category'><a href='/categories/angular/'>angular (1)</a></li>
+<li class='category'><a href='/categories/api/'>api (1)</a></li>
+<li class='category'><a href='/categories/app/'>app (2)</a></li>
+<li class='category'><a href='/categories/cakephp/'>cakephp (5)</a></li>
+<li class='category'><a href='/categories/codeigniter/'>codeigniter (3)</a></li>
+<li class='category'><a href='/categories/css/'>css (2)</a></li>
+<li class='category'><a href='/categories/docker/'>docker (3)</a></li>
+<li class='category'><a href='/categories/git/'>git (3)</a></li>
+<li class='category'><a href='/categories/github/'>github (2)</a></li>
+<li class='category'><a href='/categories/gitlab/'>gitlab (1)</a></li>
+<li class='category'><a href='/categories/javascript/'>javascript (4)</a></li>
+<li class='category'><a href='/categories/jquery/'>jquery (5)</a></li>
+<li class='category'><a href='/categories/laravel/'>laravel (1)</a></li>
+<li class='category'><a href='/categories/mac/'>mac (3)</a></li>
+<li class='category'><a href='/categories/mwskai-fa/'>mws开发 (2)</a></li>
+<li class='category'><a href='/categories/mysql/'>mysql (3)</a></li>
+<li class='category'><a href='/categories/nas/'>nas (1)</a></li>
+<li class='category'><a href='/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/categories/octopress/'>octopress (6)</a></li>
+<li class='category'><a href='/categories/php/'>php (17)</a></li>
+<li class='category'><a href='/categories/phpstorm/'>phpstorm (2)</a></li>
+<li class='category'><a href='/categories/phpji-chu/'>php基础 (4)</a></li>
+<li class='category'><a href='/categories/python/'>python (1)</a></li>
+<li class='category'><a href='/categories/restful/'>restful (4)</a></li>
+<li class='category'><a href='/categories/sublime/'>sublime (1)</a></li>
+<li class='category'><a href='/categories/switch/'>switch (3)</a></li>
+<li class='category'><a href='/categories/travis-ci/'>travis-ci (1)</a></li>
+<li class='category'><a href='/categories/ubuntu/'>ubuntu (1)</a></li>
+<li class='category'><a href='/categories/vagrant/'>vagrant (1)</a></li>
+<li class='category'><a href='/categories/vim/'>vim (4)</a></li>
+<li class='category'><a href='/categories/virtualbox/'>virtualbox (1)</a></li>
+<li class='category'><a href='/categories/xampp/'>xampp (1)</a></li>
+<li class='category'><a href='/categories/yii/'>yii (9)</a></li>
+<li class='category'><a href='/categories/yii1/'>yii1 (2)</a></li>
+<li class='category'><a href='/categories/yii2/'>yii2 (5)</a></li>
+<li class='category'><a href='/categories/youtube/'>youtube (1)</a></li>
+<li class='category'><a href='/categories/san-li-san/'>三立三 (1)</a></li>
+<li class='category'><a href='/categories/bu-gen-tuan/'>不跟团 (7)</a></li>
+<li class='category'><a href='/categories/ge-ren-cheng-chang/'>个人成长 (1)</a></li>
+<li class='category'><a href='/categories/ye-liao-dian-ying/'>也聊电影 (1)</a></li>
+<li class='category'><a href='/categories/ti-yan/'>体验 (1)</a></li>
+<li class='category'><a href='/categories/jian-shen/'>健身 (2)</a></li>
+<li class='category'><a href='/categories/fen-xiang/'>分享 (5)</a></li>
+<li class='category'><a href='/categories/fen-xiang-jing-yan/'>分享经验 (4)</a></li>
+<li class='category'><a href='/categories/chuang-ye/'>创业 (3)</a></li>
+<li class='category'><a href='/categories/qu-kuai-lian/'>区块链 (1)</a></li>
+<li class='category'><a href='/categories/tu-cao/'>吐槽 (4)</a></li>
+<li class='category'><a href='/categories/xue-ying-yu/'>学英语 (1)</a></li>
+<li class='category'><a href='/categories/gong-ju/'>工具 (3)</a></li>
+<li class='category'><a href='/categories/gong-ju-kong/'>工具控 (1)</a></li>
+<li class='category'><a href='/categories/gan-huo/'>干货 (3)</a></li>
+<li class='category'><a href='/categories/nian-du-zong-jie/'>年度总结 (1)</a></li>
+<li class='category'><a href='/categories/nian-zhong-zong-jie/'>年终总结 (4)</a></li>
+<li class='category'><a href='/categories/ying-yong/'>应用 (1)</a></li>
+<li class='category'><a href='/categories/wei-fu-wu/'>微服务 (1)</a></li>
+<li class='category'><a href='/categories/si-kao/'>思考 (13)</a></li>
+<li class='category'><a href='/categories/xing-neng-you-hua/'>性能优化 (1)</a></li>
+<li class='category'><a href='/categories/zong-jie/'>总结 (60)</a></li>
+<li class='category'><a href='/categories/xiang-fa/'>想法 (2)</a></li>
+<li class='category'><a href='/categories/ji-zhu-fen-xiang/'>技术分享 (1)</a></li>
+<li class='category'><a href='/categories/tou-zi-li-cai/'>投资理财 (1)</a></li>
+<li class='category'><a href='/categories/bo-ke/'>播客 (3)</a></li>
+<li class='category'><a href='/categories/gu-shi/'>故事 (1)</a></li>
+<li class='category'><a href='/categories/xiao-lu/'>效率 (1)</a></li>
+<li class='category'><a href='/categories/lu-you/'>旅游 (8)</a></li>
+<li class='category'><a href='/categories/shi-jian-guan-li/'>时间管理 (1)</a></li>
+<li class='category'><a href='/categories/jia-gou/'>架构 (2)</a></li>
+<li class='category'><a href='/categories/shen-du-[?]-dian/'>深度一点 (1)</a></li>
+<li class='category'><a href='/categories/shen-du-li-cai/'>深度理财 (5)</a></li>
+<li class='category'><a href='/categories/shen-du-yue-du/'>深度阅读 (24)</a></li>
+<li class='category'><a href='/categories/li-cai/'>理财 (1)</a></li>
+<li class='category'><a href='/categories/sheng-ri/'>生日 (2)</a></li>
+<li class='category'><a href='/categories/dian-ying/'>电影 (3)</a></li>
+<li class='category'><a href='/categories/kan-fa/'>看法 (1)</a></li>
+<li class='category'><a href='/categories/xia-che-dan/'>瞎扯淡 (1)</a></li>
+<li class='category'><a href='/categories/zhi-hu/'>知乎 (1)</a></li>
+<li class='category'><a href='/categories/ke-xue-shang-wang/'>科学上网 (1)</a></li>
+<li class='category'><a href='/categories/cheng-xu-yuan/'>程序员 (1)</a></li>
+<li class='category'><a href='/categories/guan-li/'>管理 (1)</a></li>
+<li class='category'><a href='/categories/jing-yan-fen-xiang/'>经验分享 (23)</a></li>
+<li class='category'><a href='/categories/bian-cheng-gong-ju/'>编程工具 (3)</a></li>
+<li class='category'><a href='/categories/bian-cheng-si-xiang/'>编程思想 (1)</a></li>
+<li class='category'><a href='/categories/mei-gu/'>美股 (5)</a></li>
+<li class='category'><a href='/categories/fan-yi/'>翻译 (4)</a></li>
+<li class='category'><a href='/categories/du-shu-bi-ji/'>读书笔记 (2)</a></li>
+<li class='category'><a href='/categories/gou-wu/'>购物 (2)</a></li>
+<li class='category'><a href='/categories/yue-du/'>阅读 (11)</a></li>
+<li class='category'><a href='/categories/xiang-mu-guan-li/'>项目管理 (1)</a></li>
+
+  </ul>
+</section>
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2020 - forecho -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

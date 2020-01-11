@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Php基础 | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/phpji-chu/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[解决Nginx无法识别PHP问题]]></title>
+    <link href="https://blog.forecho.com/jie-jue-Nginx-wu-fa-shi-bie-PHP-wen-ti.html"/>
+    <updated>2013-07-23T17:27:00+00:00</updated>
+    <id>https://blog.forecho.com/jie-jue-Nginx-wu-fa-shi-bie-PHP-wen-ti</id>
+    <content type="html"><![CDATA[<p>这两天很蛋疼的在Linux下面配置LNMP环境。参考了比较多的资料，但是发现一个问题，就是安装好环境之后，Nginx无法识别PHP文件，HTML文件是没有问题的。</p>
+
+<p>还要解决配置多个虚拟目录的问题。</p>
+
+<p>后来就各种Google找资料，按照<a href="http://www.markdream.com/server/nginx-config-null-host.shtml">这篇文章</a>的方法配置，还算比较成功。</p>
+
+<p>这个可以成功的配置虚拟目录，但是还是无法识别PHP。</p>
+
+<p>后来找到<a href="http://ilovers.sinaapp.com/drupal/node/10">这篇文章</a>，其中提到：Nginx 本身并没有PHP 解释器，所以，需要借助于 PHP 提供的 fastcgi，所以，需要运行 PHP 的 php-cgi 进程；</p>
+
+<p><code>
+php-cgi -b 127.0.0.1:9000 # cmd 中运行 php-cgi，监听本地地址，9000端口；
+</code>
+我是比较头晕不知道自己是否安装了这个，但是发现自己Nginx配置目录下还是有fastcgi文件的。 <strong>我的9000端口法无监听？</strong>试了一下这个方法，无效。 其实这个地方监听是什么，你需要去看<code>/etc/php5/fpm/pool.d/www.conf</code>配置文件写的是什么，这个写成一致即可。 后来把：</p>
+
+<p><code>
+location ~ \.php($|/) {
+    set  $script     $uri;
+    set  $path_info  "";
+    if ($uri ~ "^(.+\.php)(/.+)") {
+      set  $script     $1;
+      set  $path_info  $2;
+    }
+    fastcgi_pass   127.0.0.1:9000;
+    include        fastcgi_params;
+    fastcgi_param  PATH_INFO                $path_info;
+    fastcgi_param  SCRIPT_FILENAME          /usr/local/vhost/demo$script;
+    fastcgi_param  SCRIPT_NAME              $script;
+}
+</code>
+改成为：</p>
+
+<p><code>
+location ~ \.php$ {
+    root   /usr/local/vhost/demo;
+    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    fastcgi_index  index.php;
+    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    include        fastcgi_params;
+}
+</code>
+然后重启Nginx服务，访问你设置的server_name ，成功</p>
+
+<p>补充一些参考文章：</p>
+
+<ul>
+  <li><a href="http://www.laruence.com/2009/07/28/1030.html">Linux上配置Nginx+PHP5(FastCGI)</a></li>
+  <li><a href="http://blog.sina.com.cn/s/blog_6a0b2afd01014acf.html">ubuntu 12.10 默认安装php5-fpm无监听9000端口，nginx无法链接php5-fpm修正</a></li>
+  <li><a href="http://ordinary-linux-user.blogspot.com/2013/04/installing-nginx-and-php-on-linux-mint.html">Installing Nginx and PHP on Linux Mint 13</a></li>
+  <li><a href="https://www.digitalocean.com/community/articles/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-12-04">How to Install Linux, nginx, MySQL, PHP (LEMP) stack on Ubuntu 12.04</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP中的单引号和双引号]]></title>
+    <link href="https://blog.forecho.com/PHP-zhong-de-dan-yin-hao-he-shuang-yin-hao.html"/>
+    <updated>2013-05-18T14:53:00+00:00</updated>
+    <id>https://blog.forecho.com/PHP-zhong-de-dan-yin-hao-he-shuang-yin-hao</id>
+    <content type="html"><![CDATA[<p>被双引号的内容能被PHP检测其中的变量，并且自动转换变量，示例：</p>
+
+<p><code>
+&lt;?php
+	$name = 'forecho';
+	echo 'Hello world $name';
+	echo '&lt;/br&gt;';
+	echo "Hello world $name";
+?&gt;
+</code></p>
+
+<p>输出的结果就是：</p>
+
+<p><code>
+Hello world $name
+Hello world forecho
+</code>
+这样就可以得出结论，其实单引号更快，因为单引号不用去考虑变量问题，而是直接输出。</p>
+
+<p>更多资料，请参考鸟哥的<a href="http://www.laruence.com/2008/08/19/338.html">这篇文章</a>。但是写HTML的时候，写页面一些属性的时候，W3C标准，还是要用双引号。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP最高效的去判断数组最后一个或第一个元素]]></title>
+    <link href="https://blog.forecho.com/PHP-zui-gao-xiao-de-qu-pan-duan-shu-zu-zui-hou-yi-ge-huo-di-yi-ge-yuan-su.html"/>
+    <updated>2013-04-09T17:21:00+00:00</updated>
+    <id>https://blog.forecho.com/PHP-zui-gao-xiao-de-qu-pan-duan-shu-zu-zui-hou-yi-ge-huo-di-yi-ge-yuan-su</id>
+    <content type="html"><![CDATA[<p>首页这个方法我是无意中在知乎上看到的，确实很实用，<a href="http://www.zhihu.com/question/20158667/answer/15243506">原文地址～</a></p>
+
+<p>思路：先把数组中的第一个元素或最后一个元素用PHP自带的函数删掉，然后单独使用的时候可以单独调用。</p>
+
+<p>删掉数组<strong>最后一个</strong>元素用<a href="http://www.w3school.com.cn/php/func_array_pop.asp">array_pop()</a>这个函数。 示例：</p>
+
+<p><code>php
+&lt;?php
+    $a=array("Dog","Cat","Horse");
+    print_r(array_pop($a));
+    echo '&lt;/br&gt;';
+    print_r($a);
+?&gt;
+</code>
+输出结果：</p>
+
+<p><code>
+Horse
+Array ( [0] =&gt; Dog [1] =&gt; Cat )
+</code></p>
+
+<p>删掉数组<strong>第一个</strong>元素用<a href="http://www.w3school.com.cn/php/func_array_shift.asp">array_shift()</a>这个函数。方法跟上面类似，我就不写示例来。 
+这个方法效率很高，很实用。非常感谢原作者。  </p>
+
+<p><strong>值得注意的地方：</strong></p>
+
+<p>下面我们来说说使用这个<a href="http://www.w3school.com.cn/php/func_array_shift.asp">array_shift()</a>函数，值得注意的地方，在下面<a href="http://writecodeonline.com/php/">这个网址</a>输入以下代码：</p>
+
+<p><code>php
+$a=array('3' =&gt; "Dog", 'a' =&gt; "Cat", '0' =&gt; "Pig", '4' =&gt; "Horse");
+// print_r(array_pop($a));
+print_r(array_shift($a));
+echo '&lt;/br&gt;';
+print_r($a);
+</code>
+那么输出的结果会是这个：</p>
+
+<p><code>
+Dog
+Array ( [a] =&gt; Cat [0] =&gt; Pig [1] =&gt; Horse )
+</code>
+是不是与想象中不一样，数组中的最后一个值的键位由4变成了1，所以使用的时候要注意。但是<a href="http://www.w3school.com.cn/php/func_array_pop.asp">array_pop()</a>这个函数没有出现这种情况。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP知识点笔记]]></title>
+    <link href="https://blog.forecho.com/PHP-zhi-shi-dian-bi-ji.html"/>
+    <updated>2013-02-19T15:35:00+00:00</updated>
+    <id>https://blog.forecho.com/PHP-zhi-shi-dian-bi-ji</id>
+    <content type="html"><![CDATA[<ol>
+  <li>用<code>-&gt;</code>字符链接对象变量和属性名来访问属性变量。</li>
+  <li>_（在类中）_属性可以让对象存储数据，类方法则可以让对象执行任务。</li>
+  <li>当使用<code>new</code>操作符创建对象时，<code>__construct()</code>_（构造方法）_方法会被调用。</li>
+  <li>PHP是一种弱类型语言，即变量不需要声明为特定的数据类型。</li>
+  <li>要创建一个子类，必须在类声明中使用<code>extends</code>关键词。</li>
+  <li>调用父类方法，需要使用<code>parent</code>关键字。</li>
+  <li>要引用一个类而不是对象的方法，可以使用<code>::</code>而不是<code>-&gt;</code>。</li>
+  <li>类是生成对象的模板。</li>
+  <li>静态方法必须用<code>static</code>关键词来声明。</li>
+  <li>访问静态元素时使用<code>::</code>来链接类名和属性或类名和方法。有<code>self::</code>，<code>parent::</code>，<code>static:: </code>以及 <code>forward_static_call()</code>。<a href="http://php.net/manual/zh/language.oop5.late-static-bindings.php">详情</a>。</li>
+  <li>常量属性用<code>const</code>关键字来声明，并且只能用大写字母来命名常量，只能通过类而不能通过类的实例访问常量属性。（即<code>::</code>）</li>
+  <li>使用<code>abstract</code>关键字来定义一个抽象类。</li>
+  <li>PDO(PHP Data Object)类为不同的数据库应用程序提供了统一的接口。</li>
+  <li><code>empty()</code> 判断一个变量是否为“空”，<code>isset() </code>判断一个变量是否已经设置。</li>
+  <li><code>getenv("REMOTE_ADDR")</code>用来取得客户端的 IP 地址，但如果客户端是使用代理服务器来访问，那取到的就是代理服务器的 IP 地址，而不是真正的客户端 IP 地址。要想透过代理服务器取得客户端的真实 IP 地址，就要使用 <code>getenv("HTTP_X_FORWARDED_FOR")</code> 来读取。</li>
+  <li>PHP的内置函数<code>exec</code>,<code>system</code>都可以调用系统命令(shell命令),当然还有<code>passthru</code>,<code>escapeshellcmd</code>等函数。</li>
+  <li>MySQL的事务处理就是关闭自动提交，插入的数据暂不写进数据库，保留到临时区域，然后在提交</li>
+</ol>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Xampp | forecho 的独立博客]]></title>
+  <link href="https://blog.forecho.com/categories/xampp/atom.xml" rel="self"/>
+  <link href="https://blog.forecho.com/"/>
+  <updated>2020-01-11T03:56:41+00:00</updated>
+  <id>https://blog.forecho.com/</id>
+  <author>
+    <name><![CDATA[forecho]]></name>
+    <email><![CDATA[caizhenghai@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[XAMPP 虚拟目录配置]]></title>
+    <link href="https://blog.forecho.com/XAMPP-xu-ni-mu-lu-pei-zhi.html"/>
+    <updated>2011-11-21T09:36:00+00:00</updated>
+    <id>https://blog.forecho.com/XAMPP-xu-ni-mu-lu-pei-zhi</id>
+    <content type="html"><![CDATA[<p>我下载的是 xampp 1.77版本的。 安装的时候一直点下一步，不用有任何操作。 打开D:\xampp\apache\conf\extra\httpd-vhosts.conf 这个文件 把</p>
+
+<p><code>
+NameVirtualHost *:80
+</code></p>
+
+<p>前面的 ## 注释去掉。这个是开启虚拟目录的设置。 然后在最下面加上</p>
+
+<p>&#8220;`
+&lt;VirtualHost *:80&gt;
+DocumentRoot “D:/xampp/htdocs”
+ServerName 127.0.0.1
+&lt;/VirtualHost&gt;</p>
+
+<p>&lt;VirtualHost *:80&gt;
+DocumentRoot “F:/workspace”
+ServerName localhost
+&lt;Directory “F:/workspace”&gt;
+Options Indexes FollowSymLinks Includes ExecCGI
+AllowOverride All
+Order allow,deny
+Allow from all
+&lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+&#8220;`</p>
+
+<p>其中的路径你要根据你的路径具体情况而定。第二个就是配置虚拟路径的方法。<a href="http://www.yyduo.com/84">参考文件</a></p>
+]]></content>
+  </entry>
+  
+</feed>
